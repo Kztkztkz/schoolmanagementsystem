@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Lecturer;
+use App\Http\Requests\StoreLecturerRequest;
+use App\Http\Requests\UpdateLecturerRequest;
 
 class LecturerController extends Controller
 {
@@ -13,7 +15,7 @@ class LecturerController extends Controller
      */
     public function index()
     {
-        return view('setting.lecturer.lecturer');
+        //
     }
 
     /**
@@ -29,10 +31,10 @@ class LecturerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreLecturerRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreLecturerRequest $request)
     {
         //
     }
@@ -40,10 +42,10 @@ class LecturerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Lecturer  $lecturer
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Lecturer $lecturer)
     {
         //
     }
@@ -51,10 +53,10 @@ class LecturerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Lecturer  $lecturer
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Lecturer $lecturer)
     {
         //
     }
@@ -62,11 +64,11 @@ class LecturerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateLecturerRequest  $request
+     * @param  \App\Models\Lecturer  $lecturer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateLecturerRequest $request, Lecturer $lecturer)
     {
         //
     }
@@ -74,10 +76,10 @@ class LecturerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Lecturer  $lecturer
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Lecturer $lecturer)
     {
         //
     }
