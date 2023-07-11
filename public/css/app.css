@@ -1,0 +1,7 @@
+.starttime::-moz-placeholder {
+    text-align: center;
+}
+.starttime::placeholder {
+    text-align: center;
+}
+
