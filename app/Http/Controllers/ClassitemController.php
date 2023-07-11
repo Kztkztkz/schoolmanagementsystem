@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
-use App\Http\Requests\StoreCourseRequest;
-use App\Http\Requests\UpdateCourseRequest;
+use App\Models\Classitem;
+use App\Http\Requests\StoreClassitemRequest;
+use App\Http\Requests\UpdateClassitemRequest;
 
-class CourseController extends Controller
+class ClassitemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('setting.course.index');
+        //
     }
 
     /**
@@ -31,10 +31,10 @@ class CourseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCourseRequest  $request
+     * @param  \App\Http\Requests\StoreClassitemRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCourseRequest $request)
+    public function store(StoreClassitemRequest $request)
     {
         //
     }
@@ -42,21 +42,21 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Classitem  $classitem
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course)
+    public function show(Classitem $classitem)
     {
-       
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Classitem  $classitem
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit(Classitem $classitem)
     {
         //
     }
@@ -64,11 +64,11 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCourseRequest  $request
-     * @param  \App\Models\Course  $course
+     * @param  \App\Http\Requests\UpdateClassitemRequest  $request
+     * @param  \App\Models\Classitem  $classitem
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCourseRequest $request, Course $course)
+    public function update(UpdateClassitemRequest $request, Classitem $classitem)
     {
         //
     }
@@ -76,10 +76,10 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Course  $course
+     * @param  \App\Models\Classitem  $classitem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy(Classitem $classitem)
     {
         //
     }
