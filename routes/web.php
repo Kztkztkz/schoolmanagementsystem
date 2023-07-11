@@ -5,6 +5,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClassitemController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,3 +33,4 @@ Route::resource('payment' , PaymentController::class);
 Route::resource('room' , RoomController::class);
 Route::resource('course' , CourseController::class);
 Route::resource('student' , StudentController::class);
+Route::resource('classitem' , ClassitemController::class);

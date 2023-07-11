@@ -1,7 +1,8 @@
-.starttime::-moz-placeholder {
-    text-align: center;
-}
-.starttime::placeholder {
-    text-align: center;
+.class-colorpicker {
+    top: 0;
+    right: 0;
+    height: 34px;
+    width: 46px;
+    border: none;
 }
 

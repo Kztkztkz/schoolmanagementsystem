@@ -2062,9 +2062,16 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 $(document).ready(function () {
+  //select 2
   $(".js-example-basic-multiple").select2({
     placeholder: "Select lecturer name",
     allowClear: true
+  });
+
+  //colorpicker
+  $("#color").on("input", function () {
+    var color = $("#color").val();
+    $("#hex").val(color);
   });
 });
 
