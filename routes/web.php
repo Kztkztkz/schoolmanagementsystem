@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -19,6 +23,11 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/',function(){
-    return view('scheduler.scheduler');
+    return view('scheduler.index');
 });
 
+Route::resource('user', UserController::class);
+Route::resource('payment' , PaymentController::class);
+Route::resource('room' , RoomController::class);
+Route::resource('course' , CourseController::class);
+Route::resource('student' , StudentController::class);
