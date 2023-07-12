@@ -64,7 +64,7 @@
             <div class="col-sm-4 mt-3">
               <div class="form-group">
                 <label for="lecturer">Lecturer</label>
-                <select class="js-example-basic-multiple form-select" name="states[]" multiple="multiple" id="lecturer" placeholder="Select lecturer name">
+                <select class="js-example-basic-multiple form-select" name="states[]" multiple="multiple" id="lecturer">
                   <option value="AL">Mya</option>
                   <option value="WY">Aye</option>
                 </select>
@@ -104,9 +104,11 @@
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group">
-                <label for="color">Set Color</label>
-                <!-- <input type="color" class="form-control" id="color" placeholder="Enter email"> -->
-                <input type="text" placeholder="#958D8D" onfocus="(this.type='color')" class="form-control" id="color">
+                <label for="hex">Set Color</label>
+                <div class="position-relative">
+                <input type="text" placeholder="#958D8D" class="form-control" id="hex">
+                <input type="color"  id="color" class = "position-absolute class-colorpicker">
+                </div>                
               </div>
             </div>
             <div class="col-sm-4 mt-3">

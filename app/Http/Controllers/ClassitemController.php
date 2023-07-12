@@ -25,7 +25,7 @@ class ClassitemController extends Controller
      */
     public function create()
     {
-        //
+        return view('classitem.create');
     }
 
     /**
