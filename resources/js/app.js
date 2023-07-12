@@ -3,7 +3,7 @@ require("./bootstrap");
 $(document).ready(function () {
     //select 2
     $(".js-example-basic-multiple").select2({
-        placeholder: "Select lecturer name",
+        placeholder: "Select days",
         allowClear: true,
     });
 

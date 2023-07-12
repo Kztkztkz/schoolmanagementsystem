@@ -1,7 +1,16 @@
 .class-colorpicker {
     top: 0;
-    right: 0;
+    right: 80px;
     height: 34px;
     width: 46px;
     border: none;
+}
+
+.form-control,
+.slectopt {
+    width: 13.5rem;
+}
+
+.multisel-day {
+    width: 73%;
 }

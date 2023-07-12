@@ -2064,7 +2064,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 $(document).ready(function () {
   //select 2
   $(".js-example-basic-multiple").select2({
-    placeholder: "Select lecturer name",
+    placeholder: "Select days",
     allowClear: true
   });
 
