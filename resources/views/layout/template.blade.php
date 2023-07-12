@@ -13,6 +13,7 @@
     <meta name="robots" content="noindex,nofollow">
     <title>Matrix Admin Lite Free Versions Template by WrapPixel</title>
    @include('layout.css')
+   @yield('custom')
 </head>
 
 <body>

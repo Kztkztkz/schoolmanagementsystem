@@ -122,17 +122,12 @@
                 </select>
               </div>
             </div>
+          </div>
+          <button type="submit" class="btn btn-secondary">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
       </div>
-      <button type="submit" class="btn btn-secondary">Cancel</button>
-      <button type="submit" class="btn btn-primary">Submit</button>
-      
-
-
-
-  
-</form>
-  </div>
-</div>
+    </div>
 </div>
 
 

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Classitem;
-use App\Http\Requests\StoreClassitemRequest;
-use App\Http\Requests\UpdateClassitemRequest;
+use Illuminate\Http\Request;
 
-class ClassitemController extends Controller
+class ClassController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,41 +23,38 @@ class ClassitemController extends Controller
      */
     public function create()
     {
-        return view('classitem.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreClassitemRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreClassitemRequest $request)
+    public function store(Request $request)
     {
-        
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Classitem  $classitem
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show()
     {
-        return view('classitem.detail');
-    }
-
-    public function detail(){
+        return view('class.detail');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Classitem  $classitem
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Classitem $classitem)
+    public function edit($id)
     {
         //
     }
@@ -67,11 +62,11 @@ class ClassitemController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateClassitemRequest  $request
-     * @param  \App\Models\Classitem  $classitem
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateClassitemRequest $request, Classitem $classitem)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -79,10 +74,10 @@ class ClassitemController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Classitem  $classitem
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Classitem $classitem)
+    public function destroy($id)
     {
         //
     }
