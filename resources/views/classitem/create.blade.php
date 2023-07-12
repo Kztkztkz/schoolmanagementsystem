@@ -15,30 +15,30 @@
             </div>
         </div>
     </div>
-    
+
     <div class="card my-5">
       <div class="card-body">
         <form>
           <div class = "row">
-            <div class="col-sm-4">  
+            <div class="col-sm-4">
               <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" placeholder="Class name">
               </div>
             </div>
-            <div class="col-sm-4">  
+            <div class="col-sm-4">
               <div class="form-group">
                 <label for="startdate">Start Date</label>
                 <input type="date" class="form-control" id="enddate" placeholder="Start date">
               </div>
             </div>
-            <div class="col-sm-4">  
+            <div class="col-sm-4">
               <div class="form-group">
                 <label for="enddate">End Date</label>
                 <input type="date" class="form-control" id="enddate" placeholder="End date">
               </div>
             </div>
-            <div class="col-sm-4 mt-3">  
+            <div class="col-sm-4 mt-3">
               <div class="form-group">
               <label for="course">Course Name</label>
                 <select class="form-select" id="course">
@@ -48,20 +48,20 @@
                 </select>
               </div>
             </div>
-            <div class="col-sm-4 mt-3">  
+            <div class="col-sm-4 mt-3">
               <div class="form-group">
                 <label for="starttime">Start Time</label>
                 <!-- <input type="time" class="form-control" id="starttime" placeholder="Enter email"> -->
                 <input type="text" placeholder="--:--" onfocus="(this.type='time')" class="form-control" id="starttime">
               </div>
             </div>
-            <div class="col-sm-4 mt-3">  
+            <div class="col-sm-4 mt-3">
               <div class="form-group">
                 <label for="endtime">End Time</label>
                 <input type="text" placeholder="--:--" onfocus="(this.type='time')" class="form-control" id="endtime" class="starttime">
               </div>
             </div>
-            <div class="col-sm-4 mt-3">  
+            <div class="col-sm-4 mt-3">
               <div class="form-group">
                 <label for="lecturer">Lecturer</label>
                 <select class="js-example-basic-multiple form-select" name="states[]" multiple="multiple" id="lecturer">
@@ -70,7 +70,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-sm-4 mt-3">  
+            <div class="col-sm-4 mt-3">
               <div class="form-group">
               <label for="day">Day</label>
                 <select class="form-select" id="day">
@@ -80,7 +80,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-sm-4 mt-3">  
+            <div class="col-sm-4 mt-3">
               <div class="form-group">
               <label for="type">Type</label>
                 <select class="form-select" id="type">
@@ -90,19 +90,19 @@
                 </select>
               </div>
             </div>
-            <div class="col-sm-4 mt-3">  
+            <div class="col-sm-4 mt-3">
               <div class="form-group">
                 <label for="maxstudent">Maximun Student</label>
                 <input type="number" class="form-control" id="maxstudent" placeholder="Student limit">
               </div>
             </div>
-            <div class="col-sm-4 mt-3">  
+            <div class="col-sm-4 mt-3">
               <div class="form-group">
                 <label for="price">Price</label>
                 <input type="text" class="form-control" id="price" placeholder="Price">
               </div>
             </div>
-            <div class="col-sm-4 mt-3">  
+            <div class="col-sm-4 mt-3">
               <div class="form-group">
                 <label for="hex">Set Color</label>
                 <div class="position-relative">
@@ -111,7 +111,7 @@
                 </div>                
               </div>
             </div>
-            <div class="col-sm-4 mt-3">  
+            <div class="col-sm-4 mt-3">
               <div class="form-group">
               <label for="room">Room Name</label>
                 <select class="form-select" id="room">
@@ -128,6 +128,16 @@
         </form>
       </div>
     </div>
+      <button type="submit" class="btn btn-secondary">Cancel</button>
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+
+
+
+
+</form>
+  </div>
+</div>
 </div>
 
 

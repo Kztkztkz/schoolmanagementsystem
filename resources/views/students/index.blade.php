@@ -17,14 +17,16 @@
         </div>
     </div>
 
-    <div class="row pt-3 px-3">
+    <div class="row  px-3">
         <div class="col-9">
             <div class="card rounded-3 " style="height: 600px">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between">
                         <p class="mb-0 fw-bolder">Total - 10</p>
                         <div class="">
-                            <a href="#" class=" btn btn-secondary p-0"><i class=" mdi mdi-plus h3"></i></a>
+                            <a href="" class="btn plus-btn btn-secondary">
+                                <i class="mdi mdi-plus h5"></i>
+                            </a>
                         </div>
                     </div>
                     <table class="table table-striped table-hover">
@@ -47,25 +49,24 @@
                                 </td>
                                 <td>No.1 Pyay ...</td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="mdi mdi-credit-card-multiple h4"></i>
+                                    <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-credit-card-multiple h5"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="mdi mdi-book-open-page-variant h4"></i>
+                                    <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-book-open-page-variant h5"></i>
                                     </a>
                                 </td>
                                 <td class=" text-center">
-                                    <a href="" class="btn btn-sm btn-outline-danger">
-                                        <i class="mdi mdi-delete h4"></i>
+                                     <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-pencil h5"></i>
                                     </a>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="mdi mdi-pencil h4"></i>
+                                    <a href="" class="btn table-btn-sm btn-danger">
+                                        <i class="mdi mdi-delete h5 text-white"></i>
                                     </a>
-                                    <a href="" class="btn btn-sm btn-outline-dark">
-                                        <i class="mdi mdi-dots-vertical h4"></i>
-                                    </a>
+
+
                                 </td>
                             </tr>
                             <tr>
@@ -76,25 +77,24 @@
                                 </td>
                                 <td>No.1 Pyay ...</td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="mdi mdi-credit-card-multiple h4"></i>
+                                    <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-credit-card-multiple h5"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="mdi mdi-book-open-page-variant h4"></i>
+                                    <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-book-open-page-variant h5"></i>
                                     </a>
                                 </td>
                                 <td class=" text-center">
-                                    <a href="" class="btn btn-sm btn-outline-danger">
-                                        <i class="mdi mdi-delete h4"></i>
+                                     <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-pencil h5"></i>
                                     </a>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="mdi mdi-pencil h4"></i>
+                                    <a href="" class="btn table-btn-sm btn-danger">
+                                        <i class="mdi mdi-delete h5 text-white"></i>
                                     </a>
-                                    <a href="" class="btn btn-sm btn-outline-dark">
-                                        <i class="mdi mdi-dots-vertical h4"></i>
-                                    </a>
+
+
                                 </td>
                             </tr>
                             <tr>
@@ -105,25 +105,24 @@
                                 </td>
                                 <td>No.1 Pyay ...</td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="mdi mdi-credit-card-multiple h4"></i>
+                                    <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-credit-card-multiple h5"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="mdi mdi-book-open-page-variant h4"></i>
+                                    <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-book-open-page-variant h5"></i>
                                     </a>
                                 </td>
                                 <td class=" text-center">
-                                    <a href="" class="btn btn-sm btn-outline-danger">
-                                        <i class="mdi mdi-delete h4"></i>
+                                     <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-pencil h5"></i>
                                     </a>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="mdi mdi-pencil h4"></i>
+                                    <a href="" class="btn table-btn-sm btn-danger">
+                                        <i class="mdi mdi-delete h5 text-white"></i>
                                     </a>
-                                    <a href="" class="btn btn-sm btn-outline-dark">
-                                        <i class="mdi mdi-dots-vertical h4"></i>
-                                    </a>
+
+
                                 </td>
                             </tr>
                             <tr>
@@ -134,25 +133,24 @@
                                 </td>
                                 <td>No.1 Pyay ...</td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="mdi mdi-credit-card-multiple h4"></i>
+                                    <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-credit-card-multiple h5"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="mdi mdi-book-open-page-variant h4"></i>
+                                    <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-book-open-page-variant h5"></i>
                                     </a>
                                 </td>
                                 <td class=" text-center">
-                                    <a href="" class="btn btn-sm btn-outline-danger">
-                                        <i class="mdi mdi-delete h4"></i>
+                                     <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-pencil h5"></i>
                                     </a>
-                                    <a href="" class="btn btn-sm btn-outline-primary">
-                                        <i class="mdi mdi-pencil h4"></i>
+                                    <a href="" class="btn table-btn-sm btn-danger">
+                                        <i class="mdi mdi-delete h5 text-white"></i>
                                     </a>
-                                    <a href="" class="btn btn-sm btn-outline-dark">
-                                        <i class="mdi mdi-dots-vertical h4"></i>
-                                    </a>
+
+
                                 </td>
                             </tr>
 
@@ -165,12 +163,12 @@
         <div class="col-3">
             <div class="card" style="height: 600px">
                 <div class="card-body">
-                    <p class=" text-center fs-4">Student Filter</p>
+                    <p class=" text-center fs-4 mb-2">Student Filter</p>
 
                     <form action="">
-                        <div class=" mb-4">
+                        <div class=" mb-3">
                             <label for="">Course</label>
-                            <select class="select2 form-select shadow-none" style="width: 100%; height:36px;">
+                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
                                 <option>Select Course</option>
                                 <option value="CA">California</option>
                                 <option value="NV">Nevada</option>
@@ -178,9 +176,9 @@
                                 <option value="WA">Washington</option>
                             </select>
                         </div>
-                        <div class="mb-4">
+                        <div class="mb-3">
                             <label for="">Class</label>
-                            <select class="select2 form-select shadow-none" style="width: 100%; height:36px;">
+                            <select class="select2  form-select shadow-none">
                                 <option>Select Class</option>
                                 <option value="CA">California</option>
                                 <option value="NV">Nevada</option>
