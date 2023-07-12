@@ -15,7 +15,7 @@ class ClassitemController extends Controller
      */
     public function index()
     {
-        //
+        return view('classitem.index');
     }
 
     /**

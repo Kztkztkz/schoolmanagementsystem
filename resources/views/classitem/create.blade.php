@@ -16,7 +16,7 @@
         </div>
     </div>
     
-    <div class="card my-5">
+    <div class="card my-2">
       <div class="card-body">
         <form>
           <div class = "row">
@@ -75,7 +75,7 @@
               <div class="form-group">
                 <label for="lecturer">Day</label>
                 <div class = "multisel-day">
-                <select class="js-example-basic-multiple form-select" name="days[]" multiple="multiple" id="day">
+                <select class="js-example-basic-multiple form-select" name="days[]" multiple="multiple" id="day">    
                   <option value="Mo">Monday</option>
                   <option value="Tu">Tuesday</option>
                   <option value="We">Wednesday</option>
@@ -89,13 +89,11 @@
             </div>
             <div class="col-sm-4 mt-3">  
               <div class="form-group">
-                <label for="hex">Set Color</label>
-                <div class="position-relative">
-                <input type="text" placeholder="#958D8D" class="form-control" id="hex">
-                <input type="color"  id="color" class = "position-absolute class-colorpicker">
-                </div>                
+                <label for="price">Price</label>
+                <input type="text" class="form-control" id="price" placeholder="Price">
               </div>
             </div>
+
             <div class="col-sm-4 mt-3">  
               <div class="form-group">
                 <label for="maxstudent">Maximun Student</label>
@@ -107,15 +105,18 @@
               <label for="type">Type</label>
                 <select class="form-select slectopt" id="type">
                   <option selected>Select type</option>
-                  <option value="1">In Class</option>
-                  <option value="2">Zoom</option>
+                  <option value="1">Weekend</option>
+                  <option value="2">Weekday</option>
                 </select>
               </div>
             </div>
             <div class="col-sm-4 mt-3">  
               <div class="form-group">
-                <label for="price">Price</label>
-                <input type="text" class="form-control" id="price" placeholder="Price">
+                <label for="hex">Set Color</label>
+                <div class="position-relative">
+                <input type="text" placeholder="#958D8D" class="form-control" id="hex">
+                <input type="color"  id="color" class = "position-absolute class-colorpicker">
+                </div>                
               </div>
             </div>
             <div class="col-sm-4 mt-3">  
@@ -135,6 +136,9 @@
       <button type="submit" class="btn btn-secondary">Cancel</button>
       <button type="submit" class="btn btn-primary">Submit</button>
       </div>  
+
+</form>
+
   </div>
 </div>
 </div>

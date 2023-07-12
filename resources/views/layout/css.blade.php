@@ -5,7 +5,7 @@
     <!-- Custom CSS -->
     <link href="{{asset('admin/dist/css/style.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/class.css') }}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -16,4 +16,5 @@
 <!-- select2 -->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-<script src="{{mix('css/app.css')}}"></script>
+
+
