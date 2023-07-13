@@ -36,16 +36,41 @@
     margin-bottom: 10px;
 }
 
+.text-left{
+    text-align: left;
+}
+
+.card-body{
+    height: 600px;
+}
+
 </style>
 @endsection
 
 
 @section('content')
 <div class="page-breadcrumb">    
-        <h4 class="page-title">Class Detail / Web Foundation</h4>
+        {{-- <h4 class="page-title">Class Detail / Web Foundation</h4>
+         --}}
+         <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <!-- <h4 class="page-title">Classes / Class Create</h4> -->
+                <div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="http://localhost:8000/classitem">Class</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Detail</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
         <div class="card my-5">
             <div class="card-body">
               <form>
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary btn-sm" style="font-size: 14px">Enroll New Student</button>
+                </div>
 
                 <div class="row d-flex justify-content-between">
                     <div class="col-5">
@@ -89,37 +114,32 @@
                         <h5 class="sub-header">Enroll existing student</h5>
 
                         <div class="mt-3 mb-3">
-                            <label for="" class="mb-0"><p class="small-header mb-0">Search Existing Student</p></label>
-                            <div class="dropdown">
-                                <button class="btn border rounded dropdown-toggle w-75 text-left" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Select existing student
-                                </button>
-                                <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
+                            <label for="">Select Existing Student</label>
+                            <div class="input-group w-50">
+                                <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                                <option selected>Select Existing Student</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 mb-3">
+                            <label for="">Type</label>
+                            <div class="input-group w-50">
+                                <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                                  <option selected>Select payment type</option>
+                                  <option value="1">One</option>
+                                  <option value="2">Two</option>
+                                  <option value="3">Three</option>
+                                </select>
                             </div>
                         </div>
                         
                         <div class="mt-3 mb-3">
-                            <label for="" class="mb-0"><p class="small-header mb-0">Type</p></label>
-                            <div class="dropdown">
-                                <button class="btn border rounded dropdown-toggle w-75 text-left" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Select payment type
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">Action</a></li>
-                                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                       
-
-                        <div class="mt-3 mb-3">
                             <label for="amount mb-0"> <p class="small-header mb-0">Amount</p></label>
-                            <input type="text" class="form-control w-75" id="amount">                            
+                            <input type="text" class="form-control w-50" id="amount">                            
                         </div>
 
                         <div class="mt-3 mb-3">
@@ -136,9 +156,7 @@
 
                     </div>
 
-                    <div class="col-2">
-                        <button type="button" class="btn btn-primary btn-sm">Enroll New Student</button>
-                    </div>
+                   
                 </div>
               </form>
             </div>

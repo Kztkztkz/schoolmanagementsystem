@@ -8,7 +8,7 @@
                                 href="{{url('/')}}" aria-expanded="false"><i class="mdi mdi-calendar-clock"></i><span
                                     class="hide-menu">Scheduler</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('classitemitem.create') }}" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span
+                                href="{{ route('classitem.create') }}" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span
                                     class="hide-menu">Classes</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{ route('student.index') }}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span
