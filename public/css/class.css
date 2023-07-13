@@ -1,31 +1,30 @@
 .class-colorpicker {
-  top: 0;
-  right: 80px;
-  height: 34px;
-  width: 46px;
-  border: none;
+    top: 0;
+    right: 70px;
+    height: 34px;
+    width: 46px;
+    border: none;
 }
 
 .form-control,
 .slectopt {
-  width: 13.5rem;
+    width: 14.5rem;
 }
 
 .multisel-day {
-  width: 73%;
-  background red;
+    width: 78%;
 }
 
 .select2-container .select2-search--inline .select2-search__field {
-  height: 20px !important;
+    height: 20px !important;
 }
 
 .select2-container--default .select2-selection--multiple {
-  border: 1px solid #e9ecef !important;
+    border: 1px solid #e9ecef !important;
 }
 
 .pay-status {
-  color: white;
-  padding: 6px 0 0 0;
+    width: 3.5rem;
+    color: #fff;
+    padding: 3px 0;
 }
-

@@ -59,9 +59,9 @@ class ClassitemController extends Controller
      * @param  \App\Models\Classitem  $classitem
      * @return \Illuminate\Http\Response
      */
-    public function edit(Classitem $classitem)
+    public function edit()
     {
-        //
+        return view('classitem.edit');
     }
 
     /**

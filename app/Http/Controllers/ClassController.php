@@ -56,7 +56,7 @@ class ClassController extends Controller
      */
     public function edit($id)
     {
-        //
+       //
     }
 
     /**
