@@ -96,8 +96,16 @@
                                     </label>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary">Play</button>
+
+                            {{-- <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary">Play</button>
+                            </div> --}}
+
+                            <div class="text-center mt-5">
+                                <button type="submit" class="btn btn-secondary">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Play</button>
+                            </div>
                         </div>
 
                     </div>
