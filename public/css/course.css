@@ -1,0 +1,30 @@
+.course-btn{
+    width: 70px;
+}
+
+.course-btn .table-btn-sm:hover{
+    background-color: white !important;
+    color: #5d4dbe !important;
+}
+
+.course-width{
+    width: fit-content;
+}
+
+.add-course{
+    position: sticky;
+    bottom: 7%;
+}
+
+.course-row{
+    max-height: 540px;
+    overflow: scroll;
+}
+
+.course-row::-webkit-scrollbar{
+    display: none;
+}
+
+.course-row .form-control{
+    width: auto;
+}
