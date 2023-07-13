@@ -69,7 +69,7 @@
             <div class="card-body">
               <form>
                 <div class="col-12 d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary btn-sm" style="font-size: 14px">Enroll New Student</button>
+                    <button type="button" class="btn btn-primary btn-sm" style="font-size: 14px; border:none;">Enroll New Student</button>
                 </div>
 
                 <div class="row d-flex justify-content-between">

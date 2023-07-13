@@ -17,21 +17,30 @@
                 </div>
             </div>
 
-            <div class="col-4">
-                {{-- <div class="search-box">
-                    <input type="text" placeholder="Search">
-                    <label for="" class="icon">
-                        <i class="fas fa-search"></i>
-                    </label>
-                </div> --}}
-                {{-- <div class="input-group top-search">
-                    <div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            <div class="col-4 d-flex justify-content-end">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Launch demo modal
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Payment For Web Foundation (Batch 01)</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        ...
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary">Play</button>
+                        </div>
                     </div>
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-                      </div>
-                </div> --}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -51,26 +60,26 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr style="border-bottom: 2px solid black">
-                                <th scope="col">Date</th>
-                                <th scope="col">Class</th>
-                                <th scope="col">Course</th>
-                                <th scope="col">Student</th>
-                                <th scope="col">Payment Type</th>
-                                <th scope="col">Fees</th>
-                                <th scope="col">Due amount</th>
+                                <th scope="col-2">Date</th>
+                                <th scope="col-2">Class</th>
+                                <th scope="col-2">Course</th>
+                                <th scope="col-2">Student</th>
+                                <th scope="col-2">Payment Type</th>
+                                <th scope="col-1">Fees</th>
+                                <th scope="col-1">Due amount</th>
                             </tr>
                         </thead>
                         <tbody>
 
                             <tr>
-                                <td>01-01-2023</td>
-                                <td>Class A</td>
-                                <td>Python</td>
-                                <td>Kyaw Kyaw</td>
-                                <td>
-                                    <a href="" class="btn table-btn-sm btn-success">
-                                        Paid
-                                    </a>
+                                <td class="col-2">01-01-2023</td>
+                                <td class="col-2">Class A</td>
+                                <td class="col-2">Python</td>
+                                <td class="col-2">Kyaw Kyaw</td>
+                                <td class="col-2">
+                                    <div class="pay-status bg-success paystatus-div d-flex justify-content-center align-items-center">
+                                        <h6 class="">paid</h6>
+                                    </div>
                                 </td>
                                 <td>150000</td>
                                 <td>50000</td>
@@ -81,12 +90,12 @@
                                 <td>Python</td>
                                 <td>Kyaw Kyaw</td>
                                 <td>
-                                    <a href="" class="btn table-btn-sm btn-danger">
-                                        Unpaid
-                                    </a>
+                                    <div class="pay-status bg-danger paystatus-div d-flex justify-content-center align-items-center">
+                                        <h6 class="">paid</h6>
+                                    </div>
                                 </td>
-                                <td>150000</td>
-                                <td>50000</td>
+                                <td class="col-1">150000</td>
+                                <td class="col-1">50000</td>
                             </tr>
                         </tbody>
                     </table>

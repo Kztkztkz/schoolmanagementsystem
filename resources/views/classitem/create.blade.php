@@ -21,25 +21,25 @@
         <form>
           <div class = "row">
             <div class="col-sm-4">
-              <div class="form-group">
+              <div class="form-group test">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" placeholder="Class name">
               </div>
             </div>
             <div class="col-sm-4">
-              <div class="form-group">
+              <div class="form-group test">
                 <label for="startdate">Start Date</label>
                 <input type="date" class="form-control" id="enddate" placeholder="Start date">
               </div>
             </div>
             <div class="col-sm-4">
-              <div class="form-group">
+              <div class="form-group test">
                 <label for="enddate">End Date</label>
                 <input type="date" class="form-control" id="enddate" placeholder="End date">
               </div>
             </div>
             <div class="col-sm-4 mt-3">
-              <div class="form-group">
+              <div class="form-group test">
               <label for="course">Course Name</label>
                 <select class="form-select slectopt" id="course">
                   <option selected>Select course name</option>
@@ -49,20 +49,20 @@
               </div>
             </div>
             <div class="col-sm-4 mt-3">
-              <div class="form-group">
+              <div class="form-group test">
                 <label for="starttime">Start Time</label>
                 <!-- <input type="time" class="form-control" id="starttime" value="19:00"> -->
                 <input type="text" placeholder="--:--" onfocus="(this.type='time')" class="form-control" id="starttime">
               </div>
             </div>
             <div class="col-sm-4 mt-3">
-              <div class="form-group">
+              <div class="form-group test">
                 <label for="endtime">End Time</label>
                 <input type="text" placeholder="--:--" onfocus="(this.type='time')" class="form-control" id="endtime" class="starttime">
               </div>
             </div>
             <div class="col-sm-4 mt-3">
-              <div class="form-group">
+              <div class="form-group test">
               <label for="lecturer">Lecturer</label>
                 <select class="form-select slectopt" id="lecturer">
                   <option selected>Select lecturer name</option>
@@ -72,9 +72,9 @@
               </div>
             </div>
             <div class="col-sm-4 mt-3">
-              <div class="form-group">
+              <div class="form-group test">
                 <label for="lecturer">Day</label>
-                <div class = "multisel-day">
+                {{-- <div class = "multisel-day"> --}}
                 <select class="js-example-basic-multiple form-select" name="days[]" multiple="multiple" id="day">
                   <option value="Mo">Monday</option>
                   <option value="Tu">Tuesday</option>
@@ -84,23 +84,23 @@
                   <option value="Sa">Saturday</option>
                   <option value="Su">Sunday</option>
                 </select>
-                </div>
+                {{-- </div> --}}
               </div>
             </div>
             <div class="col-sm-4 mt-3">
-              <div class="form-group">
+              <div class="form-group test">
                 <label for="price">Price</label>
                 <input type="text" class="form-control" id="price" placeholder="Price">
               </div>
             </div>
             <div class="col-sm-4 mt-3">
-              <div class="form-group">
+              <div class="form-group test">
                 <label for="maxstudent">Maximun Student</label>
                 <input type="number" class="form-control" id="maxstudent" placeholder="Student limit">
               </div>
             </div>
             <div class="col-sm-4 mt-3">
-              <div class="form-group">
+              <div class="form-group test">
               <label for="type">Type</label>
                 <select class="form-select slectopt" id="type">
                   <option selected>Select type</option>
@@ -110,7 +110,7 @@
               </div>
             </div>
             <div class="col-sm-4 mt-3">
-              <div class="form-group">
+              <div class="form-group test">
                 <label for="hex">Set Color</label>
                 <div class="position-relative">
                 <input type="text" placeholder="#958D8D" class="form-control" id="hex">
@@ -119,7 +119,7 @@
               </div>
             </div>
             <div class="col-sm-4 mt-3">
-              <div class="form-group">
+              <div class="form-group test">
               <label for="room">Room Name</label>
                 <select class="form-select slectopt" id="room">
                   <option selected>Select room name</option>
