@@ -112,9 +112,9 @@
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
                 <label for="hex">Set Color</label>
-                <div class="position-relative">
+                <div class="d-flex">
                 <input type="text" placeholder="#958D8D" class="form-control" id="hex">
-                <input type="color"  id="color" class = "position-absolute class-colorpicker">
+                <input type="color"  id="color" class = "class-colorpicker">
                 </div>
               </div>
             </div>

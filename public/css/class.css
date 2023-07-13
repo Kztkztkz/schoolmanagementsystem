@@ -1,6 +1,4 @@
 .class-colorpicker {
-    top: 0;
-    right: 70px;
     height: 34px;
     width: 46px;
     border: none;
@@ -13,7 +11,6 @@
 
 .test {
     margin-right: 2rem;
-    background-color: #e9ecef;
 }
 .multisel-day {
     width: 78%;
@@ -31,4 +28,9 @@
     width: 3.5rem;
     color: #fff;
     padding: 3px 0;
+}
+
+.filterbtn {
+    bottom: 0;
+    padding: 0 0 1.875rem 0;
 }

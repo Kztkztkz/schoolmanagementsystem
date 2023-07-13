@@ -47,10 +47,10 @@
   </thead>
   <tbody>
     <tr>
-      <th>Web Foundation</th>
-      <td>IT</td>
-      <td>Breden Wagner</td>
-      <td>
+      <td class = "align-middle">Web Foundation</td>
+      <td class = "align-middle">IT</td>
+      <td class = "align-middle">Breden Wagner</td>
+      <td class="text-center">
         <a href="" class="btn table-btn-sm btn-primary">
             <i class="mdi mdi-credit-card-multiple h5"></i>
         </a>
@@ -74,10 +74,10 @@
         </td>
     </tr>
     <tr>
-      <th>Web Foundation</th>
-      <td>IT</td>
-      <td>Breden Wagner</td>
-      <td>
+      <td class = "align-middle">Web Foundation</td>
+      <td class = "align-middle">IT</td>
+      <td class = "align-middle">Breden Wagner</td>
+      <td class="text-center">
         <a href="" class="btn table-btn-sm btn-primary">
             <i class="mdi mdi-credit-card-multiple h5"></i>
         </a>
@@ -107,8 +107,8 @@
             </div>
         </div>
         <div class="col-3">
-            <div class="card " style="height: 600px">
-                <div class="card-body">
+            <div class="card" style="height: 600px">
+                <div class="card-body position-relative">
                     <p class="  fs-4 mb-2 text-center">Class Filter</p>
 
                     <form action="">
@@ -133,13 +133,15 @@
                             </select>
                         </div>
 
-                        <div class="d-flex justify-content-center align-items-center">
+                        <div class="d-flex justify-content-center">
+                        <div class="position-absolute filterbtn">
                             <button class="btn btn-secondary me-2" type="submit">Cancel</button>
                             <button class="btn btn-primary " type="submit">Submit</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 @endsection
