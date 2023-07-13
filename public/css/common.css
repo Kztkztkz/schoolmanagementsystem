@@ -1,3 +1,8 @@
+body{
+    height: 100%;
+    background: #eee;
+}
+
 .table-btn-sm{
     padding: 0.2rem 0.3rem !important;
 }
@@ -9,3 +14,25 @@
 .page-breadcrumb{
     padding: 13px 20px  !important;
 }
+
+.breadcrumb-item{
+    font-size: 1rem;
+}
+
+.breadcrumb-item::before{
+    font-size: 1rem !important;
+}
+
+table td , th{
+    padding: 0.4rem !important;
+}
+
+p{
+    margin-bottom: 0 !important;
+}
+
+.card-body{
+    padding: 1rem !important;
+}
+
+

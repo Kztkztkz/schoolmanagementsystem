@@ -1,0 +1,11 @@
+.student-table .w-15{
+    width: 15% ;
+}
+
+.student-table .w-30{
+    width: 30%;
+}
+
+.student-table td:last-child{
+    text-align: end !important;
+}
