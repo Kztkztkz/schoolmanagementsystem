@@ -10,7 +10,8 @@
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="{{asset('admin/assets/images/logo-text.png')}}" alt="homepage" class="light-logo" />
+                            {{-- <img src="{{asset('admin/assets/images/logo-text.png')}}" alt="homepage" class="light-logo" /> --}}
+                            <h4 class=" mb-0">School Management</h4>
 
                         </span>
                         <!-- Logo icon -->
@@ -46,7 +47,7 @@
                         <!-- ============================================================== -->
                         <!-- create new -->
                         <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
+                        {{-- <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <span class="d-none d-md-block">Create New <i class="fa fa-angle-down"></i></span>
                                 <span class="d-block d-md-none"><i class="fa fa-plus"></i></span>
@@ -57,17 +58,17 @@
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <!-- ============================================================== -->
                         <!-- Search -->
                         <!-- ============================================================== -->
-                        <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
+                        {{-- <li class="nav-item search-box"> <a class="nav-link waves-effect waves-dark"
                                 href="javascript:void(0)"><i class="ti-search"></i></a>
                             <form class="app-search position-absolute">
                                 <input type="text" class="form-control" placeholder="Search &amp; enter"> <a
                                     class="srh-btn"><i class="ti-close"></i></a>
                             </form>
-                        </li>
+                        </li> --}}
                     </ul>
                     <!-- ============================================================== -->
                     <!-- Right side toggle and nav items -->

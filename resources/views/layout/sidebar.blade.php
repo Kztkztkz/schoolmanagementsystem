@@ -8,13 +8,13 @@
                                 href="{{url('/')}}" aria-expanded="false"><i class="mdi mdi-calendar-clock"></i><span
                                     class="hide-menu">Scheduler</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('/class')}}" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span
+                                href="{{ route('classitem.create') }}" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span
                                     class="hide-menu">Classes</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('/student')}}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span
+                                href="{{ route('student.index') }}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span
                                     class="hide-menu">Students</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('/payment')}}" aria-expanded="false"><i class="mdi mdi-credit-card-multiple"></i><span
+                                href="{{ route('payment.index') }}" aria-expanded="false"><i class="mdi mdi-credit-card-multiple"></i><span
                                     class="hide-menu">Payment</span></a></li>
                         <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="charts.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span
