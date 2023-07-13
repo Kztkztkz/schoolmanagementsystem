@@ -15,8 +15,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return view('payment.list');
-
+        return view('payment.index');
     }
 
     /**
@@ -84,7 +83,4 @@ class PaymentController extends Controller
         //
     }
 
-    public function paid(){
-        return view('payment.paid');
-    }
 }

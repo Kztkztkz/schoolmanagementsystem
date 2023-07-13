@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-        <div class="card my-5">
+        <div class="card">
             <div class="card-body">
               <form>
                 <div class="col-12 d-flex justify-content-end">
