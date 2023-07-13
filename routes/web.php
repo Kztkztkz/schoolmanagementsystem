@@ -29,9 +29,13 @@ Route::get('/',function(){
 });
 
 Route::resource('user', UserController::class);
+
+Route::get('payment/paid',[PaymentController::class,'paid'])->name('payment.paid');
 Route::resource('payment' , PaymentController::class);
+
 Route::resource('room' , RoomController::class);
 Route::resource('course' , CourseController::class);
 Route::resource('student' , StudentController::class);
 Route::resource('classitem' , ClassitemController::class);
+
 

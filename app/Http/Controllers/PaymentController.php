@@ -45,9 +45,9 @@ class PaymentController extends Controller
      * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment $payment)
+    public function show()
     {
-        //
+        return view('payment.list');
     }
 
     /**
@@ -82,5 +82,9 @@ class PaymentController extends Controller
     public function destroy(Payment $payment)
     {
         //
+    }
+
+    public function paid(){
+        return view('payment.paid');
     }
 }

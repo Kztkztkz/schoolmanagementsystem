@@ -1,0 +1,20 @@
+.top-search {
+    flex-wrap: nowrap !important;
+}
+
+.top-search input {
+    outline: none;
+    border: none;
+}
+
+.input-group-prepend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-group-text {
+    padding: 0;
+    border: 0;
+    background: white;
+}
