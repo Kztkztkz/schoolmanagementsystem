@@ -24,6 +24,10 @@
     border: 1px solid #e9ecef !important;
 }
 
+.select2 {
+    width: 100% !important;
+}
+
 .pay-status {
     width: 3.5rem;
     color: #fff;

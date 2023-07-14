@@ -73,7 +73,7 @@
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-                <label for="lecturer">Day</label>
+                <label for="day" class="d-block">Day</label>
                 {{-- <div class = "multisel-day"> --}}
                 <select class="js-example-basic-multiple form-select" name="days[]" multiple="multiple" id="day">
                   <option value="Mo">Monday</option>
