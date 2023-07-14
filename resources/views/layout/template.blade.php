@@ -30,49 +30,57 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
-        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        <header class="topbar" data-navbarbg="skin5">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <div class="navbar-header" data-logobg="skin5">
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full" style="position: fixed;
+        display: flex;
+        flex-direction: column;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;">
+                        <!-- ============================================================== -->
+                        <!-- Topbar header - style you can find in pages.scss -->
+                        <!-- ============================================================== -->
 
+                        <header class="topbar" data-navbarbg="skin5">
+                            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                                <div class="navbar-header" data-logobg="skin5">
+                                <!-- Logo and navbar -->
+                                <!-- ============================================================== -->
+                                @include('layout.navbar')
+                                <!-- ============================================================== -->
+                                <!-- Bread crumb and right sidebar toggle -->
+                                <!-- ============================================================== -->
+
+                                {{-- </div>
+                            </nav>
+                        </header> --}}
+
+                    {{-- <div class="page-wrapper " style="margin-left: 0!important"> --}}
+                        <!-- ============================================================== -->
+                        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+                        <!-- ============================================================== -->
+                        @include('layout.sidebar')
+                        <!-- ============================================================== -->
+                        <!-- Page wrapper  -->
+                        <div class="page-wrapper" style="height: 100%">
+                        @yield('content')
+                        </div>
+
+                        <!-- ============================================================== -->
+                        <!-- footer -->
+                        <!-- ============================================================== -->
+                        <footer class="footer text-center">
+                            {{-- All Rights Reserved by Matrix-admin. Designed and Developed by <a
+                                href="https://www.wrappixel.com">WrapPixel</a>. --}}
+                        </footer>
+                        <!-- ============================================================== -->
+                        <!-- End footer -->
+                        <!-- ============================================================== -->
+                    {{-- </div> --}}
                     <!-- ============================================================== -->
-                    <!-- Logo and navbar -->
+                    <!-- End Page wrapper  -->
                     <!-- ============================================================== -->
-               @include('layout.navbar')
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-       @include('layout.sidebar')
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper ">
-            <!-- ============================================================== -->
-            <!-- Bread crumb and right sidebar toggle -->
-            <!-- ============================================================== -->
-
-
-            @yield('content')
-
-
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-            <footer class="footer text-center">
-                {{-- All Rights Reserved by Matrix-admin. Designed and Developed by <a
-                    href="https://www.wrappixel.com">WrapPixel</a>. --}}
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-    </div>
+                </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
