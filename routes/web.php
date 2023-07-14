@@ -28,9 +28,11 @@ Route::get('/',function(){
     return view('scheduler.index');
 });
 
-Route::get('/s',function(){
-    return view('layout.template');
+Route::get('/login',function(){
+    return view('auth.login');
 });
+
+
 
 Route::resource('user', UserController::class);
 

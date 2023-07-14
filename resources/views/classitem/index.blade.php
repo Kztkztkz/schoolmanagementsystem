@@ -2,7 +2,7 @@
 @section('content')
 <div class="page-breadcrumb">
   <div class="row">
-    <div class="col-12 d-flex ">
+    <div class="col-9 d-flex ">
       <div class="">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -12,11 +12,23 @@
         </nav>
       </div>
     </div>
+    <div class="col-3">
+        <div class="mx-auto">
+            <div class="input-group">
+                <input class="form-control border-end-0 border" placeholder="search class" type="search" value="" id="example-search-input">
+                <span class="input-group-append">
+                    <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
   </div>
 </div>
-<div class="row  px-3">
+<div class="row  px-3 max-height" >
   <div class="col-9">
-    <div class="card rounded-3 " style="height: 600px">
+    <div class="card rounded-3 " >
       <div class="card-body">
         <div class="d-flex justify-content-between">
           <p class="mb-0 fw-bolder">Total - 10</p>
@@ -96,7 +108,7 @@
     </div>
   </div>
   <div class="col-3">
-    <div class="card" style="height: 600px">
+    <div class="card" >
       <div class="card-body position-relative">
         <p class="  fs-4 mb-2 text-center">Class Filter</p>
         <form action="">

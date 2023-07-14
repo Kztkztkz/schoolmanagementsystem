@@ -21,9 +21,9 @@
         </div>
     </div>
 
-    <div class="row  px-3">
+    <div class="row  px-3 max-height">
         <div class="col-9">
-            <div class="card rounded-3 " style="height: 600px">
+            <div class="card rounded-3 ">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <p class="mb-0 fw-bolder">Total - 10</p>
@@ -39,9 +39,9 @@
                                 <th class="w-15" scope="col">Name</th>
                                 <th class=" w-25" scope="col">Contact</th>
                                 <th class=" w-30 " scope="col">Address</th>
-                                <th  scope="col">Payment</th>
-                                <th  scope="col">Class</th>
-                                <th  class="text-end" scope="col">Controls</th>
+                                <th scope="col">Payment</th>
+                                <th scope="col">Class</th>
+                                <th class="text-end" scope="col">Controls</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,7 +52,7 @@
                                     <p class="mb-0">0934355333</p>
                                 </td>
                                 <td>
-                                    <p>No.1 Pyay  sit amet reprehenderit animi ea?</p>
+                                    <p>No.1 Pyay sit amet reprehenderit animi ea?</p>
                                 </td>
                                 <td>
                                     <a href="" class="btn table-btn-sm btn-primary">
@@ -65,7 +65,7 @@
                                     </a>
                                 </td>
                                 <td class="">
-                                     <a href="{{ route('student.edit' , 1) }}" class="btn table-btn-sm btn-primary">
+                                    <a href="{{ route('student.edit', 1) }}" class="btn table-btn-sm btn-primary">
                                         <i class="mdi mdi-pencil h5"></i>
                                     </a>
                                     <a href="" class="btn table-btn-sm btn-danger">
@@ -82,7 +82,7 @@
                                     <p class="mb-0">0934355333</p>
                                 </td>
                                 <td>
-                                    <p>No.1 Pyay  sit amet reprehenderit animi ea?</p>
+                                    <p>No.1 Pyay sit amet reprehenderit animi ea?</p>
                                 </td>
                                 <td>
                                     <a href="" class="btn table-btn-sm btn-primary">
@@ -95,7 +95,7 @@
                                     </a>
                                 </td>
                                 <td class=" ">
-                                     <a href="{{ route('student.edit' , 1) }}" class="btn table-btn-sm btn-primary">
+                                    <a href="{{ route('student.edit', 1) }}" class="btn table-btn-sm btn-primary">
                                         <i class="mdi mdi-pencil h5"></i>
                                     </a>
                                     <a href="" class="btn table-btn-sm btn-danger">
@@ -112,7 +112,7 @@
                                     <p class="mb-0">0934355333</p>
                                 </td>
                                 <td>
-                                    <p>No.1 Pyay  sit amet reprehenderit animi ea?</p>
+                                    <p>No.1 Pyay sit amet reprehenderit animi ea?</p>
                                 </td>
                                 <td>
                                     <a href="" class="btn table-btn-sm btn-primary">
@@ -125,7 +125,7 @@
                                     </a>
                                 </td>
                                 <td class=" ">
-                                     <a href="{{ route('student.edit' , 1) }}" class="btn table-btn-sm btn-primary">
+                                    <a href="{{ route('student.edit', 1) }}" class="btn table-btn-sm btn-primary">
                                         <i class="mdi mdi-pencil h5"></i>
                                     </a>
                                     <a href="" class="btn table-btn-sm btn-danger">
@@ -142,7 +142,7 @@
                                     <p class="mb-0">0934355333</p>
                                 </td>
                                 <td>
-                                    <p>No.1 Pyay  sit amet reprehenderit animi ea?</p>
+                                    <p>No.1 Pyay sit amet reprehenderit animi ea?</p>
                                 </td>
                                 <td>
                                     <a href="" class="btn table-btn-sm btn-primary">
@@ -155,7 +155,7 @@
                                     </a>
                                 </td>
                                 <td class=" ">
-                                     <a href="{{ route('student.edit' , 1) }}" class="btn table-btn-sm btn-primary">
+                                    <a href="{{ route('student.edit', 1) }}" class="btn table-btn-sm btn-primary">
                                         <i class="mdi mdi-pencil h5"></i>
                                     </a>
                                     <a href="" class="btn table-btn-sm btn-danger">
@@ -173,8 +173,8 @@
             </div>
         </div>
         <div class="col-3">
-            <div class="card " style="height: 600px">
-                <div class="card-body">
+            <div class="card " >
+                <div class="card-body position-relative">
                     <p class="  fs-4 mb-2 text-center">Student Filter</p>
 
                     <form action="">
@@ -199,9 +199,11 @@
                             </select>
                         </div>
 
-                        <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-secondary me-2" type="submit">Cancel</button>
-                            <button class="btn btn-primary " type="submit">Submit</button>
+                        <div class="d-flex justify-content-center align-items-center ">
+                            <div class="position-absolute filterbtn">
+                                <button class="btn btn-secondary me-2" type="submit">Cancel</button>
+                                <button class="btn btn-primary " type="submit">Submit</button>
+                            </div>
                         </div>
                     </form>
                 </div>

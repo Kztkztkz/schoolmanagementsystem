@@ -2075,6 +2075,14 @@ $(document).ready(function () {
   });
 });
 
+//Course Create
+$("#addCourse").click(function () {
+  $("#courseRow").append("\n        <div class=\" mb-3\">\n        <a href=\"\" class=\" btn course-btn  btn-primary px-1 me-2\">\n            Add\n        </a>\n\n        <input type=\"text\" class=\" form-control d-inline-block\" placeholder=\"Add new course\" >\n        <button class=\" btn course-btn btn-secondary px-1 ms-2 course-del\">\n            Cancel\n        </button>\n        </div>\n\n    ");
+});
+$('.course-row').delegate(".course-del", "click", function () {
+  $(this).parent().remove();
+});
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

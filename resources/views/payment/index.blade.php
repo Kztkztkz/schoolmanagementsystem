@@ -29,7 +29,7 @@
                             </span>
                         </div>
                     </div>
-                
+
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -47,7 +47,7 @@
                                         <th scope="col-3">Transfer Date</th>
                                         <th scope="col-3">Fees</th>
                                         <th scope="col-3">Paid</th>
-                                        <th scope="col-3">Type</th>              
+                                        <th scope="col-3">Type</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -69,7 +69,7 @@
                                 <div class="col-6">
                                     <div class="mt-3 mb-3">
                                         <label for="amount mb-0"> <p class="small-header mb-0">Amount</p></label>
-                                        <input type="text" class="form-control w-75" id="amount" placeholder="Enter Amount">                            
+                                        <input type="text" class="form-control w-75" id="amount" placeholder="Enter Amount">
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -115,9 +115,9 @@
         </div>
     </div>
 
-    <div class="row  px-3">
+    <div class="row  px-3 max-height">
         <div class="col-9">
-            <div class="card rounded-3 " style="height: 600px">
+            <div class="card rounded-3 " >
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <p class="mb-0 fw-bolder">Total - 10</p>
@@ -173,7 +173,7 @@
             </div>
         </div>
         <div class="col-3">
-            <div class="card" style="height: 600px">
+            <div class="card" >
                 <div class="card-body">
                     <p class=" text-center fs-4 mb-2">Payements Filter</p>
 

@@ -17,7 +17,7 @@ $(document).ready(function () {
 
 //Course Create
 $("#addCourse").click(function () {
-
+    
     $("#courseRow").append(`
         <div class=" mb-3">
         <a href="" class=" btn course-btn  btn-primary px-1 me-2">
@@ -34,7 +34,7 @@ $("#addCourse").click(function () {
 });
 
 
-// Course Create row delete
+
 $('.course-row').delegate(".course-del" , "click" , function(){
     $(this).parent().remove();
 })

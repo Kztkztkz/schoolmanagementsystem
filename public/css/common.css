@@ -34,7 +34,17 @@ p {
 .card-body {
     padding: 1rem !important;
 }
-/* 
+
+.card{
+    height: 100% !important;
+}
+
+.max-height{
+    height: 100%;
+    padding-bottom: 50px;
+
+}
+/*
 .left-sidebar {
     position: fixed;
 }
