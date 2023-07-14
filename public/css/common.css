@@ -1,38 +1,44 @@
-body{
+body {
     height: 100%;
     background: #eee;
 }
-
-.table-btn-sm{
+.table-btn-sm {
     padding: 0.2rem 0.3rem !important;
 }
 
-.plus-btn{
+.plus-btn {
     padding: 0.1rem 0.2rem;
 }
 
-.page-breadcrumb{
-    padding: 13px 20px  !important;
+.page-breadcrumb {
+    padding: 13px 20px !important;
 }
 
-.breadcrumb-item{
+.breadcrumb-item {
     font-size: 1rem;
 }
 
-.breadcrumb-item::before{
+.breadcrumb-item::before {
     font-size: 1rem !important;
 }
 
-table td , th{
+table td,
+th {
     padding: 0.4rem !important;
 }
 
-p{
+p {
     margin-bottom: 0 !important;
 }
 
-.card-body{
+.card-body {
     padding: 1rem !important;
 }
 
+.left-sidebar {
+    position: fixed;
+}
 
+.navbar-collapse {
+    position: fixed;
+}

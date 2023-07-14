@@ -20,7 +20,12 @@
 }
 
 .pay-status {
-    width: 80px;
+    /* width: 80px; */
+}
+
+.page-wrapper {
+    height: 85vh;
+    overflow: hidden;
 }
 
 /* .modal {

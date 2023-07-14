@@ -55,13 +55,13 @@
                                         <td class="col-3">01-01-2023</td>
                                         <td class="col-3">Class A</td>
                                         <td class="col-3">Python</td>
-                                        <td class="col-3">Kyaw Kyaw</td>
+                                        <td class="col-3">Cash</td>
                                     </tr>
                                     <tr>
                                         <td class="col-3">01-01-2023</td>
                                         <td class="col-3">Class A</td>
                                         <td class="col-3">Python</td>
-                                        <td class="col-3">Kyaw Kyaw</td>
+                                        <td class="col-3">Debit Card</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -146,8 +146,8 @@
                                 <td class="col-2">Python</td>
                                 <td class="col-2">Kyaw Kyaw</td>
                                 <td class="col-2">
-                                    <div class="pay-status bg-success paystatus-div d-flex justify-content-center align-items-center">
-                                        <h6 class="">paid</h6>
+                                    <div class="pay-status bg-success paystatus-div d-flex justify-content-center align-items-center" style=" border-radius:2px;">
+                                        <h6 class="" style="margin:3px;">paid</h6>
                                     </div>
                                 </td>
                                 <td>150000</td>
@@ -159,8 +159,8 @@
                                 <td>Python</td>
                                 <td>Kyaw Kyaw</td>
                                 <td>
-                                    <div class="pay-status bg-danger paystatus-div d-flex justify-content-center align-items-center">
-                                        <h6 class="">unpaid</h6>
+                                    <div class="pay-status bg-danger paystatus-div d-flex justify-content-center align-items-center" style=" border-radius:2px;">
+                                        <h6 class="" style="margin:3px;">unpaid</h6>
                                     </div>
                                 </td>
                                 <td class="col-1">150000</td>
@@ -210,8 +210,8 @@
                             </select>
                         </div>
 
-                        <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-secondary me-2" type="submit">Cancel</button>
+                        <div class="d-flex justify-content-center align-items-center" style="margin: 60% auto;">
+                            <button class="btn btn-secondary me-2" type="submit" style="">Cancel</button>
                             <button class="btn btn-primary " type="submit">Submit</button>
                         </div>
                     </form>
