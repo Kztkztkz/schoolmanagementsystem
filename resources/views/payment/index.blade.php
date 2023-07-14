@@ -30,87 +30,7 @@
                         </div>
                     </div>
 
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Payment For Web Foundation (Batch 01)</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <h6>Student Name - Kyaw Kyaw</h6>
-
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr style="border-bottom: 2px solid black">
-                                        <th scope="col-3">Transfer Date</th>
-                                        <th scope="col-3">Fees</th>
-                                        <th scope="col-3">Paid</th>
-                                        <th scope="col-3">Type</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="col-3">01-01-2023</td>
-                                        <td class="col-3">Class A</td>
-                                        <td class="col-3">Python</td>
-                                        <td class="col-3">Cash</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="col-3">01-01-2023</td>
-                                        <td class="col-3">Class A</td>
-                                        <td class="col-3">Python</td>
-                                        <td class="col-3">Debit Card</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="mt-3 mb-3">
-                                        <label for="amount mb-0"> <p class="small-header mb-0">Amount</p></label>
-                                        <input type="text" class="form-control w-75" id="amount" placeholder="Enter Amount">
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="mt-3 mb-3">
-                                        <label for="">Type</label>
-                                        <div class="input-group w-75">
-                                            <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
-                                              <option selected>Choose Type</option>
-                                              <option value="1">One</option>
-                                              <option value="2">Two</option>
-                                              <option value="3">Three</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-3 mb-3 d-flex">
-                                <div class="" style="margin-right: 10px;">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                </div>
-                                <div>
-                                    <label class="form-check-label mb-0" for="flexRadioDefault1">
-                                        <p class="small-header mb-0" style="padding-top: 3px;">Print out the slip</p>
-                                    </label>
-                                </div>
-                            </div>
-
-                            {{-- <div class="d-flex justify-content-center">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary">Play</button>
-                            </div> --}}
-
-                            <div class="text-center mt-5">
-                                <button type="submit" class="btn btn-secondary">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Play</button>
-                            </div>
-                        </div>
-
-                    </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -172,7 +92,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        {{-- <div class="col-3">
             <div class="card" >
                 <div class="card-body">
                     <p class=" text-center fs-4 mb-2">Payements Filter</p>
@@ -217,6 +137,136 @@
                     </form>
                 </div>
             </div>
+        </div> --}}
+        <div class="col-3">
+            <div class="card" style="height: 100%">
+                <div class="card-body position-relative">
+                    <p class="  fs-4 mb-2 text-center">Class Filter</p>
+                    <form action="">
+                        <div class=" mb-3">
+                            <label for="">Student</label>
+                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
+                                <option>Select Student</option>
+                                <option value="CA">California</option>
+                                <option value="NV">Nevada</option>
+                                <option value="OR">Oregon</option>
+                                <option value="WA">Washington</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="">Course</label>
+                            <select class="select2  form-select shadow-none">
+                                <option>Select Course</option>
+                                <option value="CA">California</option>
+                                <option value="NV">Nevada</option>
+                                <option value="OR">Oregon</option>
+                                <option value="WA">Washington</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="">Class</label>
+                            <select class="select2  form-select shadow-none">
+                                <option>Select Class</option>
+                                <option value="CA">California</option>
+                                <option value="NV">Nevada</option>
+                                <option value="OR">Oregon</option>
+                                <option value="WA">Washington</option>
+                            </select>
+                        </div>
+                       <div class="d-flex justify-content-center">
+                            <div class="position-absolute filterbtn">
+                                <button class="btn btn-secondary me-2" type="submit">Cancel</button>
+                                <button class="btn btn-primary " type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Payment For Web Foundation (Batch 01)</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Student Name - Kyaw Kyaw</h6>
+
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr style="border-bottom: 2px solid black">
+                            <th scope="col-3">Transfer Date</th>
+                            <th scope="col-3">Fees</th>
+                            <th scope="col-3">Paid</th>
+                            <th scope="col-3">Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-3">01-01-2023</td>
+                            <td class="col-3">Class A</td>
+                            <td class="col-3">Python</td>
+                            <td class="col-3">Cash</td>
+                        </tr>
+                        <tr>
+                            <td class="col-3">01-01-2023</td>
+                            <td class="col-3">Class A</td>
+                            <td class="col-3">Python</td>
+                            <td class="col-3">Debit Card</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mt-3 mb-3">
+                            <label for="amount mb-0"> <p class="small-header mb-0">Amount</p></label>
+                            <input type="text" class="form-control w-75" id="amount" placeholder="Enter Amount">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mt-3 mb-3">
+                            <label for="">Type</label>
+                            <div class="input-group w-75">
+                                <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                                <option selected>Choose Type</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 mb-3 d-flex">
+                    <div class="" style="margin-right: 10px;">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                    </div>
+                    <div>
+                        <label class="form-check-label mb-0" for="flexRadioDefault1">
+                            <p class="small-header mb-0" style="padding-top: 3px;">Print out the slip</p>
+                        </label>
+                    </div>
+                </div>
+
+                {{-- <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Play</button>
+                </div> --}}
+
+                <div class="text-center mt-5">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Play</button>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+@endpush
