@@ -12,12 +12,19 @@ $(document).ready(function () {
         var color = $("#color").val();
         $("#hex").val(color);
     });
-});
 
+    //classitem index table expend
+    $(".dropdown-arrowIcon").click(function () {
+        $(this).toggleClass("dropup-arrowIcon");
+    });
+
+    $(".dropdown-arrowIcon2").click(function () {
+        $(this).toggleClass("dropup-arrowIcon2");
+    });
+});
 
 //Course Create
 $("#addCourse").click(function () {
-    
     $("#courseRow").append(`
         <div class=" mb-3">
         <a href="" class=" btn course-btn  btn-primary px-1 me-2">
@@ -33,8 +40,6 @@ $("#addCourse").click(function () {
     `);
 });
 
-
-
-$('.course-row').delegate(".course-del" , "click" , function(){
+$(".course-row").delegate(".course-del", "click", function () {
     $(this).parent().remove();
-})
+});

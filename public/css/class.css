@@ -38,3 +38,32 @@
     bottom: 0;
     padding: 0 0 1.875rem 0;
 }
+
+.dropdown-arrowIcon,
+.dropup-arrowIcon,
+.dropdown-arrowIcon2,
+.dropup-arrowIcon2 {
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+    border-left: 2px solid #666;
+    border-bottom: 2px solid #666;
+    margin: 0.4rem 0 0 3rem;
+    transition: all 0.33s ease;
+    cursor: pointer;
+}
+
+.dropdown-arrowIcon,
+.dropdown-arrowIcon2 {
+    transform: rotate(-220deg);
+}
+
+.dropup-arrowIcon,
+.dropup-arrowIcon2 {
+    transform: rotate(-45deg);
+}
+
+/* .modal-backdrop {
+    width: 0;
+    height: 0;
+} */
