@@ -52,3 +52,9 @@ p {
 .navbar-collapse {
     position: fixed;
 } */
+
+@media screen and (max-width : 460px){
+    .card-body{
+        padding: 1rem  0.5rem !important;
+    }
+}

@@ -9,3 +9,18 @@
 .student-table td:last-child{
     text-align: end !important;
 }
+
+
+@media screen and (max-width : 460px){
+    .student-table{
+        width: 800px !important;
+    }
+
+    .table-container{
+        overflow: scroll;
+    }
+
+    .table-container::-webkit-scrollbar {
+        display: none;
+      }
+}
