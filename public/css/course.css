@@ -9,15 +9,16 @@
 
 .course-width{
     width: fit-content;
+
 }
 
 .add-course{
     position: sticky;
-    bottom: 7%;
+    bottom: 0;
 }
 
 .course-row{
-    max-height: 540px;
+    max-height: 700px;
     overflow: scroll;
 }
 

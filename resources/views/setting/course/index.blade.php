@@ -23,10 +23,10 @@
         </div>
     </div>
 
-    <div class="row  px-3">
+    <div class="row  px-3 max-height">
         <div class="col-md-12">
-            <div class="card rounded-3 " style="height: 600px">
-                <div class="card-body position-relative">
+            <div class="card rounded-3 position-relative">
+                <div class="card-body ">
                     <div class="course-width">
                         <div class="course-row" id="courseRow">
                             <div class=" mb-3">

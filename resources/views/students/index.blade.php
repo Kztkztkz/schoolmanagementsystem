@@ -7,8 +7,7 @@
 @section('content')
     <div class="page-breadcrumb">
         <div class="row">
-            <div class="col-12 d-flex ">
-
+            <div class="col-9 d-flex ">
                 <div class="">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
@@ -16,6 +15,18 @@
                             <li class="breadcrumb-item active " aria-current="page">List</li>
                         </ol>
                     </nav>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="mx-auto">
+                    <div class="input-group">
+                        <input class="form-control border-end-0 border" placeholder="search student" type="search" value="" id="example-search-input">
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

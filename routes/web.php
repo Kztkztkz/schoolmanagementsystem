@@ -24,9 +24,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/',function(){
-    return view('scheduler.index');
-});
+Route::get('/', [\App\Http\Controllers\SchedulerController::class , 'index'])->name('schdeuler.index');
 
 Route::get('/login',function(){
     return view('auth.login');
