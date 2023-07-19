@@ -17,11 +17,11 @@
                 </div>
             </div>
 
-            <div class="col-3 ">
+            <div class="col-lg-3 col-md-3 col-sm-12 ">
                 <!-- Button trigger modal -->
                     <div class="mx-auto">
                         <div class="input-group">
-                            <input class="form-control border-end-0 border" type="search" value="" id="example-search-input">
+                            <input class="form-control border-end-0 border" type="search" value="" id="example-search-input ">
                             <span class="input-group-append">
                                 <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5" type="button">
                                     <i class="fa fa-search"></i>
@@ -29,14 +29,24 @@
                             </span>
                         </div>
                     </div>
-
-                
             </div>
         </div>
     </div>
 
+    <div class="d-flex justify-content-end me-3 mb-3 d-xs-block d-md-none">
+        <button type="button" class="btn btn-primary d-flex "  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Class Filter
+        </button>
+    </div>
+    
+    
+
+
+
     <div class="row  px-3 max-height">
-        <div class="col-9">
+
+        {{-- <div class="col-9 col-sm-12"> --}}
+        <div class=" col-sm-12 col-md-9 ">
             <div class="card rounded-3 " >
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -92,53 +102,8 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="col-3">
-            <div class="card" >
-                <div class="card-body">
-                    <p class=" text-center fs-4 mb-2">Payements Filter</p>
-
-                    <form action="">
-                        <div class=" mb-3">
-                            <label for="">Student</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
-                                <option>Select Student</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="">Course</label>
-                            <select class="select2  form-select shadow-none">
-                                <option>Select Course</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="">Class</label>
-                            <select class="select2  form-select shadow-none">
-                                <option>Select Class</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
-                            </select>
-                        </div>
-
-                        <div class="d-flex justify-content-center align-items-center" style="margin: 60% auto;">
-                            <button class="btn btn-secondary me-2" type="submit" style="">Cancel</button>
-                            <button class="btn btn-primary " type="submit">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div> --}}
-        <div class="col-3">
+  
+        <div class="col-3 d-none d-md-block" id="exampleModal2">
             <div class="card" style="height: 100%">
                 <div class="card-body position-relative">
                     <p class="  fs-4 mb-2 text-center">Class Filter</p>
@@ -254,19 +219,63 @@
                         </label>
                     </div>
                 </div>
-
-                {{-- <div class="d-flex justify-content-center">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Play</button>
-                </div> --}}
-
                 <div class="text-center mt-5">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Play</button>
                 </div>
             </div>
-
         </div>
         </div>
     </div>
+
+    {{-- Modal for right side bar --}}
+    <div class="modal fade" id="staticBackdrop"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Class Filter</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body  position-relative">
+            <form action="">
+                <div class=" mb-3">
+                  <label for="">Student</label>
+                  <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
+                    <option>Select Student</option>
+                    <option value="CA">David</option>
+                    <option value="NV">Steven</option>
+                    <option value="OR">Michael</option>
+                    <option value="WA">Earthshaker</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="">Course</label>
+                  <select class="select2  form-select shadow-none">
+                    <option>Select Course</option>
+                    <option value="CA">Html</option>
+                    <option value="NV">Css</option>
+                    <option value="OR">Php</option>
+                    <option value="WA">Laravel</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                    <label for="">Class</label>
+                    <select class="select2  form-select shadow-none">
+                      <option>Select Class</option>
+                      <option value="CA">Basic</option>
+                      <option value="NV">Intermediate</option>
+                      <option value="OR">Advance</option>
+                      <option value="WA">Washington</option>
+                    </select>
+                  </div>
+              
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
 @endpush

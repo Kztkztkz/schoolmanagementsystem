@@ -69,12 +69,12 @@
             <div class="card-body">
               <form>
                 <div class="col-12 d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary btn-sm" style="font-size: 14px; border:none;">Enroll New Student</button>
+                    <button type="button" class="btn btn-primary d-none d-md-block" style="font-size: 14px; border:none;">Enroll New Student</button>
                 </div>
 
                 <div class="row d-flex justify-content-between">
-                    <div class="col-5">
-                        <div class="col-9">
+                    <div class="col-xs-12 col-md-5 ">
+                        <div class="col-xs-12 col-md-9 ">
                             <div class="row">
                                     <div class="col-4">Time</div>
                                     <div class="col-2">-</div>
@@ -110,7 +110,11 @@
                         </div>
                     </div>
 
-                    <div class="col-5">
+                    {{-- model --}}
+                    <div class="col-12 d-flex justify-content-start d-block d-md-none">
+                        <button type="button" class="btn btn-primary" style="font-size: 14px; border:none;"   data-bs-toggle="modal" data-bs-target="#staticBackdrop">Enroll New Student</button>
+                    </div>
+                    <div class="d-none col-5 d-md-block">
                         <h5 class="sub-header">Enroll existing student</h5>
 
                         <div class="mt-3 mb-3">
@@ -155,8 +159,6 @@
                         </div>
 
                     </div>
-
-                   
                 </div>
               </form>
             </div>
@@ -165,3 +167,68 @@
 
 
 @endsection
+
+@push('scripts')
+{{-- model --}}
+    <div class="modal fade" id="staticBackdrop" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title sub-header"> Enroll existing student</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding:10%">
+                {{-- <div class="d-none col-5 d-md-block"> --}}
+                <div class="col-12" >
+
+                    <h5 class="sub-header">Enroll existing student</h5>
+
+                    <div class="mt-3 mb-3">
+                        <label for="">Select Existing Student</label>
+                        <div class="input-group w-75">
+                            <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                            <option selected>Select Existing Student</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 mb-3">
+                        <label for="">Type</label>
+                        <div class="input-group w-75">
+                            <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                              <option selected>Select payment type</option>
+                              <option value="1">One</option>
+                              <option value="2">Two</option>
+                              <option value="3">Three</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3 mb-3">
+                        <label for="amount mb-0"> <p class="small-header mb-0">Amount</p></label>
+                        <input type="text" class="form-control w-75" id="amount">                            
+                    </div>
+
+                    <div class="mt-3 mb-3">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                        <label class="form-check-label mb-0" for="flexRadioDefault1">
+                            <p class="small-header mb-0">Print out the slip</p>
+                        </label>
+                    </div>
+
+                </div>
+              
+            </div>
+            
+            <div class="modal-footer d-flex justify-content-center">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-primary">Enroll</button>
+            </div>
+          </div>
+        </div>
+    </div>
+{{-- model --}}
+@endpush
