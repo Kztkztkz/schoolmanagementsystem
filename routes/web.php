@@ -6,6 +6,7 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClassitemController;
+use App\Http\Controllers\SchedulerController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,7 +25,10 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [\App\Http\Controllers\SchedulerController::class , 'index'])->name('schdeuler.index');
+Route::get('/', [ SchedulerController::class , 'index'])->name('schdeuler.index');
+Route::get('/nextMonth/{from}' , [ SchedulerController::class , 'nextMonth' ])->name('schedular.nextMonth');
+Route::get('/preMonth/{from}' , [ SchedulerController::class , 'preMonth' ])->name('schedular.preMonth');
+
 
 Route::get('/login',function(){
     return view('auth.login');

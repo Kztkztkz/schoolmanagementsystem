@@ -7,14 +7,27 @@
 @section('content')
     <div class="page-breadcrumb">
         <div class="row">
-            <div class="col-12 d-flex ">
+            <div class="col-12  d-flex justify-content-between">
                 <div class="">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item "><a href="#">Class</a></li>
                             <li class="breadcrumb-item active " aria-current="page">List</li>
+                            <li class="breadcrumb-item active " aria-current="page"></li>
                         </ol>
                     </nav>
+                </div>
+                <div class="d-flex justify-content-center align-items-center bg-light shadow-sm ">
+                    <a href="{{ route('schedular.preMonth' , $monthArr[0]->format('Y-M-d') ) }}" class="btn btn-light " id="nextMonth">
+                        <i class=" mdi mdi-arrow-left"></i>
+
+
+                    </a>
+                    <div class=" fw-bold mx-3">{{ $monthArr[0]->format('Y-M')  }} ~ {{ $monthArr[6]->format('Y-M')  }}</div>
+                    <a href="{{ route('schedular.nextMonth' , $monthArr[6]->format('Y-M-d') ) }}" class="btn btn-light" id="nextMonth">
+
+                        <i class=" mdi mdi-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -60,12 +73,13 @@
         <div class="col-10">
             <div class="card rounded-3 ">
                 <div class="card-body">
+
                     <table class=" table table-bordered">
                         <thead>
                             <tr>
                                 <th></th>
-                                @foreach ($monthArr as $key => $value)
-                                    <th class=" fs-4 fw-bolder text-end py-0"> {{ $value['month'] }} </th>
+                                @foreach ($monthArr as $month)
+                                    <th class=" fs-4 fw-bolder text-end py-0"> {{ $month->format('M') }} </th>
                                 @endforeach
                             </tr>
                         </thead>
