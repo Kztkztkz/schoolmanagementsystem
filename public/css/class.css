@@ -67,3 +67,12 @@
     width: 0;
     height: 0;
 } */
+
+.dropdown-toggle::after{
+    display: none !important;
+}
+
+.dropdown-menu{
+    min-width: auto !important;
+    padding: 0.3rem !important;
+}
