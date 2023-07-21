@@ -39,7 +39,7 @@
     padding: 0 0 1.875rem 0;
 }
 
-/* .dropdown-arrowIcon,
+.dropdown-arrowIcon,
 .dropup-arrowIcon,
 .dropdown-arrowIcon2,
 .dropup-arrowIcon2 {
@@ -61,7 +61,7 @@
 .dropup-arrowIcon,
 .dropup-arrowIcon2 {
     transform: rotate(-45deg);
-} */
+}
 
 /* .modal-backdrop {
     width: 0;
