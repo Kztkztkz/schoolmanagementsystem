@@ -2075,15 +2075,23 @@ $(document).ready(function () {
   });
 
   //classitem index table expend
-  $(".dropdown-arrowIcon").click(function () {
-    $(this).toggleClass("dropup-arrowIcon");
-  });
-  $(".dropdown-arrowIcon2").click(function () {
-    $(this).toggleClass("dropup-arrowIcon2");
-  });
+  // $(".dropdown-arrowIcon").click(function () {
+  //     $(this).toggleClass("dropup-arrowIcon");
+  // });
 
-  //modal blur background
-  $("modlbtn").click(function () {});
+  // $(".dropdown-arrowIcon2").click(function () {
+  //     $(this).toggleClass("dropup-arrowIcon2");
+  // });
+
+  //control-icon(edit delete detail)
+  $(".contro-ion").on("click", function () {
+    $(this).siblings(".contro-cotainr").removeClass("d-none");
+    $(".blurbg").addClass("rmv");
+  });
+  $(".hbg").on("click", function () {
+    $(".contro-cotainr").addClass("d-none");
+    $(".blurbg").removeClass("rmv");
+  });
 });
 
 //Course Create
