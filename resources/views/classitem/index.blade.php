@@ -51,15 +51,21 @@
           <thead>
             <tr style="border-bottom: 2px solid black">
               <th scope="col">Name</th>
-              <th scope="col">Course</th>
-              <th scope="col" class="text-center">Control</th>
+              <th scope="col">Status</th>
+              <th scope="col" class="text-end">Control</th>
             </tr>
           </thead>
           <tbody>
-            <tr data-bs-toggle="collapse" href="#collapseExample">
+            <tr>
               <td class = "align-middle">Basic to Pro</td>
-              <td class = "align-middle">Web Development</td>
-              <td class="text-end">
+              <td class = "align-middle">
+              <p class="bg-success pay-status rounded my-2 text-center"> paid </p>
+              </td>
+              <td class="text-end align-middle position-relative">
+              <a href="#" class="btn table-btn-sm btn-secondary contro-ion">
+                <i class="mdi mdi-settings h5"></i>
+                </a>
+                <div class="bg-secondary position-absolute d-flex flex-row contro-cotainr d-none">
                 <a href="{{ route('classitem.edit' , 1) }}" class="btn table-btn-sm btn-primary">
                 <i class="mdi mdi-pencil h5"></i>
                 </a>
@@ -69,41 +75,22 @@
                 <a href="{{ route('classitem.show' , 'detail') }}" class="btn table-btn-sm btn-dark">
                 <i class="mdi mdi-dots-vertical h4"></i>
                 </a>
+                </div>      
               </td>
-              <td>
 
-              <span class="dropdown-arrowIcon data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"></span>
-              </td>
 
             </tr>
 
             <tr>
-            <td colspan="4" class="hiddenRow">
-              <div class="collapse text-center bg-light" id="collapseExample">
-                <div class="row">
-              <div class = "col-6 text-end">
-	<p class="mb-3"><strong>Lecture</strong> -  </p>
-	<p class="mb-3"><strong>Payment</strong> -  </p>
-	<p class="my-2"><strong>Status</strong> -  </p>
-</div>
-<div class = "col-6 text-start">
-	<p class="mb-2">Breden Wagner</p>
-	<p class="my-2">
-    <a href="" class="btn table-btn-sm btn-primary">
-      <i class="mdi mdi-credit-card-multiple h5"></i>
-    </a> 
-  </p>
-	<p class="bg-success pay-status rounded my-2 text-center"> paid </p>
-</div>
-</div>
-              </div>
-            </td>
-        </tr>
-
-            <tr data-bs-toggle="collapse" href="#collapseExample2">
-              <td class = "align-middle">Basic Basic Basic </td>
-              <td class = "align-middle">Japanese N5</td>
-              <td class="text-end">
+              <td class = "align-middle">Basic to Pro</td>
+              <td class = "align-middle">
+              <p class="bg-danger pay-status rounded my-2 text-center"> unpaid </p>
+              </td>
+              <td class="text-end align-middle position-relative">
+              <a href="#" class="btn table-btn-sm btn-secondary contro-ion">
+                <i class="mdi mdi-settings h5"></i>
+                </a>
+                <div class="bg-secondary position-absolute d-flex flex-row contro-cotainr d-none">
                 <a href="{{ route('classitem.edit' , 1) }}" class="btn table-btn-sm btn-primary">
                 <i class="mdi mdi-pencil h5"></i>
                 </a>
@@ -113,33 +100,10 @@
                 <a href="{{ route('classitem.show' , 'detail') }}" class="btn table-btn-sm btn-dark">
                 <i class="mdi mdi-dots-vertical h4"></i>
                 </a>
+                </div>      
               </td>
-              <td>
-              <span class="dropdown-arrowIcon2" data-bs-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample"></span>
-              </td>
+
             </tr>
-            <tr>
-            <td colspan="4" class="hiddenRow">
-              <div class="collapse text-center bg-light" id="collapseExample2">
-                <div class="row">
-              <div class = "col-6 text-end">
-	<p class="mb-3"><strong>Lecture</strong> -  </p>
-	<p class="mb-3"><strong>Payment</strong> -  </p>
-	<p class="my-2"><strong>Status</strong> -  </p>
-</div>
-<div class = "col-6 text-start">
-	<p class="mb-2">Breden Wagner</p>
-	<p class="my-2">
-    <a href="" class="btn table-btn-sm btn-primary">
-      <i class="mdi mdi-credit-card-multiple h5"></i>
-    </a> 
-  </p>
-	<p class="bg-danger pay-status rounded my-2 text-center"> unpaid </p>
-</div>
-</div>
-              </div>
-            </td>
-        </tr>
           </tbody>
         </table>
       </div>
@@ -264,6 +228,7 @@
     </div>
   </div>
 </div>
+<div class="blurbg"></div>
 @endsection
 
 
