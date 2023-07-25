@@ -9,6 +9,7 @@ use DateInterval;
 use DatePeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use App\Models\Classitem;
 
 use function PHPSTORM_META\type;
 
@@ -68,7 +69,9 @@ class SchedulerController extends Controller
             array_push($timeArr , $time);
         }
 
-        return view('scheduler.index', compact(['monthArr' , 'timeArr']));
+        $data = Classitem::orderBy('start_date','desc')->get();
+
+        return view('scheduler.index', compact(['monthArr' , 'timeArr', 'data']));
 
 
 
@@ -122,8 +125,8 @@ class SchedulerController extends Controller
             $time = $currentTime->addHours(1)->format('h:i a');
             array_push($timeArr , $time);
         }
-
-        return view('scheduler.index', compact(['monthArr' , 'timeArr']));
+        $data = Classitem::orderBy('start_date','desc')->get();
+        return view('scheduler.index', compact(['monthArr' , 'timeArr','data']));
 
 
     }
@@ -148,8 +151,8 @@ class SchedulerController extends Controller
             $time = $currentTime->addHours(1)->format('h:i a');
             array_push($timeArr , $time);
         }
-
-        return view('scheduler.index', compact(['monthArr' , 'timeArr']));
+        $data = Classitem::orderBy('start_date','desc')->get();
+        return view('scheduler.index', compact(['monthArr' , 'timeArr','data']));
     }
 
 }

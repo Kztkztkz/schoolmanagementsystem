@@ -21,6 +21,55 @@ $(document).ready(function () {
     $(".dropdown-arrowIcon2").click(function () {
         $(this).toggleClass("dropup-arrowIcon2");
     });
+
+    //Scheduling
+    var scheduledata = JSON.parse($("#scheduler").val());
+    $("td").each(function () {
+        var tdId = $(this).attr("id");
+        if (tdId) {
+            var sliceId = tdId.slice(2, 17);
+            var arr = sliceId.split("");
+            var del1 = arr.splice(2, 6);
+            var del2 = arr.splice(6, 1);
+            var splitarr = [
+                arr.splice(0, 2).join(""),
+                arr.splice(0, 4).join(""),
+                arr.join(""),
+            ];
+            $.each(
+                scheduledata,
+                function (index, schedule) {
+                    var dbstrtime = schedule.start_time.slice(0, 2);
+                    var dbstartdate = schedule.start_date.slice(5, 7);
+                    var dbstartyear = schedule.start_date.slice(0, 4);
+                    var timedif =
+                        schedule.end_time.slice(0, 2) -
+                        schedule.start_time.slice(0, 2);
+                    var monthdif =
+                        schedule.end_date.slice(5, 7) -
+                        schedule.start_date.slice(5, 7) +
+                        1;
+                    var tablemonth = parseInt(splitarr[2]) + 1;
+
+                    for (var i = 0; i < monthdif; i++) {
+                        tablemonth--;
+                        var tablehour = "";
+                        tablehour = parseInt(splitarr[0]) + 1;
+                        for (var j = -1; j < timedif; j++) {
+                            tablehour--;
+                            if (
+                                dbstrtime == tablehour &&
+                                dbstartyear == splitarr[1] &&
+                                dbstartdate == tablemonth
+                            ) {
+                                $(this).css("background-color", "red");
+                            }
+                        }
+                    }
+                }.bind(this)
+            );
+        }
+    });
 });
 
 //Course Create

@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+
+<input type="hidden" id="scheduler" value="{{json_encode($data)}}" />
+
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12  d-flex justify-content-between">
@@ -89,7 +92,7 @@
                                 <tr>
                                     <td class="time-fs text-end"> {{ $time }} </td>
                                     @foreach ($monthArr as $i)
-                                        <td></td>
+                                        <td id="td{{date('H:i:s',strtotime($time))}}{{$i}}"></td>
                                     @endforeach
                                 </tr>
                             @endforeach
