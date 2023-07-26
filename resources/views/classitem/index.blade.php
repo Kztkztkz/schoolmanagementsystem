@@ -52,15 +52,15 @@
                     <table class="table table-striped">
                         <thead>
                             <tr style="border-bottom: 2px solid black">
-                                <th scope="col">
+                                <th scope="col" class="list-lecturer-col" >
                                     <p class="d-none d-md-block">Name</p>
                                     <p class="d-block d-md-none">Class & Lecturer</p>
                                 </th>
-                                <th scope="col">Course</th>
-                                <th class="d-none d-md-table-cell" scope="col">Lecturer</th>
-                                <th scope="col">Status</th>
-                                <th class="d-none d-md-table-cell" scope="col" class="text-center">Payment</th>
-                                <th scope="col" class="text-center">
+                                <th scope="col" class="list-course-col">Course</th>
+                                <th class="d-none d-md-table-cell list-lecturer-col" scope="col">Lecturer</th>
+                                <th scope="col" class="list-status-col">Status</th>
+                                <th class="d-none d-md-table-cell list-payment-col text-center" scope="col" >Payment</th>
+                                <th scope="col" class="text-center list-control-col" class="">
                                     <p class=" d-none d-md-block">Control</p>
                                 </th>
                             </tr>
