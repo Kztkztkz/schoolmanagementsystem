@@ -32,8 +32,6 @@ class CreateClassitemsTable extends Migration
             ->onDelete('cascade');
             $table->foreign('course_id')->references('id')->on('courses')
             ->onDelete('cascade');
-            $table->foreign('payment_id')->references('id')->on('payments')
-            ->onDelete('cascade');
         });
     }
 
