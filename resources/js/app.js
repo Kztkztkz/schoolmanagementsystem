@@ -62,7 +62,7 @@ $(document).ready(function () {
                                 dbstartyear == splitarr[1] &&
                                 dbstartdate == tablemonth
                             ) {
-                                $(this).css("background-color", "red");
+                                // $(this).css("background-color", "red");
                             }
                         }
                     }
