@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use App\Models\Classitem;
 class ClassitemSeeder extends Seeder
 {
     /**
@@ -13,6 +13,6 @@ class ClassitemSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Classitem::factory()->count(6)->create();
     }
 }

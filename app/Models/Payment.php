@@ -9,10 +9,6 @@ class Payment extends Model
 {
     use HasFactory;
 
-    public function classitems()
-    {
-        return $this->hasMany(Classitem::class);
-    }
 
     public function students()
     {
