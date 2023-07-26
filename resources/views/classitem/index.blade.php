@@ -1,4 +1,19 @@
 @extends('layout.template')
+
+@section('custom')
+<style>
+    @media screen and (max-width:460px){
+    #main-wrapper{
+        position: fixed !important;
+    }
+
+    .max-height{
+        padding-bottom: 125px !important;
+    }
+}
+</style>
+@endsection
+
 @section('content')
     <div class="page-breadcrumb">
         <div class="row">
@@ -41,7 +56,7 @@
         <div class="col-12 col-md-9 class-table">
             <div class="card rounded-3">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
                         <p class="mb-0 fw-bolder">Total - 10</p>
                         <div class="">
                             <a href="{{ route('classitem.create') }}" class="btn d-flex justify-content-center align-items-center plus-btn btn-outline-secondary ">
@@ -52,15 +67,15 @@
                     <table class="table table-striped">
                         <thead>
                             <tr style="border-bottom: 2px solid black">
-                                <th scope="col">
+                                <th scope="col" class="list-lecturer-col" >
                                     <p class="d-none d-md-block">Name</p>
                                     <p class="d-block d-md-none">Class & Lecturer</p>
                                 </th>
-                                <th scope="col">Course</th>
-                                <th class="d-none d-md-table-cell" scope="col">Lecturer</th>
-                                <th scope="col">Status</th>
-                                <th class="d-none d-md-table-cell" scope="col" class="text-center">Payment</th>
-                                <th scope="col" class="text-center">
+                                <th scope="col" class="list-course-col">Course</th>
+                                <th class="d-none d-md-table-cell list-lecturer-col" scope="col">Lecturer</th>
+                                <th scope="col" class="list-status-col">Status</th>
+                                <th class="d-none d-md-table-cell list-payment-col text-center" scope="col" >Payment</th>
+                                <th scope="col" class="text-center list-control-col" class="">
                                     <p class=" d-none d-md-block">Control</p>
                                 </th>
                             </tr>
@@ -132,14 +147,14 @@
 
                             <tr>
                                 <td class="align-middle">
-                                    <p class="d-none d-md-block">Basic to Pro</p>
+                                    <p class="d-none d-md-block text-cut">Basic to Pro</p>
                                     <div class="d-block d-md-none">
-                                        <p>Basic to Pro</p>
-                                        <p class=" text-black-50">Breden Wagner</p>
+                                        <p>Basic to Pro </p>
+                                        <p class=" text-black-50 text-cut">Breden Wagner</p>
                                     </div>
                                 </td>
                                 <td class="align-middle">Web Development</td>
-                                <td class="d-none d-md-table-cell align-middle" >Breden Wagner</td>
+                                <td class="d-none d-md-table-cell align-middle" >KBreden  Wagner </td>
                                 <td class=" align-middle">
                                     <div
                                         class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">

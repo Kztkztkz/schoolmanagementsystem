@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Role;
+use App\Models\ClassitemStudent;
 
-class RoleSeeder extends Seeder
+class ClassitemStudentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::factory()->count(2)->create();
+        ClassitemStudent::factory()->count(10)->create();
     }
 }

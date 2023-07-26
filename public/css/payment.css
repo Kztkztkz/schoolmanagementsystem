@@ -33,3 +33,51 @@
     justify-content: center;
     align-items: center;
 } */
+
+.list-date-col {
+    width: 15%;
+}
+
+.list-class-col {
+    width: 25%;
+}
+.list-course-col {
+    width: 15%;
+}
+.list-student-col {
+    width: 13%;
+}
+
+.list-fees-col {
+    width: 12%;
+}
+
+.list-due-col {
+    width: 12%;
+}
+
+.list-type-col {
+    width: 8%;
+}
+
+@media screen and (max-width: 768px) {
+    .list-date-col {
+        width: 20%;
+    }
+
+    .list-class-col {
+        width: 30%;
+    }
+
+    .list-fees-col {
+        width: 15%;
+    }
+
+    .list-due-col {
+        width: 15%;
+    }
+
+    .list-type-col {
+        width: 20%;
+    }
+}

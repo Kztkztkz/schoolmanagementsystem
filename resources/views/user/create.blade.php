@@ -1,4 +1,17 @@
 @extends('layout.template')
+@section('custom')
+<style>
+    @media screen and (max-width:460px) {
+        #main-wrapper {
+            position: fixed !important;
+        }
+
+        .max-height {
+            padding-bottom: 75px !important;
+        }
+    }
+</style>
+@endsection
 @section('content')
 <div class="page-breadcrumb">
   <div class="row">

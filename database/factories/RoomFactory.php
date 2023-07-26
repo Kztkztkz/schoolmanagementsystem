@@ -13,8 +13,17 @@ class RoomFactory extends Factory
      */
     public function definition()
     {
+        $roomNames = [
+            'Room1',
+            'Room2',
+            'Room3',
+            'Room4',
+            'Room5',
+            'Room6',
+        ];
+
         return [
-            //
+            'name' =>$this->faker->unique()->randomElement($roomNames),
         ];
     }
 }

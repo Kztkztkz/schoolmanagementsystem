@@ -1,4 +1,4 @@
-<a class="navbar-brand" href="index.html">
+<a class="navbar-brand d-none d-md-flex" href="index.html">
                         <!-- Logo icon -->
                         <b class="logo-icon ps-2">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -8,7 +8,7 @@
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span class="logo-text">
+                        <span class="logo-text ">
                             <!-- dark Logo text -->
                             {{-- <img src="{{asset('admin/assets/images/logo-text.png')}}" alt="homepage" class="light-logo" /> --}}
                             <h5 class=" mb-0">School Management</h5>
@@ -27,8 +27,10 @@
                     <!-- ============================================================== -->
                     <!-- Toggle which is visible on mobile only -->
                     <!-- ============================================================== -->
-                    <a class="nav-toggler  d-block d-md-none" href="javascript:void(0)"><i
-                            class="ti-menu ti-close"></i></a>
+
+                            <a class="nav-toggler  d-block d-md-none" href="javascript:void(0)"><i
+                                class="ti-menu ti-close font-22 pt-2"></i></a>
+
                 </div>
                 <!-- ============================================================== -->
                 <!-- End Logo -->
@@ -43,7 +45,7 @@
                         <li class="d-none d-lg-block">
                             <a
                                 class="nav-link sidebartoggler " href="javascript:void(0)"
-                                data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i>
+                                data-sidebartype="mini-sidebar"><i class="mdi mdi-menu h2 mb-0"></i>
                             </a>
                         </li>
                     </ul>
@@ -55,9 +57,9 @@
                         <!-- Comment -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown setting">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle d-flex justify-content-center align-items-center" href="#" id="navbarDropdown" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="mdi mdi-settings font-24"></i>
+                                <i class="mdi mdi-settings h2 mb-0"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{ route('course.index') }}">Courses</a></li>

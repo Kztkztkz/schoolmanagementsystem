@@ -117,6 +117,7 @@
                 <input type="color"  id="color" class = "class-colorpicker">
                 </div>
               </div>
+              
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
@@ -131,8 +132,8 @@
             </div>
       </div>
 
-      <div class="text-center mt-5">
-      <button type="submit" class="btn btn-secondary">Cancel</button>
+      <div class="text-center mt-5 form-create-btn">
+      <button type="submit" class="btn btn-secondary me-2">Cancel</button>
       <button type="submit" class="btn btn-primary">Submit</button>
       </div>
   </div>

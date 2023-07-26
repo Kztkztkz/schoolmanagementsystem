@@ -29,3 +29,36 @@
 .course-row .form-control{
     width: auto;
 }
+
+
+@media screen and (max-width:460px){
+    .course-width{
+        width: auto;
+    }
+
+    .row-item .form-control{
+        width: 20rem;
+    }
+
+    .row-item {
+        display: flex;
+    }
+
+    .p-fixed{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        background-color: #4444447e !important;
+        height: 50px;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+    }
+
+    .course-row {
+        max-height: 470px;
+        
+    }
+
+}

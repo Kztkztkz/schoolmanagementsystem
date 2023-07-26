@@ -1,22 +1,25 @@
 <aside class="left-sidebar" data-sidebarbg="skin5">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav" class="pt-4">
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('/')}}" aria-expanded="false"><i class="mdi mdi-calendar-clock"></i><span
-                                    class="hide-menu">Scheduler</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('classitem.index') }}" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span
-                                    class="hide-menu">Classes</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('student.index') }}" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span
-                                    class="hide-menu">Students</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{ route('payment.index') }}" aria-expanded="false"><i class="mdi mdi-credit-card-multiple"></i><span
-                                    class="hide-menu">Payment</span></a></li>
-                        <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav" class="pt-4">
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ url('/') }}" aria-expanded="false"><i class="mdi mdi-calendar-clock"></i><span
+                            class="hide-menu">Scheduler</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ route('classitem.index') }}" aria-expanded="false"><i
+                            class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">Classes</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ route('student.index') }}" aria-expanded="false"><i
+                            class="mdi mdi-account-multiple"></i><span class="hide-menu">Students</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ route('payment.index') }}" aria-expanded="false"><i
+                            class="mdi mdi-credit-card-multiple"></i><span class="hide-menu">Payment</span></a></li>
+                <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        href="{{ route('user.index') }}" aria-expanded="false"><i
+                            class="mdi mdi-account-circle"></i><span class="hide-menu">Users</span></a></li>
+                <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="charts.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span
                                     class="hide-menu">Charts</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -107,14 +110,14 @@
                                 <li class="sidebar-item"><a href="error-500.html" class="sidebar-link"><i
                                             class="mdi mdi-alert-octagon"></i><span class="hide-menu"> Error 500
                                         </span></a></li> -->
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
+            </ul>
+            </li>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->

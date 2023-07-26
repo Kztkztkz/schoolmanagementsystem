@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <div class="row  px-3">
+    <div class="row  px-3 max-height">
         <div class="col-md-12">
             <div class="card rounded-3 " style="height: 600px">
                 <div class="card-body">
@@ -90,8 +90,8 @@
                         </div>
                     </div>
 
-                    <div class="text-center my-3">
-                        <a href="{{ route('student.index') }}" class="btn btn-secondary">Cancel</a>
+                    <div class=" text-center form-create-btn ">
+                        <a href="{{ route('student.index') }}" class="btn btn-secondary me-2">Cancel</a>
                         <a href="" class="btn btn-primary">Submit</a>
                     </div>
                 </div>

@@ -75,7 +75,7 @@ $(document).ready(function () {
 //Course Create
 $("#addCourse").click(function () {
     $("#courseRow").append(`
-        <div class=" mb-3">
+        <div class="row-item mb-3">
         <a href="" class=" btn course-btn  btn-primary px-1 me-2">
             Add
         </a>
@@ -99,6 +99,7 @@ $('.nav-toggler').on('click' , function(event){
 
     $('.navbar-header').toggleClass('add-nav-header');
     $('.nav-toggler').toggleClass('add-nav-toggler');
+    $('.navbar-brand').toggleClass('d-none');
     $('.logo-text').toggleClass('add-logo-text');
 
 })

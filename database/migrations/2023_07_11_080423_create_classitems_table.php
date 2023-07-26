@@ -27,7 +27,6 @@ class CreateClassitemsTable extends Migration
             $table->string('price');
             $table->unsignedBigInteger('room_id');
             $table->unsignedBigInteger('course_id');
-            $table->unsignedBigInteger('payment_id');
             $table->timestamps();
             $table->foreign('room_id')->references('id')->on('rooms')
             ->onDelete('cascade');
