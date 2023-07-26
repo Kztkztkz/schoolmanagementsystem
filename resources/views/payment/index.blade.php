@@ -57,56 +57,58 @@
                             <thead>
                                 <tr style="border-bottom: 2px solid black">
                                     {{-- Mobile View --}}
-                                    <th scope="col-4" class="d-table-cell d-lg-none">Date</th>
+                                    {{-- <th scope="col" class="d-table-cell d-lg-none">Date</th> --}}
                                     {{-- Mobile View --}}
 
 
-                                    <th scope="col-2" class="d-none d-lg-table-cell">Date</th>
-                                    <th scope="col-2">Class</th>
-                                    <th scope="col-2" class="d-none d-lg-table-cell">Course</th>
-                                    <th scope="col-2" class="d-none d-lg-table-cell">Student</th>
-                                    <th scope="col-1">Fees</th>
-                                    <th scope="col-1">Due amount</th>
-                                    <th scope="col-2 " class=" text-end">Payment Type</th>
+                                    <th scope="col" class="d-lg-table-cell list-date-col">Date</th>
+                                    <th scope="col" class=" list-class-col">Class</th>
+                                    <th scope="col" class="d-none d-lg-table-cell list-course-col">Course</th>
+                                    <th scope="col" class="d-none d-lg-table-cell list-student-col">Student</th>
+                                    <th scope="col" class=" list-fees-col">Fees</th>
+                                    <th scope="col" class=" list-due-col">Due</th>
+                                    <th scope="col" class=" text-center list-type-col">Type</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
                                      {{-- Mobile View --}}
-                                     <td class="col-2 d-table-cell d-lg-none text-nowrap">
+                                     <td class="d-table-cell d-lg-none text-nowrap align-middle">
                                         <p>01-01-2023</p>
                                         <p>Kyaw Kyaw</p>
                                     </td>
                                      {{-- Laptop View --}}
-                                    <td scope="col-2" class="d-none d-lg-table-cell">01-01-2023</td>
-                                    <td class="col-2">Class A</td>
-                                    <td class="col-2 d-none d-lg-table-cell">Python</td>
-                                    <td scope="col-2" class="d-none d-lg-table-cell">Kyaw Kyaw</td>
-                                    <td>150000</td>
-                                    <td>50000</td>
-                                    <td class="d-flex justify-content-end">
-                                        <div class=" pay-status bg-success  d-flex justify-content-center me-3 align-items-center rounded" >
-                                            <h6 class="" style="margin:3px;">paid</h6>
+                                    <td class="d-none d-lg-table-cell align-middle">01-01-2023</td>
+                                    <td class="align-middle">Class A</td>
+                                    <td class="d-none d-lg-table-cell align-middle">Python</td>
+                                    <td class="d-none d-lg-table-cell align-middle">Kyaw Kyaw</td>
+                                    <td class=" align-middle">150000</td>
+                                    <td class=" align-middle">50000</td>
+                                    <td class=" align-middle">
+                                        <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
+                                            paid
                                         </div>
                                     </td>
                                 </tr>
-
                                 <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    {{-- Mobile View --}}
-                                    <td class="col-2 d-table-cell d-lg-none">01-01-2023<br>Kyaw Kyaw</br></td>
-                                    {{-- Mobile View --}}
-                                   <td scope="col-2" class="d-none d-lg-table-cell">01-01-2023</td>
-                                   <td class="col-2">Class A</td>
-                                   <td class="col-2 d-none d-lg-table-cell">Python</td>
-                                   <td scope="col-2" class="d-none d-lg-table-cell">Kyaw Kyaw</td>
-                                   <td>150000</td>
-                                   <td>50000</td>
-                                   <td class="d-flex justify-content-end">
-                                       <div class="pay-status bg-danger paystatus-div d-flex justify-content-center align-items-center" style=" border-radius:2px;">
-                                           <h6 class="" style="margin:3px;">Unpaid</h6>
-                                       </div>
-                                   </td>
-                               </tr>
+                                     {{-- Mobile View --}}
+                                     <td class="d-table-cell d-lg-none text-nowrap align-middle">
+                                        <p>01-01-2023</p>
+                                        <p>Kyaw Kyaw</p>
+                                    </td>
+                                     {{-- Laptop View --}}
+                                    <td class="d-none d-lg-table-cell align-middle">01-01-2023</td>
+                                    <td class="align-middle">Class A</td>
+                                    <td class="d-none d-lg-table-cell align-middle">Python</td>
+                                    <td class="d-none d-lg-table-cell align-middle">Kyaw Kyaw</td>
+                                    <td class=" align-middle">150000</td>
+                                    <td class=" align-middle">50000</td>
+                                    <td class=" align-middle">
+                                        <div class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
+                                            Unpaid
+                                        </div>
+                                    </td>
+                                </tr>
 
                             </tbody>
                         </table>
@@ -183,10 +185,10 @@
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr style="border-bottom: 2px solid black">
-                            <th scope="col-3">Transfer Date</th>
-                            <th scope="col-3">Fees</th>
-                            <th scope="col-3">Paid</th>
-                            <th scope="col-3">Type</th>
+                            <th scope="col">Transfer Date</th>
+                            <th scope="col">Fees</th>
+                            <th scope="col">Paid</th>
+                            <th scope="col">Type</th>
                         </tr>
                     </thead>
                     <tbody>

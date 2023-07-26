@@ -96,7 +96,6 @@
 .list-control-col {
     width: 14%;
 }
-
 @media screen and (max-width: 768px) {
     .control-btns {
         display: none !important;

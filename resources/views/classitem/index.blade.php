@@ -132,14 +132,14 @@
 
                             <tr>
                                 <td class="align-middle">
-                                    <p class="d-none d-md-block">Basic to Pro</p>
+                                    <p class="d-none d-md-block text-cut">Basic to Pro</p>
                                     <div class="d-block d-md-none">
-                                        <p>Basic to Pro</p>
-                                        <p class=" text-black-50">Breden Wagner</p>
+                                        <p>Basic to Pro </p>
+                                        <p class=" text-black-50 text-cut">Breden Wagner</p>
                                     </div>
                                 </td>
                                 <td class="align-middle">Web Development</td>
-                                <td class="d-none d-md-table-cell align-middle" >Breden Wagner</td>
+                                <td class="d-none d-md-table-cell align-middle" >KBreden  Wagner </td>
                                 <td class=" align-middle">
                                     <div
                                         class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
