@@ -2,6 +2,7 @@
  <link rel="icon" type="image/png" sizes="16x16" href="{{asset('admin/assets/images/favicon.png')}}">
     <!-- Custom CSS -->
     <link href="{{asset('admin/assets/libs/flot/css/float-chart.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('admin/dist/css/icons/font-awesome/css/fontawesome-all.min.css') }}">
     <!-- Custom CSS -->
     <link href="{{asset('admin/dist/css/style.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">

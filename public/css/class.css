@@ -76,3 +76,35 @@
     min-width: auto !important;
     padding: 0.3rem !important;
 }
+
+@media screen and ( max-width : 768px ){
+    .control-btns{
+        display: none !important;
+    }
+
+    .control-btn{
+        display: block !important;
+    }
+
+    .class-table{
+        padding: 0;
+    }
+
+    .class-filter{
+        padding: 0.4rem !important;
+    }
+
+    .cnl-btn , .sub-btn{
+        margin-right: 0 !important;
+        padding: 0.2rem 0.6rem !important;
+    }
+
+    .class-filter-container{
+        padding-right: 0 !important;
+    }
+
+    .btn-outline-primary:hover , .btn-outline-primary:active{
+        color: #fff !important;
+        background-color: #0465cc !important;
+    }
+}

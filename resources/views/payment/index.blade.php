@@ -21,7 +21,7 @@
                 <!-- Button trigger modal -->
                     <div class="mx-auto">
                         <div class="input-group">
-                            <input class="form-control border-end-0 border" type="search" value="" id="example-search-input ">
+                            <input class="form-control border-end-0 border" placeholder="search payment" type="search" value="" id="example-search-input ">
                             <span class="input-group-append">
                                 <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5" type="button">
                                     <i class="fa fa-search"></i>
@@ -33,20 +33,20 @@
         </div>
     </div>
 
-    <div class="d-flex justify-content-end me-3 mb-3 d-xs-block d-md-none">
-        <button type="button" class="btn btn-primary d-flex "  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-          Payment Filter
+    <div class="d-flex justify-content-end me-3 mb-3 d-xs-block d-md-none filter-btn">
+        <button type="button" class="btn table-btn-sm btn-primary border border-0 d-flex "  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <i class="mdi mdi-file-find h3 mb-0"></i>
         </button>
     </div>
-    
-    
+
+
 
 
 
     <div class="row  px-3 max-height">
 
         {{-- <div class="col-9 col-sm-12"> --}}
-        <div class=" col-sm-12 col-md-9 ">
+        <div class=" col-sm-12 col-md-9 table-container">
             <div class="card rounded-3 " >
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -57,32 +57,35 @@
                             <thead>
                                 <tr style="border-bottom: 2px solid black">
                                     {{-- Mobile View --}}
-                                    <th scope="col-4" class="d-table-cell d-md-none">Date</th>
+                                    <th scope="col-4" class="d-table-cell d-lg-none">Date</th>
                                     {{-- Mobile View --}}
 
 
-                                    <th scope="col-2" class="d-none d-md-table-cell">Date</th>
+                                    <th scope="col-2" class="d-none d-lg-table-cell">Date</th>
                                     <th scope="col-2">Class</th>
-                                    <th scope="col-2">Course</th>
-                                    <th scope="col-2" class="d-none d-md-table-cell">Student</th>
+                                    <th scope="col-2" class="d-none d-lg-table-cell">Course</th>
+                                    <th scope="col-2" class="d-none d-lg-table-cell">Student</th>
                                     <th scope="col-1">Fees</th>
                                     <th scope="col-1">Due amount</th>
-                                    <th scope="col-2">Payment Type</th>
+                                    <th scope="col-2 " class=" text-end">Payment Type</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
                                      {{-- Mobile View --}}
-                                     <td class="col-2 d-table-cell d-md-none">01-01-2023<br>Kyaw Kyaw</br></td>
-                                     {{-- Mobile View --}}
-                                    <td scope="col-2" class="d-none d-md-table-cell">01-01-2023</td>
+                                     <td class="col-2 d-table-cell d-lg-none text-nowrap">
+                                        <p>01-01-2023</p>
+                                        <p>Kyaw Kyaw</p>
+                                    </td>
+                                     {{-- Laptop View --}}
+                                    <td scope="col-2" class="d-none d-lg-table-cell">01-01-2023</td>
                                     <td class="col-2">Class A</td>
-                                    <td class="col-2">Python</td>
-                                    <td scope="col-2" class="d-none d-md-table-cell">Kyaw Kyaw</td>
+                                    <td class="col-2 d-none d-lg-table-cell">Python</td>
+                                    <td scope="col-2" class="d-none d-lg-table-cell">Kyaw Kyaw</td>
                                     <td>150000</td>
                                     <td>50000</td>
-                                    <td class="col-2">
-                                        <div class="pay-status bg-success paystatus-div d-flex justify-content-center align-items-center" style=" border-radius:2px;">
+                                    <td class="d-flex justify-content-end">
+                                        <div class=" pay-status bg-success  d-flex justify-content-center me-3 align-items-center rounded" >
                                             <h6 class="" style="margin:3px;">paid</h6>
                                         </div>
                                     </td>
@@ -90,21 +93,21 @@
 
                                 <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     {{-- Mobile View --}}
-                                    <td class="col-2 d-table-cell d-md-none">01-01-2023<br>Kyaw Kyaw</br></td>
+                                    <td class="col-2 d-table-cell d-lg-none">01-01-2023<br>Kyaw Kyaw</br></td>
                                     {{-- Mobile View --}}
-                                   <td scope="col-2" class="d-none d-md-table-cell">01-01-2023</td>
+                                   <td scope="col-2" class="d-none d-lg-table-cell">01-01-2023</td>
                                    <td class="col-2">Class A</td>
-                                   <td class="col-2">Python</td>
-                                   <td scope="col-2" class="d-none d-md-table-cell">Kyaw Kyaw</td>
+                                   <td class="col-2 d-none d-lg-table-cell">Python</td>
+                                   <td scope="col-2" class="d-none d-lg-table-cell">Kyaw Kyaw</td>
                                    <td>150000</td>
                                    <td>50000</td>
-                                   <td class="col-2">
+                                   <td class="d-flex justify-content-end">
                                        <div class="pay-status bg-danger paystatus-div d-flex justify-content-center align-items-center" style=" border-radius:2px;">
                                            <h6 class="" style="margin:3px;">Unpaid</h6>
                                        </div>
                                    </td>
                                </tr>
-                            
+
                             </tbody>
                         </table>
                     </div>
@@ -112,11 +115,14 @@
                 </div>
             </div>
         </div>
-  
+
         <div class="col-3 d-none d-md-block" id="exampleModal2">
             <div class="card" style="height: 100%">
-                <div class="card-body position-relative">
-                    <p class="  fs-4 mb-2 text-center">Class Filter</p>
+                <div class="card-body position-relative filter-card">
+                    <div class="d-flex align-items-center justify-content-center mb-2">
+                        <i class="mdi mdi-file-find h3 me-1"></i>
+                        <p class="  fs-4 mb-2 text-center">Payment Filter</p>
+                    </div>
                     <form action="">
                         <div class=" mb-3">
                             <label for="">Student</label>
@@ -151,8 +157,8 @@
                         </div>
                        <div class="d-flex justify-content-center">
                             <div class="position-absolute filterbtn">
-                                <button class="btn btn-secondary me-2" type="submit">Cancel</button>
-                                <button class="btn btn-primary " type="submit">Submit</button>
+                                <button class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</button>
+                                <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -165,7 +171,7 @@
 @push('scripts')
 <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Payment For Web Foundation (Batch 01)</h1>
@@ -240,7 +246,7 @@
 
     {{-- Modal for right side bar --}}
     <div class="modal fade" id="staticBackdrop"  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="staticBackdropLabel">Class Filter</h5>
@@ -278,7 +284,7 @@
                       <option value="WA">Washington</option>
                     </select>
                   </div>
-              
+
             </div>
             <div class="modal-footer d-flex justify-content-center">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

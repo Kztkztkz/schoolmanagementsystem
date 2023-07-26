@@ -29,7 +29,11 @@
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+
+
+
+
+    <div id="main-wrapper" class="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full" style="position: fixed;
         display: flex;
         flex-direction: column;
@@ -54,6 +58,8 @@
                                 {{-- </div>
                             </nav>
                         </header> --}}
+
+
 
                     {{-- <div class="page-wrapper " style="margin-left: 0!important"> --}}
                         <!-- ============================================================== -->

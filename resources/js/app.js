@@ -92,3 +92,13 @@ $("#addCourse").click(function () {
 $(".course-row").delegate(".course-del", "click", function () {
     $(this).parent().remove();
 });
+
+//navbar menu btn
+$('.nav-toggler').on('click' , function(event){
+    event.preventDefault();
+
+    $('.navbar-header').toggleClass('add-nav-header');
+    $('.nav-toggler').toggleClass('add-nav-toggler');
+    $('.logo-text').toggleClass('add-logo-text');
+
+})

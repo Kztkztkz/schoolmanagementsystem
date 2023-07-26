@@ -30,23 +30,22 @@
     </div>
     <!-- filter button -->
     <!-- Button trigger modal -->
-    <div class="d-flex justify-content-end me-3 mb-3 d-xs-block d-sm-none">
-        <button type="button" class="btn btn-primary d-flex modlbtn" data-bs-toggle="modal"
-            data-bs-target="#staticBackdrop">
-            Class Filter
+    <div class="d-flex justify-content-end me-3 mb-3 d-xs-block d-md-none filter-btn">
+        <button type="button" class="btn table-btn-sm btn-primary border border-0 d-flex "  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <i class="mdi mdi-file-find h3 mb-0"></i>
         </button>
     </div>
     <!-- end filter button -->
-   
+
     <div class="row  px-3 max-height  d-sm-flex">
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-md-9 class-table">
             <div class="card rounded-3">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <p class="mb-0 fw-bolder">Total - 10</p>
                         <div class="">
-                            <a href="{{ route('classitem.create') }}" class="btn plus-btn btn-secondary">
-                                <i class="mdi mdi-plus h5"></i>
+                            <a href="{{ route('classitem.create') }}" class="btn d-flex justify-content-center align-items-center plus-btn btn-outline-secondary ">
+                                <i class="mdi mdi-plus h5 mb-0"></i>
                             </a>
                         </div>
                     </div>
@@ -59,8 +58,8 @@
                                 </th>
                                 <th scope="col">Course</th>
                                 <th class="d-none d-md-table-cell" scope="col">Lecturer</th>
-                                <th class="d-none d-md-table-cell" scope="col" class="text-center">Payment</th>
                                 <th scope="col">Status</th>
+                                <th class="d-none d-md-table-cell" scope="col" class="text-center">Payment</th>
                                 <th scope="col" class="text-center">
                                     <p class=" d-none d-md-block">Control</p>
                                 </th>
@@ -76,39 +75,40 @@
                                     </div>
                                 </td>
                                 <td class="align-middle">Web Development</td>
-                                <td class="d-none d-md-table-cell" class="align-middle">Breden Wagner</td>
-                                <td class="d-none d-md-table-cell" class="text-center">
-                                    <a href="" class="btn table-btn-sm btn-primary">
-                                        <i class="mdi mdi-credit-card-multiple h5"></i>
-                                    </a>
-                                </td>
+                                <td class="d-none d-md-table-cell  align-middle" >Breden Wagner</td>
                                 <td class=" align-middle">
                                     <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
                                         paid
                                     </div>
                                 </td>
+                                <td class="d-none d-md-table-cell align-middle text-center" >
+                                    <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-credit-card-multiple h5"></i>
+                                    </a>
+                                </td>
                                 <td class="text-end align-middle">
-                                    <div class="d-none d-md-block">
+                                    <div class="d-none d-md-block control-btns">
                                         <a href="{{ route('classitem.edit', 1) }}" class="btn table-btn-sm btn-primary">
                                             <i class="mdi mdi-pencil h5"></i>
+                                        </a>
+                                        <a href="{{ route('classitem.show', 'detail') }}" class="btn table-btn-sm btn-primary">
+                                            <i class="mdi mdi-information-outline h5"></i>
                                         </a>
                                         <a href="" class="btn table-btn-sm btn-danger">
                                             <i class="mdi mdi-delete h5 text-white"></i>
                                         </a>
-                                        <a href="{{ route('classitem.show', 'detail') }}" class="btn table-btn-sm btn-dark">
-                                            <i class="mdi mdi-dots-vertical h4"></i>
-                                        </a>
+
                                     </div>
 
 
-                                    <div class="btn-group dropup d-block d-md-none">
+                                    <div class="btn-group control-btn dropup d-block d-md-none ">
                                         <button type="button" class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="mdi mdi-dots-vertical h4"></i>
                                         </button>
 
                                         <ul class="dropdown-menu mb-1">
-                                            <div class="d-flex ">
+                                            <div class="d-flex justify-content-around">
                                                 <li>
                                                     <a href="{{ route('classitem.edit', 1) }}" class="btn table-btn-sm btn-outline-primary border border-0">
                                                         <i class="mdi mdi-pencil h5"></i>
@@ -139,40 +139,41 @@
                                     </div>
                                 </td>
                                 <td class="align-middle">Web Development</td>
-                                <td class="d-none d-md-table-cell" class="align-middle">Breden Wagner</td>
-                                <td class="d-none d-md-table-cell" class="text-center">
-                                    <a href="" class="btn table-btn-sm btn-primary">
-                                        <i class="mdi mdi-credit-card-multiple h5"></i>
-                                    </a>
-                                </td>
+                                <td class="d-none d-md-table-cell align-middle" >Breden Wagner</td>
                                 <td class=" align-middle">
                                     <div
                                         class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
                                         unpaid
                                     </div>
                                 </td>
-                                <td class="text-end align-middle">
-                                    <div class="d-none d-md-block">
+                                <td class="d-none d-md-table-cell align-middle text-center">
+                                    <a href="" class="btn table-btn-sm btn-primary">
+                                        <i class="mdi mdi-credit-card-multiple h5"></i>
+                                    </a>
+                                </td>
+                                <td class="text-end align-middle text-nowrap">
+                                    <div class="d-none d-md-block control-btns">
                                         <a href="{{ route('classitem.edit', 1) }}" class="btn table-btn-sm btn-primary">
                                             <i class="mdi mdi-pencil h5"></i>
+                                        </a>
+                                        <a href="{{ route('classitem.show', 'detail') }}"
+                                            class="btn table-btn-sm btn-primary">
+                                            <i class="mdi mdi-information-outline h5"></i>
                                         </a>
                                         <a href="" class="btn table-btn-sm btn-danger">
                                             <i class="mdi mdi-delete h5 text-white"></i>
                                         </a>
-                                        <a href="{{ route('classitem.show', 'detail') }}"
-                                            class="btn table-btn-sm btn-dark">
-                                            <i class="mdi mdi-dots-vertical h4"></i>
-                                        </a>
+
                                     </div>
 
-                                    <div class="btn-group dropup d-block d-md-none">
+                                    <div class="btn-group dropup d-block d-md-none control-btn">
                                         <button type="button" class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="mdi mdi-dots-vertical h4"></i>
                                         </button>
 
                                         <ul class="dropdown-menu mb-1">
-                                            <div class="d-flex ">
+                                            <div class="d-flex justify-content-around">
                                                 <li>
                                                     <a href="{{ route('classitem.edit', 1) }}" class="btn table-btn-sm btn-outline-primary border border-0">
                                                         <i class="mdi mdi-pencil h5"></i>
@@ -198,10 +199,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-3 d-none d-sm-block">
+        <div class="col-3 d-none d-md-block class-filter-container">
             <div class="card">
-                <div class="card-body position-relative">
-                    <p class="  fs-4 mb-2 text-center">Class Filter</p>
+                <div class="card-body position-relative filter-card">
+                    <div class="d-flex align-items-center justify-content-center mb-2">
+                        <i class="mdi mdi-file-find h3 me-1"></i>
+                        <p class="  fs-4 mb-2 text-center">Class Filter</p>
+                    </div>
                     <form action="">
                         <div class=" mb-3">
                             <label for="">Course</label>
@@ -225,8 +229,8 @@
                         </div>
                         <div class="d-flex justify-content-center">
                             <div class="position-absolute filterbtn">
-                                <button class="btn btn-secondary me-2" type="submit">Cancel</button>
-                                <button class="btn btn-primary " type="submit">Submit</button>
+                                <button class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</button>
+                                <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -240,7 +244,7 @@
 @push('scripts')
     <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="staticBackdropLabel">Class Filter</h5>
