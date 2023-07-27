@@ -13,7 +13,7 @@ class StoreClassitemRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,24 @@ class StoreClassitemRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'startdate' => 'required',
+            'enddate' => 'required',
+            'course' => 'required',
+            'starttime' => 'required',
+            'endtime' => 'required',
+            'room' => 'required',
+            'days' => 'required',
+            'price' => 'required',
+            'maxstudent' => 'required',
+            'daytype' => 'required',
+            'color' => [
+            function ($attribute, $value, $fail) {
+                if (strtolower($value) == '#000000') {
+                    $fail('Please choose the '.$attribute.'.');
+                }
+            },
+        ],
         ];
     }
 }

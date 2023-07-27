@@ -16,6 +16,19 @@
     width: 78%;
 }
 
+/* created success message */
+.success-alt {
+    position: relative;
+}
+.success-msg {
+    background: none;
+    border: none;
+    top: 2px;
+    right: 0;
+    font-size: 1.5rem;
+    position: absolute;
+}
+
 .select2-container .select2-search--inline .select2-search__field {
     height: 20px !important;
 }

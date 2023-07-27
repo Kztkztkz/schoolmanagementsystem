@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classitem;
+use App\Models\Room;
+use App\Models\Course;
 use App\Http\Requests\StoreClassitemRequest;
 use App\Http\Requests\UpdateClassitemRequest;
 
@@ -25,7 +27,9 @@ class ClassitemController extends Controller
      */
     public function create()
     {
-        return view('classitem.create');
+        $roomoption = Room::all();
+        $courseoption = Course::all();
+        return view('classitem.create',compact(['roomoption','courseoption']));
     }
 
     /**
@@ -36,7 +40,24 @@ class ClassitemController extends Controller
      */
     public function store(StoreClassitemRequest $request)
     {
-        
+        $days = $request->days;
+        $day_string = implode(',', $days);
+
+        Classitem::create([
+            'name' => $request->name,
+            'start_date' => $request->startdate,
+            'end_date' => $request->enddate,
+            'course_id' => $request->course,
+            'start_time' => $request->starttime,
+            'end_time' => $request->endtime,
+            'room_id' => $request->room,
+            'day' => $day_string,
+            'price' => $request->price,
+            'max_student' => $request->maxstudent,
+            'container_color' => $request->color,
+        ]);
+
+       return redirect()->back()->with('message','Data Inserted Successfully');
     }
 
     /**

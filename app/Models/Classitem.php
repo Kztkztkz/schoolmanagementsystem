@@ -9,6 +9,8 @@ class Classitem extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name','start_date','end_date','start_time','end_time','day','container_color','max_student','type','price','room_id','course_id'];
+
     public function students()
     {
         return $this->belongsToMany(Student::class, 'classitem_student');

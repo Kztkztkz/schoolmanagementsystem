@@ -13,6 +13,15 @@ $(document).ready(function () {
         $("#hex").val(color);
     });
 
+    //close redirect back message
+    $(".alert .close").on("click", function () {
+        $(this)
+            .parent()
+            .fadeOut("fast", function () {
+                $(this).remove();
+            });
+    });
+
     //classitem index table expend
     $(".dropdown-arrowIcon").click(function () {
         $(this).toggleClass("dropup-arrowIcon");
@@ -94,12 +103,10 @@ $(".course-row").delegate(".course-del", "click", function () {
 });
 
 //navbar menu btn
-$('.nav-toggler').on('click' , function(event){
+$(".nav-toggler").on("click", function (event) {
     event.preventDefault();
-
-    $('.navbar-header').toggleClass('add-nav-header');
-    $('.nav-toggler').toggleClass('add-nav-toggler');
-    $('.navbar-brand').toggleClass('d-none');
-    $('.logo-text').toggleClass('add-logo-text');
-
-})
+    $(".navbar-header").toggleClass("add-nav-header");
+    $(".nav-toggler").toggleClass("add-nav-toggler");
+    $(".navbar-brand").toggleClass("d-none");
+    $(".logo-text").toggleClass("add-logo-text");
+});
