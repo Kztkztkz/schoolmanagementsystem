@@ -111,56 +111,31 @@
 }
 @media screen and (max-width: 768px) {
     .control-btns {
-.list-lecturer-col {
-    width: 25%;
-}
-
-.list-course-col {
-    width: 25%;
-}
-
-.list-status-col {
-    width: 8%;
-}
-
-.list-payment-col {
-    width: 8%;
-}
-
-.list-control-col {
-    width: 14%;
-}
-@media screen and (max-width: 768px) {
-    .control-btns {
         display: none !important;
     }
 
-    .control-btn  {
+    .control-btn {
         display: block !important;
     }
 
-    .class-table  {
+    .class-table {
         padding: 0;
     }
 
-    .class-filter  {
+    .class-filter {
         padding: 0.4rem !important;
     }
 
-    .cnl-btn,
-    .sub-btn {
     .cnl-btn,
     .sub-btn {
         margin-right: 0 !important;
         padding: 0.2rem 0.6rem !important;
     }
 
-    .class-filter-container  {
+    .class-filter-container {
         padding-right: 0 !important;
     }
 
-    .btn-outline-primary:hover,
-    .btn-outline-primary:active {
     .btn-outline-primary:hover,
     .btn-outline-primary:active {
         color: #fff !important;
