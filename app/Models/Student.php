@@ -14,8 +14,8 @@ class Student extends Model
         return $this->belongsToMany(Classitem::class, 'classitem_student');
     }
 
-    public function payment()
+    public function payments()
     {
-        return $this->belongsTo(Payment::class);
+        return $this->hasMany(Payment::class);
     }
 }

@@ -10,8 +10,13 @@ class Payment extends Model
     use HasFactory;
 
 
-    public function students()
+    public function student()
     {
-        return $this->hasMany(Student::class);
+        return $this->belongsTo(Student::class);
+    }
+
+    public function classitem()
+    {
+        return $this->belongsTo(Classitem::class);
     }
 }

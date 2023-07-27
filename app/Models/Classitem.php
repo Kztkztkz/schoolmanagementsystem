@@ -30,4 +30,9 @@ class Classitem extends Model
     {
         return $this->belongsTo(Course::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

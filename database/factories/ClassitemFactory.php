@@ -25,7 +25,7 @@ class ClassitemFactory extends Factory
         $roomIds = Room::pluck('id')->toArray();
         $courseIds = Course::pluck('id')->toArray();
         return [
-            'name'=>$this->faker->randomElement($classitemNames),
+            'name'=>$this->faker->unique()->randomElement($classitemNames),
             'start_date'=>$start,
             'end_date'=>$this->faker->dateTimeBetween($start, '+9months'),
             'start_time'=>$this->faker->randomElement($stTimes),

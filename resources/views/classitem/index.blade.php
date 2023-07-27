@@ -144,7 +144,6 @@
                                     </div>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td class="align-middle">
                                     <p class="d-none d-md-block text-cut">Basic to Pro</p>

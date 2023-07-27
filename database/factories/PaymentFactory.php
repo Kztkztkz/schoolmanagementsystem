@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Student;
+use App\Models\Classitem;
 
 class PaymentFactory extends Factory
 {
@@ -20,11 +22,15 @@ class PaymentFactory extends Factory
         $dueAmount= $total-$fee;
         $type = ($dueAmount === 0 ) ? 'paid' : 'unpaid';
         $paymentMethod = ['cash', 'card', 'bank transfer'];
+        $studentIds = Student::pluck('id')->toArray();
+        $classitemIds = Classitem::pluck('id')->toArray();
         return [
             'fees' => $fee,
             'due_amount' => $dueAmount,
             'payment_type' => $type,
             'payment_method' => $this->faker->randomElement($paymentMethod),
+            'student_id' => $this->faker->randomElement($studentIds),
+            'classitem_id' => $this->faker->randomElement($classitemIds),
         ];
     }
 }

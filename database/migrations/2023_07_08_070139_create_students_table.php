@@ -19,10 +19,7 @@ class CreateStudentsTable extends Migration
             $table->string('email')->unique();
             $table->string('phone');
             $table->text('address');
-            $table->unsignedBigInteger('payment_id');
             $table->timestamps();
-            $table->foreign('payment_id')->references('id')->on('payments')
-            ->onDelete('cascade');
         });
     }
     /**

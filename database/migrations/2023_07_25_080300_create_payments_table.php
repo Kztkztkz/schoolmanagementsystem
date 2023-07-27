@@ -19,7 +19,13 @@ class CreatePaymentsTable extends Migration
             $table->string('due_amount');
             $table->enum('payment_type', ['paid', 'unpaid']);
             $table->enum('payment_method', ['cash', 'card', 'bank transfer']);
+            $table->unsignedBigInteger('classitem_id');
+            $table->unsignedBigInteger('student_id');
             $table->timestamps();
+            $table->foreign('classitem_id')->references('id')->on('classitems')
+            ->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('students')
+            ->onDelete('cascade');
         });
     }
 
