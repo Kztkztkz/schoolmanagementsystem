@@ -1,4 +1,7 @@
 @extends('layout.template')
+@section('custom')
+<link rel="stylesheet" href="{{asset('css/class.css')}}">
+@endsection
 
 @section('content')
 <div class="page-breadcrumb">
@@ -140,7 +143,7 @@
                 </div>
                 <span class="text-danger">@error('color') {{$message}} @enderror</span>
               </div>
-              
+
             </div>
             <!-- <div class="col-sm-4 mt-3">
               <div class="form-group test">

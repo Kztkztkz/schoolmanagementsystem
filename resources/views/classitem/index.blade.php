@@ -8,7 +8,7 @@
     }
 
     .max-height{
-        padding-bottom: 125px !important;
+        padding-bottom: 70px !important;
     }
 }
 </style>
@@ -43,14 +43,7 @@
             </div>
         </div>
     </div>
-    <!-- filter button -->
-    <!-- Button trigger modal -->
-    <div class="d-flex justify-content-end me-3 mb-3 d-xs-block d-md-none filter-btn">
-        <button type="button" class="btn table-btn-sm btn-primary border border-0 d-flex "  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            <i class="mdi mdi-file-find h3 mb-0"></i>
-        </button>
-    </div>
-    <!-- end filter button -->
+
 
     <div class="row  px-3 max-height  d-sm-flex">
         <div class="col-12 col-md-9 class-table">
@@ -58,10 +51,16 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
                         <p class="mb-0 fw-bolder">Total - 10</p>
-                        <div class="">
-                            <a href="{{ route('classitem.create') }}" class="btn d-flex justify-content-center align-items-center plus-btn btn-outline-secondary ">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <a href="{{ route('classitem.create') }}" class="btn d-flex me-2 justify-content-center align-items-center plus-btn btn-outline-secondary ">
                                 <i class="mdi mdi-plus h5 mb-0"></i>
                             </a>
+                            <div class="d-flex justify-content-end  d-xs-block d-md-none ">
+                                <button type="button" class="btn plus-btn btn-outline-secondary d-flex " data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop">
+                                    <i class="mdi mdi-filter-outline h5 mb-0"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <table class="table table-striped">
