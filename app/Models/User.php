@@ -44,7 +44,7 @@ class User extends Authenticatable
 
     public function classitems()
     {
-        return $this->belongsToMany(Classitem::class, 'user_classitem');
+        return $this->belongsToMany(Classitem::class, 'user_classitems');
     }
 
     public function role()

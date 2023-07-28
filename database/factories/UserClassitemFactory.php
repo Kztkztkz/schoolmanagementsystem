@@ -15,7 +15,7 @@ class UserClassitemFactory extends Factory
      */
     public function definition()
     {
-        $userIds = User::pluck('id')->toArray();
+        $userIds = User::where('role_id', '=', '1')->pluck('id')->toArray();
         $classitemIds = Classitem::pluck('id')->toArray();
         return [
             'user_id' => $this->faker->randomElement($userIds),

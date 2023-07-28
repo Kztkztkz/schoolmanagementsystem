@@ -7,6 +7,7 @@ use App\Models\Room;
 use App\Models\Course;
 use App\Http\Requests\StoreClassitemRequest;
 use App\Http\Requests\UpdateClassitemRequest;
+use Illuminate\Support\Str;
 
 class ClassitemController extends Controller
 {
@@ -17,7 +18,8 @@ class ClassitemController extends Controller
      */
     public function index()
     {
-        return view('classitem.index');
+        $classitem = Classitem::all();
+        return view('classitem.index', compact('classitem'));
     }
 
     /**

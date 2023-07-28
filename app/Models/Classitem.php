@@ -13,12 +13,12 @@ class Classitem extends Model
 
     public function students()
     {
-        return $this->belongsToMany(Student::class, 'classitem_student');
+        return $this->belongsToMany(Student::class, 'classitem_students');
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_classitem');
+        return $this->belongsToMany(User::class, 'user_classitems');
     }
 
     public function room()

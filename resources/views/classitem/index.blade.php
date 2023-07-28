@@ -80,85 +80,37 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($classitem as $classdata)
                             <tr>
                                 <td class="align-middle">
-                                    <p class="d-none d-md-block">Basic to Pro</p>
+                                    <p class="d-none d-md-block text-cut">{{Str::limit($classdata->name,20)}}</p>
                                     <div class="d-block d-md-none">
-                                        <p>Basic to Pro</p>
-                                        <p class=" text-black-50">Breden Wagner</p>
+                                        <p>{{$classdata->name}} </p>
+                                        <p class=" text-black-50 text-cut">{{Str::limit($classdata->users->pluck('name')->implode(', '),20)}} </p>
                                     </div>
                                 </td>
-                                <td class="align-middle">Web Development</td>
-                                <td class="d-none d-md-table-cell  align-middle" >Breden Wagner</td>
-                                <td class=" align-middle">
-                                    <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
-                                        paid
-                                    </div>
-                                </td>
-                                <td class="d-none d-md-table-cell align-middle text-center" >
-                                    <a href="" class="btn table-btn-sm btn-primary">
-                                        <i class="mdi mdi-credit-card-multiple h5"></i>
-                                    </a>
-                                </td>
-                                <td class="text-end align-middle">
-                                    <div class="d-none d-md-block control-btns">
-                                        <a href="{{ route('classitem.edit', 1) }}" class="btn table-btn-sm btn-primary">
-                                            <i class="mdi mdi-pencil h5"></i>
-                                        </a>
-                                        <a href="{{ route('classitem.show', 'detail') }}" class="btn table-btn-sm btn-primary">
-                                            <i class="mdi mdi-information-outline h5"></i>
-                                        </a>
-                                        <a href="" class="btn table-btn-sm btn-danger">
-                                            <i class="mdi mdi-delete h5 text-white"></i>
-                                        </a>
-
-                                    </div>
-
-
-                                    <div class="btn-group control-btn dropup d-block d-md-none ">
-                                        <button type="button" class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="mdi mdi-dots-vertical h4"></i>
-                                        </button>
-
-                                        <ul class="dropdown-menu mb-1">
-                                            <div class="d-flex justify-content-around">
-                                                <li>
-                                                    <a href="{{ route('classitem.edit', 1) }}" class="btn table-btn-sm btn-outline-primary border border-0">
-                                                        <i class="mdi mdi-pencil h5"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="" class="btn table-btn-sm btn-outline-danger border border-0">
-                                                        <i class="mdi mdi-delete h5 "></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ route('classitem.show', 'detail') }}" class="btn table-btn-sm btn-outline-secondary border border-0">
-                                                        <i class="mdi mdi-information-outline h4"></i>
-                                                    </a>
-                                                </li>
-                                            </div>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle">
-                                    <p class="d-none d-md-block text-cut">Basic to Pro</p>
-                                    <div class="d-block d-md-none">
-                                        <p>Basic to Pro </p>
-                                        <p class=" text-black-50 text-cut">Breden Wagner</p>
-                                    </div>
-                                </td>
-                                <td class="align-middle">Web Development</td>
-                                <td class="d-none d-md-table-cell align-middle" >KBreden  Wagner </td>
+                                <td class="align-middle">{{Str::limit($classdata->course->name,20)}}</td>
+                                <td class="d-none d-md-table-cell align-middle" >{{Str::limit($classdata->users->pluck('name')->implode(', '),20)}} </td>
+                                @php $isUnpaid = false; @endphp
+                                @foreach($classdata->payments as $payment)
+                                @if($payment->payment_type === 'unpaid')
+                                @php $isUnpaid = true; @endphp @break
+                                @endif
+                                @endforeach
+                                @if($isUnpaid)
                                 <td class=" align-middle">
                                     <div
                                         class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
                                         unpaid
                                     </div>
                                 </td>
+                                @else
+                                <td class=" align-middle">
+                                    <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
+                                        paid
+                                    </div>
+                                </td>
+                                @endif
                                 <td class="d-none d-md-table-cell align-middle text-center">
                                     <a href="" class="btn table-btn-sm btn-primary">
                                         <i class="mdi mdi-credit-card-multiple h5"></i>
@@ -207,6 +159,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

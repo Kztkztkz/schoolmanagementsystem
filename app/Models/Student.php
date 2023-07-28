@@ -11,7 +11,7 @@ class Student extends Model
 
     public function classitems()
     {
-        return $this->belongsToMany(Classitem::class, 'classitem_student');
+        return $this->belongsToMany(Classitem::class, 'classitem_students');
     }
 
     public function payments()
