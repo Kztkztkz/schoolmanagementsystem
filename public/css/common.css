@@ -87,6 +87,7 @@ body::-webkit-scrollbar{
 
 .table-container{
     padding:  0 !important;
+    position: relative;
 }
 
 .table-btn-sm {
@@ -138,6 +139,20 @@ p {
     padding-bottom: 50px;
 }
 
+.create-filterbtn {
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    transform: translate(50% , 0);
+    padding: 0 0 1.875rem 0;
+}
+
+.filterbtn{
+    position: absolute;
+    bottom: 0;
+    padding: 0 0 1.875rem 0;
+}
+
 /* .card-body {
     max-height: 400px;
     overflow: auto;
@@ -153,6 +168,12 @@ p {
 
 .left-sidebar  {
     width: 220px;
+}
+
+.paginate{
+    position: absolute;
+    bottom: 0rem;
+    right: 1rem;
 }
 
 /*
@@ -264,6 +285,8 @@ p {
     .filter-btn {
         margin-right: 0.4rem !important;
     }
+
+
 }
 
 

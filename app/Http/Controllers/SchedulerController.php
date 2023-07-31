@@ -71,7 +71,7 @@ class SchedulerController extends Controller
 
         $data = Classitem::orderBy('start_date','desc')->get();
 
-        return view('scheduler.index', compact(['monthArr' , 'timeArr', 'data']));
+        return view('scheduler.index' , compact(['monthArr' , 'timeArr', 'data']));
 
 
 
@@ -116,7 +116,7 @@ class SchedulerController extends Controller
         // return $period;
 
         $monthArr = $period->toArray();
-
+        
 
         $currentTime = Carbon::create(2023 , 7 , 19 , 7 );
         $timeArr = [];

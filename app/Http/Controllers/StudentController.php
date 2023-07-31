@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\Classitem;
+use App\Models\Course;
 
 class StudentController extends Controller
 {
@@ -15,7 +17,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('students.index');
+        $totalStudents = Student::all()->count();
+        $students = Student::latest()->paginate(7);
+        return view('students.index' , compact('students' , 'totalStudents'));
     }
 
     /**
@@ -25,7 +29,9 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view('students.create');
+        $classes = Classitem::all();
+        $courses = Course::all();
+        return view('students.create' , compact('classes' , 'courses'));
     }
 
     /**
@@ -36,7 +42,14 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        //
+        $students = new Student();
+        $students->name = $request->name;
+        $students->email = $request->email;
+        $students->address = $request->address;
+        $students->phone = $request->phone;
+        $students->save();
+
+        return redirect()->route('student.index')->with('message' , 'Student created successfully');
     }
 
     /**
@@ -56,9 +69,10 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit( Student $student)
     {
-        return view('students.edit');
+
+        return view('students.edit' , compact('student'));
     }
 
     /**
@@ -70,7 +84,13 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, Student $student)
     {
-        //
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->address = $request->address;
+        $student->phone = $student->phone;
+        $student->update();
+
+        return redirect()->route('student.index');
     }
 
     /**
@@ -81,6 +101,7 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
-        //
+        $student->delete();
+        return redirect()->back();
     }
 }

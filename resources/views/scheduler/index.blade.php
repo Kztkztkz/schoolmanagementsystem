@@ -20,14 +20,15 @@
                         </ol>
                     </nav>
                 </div>
+
                 <div class="d-flex justify-content-center align-items-center bg-light shadow-sm ">
                     <a href="{{ route('schedular.preMonth' , $monthArr[0]->format('Y-M-d') ) }}" class="btn btn-light " id="nextMonth">
                         <i class=" mdi mdi-arrow-left"></i>
 
 
                     </a>
-                    <div class=" fw-bold mx-3">{{ $monthArr[0]->format('Y-M')  }} ~ {{ $monthArr[6]->format('Y-M')  }}</div>
-                    <a href="{{ route('schedular.nextMonth' , $monthArr[6]->format('Y-M-d') ) }}" class="btn btn-light" id="nextMonth">
+                    <div class=" fw-bold mx-3">{{ $monthArr[0]->format('Y-M')  }} ~ {{ $monthArr[5]->format('Y-M')  }}</div>
+                    <a href="{{ route('schedular.nextMonth' , $monthArr[5]->format('Y-M-d') ) }}" class="btn btn-light" id="nextMonth">
 
                         <i class=" mdi mdi-arrow-right"></i>
                     </a>

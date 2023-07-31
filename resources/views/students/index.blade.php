@@ -4,11 +4,12 @@
     <style>
         @media screen and (max-width:460px) {
             #main-wrapper {
-                position: fixed !important;
+                height: 100vmax;
+                overflow: visible;
             }
 
             .max-height {
-                padding-bottom: 75px !important;
+                padding-bottom: 10px !important;
             }
         }
     </style>
@@ -22,7 +23,7 @@
                 <div class="">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item "><a href="#">Students</a></li>
+                            <li class="breadcrumb-item "><a href="{{ route('student.index') }}">Students</a></li>
                             <li class="breadcrumb-item active " aria-current="page">List</li>
                         </ol>
                     </nav>
@@ -50,8 +51,11 @@
         <div class="col-12 col-md-9 table-container">
             <div class="card rounded-3 ">
                 <div class="card-body">
+                    @if(session('message'))
+                        <span class=" alert alert-success ">{{ session('message') }}</span>
+                    @endif
                     <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
-                        <p class="mb-0 fw-bolder">Total - 10</p>
+                        <p class="mb-0 fw-bolder">Total - {{ $totalStudents }}</p>
                         <div class="d-flex justify-content-center align-items-center gap-2">
                             <a href="{{ route('student.create') }}"
                                 class="btn d-flex justify-content-center align-items-center plus-btn btn-outline-secondary ">
@@ -75,20 +79,22 @@
                                     <th class=" w-30 d-none d-lg-table-cell" scope="col">Address</th>
                                     <th scope="col" class="text-center">Payment</th>
                                     <th scope="col" class="text-center">Class</th>
-                                    <th scope="col" class="text-center">
+                                    <th scope="col" class="text-end">
                                         <p class=" d-none d-md-block">Control</p>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @forelse ($students as $student)
                                 <tr>
-                                    <td scope="row">Kyaw</td>
+                                    <td scope="row" class="">{{ $student->name }}</td>
                                     <td>
-                                        <p class="mb-0">kyaw@email.com</p>
-                                        <p class="mb-0">0934355333</p>
+                                        <p class="mb-0 d-block d-md-none"> {{Str::limit($student->email , 15 , '...')}} </p>
+                                        <p class="mb-0 d-none d-md-block"> {{$student->email }} </p>
+                                        <p class="mb-0">{{ $student->phone}}</p>
                                     </td>
                                     <td class="d-none d-lg-table-cell">
-                                        <p>No.1 Pyay sit amet reprehenderit animi ea?</p>
+                                        <p> {{ Str::limit($student->address, 50 , '...') }} </p>
                                     </td>
                                     <td class=" align-middle text-center">
                                         <a href="" class="btn table-btn-sm btn-primary">
@@ -100,14 +106,21 @@
                                             <i class="mdi mdi-book-open-page-variant h5"></i>
                                         </a>
                                     </td>
-                                    <td class="text-end align-middle">
+                                    <td class="text-end align-middle text-nowrap">
                                         <div class="d-none d-md-block control-btns">
-                                            <a href="{{ route('student.edit', 1) }}" class="btn table-btn-sm btn-primary">
+                                            <a href="{{ route('student.edit', $student->id ) }}" class="btn table-btn-sm btn-primary">
                                                 <i class="mdi mdi-pencil h5"></i>
                                             </a>
-                                            <a href="" class="btn table-btn-sm btn-danger">
-                                                <i class="mdi mdi-delete h5 text-white"></i>
-                                            </a>
+
+                                            <form action="{{ route('student.destroy' , $student->id ) }}" class=" d-inline-block" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button type="submit" onclick=" return confirm('Are you sure to delete?') " class="btn table-btn-sm btn-danger del-btn">
+                                                    <i class="mdi mdi-delete h5 text-white"></i>
+                                                </button>
+                                            </form>
+
+
                                         </div>
 
 
@@ -121,16 +134,20 @@
                                             <ul class="dropdown-menu mb-1">
                                                 <div class="d-flex ">
                                                     <li>
-                                                        <a href="{{ route('classitem.edit', 1) }}"
+                                                        <a href="{{ route('student.edit' , $student->id ) }}"
                                                             class="btn table-btn-sm btn-outline-primary border border-0">
                                                             <i class="mdi mdi-pencil h5"></i>
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a href=""
-                                                            class="btn table-btn-sm btn-outline-danger border border-0">
-                                                            <i class="mdi mdi-delete h5 "></i>
-                                                        </a>
+                                                        <form action="{{ route('student.destroy' , $student->id ) }}" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button type="submit" class="btn table-btn-sm btn-outline-danger border border-0">
+                                                                <i class="mdi mdi-delete h5 "></i>
+                                                            </button>
+                                                        </form>
+
                                                     </li>
 
                                                 </div>
@@ -138,7 +155,13 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
+                                @empty
+                                <td colspan="6" class="text-center">No search data</td>
+                                @endforelse
+
+
+
+                                {{-- <tr>
                                     <td scope="row">Kyaw</td>
                                     <td>
                                         <p class="mb-0">kyaw@email.com</p>
@@ -311,11 +334,15 @@
                                             </ul>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr> --}}
 
 
                             </tbody>
                         </table>
+
+                        <div class=" paginate ">
+                            {{$students->links('pagination::bootstrap-4')}}
+                        </div>
                     </div>
 
                 </div>
@@ -352,7 +379,7 @@
                         </div>
 
                         <div class="d-flex justify-content-center align-items-center ">
-                            <div class="position-absolute filterbtn">
+                            <div class="filterbtn">
                                 <button class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</button>
                                 <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                             </div>
@@ -408,4 +435,5 @@
             </div>
         </div>
     </div>
+
 @endpush
