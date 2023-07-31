@@ -77,36 +77,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-bs-toggle="collapse" href="#collapseExample">
-                                <th scope="col">
-                                    <p class="d-none d-lg-block">Name</p>
-                                    <div class="d-block d-lg-none">
-                                        <p>Kowf enoef</p>
-                                        <p class=" text-black-50">Admin</p>
-                                    </div>
-                                 </th>
-                                <td class="align-middle">ko@mail.com</td>
-                                <td class="text-end align-middle">
-                                    <a href="{{ route('user.edit', 1) }}" class="btn table-btn-sm btn-primary">
-                                        <i class="mdi mdi-pencil h5"></i>
-                                    </a>
-                                    <a href="" class="btn table-btn-sm btn-danger">
-                                        <i class="mdi mdi-delete h5 text-white"></i>
-                                    </a>
-                                </td>
-
-
-                            </tr>
-
+                            @foreach($userdata as $user)
                             <tr data-bs-toggle="collapse" href="#collapseExample2">
                                 <th scope="col">
                                     <p class="d-none d-lg-block">Name</p>
                                     <div class="d-block d-lg-none">
-                                        <p>Kowf enoef</p>
-                                        <p class=" text-black-50">Admin</p>
+                                        <p>{{$user->name}}</p>
+                                        <p class=" text-black-50">{{$user->role->name}}</p>
                                     </div>
                                  </th>
-                                <td class="align-middle">mg@mail.com</td>
+                                <td class="align-middle">{{$user->email}}</td>
                                 <td class="text-end align-middle">
                                     <a href="{{ route('user.edit', 1) }}" class="btn table-btn-sm btn-primary">
                                         <i class="mdi mdi-pencil h5"></i>
@@ -117,7 +97,7 @@
                                 </td>
 
                             </tr>
-
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -147,10 +127,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($userdata as $user)
                             <tr>
-                                <td class="align-middle">Ko</td>
-                                <td class="align-middle">ko@mail.com</td>
-                                <td class="align-middle">Admin</td>
+                                <td class="align-middle">{{$user->name}} </td>
+                                <td class="align-middle">{{$user->email}}</td>
+                                <td class="align-middle">{{$user->role->name}}</td>
                                 <td class="text-end">
                                     <a href="{{ route('user.edit', 1) }}" class="btn table-btn-sm btn-primary">
                                         <i class="mdi mdi-pencil h5"></i>
@@ -160,19 +141,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="align-middle">Mg </td>
-                                <td class="align-middle">mg@mail.com</td>
-                                <td class="align-middle">Lecturer</td>
-                                <td class="text-end">
-                                    <a href="{{ route('user.edit', 1) }}" class="btn table-btn-sm btn-primary">
-                                        <i class="mdi mdi-pencil h5"></i>
-                                    </a>
-                                    <a href="" class="btn table-btn-sm btn-danger">
-                                        <i class="mdi mdi-delete h5 text-white"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -7,7 +7,7 @@
 @section('content')
 
 <input type="hidden" id="scheduler" value="{{json_encode($data)}}" />
-
+{{-- dd({{$data}}) --}}
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12  d-flex justify-content-between">
@@ -77,47 +77,100 @@
             <div class="card rounded-3 ">
                 <div class="card-body">
 
-                    <table class=" table table-bordered">
-                        <thead>
-                            <tr>
-                                <th></th>
+                    <div class="" style="
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                        position: relative;
+                    ">
+                    <div style="
+                        display: flex;
+                        position: relative;
+                    ">  
+                        <div style="width:15%; border-right: 1px solid #a9aeb3; border-bottom: 1px solid #a9aeb3;height: 40px;"></div>
                                 @foreach ($monthArr as $month)
-                                    <th class=" fs-4 fw-bolder text-end py-0"> {{ $month->format('M') }} </th>
+                                    <div class=" fs-4 fw-bolder text-end py-0"  style="width:12%; border-right: 1px solid #a9aeb3; border-bottom: 1px solid #a9aeb3;height: 40px; display: flex; justify-content: center; align-items: center;"> {{ $month->format('M') }} </div>
                                 @endforeach
-                            </tr>
-                        </thead>
-                        <tbody>
+                        </div>
+                        <div style="
+                        display: block;
+                        position: relative;
+                    ">
 
                             @foreach ($timeArr as $time)
-                                <tr>
-                                    <td class="time-fs text-end"> {{ $time }} </td>
-                                    @foreach ($monthArr as $i)
-                                        <td id="td{{date('H:i:s',strtotime($time))}}{{$i}}"></td>
-                                    @endforeach
-                                </tr>
+                                <div class="sch-row" style="display: flex; flex-direction:row">
+                                    <div class="time-fs" style="width:15%;border-right: 1px solid #a9aeb3;  border-bottom: 1px solid #a9aeb3;height: 15px;display: flex; justify-content: center; align-items: center;"> 
+                                        {{ $time }} 
+                                    </div>
+                                    <div class="sch-inner" style="display: flex; width:85%;">
+
+                                        @foreach ($monthArr as $month)
+                                       
+                                            <div  style="width:14%; border-right: 1px solid #a9aeb3; border-bottom: 1px solid #a9aeb3;height: 15px; display: flex; justify-content: center; align-items: center;">
+                                            @foreach($data as $classitem)
+                                            @php
+                                            $monthdif =
+                                            date('m', strtotime($classitem->end_date)) - date('m', strtotime($classitem->start_date));
+                                            $timedif = date('H', strtotime($classitem->end_time)) - date('H', strtotime($classitem->start_time));
+                                            $tablemonth = date('m', strtotime($month))+1;
+                                            $tablehour = date('H',strtotime($time))+1;
+                                           
+                                            @endphp
+                                        @for($i = -1; $i < $monthdif; $i++)
+                                        @php
+                                        $tablemonth--;
+                                        $monthstring = sprintf('%02d', $tablemonth);
+                                        $tablehour = "";
+                                        $tablehour = date('H',strtotime($time))+1;
+
+                                        @endphp
+                                        @for($j = -1;$j < $timedif; $j++)
+                                        @php
+                                        $tablehour--;
+                                        $hourstring = sprintf('%02d', $tablehour);
+                                        
+                                        @endphp
+                                          @if($hourstring === date('H', strtotime($classitem->start_time)) && $monthstring === date('m', strtotime($classitem->start_date)) && date('Y', strtotime($month)) === date('Y', strtotime($classitem->start_date)))
+
+                                          <div id="asdf"  style="width:100%; position:relative; border-right: 1px solid #a9aeb3; border-bottom: 1px solid #a9aeb3;height: 15px; display: flex; justify-content: center; align-items: center; background: red; border:1px solid red; color:white; ">
+                                            @if($i == -1 && $j == -1)
+                                            <span style="position: absolute;left:10; top:5px; z-index:1;" data-bs-placement="bottom" title="{{$classitem->name}}">
+                                            {{$classitem->code}}</span>
+                                            @endif
+                                        </div>
+                                          @endif
+                                        @endfor
+                                        @endfor
+                                        
+                                        @endforeach
+                                            </div>
+
+                                        @endforeach
+                                    </div>
+                                </div>
                             @endforeach
 
-                        </tbody>
+                        </div>
 
-                        <tbody>
-                            <tr>
-                                <td  colspan="8"><div class="p-0 week-line"></div></td>
-                            </tr>
-                        </tbody>
+                        <div>
+                            <div>
+                                <div  colspan="8"><div class="p-0 week-line"></div></div>
+                            </div>
+                        </div>
 
-                        <tbody >
+                        <div >
 
                             @foreach ($timeArr as $time)
-                                <tr>
-                                    <td class="time-fs text-end"> {{ $time }} </td>
+                                <div>
+                                    <div class="time-fs text-end"> {{ $time }} </div>
                                     @foreach ($monthArr as $i)
-                                        <td></td>
+                                        <div></div>                                        
                                     @endforeach
-                                </tr>
+                                </div>
                             @endforeach
 
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -25,6 +25,7 @@ class CreateClassitemsTable extends Migration
             $table->integer('max_student');
             $table->enum('type', ['weekdays','weekend']);
             $table->string('price');
+            $table->string('code');
             $table->unsignedBigInteger('room_id');
             $table->unsignedBigInteger('course_id');
             $table->timestamps();

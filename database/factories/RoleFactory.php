@@ -15,7 +15,7 @@ class RoleFactory extends Factory
     {
         $roleNames=['Admin','Lecturer'];
         return [
-           'name' => $this->faker->unique()->randomElement($roleNames),
+           'name' => $this->faker->randomElement($roleNames),
         ];
     }
 }

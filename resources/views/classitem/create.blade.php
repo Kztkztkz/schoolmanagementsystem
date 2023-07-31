@@ -145,6 +145,13 @@
               </div>
 
             </div>
+            <div class="col-sm-4 mt-3">
+              <div class="form-group test">
+                <label for="shortcode">Short Code</label>
+                <input type="text" class="form-control" id="shortcode" placeholder="Short Code" name="shortcode">
+                <span class="text-danger">@error('shortcode') {{$message}} @enderror</span>
+              </div>
+            </div>
             <!-- <div class="col-sm-4 mt-3">
               <div class="form-group test">
               <label for="room">Room Name</label>

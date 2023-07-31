@@ -42,6 +42,7 @@ class StoreClassitemRequest extends FormRequest
                 }
             },
         ],
+            'shortcode' => 'required',
         ];
     }
 }

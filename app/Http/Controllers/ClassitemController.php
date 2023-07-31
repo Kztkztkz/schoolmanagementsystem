@@ -43,7 +43,7 @@ class ClassitemController extends Controller
     public function store(StoreClassitemRequest $request)
     {
         $days = $request->days;
-        $day_string = implode(',', $days);
+        $day_string = implode(', ', $days);
 
         Classitem::create([
             'name' => $request->name,
@@ -57,6 +57,7 @@ class ClassitemController extends Controller
             'price' => $request->price,
             'max_student' => $request->maxstudent,
             'container_color' => $request->color,
+            'code' => $request->shortcode,
         ]);
 
        return redirect()->back()->with('message','Data Inserted Successfully');
@@ -82,9 +83,11 @@ class ClassitemController extends Controller
      * @param  \App\Models\Classitem  $classitem
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(Classitem $classitem)
     {
-        return view('classitem.edit');
+        $roomoption = Room::all();
+        $courseoption = Course::all();
+        return view('classitem.edit',compact(['classitem','courseoption','roomoption']));
     }
 
     /**
@@ -96,7 +99,26 @@ class ClassitemController extends Controller
      */
     public function update(UpdateClassitemRequest $request, Classitem $classitem)
     {
-        //
+        $days = $request->days;
+        $day_string = implode(', ', $days);
+
+
+        $classitem->update([
+            'name' => $request->name,
+            'start_date' => $request->startdate,
+            'end_date' => $request->enddate,
+            'course_id' => $request->course,
+            'start_time' => $request->starttime,
+            'end_time' => $request->endtime,
+            'room_id' => $request->room,
+            'day' => $day_string,
+            'price' => $request->price,
+            'max_student' => $request->maxstudent,
+            'container_color' => $request->color,
+            'code' => $request->shortcode,
+        ]);
+
+        return redirect()->route('classitem.index')->with('message', 'Data updated successfully');
     }
 
     /**
