@@ -46,4 +46,3 @@ Route::resource('course' , CourseController::class);
 Route::resource('student' , StudentController::class);
 Route::resource('classitem' , ClassitemController::class);
 
-

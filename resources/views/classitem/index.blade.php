@@ -63,6 +63,14 @@
                             </div>
                         </div>
                     </div>
+                    @if(session()->has('message'))
+                    <div class="alert alert-success success-alt mt-2">
+                      {{session()->get('message')}}
+                      <button type="button" class="close success-msg" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    @endif
                     <table class="table table-striped">
                         <thead>
                             <tr style="border-bottom: 2px solid black">
@@ -118,7 +126,7 @@
                                 </td>
                                 <td class="text-end align-middle text-nowrap">
                                     <div class="d-none d-md-block control-btns">
-                                        <a href="{{ route('classitem.edit', 1) }}" class="btn table-btn-sm btn-primary">
+                                        <a href="{{ route('classitem.edit', $classdata) }}" class="btn table-btn-sm btn-primary">
                                             <i class="mdi mdi-pencil h5"></i>
                                         </a>
                                         <a href="{{ route('classitem.show', 'detail') }}"
