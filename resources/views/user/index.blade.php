@@ -133,6 +133,7 @@
                   </button>
                     </div>
                     @endif
+
                     <table class="table table-striped">
                         <thead>
                             <tr style="border-bottom: 2px solid black">

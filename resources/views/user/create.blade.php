@@ -39,6 +39,17 @@
                   </button>
                     </div>
                     @endif
+
+                    {{-- @if(session()->has('message'))
+                    <script>
+                 new Noty({
+            type: 'success',
+            layout: 'center',
+            text: "{{ session('message') }}",
+            timeout: 3000,
+        }).show();
+                    </script>
+                @endif --}}
       <form action="{{route('user.store')}}" method="post">
         @csrf
         <div class="row col-md-4">
@@ -74,7 +85,7 @@
           </div>
         </div>
         <div class = "mt-5 text-center">
-          <a href="{{route('user.index')}}" class="btn btn-secondary">Cancel</a>
+          <a href="{{route('user.index')}}" class="btn btn-secondary ss">Cancel</a>
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>

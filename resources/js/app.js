@@ -1,4 +1,7 @@
 require("./bootstrap");
+import Noty from "noty";
+import "noty/lib/noty.css";
+import "noty/lib/themes/sunset.css";
 
 $(document).ready(function () {
     //select 2
@@ -44,6 +47,7 @@ $(document).ready(function () {
             }
         });
     });
+
     //classitem index table expend
     $(".dropdown-arrowIcon").click(function () {
         $(this).toggleClass("dropup-arrowIcon");
