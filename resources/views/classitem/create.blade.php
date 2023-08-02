@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
@@ -31,6 +32,15 @@
         </button>
           </div>
           @endif
+          {{-- @if(session()->has('message'))
+          <script>
+            noty({
+                type: 'success',
+                text: '{{ session('success') }}',
+                timeout: 3000
+            });
+        </script>
+          @endif --}}
           <div class = "row">
             <div class="col-sm-4">
               <div class="form-group test">
@@ -166,7 +176,7 @@
       </div>
 
       <div class="text-center mt-5 form-create-btn">
-      <button type="submit" class="btn btn-secondary me-2">Cancel</button>
+      <a href="{{route('classitem.index')}}" class="btn btn-secondary me-2">Cancel</a>
       <button type="submit" class="btn btn-primary">Submit</button>
       </div>
   </div>

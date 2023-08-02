@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Classitem;
+use App\Models\Classitem; 
 use App\Models\Room;
 use App\Models\Course;
 use App\Http\Requests\StoreClassitemRequest;
@@ -18,7 +18,7 @@ class ClassitemController extends Controller
      */
     public function index()
     {
-        $classitem = Classitem::all();
+        $classitem =  Classitem::orderBy('id', 'desc')->paginate(7);
         return view('classitem.index', compact('classitem'));
     }
 
@@ -59,6 +59,11 @@ class ClassitemController extends Controller
             'container_color' => $request->color,
             'code' => $request->shortcode,
         ]);
+
+        // $noty = new Noty('success');
+        // $noty->setTitle('Success');
+        // $noty->setMessage('Your file has been uploaded successfully.');
+        // $noty->show();
 
        return redirect()->back()->with('message','Data Inserted Successfully');
     }
@@ -129,6 +134,7 @@ class ClassitemController extends Controller
      */
     public function destroy(Classitem $classitem)
     {
-        //
+        $classitem->delete();
+        return redirect()->route('classitem.index')->with('del', 'Data is deleted');
     }
 }

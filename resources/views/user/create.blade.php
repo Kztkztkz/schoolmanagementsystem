@@ -31,40 +31,50 @@
 <div class="col-md-12">
   <div class="card rounded-3 " style="height: 600px">
     <div class="card-body">
-      <form>
+      @if(session()->has('message'))
+                    <div class="alert alert-success success-alt mt-2">
+                      {{session()->get('message')}}
+                      <button type="button" class="close success-msg" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    @endif
+      <form action="{{route('user.store')}}" method="post">
+        @csrf
         <div class="row col-md-4">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="name" class="form-control" id="name" placeholder="Name">
+            <input type="name" class="form-control" id="name" placeholder="Name" name="name">
+            <span class="text-danger">@error ('name') {{$message}} @enderror</span>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Email">
+            <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+            <span class="text-danger">@error ('email') {{$message}} @enderror</span>
           </div>
           <div class="form-group">
-            <label for="oldpassword">Old Password</label>
-            <input type="password" class="form-control" placeholder="old password">
-          </div>
-          <div class="form-group">
-            <label for="newpassword">New Password</label>
-            <input type="password" class="form-control" id="newpassword" placeholder="new password">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="password" name="password">
+            <span class="text-danger">@error ('password') {{$message}} @enderror</span>
           </div>
           <div class="form-group">
             <label for="confirmpassword">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm Password">
+            <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm Password" name="confirm_password">
+            <span class="text-danger">@error ('confirm_password') {{$message}} @enderror</span>
           </div>
           <div class="form-group">
             <label for="role">Role</label>
-            <select class="form-select">
-              <option id = "role" selected>Select Role</option>
-              <option value="1">Role One</option>
-              <option value="2">Role Two</option>
-              <option value="3">Role Three</option>
+            <select class="form-select" name="role">
+              <option id = "role" value="">Select Role</option>
+              @foreach($roleoptions as $roles)
+              <option value="{{$roles->id}}">{{$roles->name}}</option>
+              @endforeach
             </select>
+            <span class="text-danger">@error ('role') {{$message}} @enderror</span>
           </div>
         </div>
         <div class = "mt-5 text-center">
-          <button type="submit" class="btn btn-secondary">Cancel</button>
+          <a href="{{route('user.index')}}" class="btn btn-secondary">Cancel</a>
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>

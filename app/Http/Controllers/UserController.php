@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\Role;
 
 class UserController extends Controller
 {
@@ -14,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $userdata = User::all();
+        $userdata = User::orderBy('id', 'desc')->paginate(7);
         return view('user.index', compact('userdata'));
     }
 
@@ -25,7 +27,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        $roleoptions = Role::all();
+        return view('user.create', compact('roleoptions'));
     }
 
     /**
@@ -34,9 +37,16 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'role_id' => $request->role,
+        ]);
+
+        return redirect()->back()->with('message','Data Inserted Successfully');
     }
 
     /**
@@ -56,9 +66,10 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit(User $user)
     {
-        return view('user.edit');
+        $roleoptions = Role::all();
+        return view('user.edit', compact(['user', 'roleoptions']));
     }
 
     /**
@@ -68,9 +79,15 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        User::update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role_id' => $request->role,
+        ]);
+
+        return redirect()->back()->with('message','Data updated Successfully');
     }
 
     /**
@@ -81,6 +98,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('user.index')->with('del', 'Data is deleted');
     }
 }
