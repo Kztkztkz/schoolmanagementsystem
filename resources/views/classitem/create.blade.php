@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
@@ -31,6 +32,15 @@
         </button>
           </div>
           @endif
+          {{-- @if(session()->has('message'))
+          <script>
+            noty({
+                type: 'success',
+                text: '{{ session('success') }}',
+                timeout: 3000
+            });
+        </script>
+          @endif --}}
           <div class = "row">
             <div class="col-sm-4">
               <div class="form-group test">
@@ -78,6 +88,18 @@
                 <label for="endtime">End Time</label>
                 <input type="text" placeholder="--:--" onfocus="(this.type='time')" class="form-control" id="endtime" class="starttime" name="endtime">
                 <span class="text-danger">@error('endtime') {{$message}} @enderror</span>
+              </div>
+            </div>
+            <div class="col-sm-4 mt-3">
+              <div class="form-group test">
+              <label for="lecturer">Lecturer</label>
+                <select class="form-select slectopt" id="lecturer" name="lecturer">
+                  <option value="">Select Lecturer name</option>
+                  @foreach($lectureroption as $lecturer)
+                  <option value="{{$lecturer->id}}">{{$lecturer->name}}</option>
+                  @endforeach
+                </select>
+                <span class="text-danger">@error('lecturer') {{$message}} @enderror</span>
               </div>
             </div>
             <div class="col-sm-4 mt-3">
@@ -166,7 +188,7 @@
       </div>
 
       <div class="text-center mt-5 form-create-btn">
-      <button type="submit" class="btn btn-secondary me-2">Cancel</button>
+      <a href="{{route('classitem.index')}}" class="btn btn-secondary me-2">Cancel</a>
       <button type="submit" class="btn btn-primary">Submit</button>
       </div>
   </div>

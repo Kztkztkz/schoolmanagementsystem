@@ -5,8 +5,100 @@
     width: 15% !important;
 }
 
+.scheduler-container{
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+}
+
 .week-line {
     width: 100%;
     height: 2px;
     background-color: #cb5050;
+}
+
+.month-row{
+    width:100%;
+    flex-grow: 1;
+    border-right: 1px solid #a9aeb3;
+    border-bottom: 1px solid #a9aeb3;
+    height: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time-row{
+    width:100%;
+    border-right: 1px solid #a9aeb3;
+    border-bottom: 1px solid #a9aeb3;
+    height: 20px;
+    text-align:center
+}
+
+.sch-inner{
+    width:100%;
+    flex-grow: 1;
+    border-right: 1px solid #a9aeb3;
+    border-bottom: 1px solid #a9aeb3;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.active-classitem{
+    width:100%;
+    position:relative;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+}
+
+.day-type{
+    grid-area: day-type;
+    writing-mode: vertical-lr;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    transform: rotate(180deg);
+}
+
+.months{
+    grid-area: months;
+}
+.times{
+    grid-area: times;
+}
+
+.grid-container{
+    grid-template-columns: 4% 1fr;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+    "day-type months"
+    "day-type times"
+    ;
+}
+
+.main-wrapper {
+    position: relative !important;
+}
+
+.page-wrapper {
+    padding-top: 64px;
+}
+
+.topbar {
+    position: fixed !important;
+    width: 100% !important;
+}
+
+.left-sidebar {
+    position: fixed;
 }

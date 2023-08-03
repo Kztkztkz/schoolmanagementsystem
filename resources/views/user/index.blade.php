@@ -117,6 +117,23 @@
                             </a>
                         </div>
                     </div>
+                    @if(session()->has('message'))
+                    <div class="alert alert-success success-alt mt-2">
+                      {{session()->get('message')}}
+                      <button type="button" class="close success-msg" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    @endif
+                    @if(session()->has('del'))
+                    <div class="alert alert-success success-alt mt-2">
+                      {{session()->get('del')}}
+                      <button type="button" class="close success-msg" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    @endif
+
                     <table class="table table-striped">
                         <thead>
                             <tr style="border-bottom: 2px solid black">
@@ -136,14 +153,24 @@
                                     <a href="{{ route('user.edit', 1) }}" class="btn table-btn-sm btn-primary">
                                         <i class="mdi mdi-pencil h5"></i>
                                     </a>
-                                    <a href="" class="btn table-btn-sm btn-danger">
+                                    {{-- <a href="" class="btn table-btn-sm btn-danger">
                                         <i class="mdi mdi-delete h5 text-white"></i>
-                                    </a>
+                                    </a> --}}
+                                    <form action="{{route('user.destroy', $user->id)}}" method="post" class="d-inline">
+                                        @csrf
+                                        <input name="_method" type="hidden" value="delete">
+                                        <button type="submit" class="btn table-btn-sm btn-danger del-btn alertbox">
+                                            <i class="mdi mdi-delete h5 text-white"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="d-flex justify-content-end me-3">
+                    {{$userdata->links()}}
                 </div>
             </div>
         </div>

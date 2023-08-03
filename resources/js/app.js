@@ -1,4 +1,7 @@
 require("./bootstrap");
+// import Noty from "noty";
+// import "noty/lib/noty.css";
+// import "noty/lib/themes/sunset.css";
 
 $(document).ready(function () {
     //select 2
@@ -20,6 +23,29 @@ $(document).ready(function () {
             .fadeOut("fast", function () {
                 $(this).remove();
             });
+    });
+
+    //sweetalert2
+    $(".alertbox").click(function (event) {
+        var form = $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire("Deleted!", "Your file has been deleted.", "success");
+                setTimeout(() => {
+                    form.submit();
+                }, 3000);
+            }
+        });
     });
 
     //classitem index table expend

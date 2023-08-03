@@ -71,6 +71,14 @@
                   </button>
                     </div>
                     @endif
+                    @if(session()->has('del'))
+                    <div class="alert alert-success success-alt mt-2">
+                      {{session()->get('del')}}
+                      <button type="button" class="close success-msg" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                    </div>
+                    @endif
                     <table class="table table-striped">
                         <thead>
                             <tr style="border-bottom: 2px solid black">
@@ -134,9 +142,17 @@
                                             class="btn table-btn-sm btn-primary">
                                             <i class="mdi mdi-information-outline h5"></i>
                                         </a>
-                                        <a href="" class="btn table-btn-sm btn-danger">
+                                        {{-- <a href="" class="btn table-btn-sm btn-danger">
                                             <i class="mdi mdi-delete h5 text-white"></i>
-                                        </a>
+                                        </a> --}}
+                                        <form action="{{route('classitem.destroy', $classdata->id)}}" method="post" class="d-inline">
+                                        @csrf
+                                        <input name="_method" type="hidden" value="delete">
+                                        <button type="submit" class="btn table-btn-sm btn-danger del-btn alertbox">
+                                            <i class="mdi mdi-delete h5 text-white"></i>
+                                        </button>
+                                        </form>
+                                    
 
                                     </div>
 
@@ -170,9 +186,13 @@
                             </tr>
                             @endforeach
                         </tbody>
-                    </table>
+                    </table>                    
                 </div>
+                <div class="d-flex justify-content-end me-3">
+                {{$classitem->links()}}
             </div>
+            </div>
+            
         </div>
         <div class="col-3 d-none d-md-block class-filter-container">
             <div class="card">

@@ -18,40 +18,30 @@
 <div class="col-md-12">
   <div class="card rounded-3 " style="height: 600px">
     <div class="card-body">
-      <form>
+      <form method="post" action="{{route('user.update', $user->id)}}">
+        @csrf
+        @method('put')
         <div class="row col-md-4">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="name" class="form-control" id="name" placeholder="Name">
+            <input type="name" class="form-control" id="name" placeholder="Name" name="name" value="{{$user->name}}">
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <label for="oldpassword">Old Password</label>
-            <input type="password" class="form-control" placeholder="old password">
-          </div>
-          <div class="form-group">
-            <label for="newpassword">New Password</label>
-            <input type="password" class="form-control" id="newpassword" placeholder="new password">
-          </div>
-          <div class="form-group">
-            <label for="confirmpassword">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm Password">
+            <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="{{$user->email}}">
           </div>
           <div class="form-group">
             <label for="role">Role</label>
-            <select class="form-select">
+            <select class="form-select" name="role">
               <option id = "role" selected>Select Role</option>
-              <option value="1">Role One</option>
-              <option value="2">Role Two</option>
-              <option value="3">Role Three</option>
+              @foreach($roleoptions as $roledata)
+              <option value="{{$roledata->id}}" {{$user->role_id == $roledata->id ? 'selected' : '' }}>{{$roledata->name}}</option>
+              @endforeach
             </select>
           </div>
         </div>
         <div class = "mt-5 text-center">
-          <button type="submit" class="btn btn-secondary">Cancel</button>
+          <a href="{{route('user.index')}}" class="btn btn-secondary">Cancel</a>
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </form>
