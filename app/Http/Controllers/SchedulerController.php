@@ -52,7 +52,7 @@ class SchedulerController extends Controller
     {
 
         $currentDate = Carbon::today();
-        $dateDiff  = Carbon::today()->addMonths(6);
+        $dateDiff  = Carbon::today()->addMonths(5);
 
 
         $period = CarbonPeriod::create($currentDate , $dateDiff , '1 month');
@@ -109,7 +109,7 @@ class SchedulerController extends Controller
     public function nextMonth($from ){
 
         $currentDate = Carbon::create($from);
-        $dateDiff = $currentDate->addMonths(6);
+        $dateDiff = $currentDate->addMonths(5);
         // dd($from , $dateDiff);
 
         $period = CarbonPeriod::create( $from , $dateDiff , '1 month');
@@ -117,7 +117,7 @@ class SchedulerController extends Controller
         // return $period;
 
         $monthArr = $period->toArray();
-        
+
 
         $currentTime = Carbon::create(2023 , 7 , 19 , 7 );
         $timeArr = [];
@@ -135,7 +135,7 @@ class SchedulerController extends Controller
     public function preMonth($from){
 
         $currentDate = Carbon::create($from);
-        $dateDiff = $currentDate->subMonths(6);
+        $dateDiff = $currentDate->subMonths(5);
         // dd($from , $dateDiff);
 
         $period = CarbonPeriod::create( $dateDiff ,$from ,  '1 month');
