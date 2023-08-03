@@ -120,7 +120,7 @@
                                 </td>
                                 @endif
                                 <td class="d-none d-md-table-cell align-middle text-center">
-                                    <a href="" class="btn table-btn-sm btn-primary">
+                                    <a href="{{route('payment.index')}}" class="btn table-btn-sm btn-primary">
                                         <i class="mdi mdi-credit-card-multiple h5"></i>
                                     </a>
                                 </td>
@@ -129,7 +129,8 @@
                                         <a href="{{ route('classitem.edit', $classdata) }}" class="btn table-btn-sm btn-primary">
                                             <i class="mdi mdi-pencil h5"></i>
                                         </a>
-                                        <a href="{{ route('classitem.show', 'detail') }}"
+    
+                                        <a href="{{ route('classitem.show', $classdata) }}"
                                             class="btn table-btn-sm btn-primary">
                                             <i class="mdi mdi-information-outline h5"></i>
                                         </a>

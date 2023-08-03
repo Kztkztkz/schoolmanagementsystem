@@ -21,6 +21,11 @@ class Classitem extends Model
         return $this->belongsToMany(User::class, 'user_classitems');
     }
 
+    public function users_classitems()
+    {
+        return $this->hasMany(UserClassitem::class);
+    }
+
     public function room()
     {
         return $this->belongsTo(Room::class);

@@ -7,6 +7,8 @@ use App\Models\Room;
 use App\Models\Course;
 use App\Http\Requests\StoreClassitemRequest;
 use App\Http\Requests\UpdateClassitemRequest;
+use App\Models\Student;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class ClassitemController extends Controller
@@ -69,9 +71,10 @@ class ClassitemController extends Controller
      * @param  \App\Models\Classitem  $classitem
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Classitem $classitem)
     {
-        return view('classitem.detail');
+        $students = Student::all();
+        return view('classitem.detail', compact('classitem','students'));
     }
 
     public function detail(){

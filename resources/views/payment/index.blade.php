@@ -85,34 +85,45 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($payments as $payment)
                                 <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
+
                                     {{-- Mobile View --}}
                                     <td class="d-table-cell d-lg-none text-nowrap align-middle">
-                                        <p>01-01-2023</p>
-                                        <p>Kyaw Kyaw</p>
+                                        {{-- <p>01-01-2023</p> --}}
+                                        <p>{{$payment->created_at}}</p>
+                                        <p>{{$payment->student->name}}</p>
                                     </td>
                                     {{-- Laptop View --}}
-                                    <td class="d-none d-lg-table-cell align-middle">01-01-2023</td>
-                                    <td class="align-middle">Class A</td>
-                                    <td class="d-none d-lg-table-cell align-middle">Python</td>
-                                    <td class="d-none d-lg-table-cell align-middle">Kyaw Kyaw</td>
-                                    <td class=" align-middle">150000</td>
-                                    <td class=" align-middle">50000</td>
+                                    <td class="d-none d-lg-table-cell align-middle">{{$payment->created_at}}</td>
+                                    <td class="align-middle">{{$payment->classitem->name}}</td>
+                                    <td class="d-none d-lg-table-cell align-middle">{{$payment->classitem->course->name}}</td>
+                                    <td class="d-none d-lg-table-cell align-middle">{{$payment->student->name}}</td>
+                                    <td class=" align-middle">{{$payment->fees}}</td>
+                                    <td class=" align-middle">{{$payment->due_amount}}</td>
                                     <td class=" align-middle">
-                                        <div
-                                            class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
-                                            paid
-                                        </div>
+                                        
+                                        @if ($payment->payment_type=="paid")
+                                            <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
+                                                paid
+                                            </div>
+                                        @else
+                                            <div class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
+                                                unpaid
+                                            </div>
+                                        @endif
+                                      
                                     </td>
                                 </tr>
-                                <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                @endforeach
+                                {{-- <tr data-bs-toggle="modal" data-bs-target="#exampleModal"> --}}
                                     {{-- Mobile View --}}
-                                    <td class="d-table-cell d-lg-none text-nowrap align-middle">
+                                    {{-- <td class="d-table-cell d-lg-none text-nowrap align-middle">
                                         <p>01-01-2023</p>
                                         <p>Kyaw Kyaw</p>
-                                    </td>
+                                    </td> --}}
                                     {{-- Laptop View --}}
-                                    <td class="d-none d-lg-table-cell align-middle">01-01-2023</td>
+                                    {{-- <td class="d-none d-lg-table-cell align-middle">01-01-2023</td>
                                     <td class="align-middle">Class A</td>
                                     <td class="d-none d-lg-table-cell align-middle">Python</td>
                                     <td class="d-none d-lg-table-cell align-middle">Kyaw Kyaw</td>
@@ -123,8 +134,8 @@
                                             class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
                                             Unpaid
                                         </div>
-                                    </td>
-                                </tr>
+                                    </td> --}}
+                                {{-- </tr> --}}
 
                             </tbody>
                         </table>

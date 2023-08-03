@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Payment;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
+use PhpParser\Builder\Class_;
+
+use App\Models\Course;
+use App\Models\Classitem;
+
+
 
 class PaymentController extends Controller
 {
@@ -15,7 +21,12 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return view('payment.index');
+        // 27.7.23
+        $payments = Payment::all();
+        // $classitems = Classitem::all();
+        return view('payment.index',compact('payments'));
+        // 27.7.23
+        
     }
 
     /**

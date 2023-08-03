@@ -75,25 +75,24 @@
                             <div class="row">
                                     <div class="col-4">Time</div>
                                     <div class="col-2">-</div>
-                                    <div class="col-4">8am - 11am</div>
+                                    <div class="col-4">{{ $classitem->start_time }} - {{ $classitem->end_time }}</div>
                             </div>
                             <div class="row">
                                 <div class="col-4">fee</div>
                                 <div class="col-2">-</div>
-                                <div class="col-4">150000 mmk</div>
+                                <div class="col-4">{{ $classitem->price }} mmk</div>
                             </div>
                             <div class="row">
                                 <div class="col-4">Course name</div>
                                 <div class="col-2">-</div>
-                                <div class="col-4">IT Course</div>
+                                <div class="col-4">{{ $classitem->course->name }}</div>
                             </div>
                             <div class="row">
                                 <div class="col-4">Days</div>
                                 <div class="col-2">-</div>
                                 <div class="col-4">
                                     <ul class="list-group list-unstyled">
-                                        <li class="">Tues,Wed,Fr</li>
-                                        <li class="">(Wednesday)</li>
+                                        <li class="">{{ $classitem->day }}</li>
                                     </ul>
                                     {{-- <div class="row">Tues,Wed,Fr</div>
                                     <div class="row">(Wednesday)</div> --}}
@@ -102,7 +101,11 @@
                             <div class="row">
                                 <div class="col-4">Lecture</div>
                                 <div class="col-2">-</div>
-                                <div class="col-4">Brenden Wagner</div>
+                                <div class="col-4">
+                                    @foreach($classitem->users as $user)
+                                    {{ $user->name }}<br>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -119,9 +122,10 @@
                             <div class="input-group w-75">
                                 <select class="form-select" id="inputGroupSelect04" aria-label="Example select with button addon">
                                 <option selected>Select Existing Student</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($students as $student)
+                                <option value="{{$student->id}}">{{$student->name}}</option>    
+                                @endforeach
+                                
                                 </select>
                             </div>
                         </div>
