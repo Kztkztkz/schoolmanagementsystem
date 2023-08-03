@@ -96,20 +96,23 @@
                                     <div class="month-row fs-4 fw-bolder text-end py-0" style="">
                                         {{ $month->format('M') }} </div>
                                 @endforeach
-                            </div>
+                            </div>                          
                             <div class="times">
                                 @foreach ($timeArr as $time)
                                     <div class="d-flex">
                                         <div class="time-row">
                                             {{ $time }}
                                         </div>
-                                        @foreach ($monthArr as $month)
+                                        @foreach ($monthArr as $month)                                        
                                             <div class=" fs-4 fw-bolder text-end py-0 sch-inner">
 
                                                 @foreach ($data as $classitem)
                                                     @if ($classitem->type === 'weekdays')
                                                         @php
-                                                            $monthdif = date('m', strtotime($classitem->end_date)) - date('m', strtotime($classitem->start_date));
+                                                        $start_date1 = new DateTime($classitem->start_date);
+                                                $end_date1 = new DateTime($classitem->end_date);
+                                                $difference = date_diff($start_date1, $end_date1);
+                                                $monthdif = $difference->m;
                                                             $timedif = date('H', strtotime($classitem->end_time)) - date('H', strtotime($classitem->start_time));
                                                             $tablemonth = date('m', strtotime($month)) + 1;
                                                             $tablehour = date('H', strtotime($time)) + 1;

@@ -72,6 +72,18 @@
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
+              <label for="lecturer">Lecturer</label>
+                <select class="form-select slectopt" id="lecturer" name="lecturer">
+                  <option value="">Select Lecturer name</option>
+                  @foreach($lectureroption as $lecturer)
+                  <option value="{{$lecturer->id}}" {{$classitem->users->contains($lecturer) ? 'selected' : '' }}>{{$lecturer->name}}</option>
+                  @endforeach
+                </select>
+                <span class="text-danger">@error('lecturer') {{$message}} @enderror</span>
+              </div>
+            </div>
+            <div class="col-sm-4 mt-3">
+              <div class="form-group test">
               <label for="room">Room</label>
                 <select class="form-select slectopt" id="room" name="room">
                   <option value="">Select Room name</option>

@@ -42,12 +42,15 @@
 
                     {{-- @if(session()->has('message'))
                     <script>
-                 new Noty({
-            type: 'success',
-            layout: 'center',
-            text: "{{ session('message') }}",
-            timeout: 3000,
-        }).show();
+import Noty from 'noty';
+
+const noty = new Noty({
+    type: 'success',
+    message: 'Your file has been uploaded successfully.',
+});
+
+noty.show();
+
                     </script>
                 @endif --}}
       <form action="{{route('user.store')}}" method="post">
@@ -92,4 +95,5 @@
     </div>
   </div>
 </div>
+
 @endsection

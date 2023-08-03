@@ -30,6 +30,7 @@ class StoreClassitemRequest extends FormRequest
             'course' => 'required',
             'starttime' => 'required',
             'endtime' => 'required',
+            'lecturer'=>'required',
             'room' => 'required',
             'days' => 'required',
             'price' => 'required',

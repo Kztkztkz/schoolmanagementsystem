@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Classitem; 
 use App\Models\Room;
 use App\Models\Course;
+use App\Models\User;
 use App\Http\Requests\StoreClassitemRequest;
 use App\Http\Requests\UpdateClassitemRequest;
 use Illuminate\Support\Str;
@@ -31,7 +32,8 @@ class ClassitemController extends Controller
     {
         $roomoption = Room::all();
         $courseoption = Course::all();
-        return view('classitem.create',compact(['roomoption','courseoption']));
+        $lectureroption =  User::where('role_id', 2)->get();
+        return view('classitem.create',compact(['roomoption','courseoption','lectureroption']));
     }
 
     /**
@@ -44,8 +46,9 @@ class ClassitemController extends Controller
     {
         $days = $request->days;
         $day_string = implode(', ', $days);
+        $lecturerIds = $request->lecturer;
 
-        Classitem::create([
+        $classitemId = Classitem::create([
             'name' => $request->name,
             'start_date' => $request->startdate,
             'end_date' => $request->enddate,
@@ -59,6 +62,7 @@ class ClassitemController extends Controller
             'container_color' => $request->color,
             'code' => $request->shortcode,
         ]);
+        $classitemId->users()->attach($lecturerIds); 
 
         // $noty = new Noty('success');
         // $noty->setTitle('Success');
@@ -92,7 +96,8 @@ class ClassitemController extends Controller
     {
         $roomoption = Room::all();
         $courseoption = Course::all();
-        return view('classitem.edit',compact(['classitem','courseoption','roomoption']));
+        $lectureroption =  User::where('role_id', 2)->get();
+        return view('classitem.edit',compact(['classitem','courseoption','roomoption','lectureroption']));
     }
 
     /**
@@ -106,9 +111,9 @@ class ClassitemController extends Controller
     {
         $days = $request->days;
         $day_string = implode(', ', $days);
+        $lecturerIds = $request->lecturer;
 
-
-        $classitem->update([
+        $classitemId = $classitem->update([
             'name' => $request->name,
             'start_date' => $request->startdate,
             'end_date' => $request->enddate,
@@ -122,6 +127,8 @@ class ClassitemController extends Controller
             'container_color' => $request->color,
             'code' => $request->shortcode,
         ]);
+
+        $classitemId->users()->attach($lecturerIds);
 
         return redirect()->route('classitem.index')->with('message', 'Data updated successfully');
     }
