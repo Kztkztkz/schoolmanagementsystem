@@ -205,21 +205,19 @@
                         <div class=" mb-3">
                             <label for="">Course</label>
                             <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
-                                <option>Select Course</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                                <option value = "">Select Course</option>
+                                @foreach($courseoption as $courses)
+                                    <option value="{{$courses->id}}">{{$courses->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="">Student</label>
                             <select class="select2  form-select shadow-none">
                                 <option>Select Class</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                                @foreach($studentoption as $students)
+                                    <option value="{{$students->id}}">{{$students->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="d-flex justify-content-center">

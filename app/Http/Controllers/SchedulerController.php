@@ -51,18 +51,16 @@ class SchedulerController extends Controller
     public static function index()
     {
 
-        $currentDate = Carbon::today();
+        $currentDate = Carbon::today()->startOfMonth();
         $dateDiff  = Carbon::today()->addMonths(5);
 
 
         $period = CarbonPeriod::create($currentDate , $dateDiff , '1 month');
 
-
-
         $monthArr = $period->toArray();
 
         $currentTime = Carbon::create(2023 , 7 , 19 , 7 );
-
+// dd($currentTime);
         $timeArr = [];
 
         for($i=0 ; $i<=12 ; $i++){

@@ -21,8 +21,10 @@ class ClassitemController extends Controller
      */
     public function index()
     {
+        $studentoption = Student::all();
+        $courseoption = Course::all();
         $classitem =  Classitem::orderBy('id', 'desc')->paginate(7);
-        return view('classitem.index', compact('classitem'));
+        return view('classitem.index', compact(['classitem','courseoption','studentoption']));
     }
 
     /**
