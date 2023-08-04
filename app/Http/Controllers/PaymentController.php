@@ -22,9 +22,11 @@ class PaymentController extends Controller
     public function index()
     {
         // 27.7.23
-        $payments = Payment::all();
+        $totalPayments = Payment::all();
+        $payments = Payment::latest()->paginate(7);
         // $classitems = Classitem::all();
-        return view('payment.index',compact('payments'));
+        return view('payment.index',compact('payments','totalPayments'));
+
         // 27.7.23
         
     }

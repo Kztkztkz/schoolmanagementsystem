@@ -99,8 +99,8 @@
                                     <td class="align-middle">{{$payment->classitem->name}}</td>
                                     <td class="d-none d-lg-table-cell align-middle">{{$payment->classitem->course->name}}</td>
                                     <td class="d-none d-lg-table-cell align-middle">{{$payment->student->name}}</td>
-                                    <td class=" align-middle">{{$payment->fees}}</td>
-                                    <td class=" align-middle">{{$payment->due_amount}}</td>
+                                    <td class=" align-middle">{{number_format(floatval($payment->fees))}}</td>
+                                    <td class=" align-middle">{{number_format(floatval($payment->due_amount))}}</td>
                                     <td class=" align-middle">
                                         
                                         @if ($payment->payment_type=="paid")
@@ -139,6 +139,9 @@
 
                             </tbody>
                         </table>
+                        <div class=" paginate ">
+                            {{$payments->links('pagination::bootstrap-4')}}
+                        </div>
                     </div>
 
                 </div>
