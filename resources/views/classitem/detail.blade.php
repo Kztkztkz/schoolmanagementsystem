@@ -107,6 +107,14 @@
                                     @endforeach
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-4">Color</div>
+                                <div class="col-2">-</div>
+                                <div class="col-4" style="display:flex" >
+                                    <div style="width: 20%;border-radius: 18%;margin-right: 10%;background: {{$classitem->container_color}}"></div>
+                                    <div>{{$classitem->container_color}} </div> 
+                                </div>
+                            </div>
                         </div>
                     </div>
 
