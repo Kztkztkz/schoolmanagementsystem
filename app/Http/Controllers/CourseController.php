@@ -15,7 +15,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('setting.course.index');
+        $courses = Course::all();
+        return view('setting.course.index' , compact('courses'));
     }
 
     /**
@@ -47,7 +48,7 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-       
+
     }
 
     /**

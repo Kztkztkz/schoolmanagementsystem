@@ -1,5 +1,5 @@
 .course-btn{
-    width: 70px;
+    width: 100%;
 }
 
 .course-btn .table-btn-sm:hover{
@@ -7,8 +7,19 @@
     color: #0465cc!important;
 }
 
+.grid-container{
+    display: grid;
+    grid-template-columns: 15% 1fr 15%;
+    align-content: center;
+}
+
+.course-width .table-btn-sm:hover{
+    color: #0465cc !important;
+    background-color: transparent !important;
+}
+
 .course-width{
-    width: fit-content;
+    width: 40%;
 
 }
 
@@ -18,7 +29,8 @@
 }
 
 .course-row{
-    max-height: 700px;
+    max-height: 500px;
+
     overflow: scroll;
 }
 
@@ -30,10 +42,17 @@
     width: auto;
 }
 
+@media screen and (max-width:768px){
+    .course-width{
+        width: auto;
+
+    }
+}
+
 
 @media screen and (max-width:460px){
     .course-width{
-        width: auto;
+        width: 100%;
     }
 
     .row-item .form-control{
@@ -56,9 +75,13 @@
         right: 0;
     }
 
+    .add-course{
+        width: 50% !important;
+    }
+
     .course-row {
         max-height: 470px;
-        
+
     }
 
 }

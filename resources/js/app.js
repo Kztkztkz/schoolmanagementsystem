@@ -110,7 +110,7 @@ $(document).ready(function () {
 //Course Create
 $("#addCourse").click(function () {
     $("#courseRow").append(`
-        <div class="row-item mb-3">
+        <div class="row-item mb-3 grid-container">
         <a href="" class=" btn course-btn  btn-primary px-1 me-2">
             Add
         </a>

@@ -31,16 +31,18 @@
             </div>
             <div class="col-12 col-md-3">
                 <div class="mx-auto">
-                    <div class="input-group">
-                        <input class="form-control border-end-0 border" placeholder="search student" type="search"
-                            value="" id="example-search-input">
-                        <span class="input-group-append">
-                            <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
-                                type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
+                    <form action="{{ route('student.index') }}" >
+                        <div class="input-group">
+                            <input class="form-control border-end-0 border" placeholder="search student" type="search"
+                            name="keyword" value="{{ request('keyword') }}" id="example-search-input">
+                            <span class="input-group-append">
+                                <button class="btn btn-outline-secondary bg-white hover-none border-start-0 border-bottom-0 border ms-n5"
+                                    type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -97,12 +99,12 @@
                                         <p> {{ Str::limit($student->address, 50 , '...') }} </p>
                                     </td>
                                     <td class=" align-middle text-center">
-                                        <a href="" class="btn table-btn-sm btn-primary">
+                                        <a href="{{ route('student.relatedPayment' , $student->id ) }}" class="btn table-btn-sm btn-primary">
                                             <i class="mdi mdi-credit-card-multiple h5"></i>
                                         </a>
                                     </td>
                                     <td class=" align-middle text-center">
-                                        <a href="" class="btn table-btn-sm btn-primary">
+                                        <a href="{{ route('student.relatedClass' , $student->id ) }}" class="btn table-btn-sm btn-primary">
                                             <i class="mdi mdi-book-open-page-variant h5"></i>
                                         </a>
                                     </td>

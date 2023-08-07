@@ -40,21 +40,26 @@
                 <div class="card-body ">
                     <div class="course-width">
                         <div class="course-row" id="courseRow">
-                            <div class="row-item mb-3">
-                                <div class="course-btn me-2 d-inline-block text-center">
-                                    <a href="" class=" btn table-btn-sm btn-outline-primary border-0">
-                                        <i class=" mdi  mdi-pencil-box-outline h3"></i>
-                                    </a>
-                                </div>
 
-                                <input type="text" class=" form-control d-inline-block" value="ClassA" disabled>
-                                <div class="course-btn ms-2 d-inline-block text-center">
-                                    <a href="" class=" btn table-btn-sm btn-outline-primary border-0">
-                                        <i class=" mdi mdi-delete h3"></i>
-                                    </a>
-                                </div>
+
+                            @foreach ($courses as $course)
+                            <div class="row-item mb-3 grid-container">
+                                {{-- <div class="course-btn me-2 d-inline-block text-center edit">
+
+                                </div> --}}
+                                <a href="" class=" btn table-btn-sm btn-outline-primary border-0">
+                                    <i class=" mdi  mdi-pencil-box-outline h3"></i>
+                                </a>
+                                <input type="text" class=" form-control d-inline-block course-name" value="{{$course->name}}" disabled>
+                                {{-- <div class="course-btn ms-2 d-inline-block text-center del">
+
+                                </div> --}}
+                                <a href="" class=" btn table-btn-sm btn-outline-primary border-0">
+                                    <i class=" mdi mdi-delete h3"></i>
+                                </a>
                             </div>
-                            <div class="row-item mb-3">
+                            @endforeach
+                            {{-- <div class="row-item mb-3">
                                 <div class="course-btn me-2 d-inline-block text-center">
                                     <a href="" class=" btn table-btn-sm btn-outline-primary border-0">
                                         <i class=" mdi  mdi-pencil-box-outline h3"></i>
@@ -109,8 +114,8 @@
                                         <i class=" mdi mdi-delete h3"></i>
                                     </a>
                                 </div>
-                            </div>
-                            <div class="row-item mb-3">
+                            </div> --}}
+                            <div class="row-item mb-3 grid-container">
                                 <a href="" class=" btn course-btn  btn-primary px-1 me-2">
                                     Add
                                 </a>
@@ -123,7 +128,7 @@
                         </div>
 
                         <div class=" bg-light p-fixed">
-                            <button id="addCourse" class="btn btn-primary w-50  add-course d-flex justify-content-center align-items-center gap-2">
+                            <button id="addCourse" class="btn btn-primary w-100  add-course d-flex justify-content-center align-items-center gap-2">
                                 <i class="mdi mdi-plus-circle h3 mb-0"></i>
                                 <p class="">Create new course</p>
                             </button>

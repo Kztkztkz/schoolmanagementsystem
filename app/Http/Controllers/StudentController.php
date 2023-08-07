@@ -19,6 +19,18 @@ class StudentController extends Controller
     {
         $totalStudents = Student::all()->count();
         $students = Student::latest()->paginate(7);
+
+        if (request('keyword')){
+
+            $keyword = request('keyword');
+            $students = Student::when( request("keyword") , function ($query){
+                $keyword = request('keyword');
+                $query->where("name" ,  $keyword)->where("name" , "like" , "%$keyword%")
+                ->orWhere( "email" , "like" , "%$keyword%");
+            })->paginate(7)->withQueryString();
+
+        }
+
         return view('students.index' , compact('students' , 'totalStudents'));
     }
 
@@ -103,5 +115,24 @@ class StudentController extends Controller
     {
         $student->delete();
         return redirect()->back();
+    }
+
+    public function relatedClass(Student $student){
+        $studentoption = Student::all();
+        $courseoption = Course::all();
+        $classitem = $student->classitems;
+        $selectedStudent = $student;
+        return view('students.class-student' , compact('classitem' , 'studentoption' , 'courseoption' , 'selectedStudent'));
+    }
+
+    public function relatedPayment(Student $student){
+
+        $payments = $student->payments()->get();
+        $studentoption = Student::all();
+        $courseoption = Course::all();
+        $classitems = Classitem::all();
+        $selectedStudent = $student;
+
+        return view('students.payment-student' , compact(['classitems' , 'studentoption' , 'courseoption' ,'selectedStudent' , 'payments']));
     }
 }
