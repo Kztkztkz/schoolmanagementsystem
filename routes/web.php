@@ -25,14 +25,17 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', [ SchedulerController::class , 'index'])->name('schdeuler.index');
+Route::get('/', [ SchedulerController::class , 'index'])->name('schdeuler.index')->middleware();
 Route::get('/nextMonth/{from}' , [ SchedulerController::class , 'nextMonth' ])->name('schedular.nextMonth');
 Route::get('/preMonth/{from}' , [ SchedulerController::class , 'preMonth' ])->name('schedular.preMonth');
 
 
 Route::get('/login',function(){
     return view('auth.login');
-});
+})->name('auth.login');
+
+Route::post('/login',[UserController::class,'login'])->name('user.login');
+Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
 
 
 

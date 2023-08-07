@@ -76,7 +76,7 @@
                 <select class="form-select slectopt" id="lecturer" name="lecturer">
                   <option value="">Select Lecturer name</option>
                   @foreach($lectureroption as $lecturer)
-                  <option value="{{$lecturer->id}}" {{$classitem->users->contains($lecturer) ? 'selected' : '' }}>{{$lecturer->name}}</option>
+                  <option value="{{$lecturer->id}}" {{ $classitem->users->contains($lecturer->id) ? 'selected' : '' }}>{{$lecturer->name}}</option>
                   @endforeach
                 </select>
                 <span class="text-danger">@error('lecturer') {{$message}} @enderror</span>

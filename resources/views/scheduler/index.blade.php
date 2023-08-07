@@ -109,10 +109,9 @@
                                             <div class=" fs-4 fw-bolder text-end py-0 sch-inner">
 
                                                 @foreach ($data as $classitem)
-                                                
                                                     @if ($classitem->type === 'weekdays')
                                                         @php
-                                                        $start_date1 = new DateTime($classitem->start_date);
+                                                $start_date1 = new DateTime($classitem->start_date);
                                                 $end_date1 = new DateTime($classitem->end_date);
                                                 $difference = date_diff($start_date1, $end_date1);
                                                 $monthdif = $difference->m;
@@ -122,7 +121,7 @@
                                                             $tablehour = date('H', strtotime($time)) + 1;
 
                                                         @endphp
-                                                         @for ($i = -1; $i < $monthdif; $i++)
+                                                         {{-- @for ($i = 0; $i <= $monthdif; $i++) --}}
                                                             @php
                                                                 $tablemonth--;
                                                                 $monthstring = sprintf('%02d', $tablemonth);
@@ -131,39 +130,36 @@
                                                                 
                                                             @endphp
                                                             {{-- @dump($monthdif) --}}
-                                                            @for ($j = -1; $j < $timedif; $j++)
+                                                            @for ($k = 0; $k <= $timedif; $k++)
+
                                                                 @php
                                                                     $tablehour--;
-                                                                    $hourstring = sprintf('%02d', $tablehour);
-                                                                    
-                                                                    
-                                                                @endphp
-                                                                {{-- @dd($month, Carbon\Carbon::parse($classitem->start_date)->format('d-m-Y'), Carbon\Carbon::parse($classitem->end_date)->format('d-m-Y')) --}}
-                                                                @if ($month->between(Carbon\Carbon::parse($classitem->start_date)->format('Y-m'), Carbon\Carbon::parse($classitem->end_date)->format('Y-m')) && $hourstring === date('H', strtotime($classitem->start_time)) )
-
-
-                                                                        
+                                                                    $hourstring = sprintf('%02d', $tablehour);                                                                 
+                                                                @endphp                                                                
+                                                                @if ($month->between(Carbon\Carbon::parse($classitem->start_date)->format('Y-m'), Carbon\Carbon::parse($classitem->end_date)->format('Y-m')) && $hourstring === date('H', strtotime($classitem->start_time)))
                                                                     <div id="asdf" class="active-classitem"
                                                                         style=" background-color: {{ $classitem->container_color }}; border: 1px solid {{ $classitem->container_color }}; border-right: 1px solid {{ $classitem->container_color }}; border-bottom: 1px solid {{ $classitem->container_color }};"
                                                                         style="">
 
-                                                                        @if ($i == -1 && $j == -1)
-                                                                            <span
-                                                                                style="margin-top: calc( 20px *  {{ $timedif }}); z-index:1;"
-                                                                                data-bs-placement="bottom"
-                                                                                title="{{ $classitem->name }}">
-                                                                                {{ $classitem->code }}
-                                                                            </span>
-                                                                            @push('scripts')
-                                                                                <script>
-                                                                                    let activeColor = "@php echo $classitem->container_color @endphp";
-                                                                                    $('.active-classitem').parent().css('border-right', activeColor);
-                                                                                </script>
-                                                                            @endpush
+                                                                        @if ( $k == 1 && $month->format('m') == date('m', strtotime($classitem->start_date)))
+                                                                        <span
+                                                                        style="margin-top: calc( 15px *  {{ $timedif }}); z-index:1;"
+                                                                        data-bs-placement="bottom"
+                                                                        title="{{ $classitem->name }}">
+                                                                        {{ $classitem->code }}
+                                                                    </span>                                                                  
+
                                                                         @endif
+
+                                                                        @push('scripts')
+                                                                        <script>
+                                                                            let activeColor = "@php echo $classitem->container_color @endphp";
+                                                                            $('.active-classitem').parent().css('border-right', activeColor);
+                                                                        </script>
+                                                                    @endpush
                                                                     </div>
                                                                 @endif
-                                                            @endfor
+                                                            {{-- @endfor --}}
                                                         @endfor
                                                     @endif
                                                 @endforeach
@@ -210,7 +206,7 @@
                                                             $tablehour = date('H', strtotime($time)) + 1;
 
                                                         @endphp
-                                                        @for ($i = -1; $i < $monthdif; $i++)
+                                                        {{-- @for ($i = -1; $i < $monthdif; $i++) --}}
                                                             @php
                                                                 $tablemonth--;
                                                                 $monthstring = sprintf('%02d', $tablemonth);
@@ -224,16 +220,13 @@
                                                                     $hourstring = sprintf('%02d', $tablehour);
 
                                                                 @endphp
-                                                                @if (
-                                                                    $hourstring === date('H', strtotime($classitem->start_time)) &&
-                                                                        $monthstring === date('m', strtotime($classitem->start_date)) &&
-                                                                       (date('Y', strtotime($month)) === date('Y', strtotime($classitem->start_date)) || date('Y', strtotime($month)) === date('Y', strtotime($classitem->end_date))) )
+                                                                   @if ($month->between(Carbon\Carbon::parse($classitem->start_date)->format('Y-m'), Carbon\Carbon::parse($classitem->end_date)->format('Y-m')) && $hourstring === date('H', strtotime($classitem->start_time)))
 
                                                                     <div id="asdf" class="active-classitem"
                                                                         style=" background-color: {{ $classitem->container_color }}; border: 1px solid {{ $classitem->container_color }}; border-right: 1px solid {{ $classitem->container_color }}; border-bottom: 1px solid {{ $classitem->container_color }};"
                                                                         style="">
 
-                                                                        @if ($i == -1 && $j == -1)
+                                                                        @if ( $k == 1 && $month->format('m') == date('m', strtotime($classitem->start_date)))
                                                                             <span
                                                                                 style="margin-top: calc( 20px *  {{ $timedif }}); z-index:1;"
                                                                                 data-bs-placement="bottom"
@@ -250,7 +243,7 @@
                                                                     </div>
                                                                 @endif
                                                             @endfor
-                                                        @endfor
+                                                        {{-- @endfor --}}
                                                     @endif
                                                 @endforeach
 

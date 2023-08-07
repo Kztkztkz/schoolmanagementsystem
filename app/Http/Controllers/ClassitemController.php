@@ -19,11 +19,34 @@ class ClassitemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        
         $studentoption = Student::all();
         $courseoption = Course::all();
-        $classitem =  Classitem::orderBy('id', 'desc')->paginate(7);
+
+        if($request->has('coursesearchclassitem') || $request->has('studentsearchclassitem')){
+            $classitem = Classitem::where('course_id', $request->coursesearchclassitem)
+            ->orWhereHas('students', function ($query) use ($request) {
+                $query->where('students.id', $request->studentsearchclassitem);
+            })
+            ->paginate(7)->withQueryString();
+        }
+
+        else if($request->has('classitemsearch')){
+            $classitem = Classitem::where('name', 'like', '%' . $request->classitemsearch . '%')
+            ->orWhereHas('course', function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->classitemsearch . '%');
+            })
+            ->orWhereHas('users', function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->classitemsearch . '%');
+            })
+            ->paginate(7)->withQueryString();
+        }
+
+        else {
+            $classitem =  Classitem::orderBy('id', 'desc')->paginate(7);
+        }
         return view('classitem.index', compact(['classitem','courseoption','studentoption']));
     }
 

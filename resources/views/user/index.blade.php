@@ -25,11 +25,11 @@
                     </nav>
                 </div>
             </div>
-            <div class="col-md-3">
+            <form class="col-md-3" method="get" action="{{route('user.index')}}">
                 <div class="mx-auto">
                     <div class="input-group">
                         <input class="form-control border-end-0 border" placeholder="search user" type="search"
-                            value="" id="example-search-input">
+                            value="" id="example-search-input" name="usersearch">
                         <span class="input-group-append">
                             <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
                                 type="button">
@@ -38,7 +38,7 @@
                         </span>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
     <!-- filter button -->
@@ -183,20 +183,16 @@
                             <label for="">Name</label>
                             <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
                                 <option>Select Name</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                                <option value="CA">dfa</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="">Role</label>
-                            <select class="select2  form-select shadow-none">
+                            <select class="select2  form-select shadow-none" name="userrolefilter">
                                 <option>Select Role</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                                @foreach($roles as $roledata)
+                                <option value="{{$roledata->id}}">{{$roledata->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="d-flex justify-content-center">

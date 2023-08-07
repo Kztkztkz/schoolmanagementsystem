@@ -81,8 +81,9 @@
                                         width="31">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                                    {{-- <li><a class="dropdown-item" href="{{ route('user.edit',auth()->user()->id) }}">{{auth()->user()->name}}</a></li> --}}
                                     <li><a class="dropdown-item" href="{{ route('user.edit' , 2) }}">Profile edit</a></li>
-                                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                                    <li><a class="dropdown-item" href="{{route('user.logout')}}">Logout</a></li>
 
                                 </ul>
                             </li>

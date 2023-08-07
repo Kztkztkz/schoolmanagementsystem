@@ -27,11 +27,12 @@
                     </nav>
                 </div>
             </div>
-            <div class="col-md-3">
+            <form class="col-md-3" action="{{route('classitem.index')}}" method="get">
                 <div class="mx-auto">
                     <div class="input-group">
                         <input class="form-control border-end-0 border" placeholder="search class" type="search"
-                            value="" id="example-search-input">
+                            value="" id="example-search-input" name="classitemsearch">
+                        
                         <span class="input-group-append">
                             <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
                                 type="button">
@@ -40,7 +41,7 @@
                         </span>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -96,7 +97,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($classitem as $classdata)
+                            @forelse($classitem as $classdata)
                             <tr>
                                 <td class="align-middle">
                                     <p class="d-none d-md-block text-cut">{{Str::limit($classdata->name,20)}}</p>
@@ -184,7 +185,11 @@
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="6" class="text-center text-danger">Data Not Found</td>
+                              </tr>
+                            @endforelse
                         </tbody>
                     </table>                    
                 </div>
@@ -201,20 +206,20 @@
                         <i class="mdi mdi-file-find h3 me-1"></i>
                         <p class="  fs-4 mb-2 text-center">Class Filter</p>
                     </div>
-                    <form action="">
+                    <form action="{{route('classitem.index')}}" method="get">
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
+                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="coursesearchclassitem">
                                 <option value = "">Select Course</option>
                                 @foreach($courseoption as $courses)
                                     <option value="{{$courses->id}}">{{$courses->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="mb-3">
+                        <div class=" mb-3">
                             <label for="">Student</label>
-                            <select class="select2  form-select shadow-none">
-                                <option>Select Class</option>
+                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentsearchclassitem">
+                                <option value = "">Select Student</option>
                                 @foreach($studentoption as $students)
                                     <option value="{{$students->id}}">{{$students->name}}</option>
                                 @endforeach

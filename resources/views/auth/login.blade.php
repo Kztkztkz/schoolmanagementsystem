@@ -42,17 +42,30 @@
                         </div>
                         <div class="col-8 login-right">
                             <h4 class="text-center pb-2 border-bottom border-dark">Login</h4>
-                            <div class="d-flex flex-column justify-content-center align-items-center mt-5">
+                            @if($errors->any())
+                            <h6 class="alert alert-danger success-alt p-2">@error ('email') {{$message}} @enderror</h6>
+                            <h6 class="alert alert-danger success-alt p-2">@error ('password') {{$message}} @enderror</h6>
+                            @endif
+                            @if(session()->has('err'))
+                            <div class="alert alert-danger success-alt">
+                              <h6>{{session()->get('err')}}</h6>
+                              <button type="button" class="close success-msg" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                            </div>
+                            @endif
+                            <form class="d-flex flex-column justify-content-center align-items-center mt-5" method="post" action="{{route('user.login')}}">
+                                @csrf
                                 <div class="form-group d-flex align-items-center w-100 mb-4">
                                     <label   for="startdate">Email</label>
-                                    <input type="email" class="form-control w-75" id="enddate" placeholder="enter email">
+                                    <input type="email" class="form-control w-75" id="enddate" placeholder="enter email" name="email">
                                 </div>
                                 <div class="form-group d-flex align-items-center w-100">
                                     <label   for="name">Password</label>
-                                    <input type="password" class="form-control w-75" id="name" placeholder="enter password">
+                                    <input type="password" class="form-control w-75" id="name" placeholder="enter password" name="password">                                    
                                 </div>
-                                <a href="{{ route('student.index') }}" class="btn btn-primary btn-sm px-3 mt-3 fs-5">login</a>
-                            </div>
+                                <button type="submit" class="btn btn-primary btn-sm px-3 mt-3 fs-5">login</button>
+                            </form>
                         </div>
                     </div>
                 </div>

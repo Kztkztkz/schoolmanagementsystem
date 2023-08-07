@@ -5,7 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\LoginUserRequest;
+use Illuminate\Http\Request;
 use App\Models\Role;
+use Illuminate\Support\Facades\Auth;
+use Hash;
+use Session;
+
 
 class UserController extends Controller
 {
@@ -14,10 +20,23 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $userdata = User::orderBy('id', 'desc')->paginate(7);
-        return view('user.index', compact('userdata'));
+        $roles = Role::all();
+
+        if($request->has('usersearch')){
+            $userdata = User::where('name', 'like', '%' . $request->usersearch . '%')
+            ->orWhere('email','like','%'.$request->usersearch.'%')
+            ->orWhereHas('role', function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->usersearch . '%');
+            })
+            ->paginate(7)->withQueryString();
+        } else if($request->has('userrolefilter')){
+            $userdata = User::where('role_id',$request->userrolefilter)->paginate(7)->withQueryString();
+        }
+
+        return view('user.index', compact(['userdata','roles']));
     }
 
     /**
@@ -42,7 +61,7 @@ class UserController extends Controller
         User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => Hash::make($request->password),
             'role_id' => $request->role,
         ]);
 
@@ -81,11 +100,16 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        User::update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role_id' => $request->role,
-        ]);
+        // User::update([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'role_id' => $request->role,
+        // ]);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role_id = $request->role;
+        $user->update();
 
         return redirect()->back()->with('message','Data updated Successfully');
     }
@@ -100,5 +124,23 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->route('user.index')->with('del', 'Data is deleted');
+    }
+
+    public function login(LoginUserRequest $request)
+    {
+        $credentials=$request->only('email','password');
+        if(Auth::attempt($credentials)){
+            return redirect()->intended(route('schdeuler.index'));
+        }
+
+        return redirect()->route('auth.login')->with('err','Username or password incorrect');
+    }
+
+    public function logout()
+    {
+        Session::flush();
+        Auth::logout();
+
+        return redirect()->route('auth.login');
     }
 }
