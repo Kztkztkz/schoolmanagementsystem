@@ -85,7 +85,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($payments as $payment)
+                                @forelse ($payments as $payment)
                                 <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
 
                                     {{-- Mobile View --}}
@@ -115,7 +115,9 @@
 
                                     </td>
                                 </tr>
-                                @endforeach
+                                @empty
+                                <td colspan="7" class="text-center">No search data</td>
+                                @endforelse
                                 {{-- <tr data-bs-toggle="modal" data-bs-target="#exampleModal"> --}}
                                     {{-- Mobile View --}}
                                     {{-- <td class="d-table-cell d-lg-none text-nowrap align-middle">
@@ -287,44 +289,37 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  position-relative">
-                    <form action="">
+                    <form action="{{route('student.index')}}" method="get">
                         <div class=" mb-3">
-                            <label for="">Student</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
-                                <option>Select Student</option>
-                                <option value="CA">David</option>
-                                <option value="NV">Steven</option>
-                                <option value="OR">Michael</option>
-                                <option value="WA">Earthshaker</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
                             <label for="">Course</label>
-                            <select class="select2  form-select shadow-none">
-                                <option>Select Course</option>
-                                <option value="CA">Html</option>
-                                <option value="NV">Css</option>
-                                <option value="OR">Php</option>
-                                <option value="WA">Laravel</option>
+                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
+                                <option value = "">Select Course</option>
+                                @foreach($courses as $course)
+                                    <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
+                                        {{$course->name}}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select class="select2  form-select shadow-none">
-                                <option>Select Class</option>
-                                <option value="CA">Basic</option>
-                                <option value="NV">Intermediate</option>
-                                <option value="OR">Advance</option>
-                                <option value="WA">Washington</option>
+                            <select required class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
+                                <option value = "">Select Class</option>
+                                @foreach($classitems as $class)
+                                    <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
+                                        {{$class->name}}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
 
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
-                </div>
-                </form>
+                        <div class="d-flex justify-content-center align-items-center ">
+                            <div class="">
+                                <a href="{{route('student.index')}}" class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</a>
+                                <button class="btn btn-primary sub-btn " type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
             </div>
         </div>
     </div>

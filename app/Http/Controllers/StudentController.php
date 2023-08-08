@@ -7,6 +7,8 @@ use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Classitem;
 use App\Models\Course;
+use App\Models\Payment;
+use Faker\Core\Number;
 
 class StudentController extends Controller
 {
@@ -29,6 +31,8 @@ class StudentController extends Controller
             $students = Student::whereHas('classitems' , function($query){
 
                 $query->where("classitems.id" , request('studentByClass'));
+            })->orWhereHas('classitems' , function($query){
+                $query->where('course_id' , request('studentByCourse'));
             })
             ->paginate(7)->withQueryString();
         }
@@ -70,14 +74,34 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        $students = new Student();
-        $students->name = $request->name;
-        $students->email = $request->email;
-        $students->address = $request->address;
-        $students->phone = $request->phone;
-        $students->save();
 
 
+
+        $student = new Student();
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->address = $request->address;
+        $student->phone = $request->phone;
+        $student->save();
+
+        if($request->classitem_id == ''){
+            $classitem = Classitem::find(request('classitem_id'));
+            $classitemPrice = $classitem->price;
+            $due_amount = (int) $classitemPrice - (int) request('due_amount');
+
+            $payment = new Payment();
+            $payment->fees = $classitemPrice;
+            $payment->due_amount = $due_amount;
+            $payment->classitem_id = $request->classitem_id;
+            $payment->student_id = $student->id;
+
+            $payment_type = ( $due_amount === 0 ) ? 'paid' : 'unpaid';
+            $payment_method = ['cash', 'card', 'bank transfer'];
+            $payment->payment_type = $payment_type;
+            $payment->payment_method = array_rand($payment_method);
+            $payment->save();
+
+        }
 
         return redirect()->route('student.index')->with('message' , 'Student created successfully');
     }

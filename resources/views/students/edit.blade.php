@@ -29,15 +29,21 @@
                         @csrf
                         @method('put')
                         <div class="row">
-                            <div class="col-md-6 ">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" class="form-control" name="name" value="{{old('name' , $student->name)}}" id="name" placeholder="Name">
+                                    <input type="text" name="name" value="{{old('name' , $student->name)}}" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name">
+                                    @error('name')
+                                        <div class=" invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Address</label>
-                                    <textarea name="address" class="form-control form-text" id="address" cols="30" rows="5"
-                                        placeholder="Address">{{old('address' ,$student->address)}}</textarea>
+                                    <textarea name="address" class="form-control form-text @error('address') is-invalid @enderror" id="address" cols="30" rows="5"
+                                        placeholder="Address">{{old('address' , $student->address)}}</textarea>
+                                        @error('address')
+                                            <div class=" invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     {{-- <input type="text" class="form-control" id="name" placeholder="Address"> --}}
                                 </div>
 
@@ -46,11 +52,17 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="startdate">Email</label>
-                                    <input type="email" class="form-control" name="email" id="enddate" value="{{old('email' ,$student->email)}}" placeholder="Email">
+                                    <input type="email" name="email" value="{{old('email' , $student->email)}}" class="form-control @error('email') is-invalid @enderror" id="enddate" placeholder="Email">
+                                    @error('email')
+                                            <div class=" invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Phone</label>
-                                    <input  value="{{old('phone',$student->phone)}}" name="phone" class="form-control" id="name" placeholder="Phone number">
+                                    <input type="number" name="phone" value="{{old('phone' , $student->phone)}}" class="form-control @error('phone') is-invalid @enderror" id="name" placeholder="Phone number">
+                                    @error('phone')
+                                            <div class=" invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
