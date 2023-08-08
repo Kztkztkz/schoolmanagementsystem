@@ -10,6 +10,7 @@ use App\Http\Controllers\SchedulerController;
 use Illuminate\Support\Facades\Route;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +43,7 @@ Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
 Route::resource('user', UserController::class);
 
 Route::get('payment/paid',[PaymentController::class,'paid'])->name('payment.paid');
+// Route::get('payment/{name}/{course}',[PaymentController::class,'paymentAll'])->name('payment.one');
 Route::resource('payment' , PaymentController::class);
 
 Route::resource('room' , RoomController::class);

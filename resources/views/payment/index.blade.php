@@ -1,3 +1,5 @@
+
+
 @extends('layout.template')
 @section('custom')
     <style>
@@ -95,10 +97,12 @@
                                         <p>{{$payment->student->name}}</p>
                                     </td>
                                     {{-- Laptop View --}}
-                                    <td class="d-none d-lg-table-cell align-middle">{{$payment->created_at}}</td>
-                                    <td class="align-middle">{{$payment->classitem->name}}</td>
-                                    <td class="d-none d-lg-table-cell align-middle">{{$payment->classitem->course->name}}</td>
-                                    <td class="d-none d-lg-table-cell align-middle">{{$payment->student->name}}</td>
+                                    <td class="d-none d-lg-table-cell align-middle">{{$payment->created_at->format('d-m-Y')}}</td>
+                                    <td class="align-middle">{{Str::limit($payment->classitem->name, 20)}} </td>
+                                    <td class="d-none d-lg-table-cell align-middle">
+                                        {{Str::limit($payment->classitem->course->name, 15)}}</td>
+                                    <td class="d-none d-lg-table-cell align-middle">
+                                        {{Str::limit($payment->student->name, 15)}}</td>
                                     <td class=" align-middle">{{number_format(floatval($payment->fees))}}</td>
                                     <td class=" align-middle">{{number_format(floatval($payment->due_amount))}}</td>
                                     <td class=" align-middle">
@@ -210,7 +214,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <h6>Student Name - Kyaw Kyaw</h6>
+                    <h6>Student Name - {{$payment->student->name}}</h6>
+                    $stu = {{$payment->student->name}};
+                    $qry = DB::
 
                     <table class="table table-striped table-hover">
                         <thead>
@@ -222,18 +228,21 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{-- @foreach ({{$payment->student->name}} as $student) --}}
+                                
                             <tr>
                                 <td class="col-3">01-01-2023</td>
                                 <td class="col-3">Class A</td>
                                 <td class="col-3">Python</td>
                                 <td class="col-3">Cash</td>
                             </tr>
-                            <tr>
+                            {{-- @endforeach --}}
+                            {{-- <tr>
                                 <td class="col-3">01-01-2023</td>
                                 <td class="col-3">Class A</td>
                                 <td class="col-3">Python</td>
                                 <td class="col-3">Debit Card</td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                     </table>
                     <div class="row">
