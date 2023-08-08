@@ -5,6 +5,36 @@
     width: 15% !important;
 }
 
+.room-create{
+    width: fit-content !important;
+    height: fit-content !important;
+    margin-left: auto !important;
+    margin-right: 11px !important;
+}
+
+.scheduler .filterbtn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scheduler .sub-btn{
+    width: 85%;
+
+}
+
+.scheduler .list-group-item{
+    padding: 0.5rem !important;
+}
+
+.room-control:hover , .room-control:active , .btn-outline-dark.dropdown-toggle.show , .room-control:focus{
+    color: #2b2b41 !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
 .scheduler-container{
     width: 100%;
     height: 100%;
@@ -48,6 +78,7 @@
     justify-content: center;
     align-items: center;
 }
+
 
 .active-classitem{
     width:100%;

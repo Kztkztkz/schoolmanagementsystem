@@ -6,9 +6,9 @@
     width: 30%;
 }
 
-.student-table td:last-child{
+/* .student-table td:last-child{
     text-align: end !important;
-}
+} */
 
 @media screen and (max-width : 768px){
     .table thead th:first-child{

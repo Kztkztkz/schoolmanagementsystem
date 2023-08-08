@@ -17,10 +17,23 @@ class StudentController extends Controller
      */
     public function index()
     {
+        $classitems = Classitem::all();
+        $courses = Course::all();
         $totalStudents = Student::all()->count();
-        $students = Student::latest()->paginate(7);
+        $searchByClass = Classitem::where('id' , request('studentByClass'))->get();
 
-        if (request('keyword')){
+
+
+        if(request()->has('studentByCourse') || request()->has('studentByClass')){
+
+            $students = Student::whereHas('classitems' , function($query){
+
+                $query->where("classitems.id" , request('studentByClass'));
+            })
+            ->paginate(7)->withQueryString();
+        }
+
+        else if (request('keyword')){
 
             $keyword = request('keyword');
             $students = Student::when( request("keyword") , function ($query){
@@ -30,8 +43,11 @@ class StudentController extends Controller
             })->paginate(7)->withQueryString();
 
         }
+        else{
+            $students = Student::latest()->paginate(7);
+        }
 
-        return view('students.index' , compact('students' , 'totalStudents'));
+        return view('students.index' , compact('students' , 'totalStudents' , 'classitems' , 'courses' , 'searchByClass'));
     }
 
     /**
@@ -60,6 +76,8 @@ class StudentController extends Controller
         $students->address = $request->address;
         $students->phone = $request->phone;
         $students->save();
+
+
 
         return redirect()->route('student.index')->with('message' , 'Student created successfully');
     }

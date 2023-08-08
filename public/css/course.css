@@ -42,6 +42,18 @@
     width: auto;
 }
 
+.edit-grid-container{
+    display: grid;
+    grid-template-columns: 1fr 15%;
+    align-content: center;
+}
+
+.sec-grid{
+    display: grid;
+    grid-template-columns:15% 1fr ;
+    align-content: center;
+}
+
 @media screen and (max-width:768px){
     .course-width{
         width: auto;

@@ -110,17 +110,20 @@ $(document).ready(function () {
 //Course Create
 $("#addCourse").click(function () {
     $("#courseRow").append(`
-        <div class="row-item mb-3 grid-container">
-        <a href="" class=" btn course-btn  btn-primary px-1 me-2">
+    <form action="{{ route('course.store') }}" method="POST">
+    <div class="row-item mb-3 grid-container">
+        @csrf
+        <button type="submit" class=" btn course-btn  btn-primary px-1 me-2">
             Add
-        </a>
+        </button>
 
-        <input type="text" class=" form-control d-inline-block" placeholder="Add new course" >
+        <input type="text" name="name" class=" form-control d-inline-block"
+            placeholder="Add new course">
         <button class=" btn course-btn btn-secondary px-1 ms-2 course-del">
             Cancel
         </button>
-        </div>
-
+    </div>
+</form>
     `);
 });
 

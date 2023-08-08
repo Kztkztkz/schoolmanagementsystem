@@ -36,7 +36,11 @@ class RoomController extends Controller
      */
     public function store(StoreRoomRequest $request)
     {
-        //
+        $room = new Room();
+        $room->name = $request->name;
+        $room->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -70,7 +74,9 @@ class RoomController extends Controller
      */
     public function update(UpdateRoomRequest $request, Room $room)
     {
-        //
+        $room->name = $request->name;
+        $room->update();
+        return redirect()->back();
     }
 
     /**
@@ -81,6 +87,7 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        //
+        $room->delete();
+        return redirect()->route('schdeuler.index');
     }
 }

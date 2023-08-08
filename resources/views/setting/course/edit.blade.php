@@ -42,27 +42,29 @@
                         <div class="course-row" id="courseRow">
 
 
-                            @foreach ($courses as $course)
-                                <div class="row-item mb-3 grid-container">
-                                    {{-- <div class="course-btn me-2 d-inline-block text-center edit">
+                            @foreach ($allCourses as $c)
 
-                                </div> --}}
-                                    <a href="{{ route('course.edit' , $course->id) }}" class=" btn table-btn-sm btn-outline-primary border-0">
-                                        <i class=" mdi  mdi-pencil-box-outline h3"></i>
-                                    </a>
-                                    <input type="text" class=" form-control d-inline-block course-name"
-                                        value="{{ $course->name }}" disabled>
-                                    {{-- <div class="course-btn ms-2 d-inline-block text-center del">
+                                    <div class="row-item mb-3 edit-grid-container">
+                                        <form action="{{route('course.update' , $c->id)}}" class=" sec-grid" method="POST">
+                                            @csrf
+                                            @method('put')
+                                        <button type="submit" class=" btn table-btn-sm btn-outline-primary border-0">
+                                            <i class=" mdi  mdi-pencil-box-outline h3"></i>
+                                        </button>
+                                        <input type="text" name="name" class=" form-control d-inline-block course-name"
+                                            value="{{ $c->name }}"
+                                            {{ $c->id == $course->id ? '':'disabled' }}
+                                            >
+                                        </form>
+                                        <form action="{{route('course.destroy' , $c->id)}}">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class=" btn table-btn-sm btn-outline-primary border-0">
+                                                <i class=" mdi mdi-delete h3"></i>
+                                            </button>
+                                        </form>
+                                    </div>
 
-                                </div> --}}
-                                <form action="{{route('course.destroy' , $course->id)}} " method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit"  class=" btn table-btn-sm btn-outline-primary border-0">
-                                        <i class=" mdi mdi-delete h3"></i>
-                                    </button>
-                                </form>
-                                </div>
                             @endforeach
 
                             <form action="{{ route('course.store') }}" method="POST">

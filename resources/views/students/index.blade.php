@@ -25,6 +25,10 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item "><a href="{{ route('student.index') }}">Students</a></li>
                             <li class="breadcrumb-item active " aria-current="page">List</li>
+                            {{-- @if (request('studentByClass'))
+                                <li class="breadcrumb-item active " aria-current="page">Search by <span
+                                        class=" text-primary">{{ $searchByClass }}</span></li>
+                            @endif --}}
                         </ol>
                     </nav>
                 </div>
@@ -358,25 +362,23 @@
                         <p class="  fs-4 mb-2 text-center">Student Filter</p>
                     </div>
 
-                    <form action="">
+                    <form action="{{route('student.index')}}" method="get">
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
-                                <option>Select Course</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
+                                <option value = "">Select Course</option>
+                                @foreach($courses as $course)
+                                    <option value="{{$course->id}}">{{$course->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select class="select2  form-select shadow-none">
-                                <option>Select Class</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
+                                <option value = "">Select Class</option>
+                                @foreach($classitems as $class)
+                                    <option value="{{$class->id}}">{{$class->name}}</option>
+                                @endforeach
                             </select>
                         </div>
 
