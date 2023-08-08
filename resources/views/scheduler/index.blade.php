@@ -7,6 +7,7 @@
 @section('content')
     <input type="hidden" id="scheduler" value="{{ json_encode($data) }}" />
     {{-- dd({{$data}}) --}}
+    <div class="page-breadcrumb-fixed">
     <div class="page-breadcrumb">
         <div class="row">
             <div class="col-12  d-flex justify-content-between">
@@ -59,7 +60,7 @@
     </div>
 
 
-    <div class="row  px-3 row">
+    <div class="row  px-3 row" >
         <div class="col-2 mb-2 position-relative">
             <div style="width: auto">
                 <a class="btn btn-light w-100 dropdown-toggle" href="#" role="button" id="dropdownMenuButton1"
@@ -98,37 +99,40 @@
             <p class="">Create Room</p>
         </button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Create New Room</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form action="{{ route('room.store') }}" method="POST">
-                        <div class="modal-body">
 
-                            @csrf
-                            <div class="form-group">
-                                <label for="room">Room name</label>
-                                <input type="text" name="name" class="form-control" id="room"
-                                    placeholder="Room 01">
-                            </div>
+    </div>
+    </div>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create New Room</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form action="{{ route('room.store') }}" method="POST">
+                    <div class="modal-body">
+
+                        @csrf
+                        <div class="form-group">
+                            <label for="room">Room name</label>
+                            <input type="text" name="name" class="form-control" id="room"
+                                placeholder="Room 01">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    @foreach ($rooms as $room)
-        <div class="row pb-4 px-3 scheduler">
+    @forelse ($rooms as $room)
+        <div class="row pb-4 px-3 scheduler " style="">
 
             <div class="col-2">
 
@@ -408,5 +412,7 @@
                 </div>
             </div>
         </div>
-    @endforeach
+        @empty
+        <div class=" vh-100 text-center h3 py-2 text-black-50">No Such Data</div>
+    @endforelse
 @endsection

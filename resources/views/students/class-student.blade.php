@@ -96,7 +96,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($classitem as $classdata)
+                            @forelse($classitem as $classdata)
                             <tr>
                                 <td class="align-middle">
                                     <p class="d-none d-md-block text-cut">{{Str::limit($classdata->name,20)}}</p>
@@ -184,7 +184,9 @@
                                     </div>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                                <td colspan="6" class="text-center">No search data</td>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -247,34 +249,37 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  position-relative">
-                    <form action="">
+                    <form action="{{route('student.index')}}" method="get">
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
-                                <option>Select Course</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
+                                <option value = "">Select Course</option>
+                                @foreach($courses as $course)
+                                    <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
+                                        {{$course->name}}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="">Student</label>
-                            <select class="select2  form-select shadow-none">
-                                <option>Select Class</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                            <label for="">Class</label>
+                            <select required class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
+                                <option value = "">Select Class</option>
+                                @foreach($classitems as $class)
+                                    <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
+                                        {{$class->name}}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
-                </div>
-                </form>
+                        <div class="d-flex justify-content-center align-items-center ">
+                            <div class="">
+                                <a href="{{route('student.index')}}" class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</a>
+                                <button class="btn btn-primary sub-btn " type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
             </div>
         </div>
     </div>

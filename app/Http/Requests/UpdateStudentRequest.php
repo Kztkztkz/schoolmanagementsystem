@@ -24,7 +24,10 @@ class UpdateStudentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|min:3',
+            'address' => 'required|min:15',
+            'email' => 'required|email|string|max:255|',
+            'phone' => 'required|numeric'
         ];
     }
 }

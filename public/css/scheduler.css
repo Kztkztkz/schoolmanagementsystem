@@ -1,3 +1,12 @@
+.page-breadcrumb-fixed{
+    position: fixed;
+    top: 64px;
+    z-index: 999;
+    width: 85%;
+    background-color: #eee;
+    box-shadow: 0 0 3px #0001;
+}
+
 .time-fs {
     font-size: 12px;
     padding: 0 5px !important;
@@ -23,6 +32,18 @@
     width: 85%;
 
 }
+
+.page-wrapper > .scheduler {
+    margin-top: 7rem;
+}
+
+.page-wrapper > .scheduler ~ .scheduler {
+    margin-top: 0rem;
+}
+
+/* .scheduler{
+    margin-top: 7rem !important;
+} */
 
 .scheduler .list-group-item{
     padding: 0.5rem !important;

@@ -368,23 +368,27 @@
                             <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
                                 <option value = "">Select Course</option>
                                 @foreach($courses as $course)
-                                    <option value="{{$course->id}}">{{$course->name}}</option>
+                                    <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
+                                        {{$course->name}}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
+                            <select required class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
                                 <option value = "">Select Class</option>
                                 @foreach($classitems as $class)
-                                    <option value="{{$class->id}}">{{$class->name}}</option>
+                                    <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
+                                        {{$class->name}}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="d-flex justify-content-center align-items-center ">
                             <div class="filterbtn">
-                                <button class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</button>
+                                <a href="{{route('student.index')}}" class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</a>
                                 <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                             </div>
                         </div>
@@ -405,33 +409,35 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  position-relative">
-                    <form action="">
+                    
+                    <form action="{{route('student.index')}}" method="get">
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
-                                <option>Select Course</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
+                                <option value = "">Select Course</option>
+                                @foreach($courses as $course)
+                                    <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
+                                        {{$course->name}}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select class="select2  form-select shadow-none">
-                                <option>Select Class</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                            <select required class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
+                                <option value = "">Select Class</option>
+                                @foreach($classitems as $class)
+                                    <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
+                                        {{$class->name}}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
 
                         <div class="d-flex justify-content-center align-items-center ">
                             <div class="">
-                                <button type="button" class="btn btn-secondary me-2"
-                                    data-bs-dismiss="modal">Cancel</button>
-                                <button class="btn btn-primary " type="submit">Submit</button>
+                                <a href="{{route('student.index')}}" class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</a>
+                                <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                             </div>
                         </div>
                     </form>

@@ -31,12 +31,18 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name">Name</label>
-                                    <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+                                    <input type="text" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name">
+                                    @error('name')
+                                        <div class=" invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Address</label>
-                                    <textarea name="address" class="form-control form-text" id="address" cols="30" rows="5"
-                                        placeholder="Address"></textarea>
+                                    <textarea name="address" class="form-control form-text @error('address') is-invalid @enderror" id="address" cols="30" rows="5"
+                                        placeholder="Address">{{old('address')}}</textarea>
+                                        @error('address')
+                                            <div class=" invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     {{-- <input type="text" class="form-control" id="name" placeholder="Address"> --}}
                                 </div>
 
@@ -45,11 +51,17 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="startdate">Email</label>
-                                    <input type="email" name="email" class="form-control" id="enddate" placeholder="Email">
+                                    <input type="email" name="email" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror" id="enddate" placeholder="Email">
+                                    @error('email')
+                                            <div class=" invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Phone</label>
-                                    <input type="number" name="phone" class="form-control" id="name" placeholder="Phone number">
+                                    <input type="number" name="phone" value="{{old('phone')}}" class="form-control @error('phone') is-invalid @enderror" id="name" placeholder="Phone number">
+                                    @error('phone')
+                                            <div class=" invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -60,7 +72,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="course">Course Name</label>
-                                    <select name="course" class="form-select slectopt" id="course">
+                                    <select name="course_id" class="form-select slectopt" id="course">
                                         <option selected>Select course </option>
                                         @foreach ($courses as $course)
                                         <option value="{{ $course->id }}">{{$course->name}}</option>
@@ -70,7 +82,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="amount">Amount</label>
-                                    <input type="number" class="form-control" id="amount" placeholder="Amount">
+                                    <input type="number" name="due_amount" class="form-control" id="amount" placeholder="Amount">
                                 </div>
 
                             </div>
@@ -78,7 +90,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="class">Class</label>
-                                    <select name="class" class="form-select slectopt" id="class">
+                                    <select name="classitem_id" class="form-select slectopt" id="class">
                                         <option selected>Select class</option>
                                         @foreach ($classes as $class)
                                         <option value="{{ $class->id }}">{{$class->name}}</option>

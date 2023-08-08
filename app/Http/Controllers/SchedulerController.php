@@ -110,7 +110,11 @@ class SchedulerController extends Controller
         if(request('keyword')){
             $rooms = Room::when( request("keyword") , function ($query){
                 $query->where("name" , request('keyword'));
-            })->get();
+            })->orWhereHas('classitems' , function($query){
+                $keyword = request('keyword');
+                $query->where('name' , 'like' , "%$keyword%");
+            })
+            ->get();
         }else{
             $rooms = Room::all();
         }
@@ -144,7 +148,11 @@ class SchedulerController extends Controller
 
             $rooms = Room::when( request("keyword") , function ($query){
                 $query->where("name" , request('keyword'));
-            })->get();
+            })->orWhereHas('classitems' , function($query){
+                $keyword = request('keyword');
+                $query->where('name' , 'like' , "%$keyword%");
+            })
+            ->get();
 
         }else{
             $rooms = Room::all();
