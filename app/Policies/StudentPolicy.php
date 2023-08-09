@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Student;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class StudentPolicy
@@ -18,7 +19,7 @@ class StudentPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->role_id == Role::IS_ADMIN;
     }
 
     /**
@@ -30,7 +31,7 @@ class StudentPolicy
      */
     public function view(User $user, Student $student)
     {
-        //
+        return $user->role_id == Role::IS_ADMIN;
     }
 
     /**
@@ -41,7 +42,7 @@ class StudentPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->role_id == Role::IS_ADMIN;
     }
 
     /**
@@ -53,7 +54,7 @@ class StudentPolicy
      */
     public function update(User $user, Student $student)
     {
-        //
+        return $user->role_id == Role::IS_ADMIN;
     }
 
     /**
@@ -65,7 +66,7 @@ class StudentPolicy
      */
     public function delete(User $user, Student $student)
     {
-        //
+        return $user->role_id == Role::IS_ADMIN;
     }
 
     /**

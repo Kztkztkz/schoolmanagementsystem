@@ -24,7 +24,6 @@ class ClassitemController extends Controller
         
         $studentoption = Student::all();
         $courseoption = Course::all();
-
         if($request->has('coursesearchclassitem') || $request->has('studentsearchclassitem')){
             $classitem = Classitem::where('course_id', $request->coursesearchclassitem)
             ->orWhereHas('students', function ($query) use ($request) {
@@ -57,6 +56,7 @@ class ClassitemController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Classitem::class);
         $roomoption = Room::all();
         $courseoption = Course::all();
         $lectureroption =  User::where('role_id', 2)->get();
@@ -137,6 +137,7 @@ class ClassitemController extends Controller
      */
     public function update(UpdateClassitemRequest $request, Classitem $classitem)
     {
+        $this->authorize('update', $classitem);
         $days = $request->days;
         $day_string = implode(', ', $days);
         $lecturerIds = $request->lecturer;
@@ -169,6 +170,7 @@ class ClassitemController extends Controller
      */
     public function destroy(Classitem $classitem)
     {
+        $this->authorize('delete', $classitem);
         $classitem->delete();
         return redirect()->route('classitem.index')->with('del', 'Data is deleted');
     }

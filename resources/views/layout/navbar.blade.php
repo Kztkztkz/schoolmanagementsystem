@@ -77,12 +77,17 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#"
                                     id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('admin/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle"
-                                        width="31">
+                                    {{-- <img src="{{ asset('admin/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle"
+                                        width="31"> --}}
+                                        <h3 class="user-account-name" style="
+                                        background: #959595;
+                                        padding: 4px 10px;
+                                        border-radius: 50%;
+                                        margin: 12px 0;">{{strtoupper(substr(auth()->user()->name,0,1))}}</h3>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdown">
-                                    {{-- <li><a class="dropdown-item" href="{{ route('user.edit',auth()->user()->id) }}">{{auth()->user()->name}}</a></li> --}}
-                                    <li><a class="dropdown-item" href="{{ route('user.edit' , 2) }}">Profile edit</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('user.edit',auth()->user()->id) }}">{{auth()->user()->name}}</a></li>
+                                    {{-- <li><a class="dropdown-item" href="{{ route('user.edit' , 2) }}">Profile edit</a></li> --}}
                                     <li><a class="dropdown-item" href="{{route('user.logout')}}">Logout</a></li>
 
                                 </ul>

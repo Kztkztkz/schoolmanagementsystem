@@ -41,10 +41,9 @@
                             </div>
                         </div>                        
                         <div class="col-8 login-right">
-                            <h4 class="text-center pb-2 border-bottom border-dark rmlogin">Login</h4>
+                            <h4 class="text-center pb-2 border-bottom border-dark rmlogin">Reset Password</h4>
                             @if($errors->any())
                             <h6 class="alert alert-danger success-alt p-2">@error ('email') {{$message}} @enderror</h6>
-                            <h6 class="alert alert-danger success-alt p-2">@error ('password') {{$message}} @enderror</h6>
                             @endif
                             @if(session()->has('err'))
                             <div class="alert alert-danger success-alt">
@@ -62,19 +61,22 @@
                           </button>
                             </div>
                             @endif                           
-                            <form class="d-flex flex-column justify-content-center align-items-center mt-5 rmlgform" method="post" action="{{route('user.login')}}">
+                            <form class="d-flex flex-column justify-content-center align-items-center mt-3" method="post" action="{{route('user.forgetpwd')}}">
                                 @csrf
-                                <div class="form-group d-flex align-items-center w-100 mb-4">
+                                <p class="mb-3 fw-bold mt-3">We will send password reset link to your inbox and use that link to reset password.</p>                                
+                                <div class="form-group d-flex align-items-center w-100 mb-2">
                                     <label   for="startdate">Email</label>
-                                    <input type="email" class="form-control w-75" id="enddate" placeholder="enter email" name="email">
+                                    <input type="email" class="form-control w-75" id="enddate" placeholder="enter email" name="email">                                    
                                 </div>
-                                <div class="form-group d-flex align-items-center w-100">
-                                    <label   for="name">Password</label>
-                                    <input type="password" class="form-control w-75" id="name" placeholder="enter password" name="password">                                    
-                                </div>
-                                <a href="{{route('user.forgetpwdview')}}" class="h6 text-primary"><u>Forget Password  ?</u></a>
-                                <button type="submit" class="btn btn-primary btn-sm px-3 mt-3 fs-5">login</button>
+                                <div class="mt-2">
+                                <a href="{{route('user.login')}}" class="btn btn-secondary btn-sm px-3 mt-3 fs-5 mx-3">Cancel</a>
+                                <button type="submit" class="btn btn-primary btn-sm px-3 mt-3 fs-5">Reset Password</button>
+                              </div>
                             </form>
+
+
+ 
+
                         </div>
                     </div>
                 </div>

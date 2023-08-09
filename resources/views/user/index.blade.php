@@ -29,7 +29,7 @@
                 <div class="mx-auto">
                     <div class="input-group">
                         <input class="form-control border-end-0 border" placeholder="search user" type="search"
-                            value="" id="example-search-input" name="usersearch">
+                            value="{{request('usersearch')}}" id="example-search-input" name="usersearch">
                         <span class="input-group-append">
                             <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
                                 type="button">
@@ -179,19 +179,19 @@
                 <div class="card-body position-relative">
                     <p class="  fs-4 mb-2 text-center">User Filter</p>
                     <form action="">
-                        <div class=" mb-3">
+                        {{-- <div class=" mb-3">
                             <label for="">Name</label>
                             <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
                                 <option>Select Name</option>
                                 <option value="CA">dfa</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label for="">Role</label>
                             <select class="select2  form-select shadow-none" name="userrolefilter">
                                 <option>Select Role</option>
                                 @foreach($roles as $roledata)
-                                <option value="{{$roledata->id}}">{{$roledata->name}}</option>
+                                <option value="{{$roledata->id}}" {{$roledata->id == request('userrolefilter') ? 'selected' : ''}}>{{$roledata->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -220,31 +220,20 @@
                 </div>
                 <div class="modal-body  position-relative">
                     <form action="">
-                        <div class=" mb-3">
-                            <label for="">Name</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
-                                <option>Select Name</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
-                            </select>
-                        </div>
                         <div class="mb-3">
                             <label for="">Role</label>
                             <select class="select2  form-select shadow-none">
                                 <option>Select Role</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                                @foreach($roles as $roledata)
+                                <option value="{{$roledata->id}}" {{$roledata->id == request('userrolefilter') ? 'selected' : ''}}>{{$roledata->name}}</option>
+                                @endforeach
                             </select>
                         </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 </form>
             </div>

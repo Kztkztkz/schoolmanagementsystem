@@ -23,6 +23,12 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item asdf"><a href="#">Class</a></li>
                             <li class="breadcrumb-item active " aria-current="page">List</li>
+                            {{-- @if(request('coursesearchclassitem'))
+                            <li class="breadcrumb-item active d-xs-block d-sm-none" aria-current="page"> search by {{request('coursesearchclassitem')}}</li>
+                            @endif
+                            @if(request('studentsearchclassitem'))
+                            <li class="mx-2 d-xs-block d-sm-none" style="color: #6c757d; font-weight: normal; margin-top: 5px; font-size: 16px;">/ search by {{request('studentsearchclassitem')}}</li>
+                            @endif --}}
                         </ol>
                     </nav>
                 </div>
@@ -31,7 +37,7 @@
                 <div class="mx-auto">
                     <div class="input-group">
                         <input class="form-control border-end-0 border" placeholder="search class" type="search"
-                            value="" id="example-search-input" name="classitemsearch">
+                        value="{{ request('classitemsearch') }}" id="example-search-input" name="classitemsearch">
                         
                         <span class="input-group-append">
                             <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
@@ -89,8 +95,10 @@
                                 </th>
                                 <th scope="col" class="list-course-col">Course</th>
                                 <th class="d-none d-md-table-cell list-lecturer-col" scope="col">Lecturer</th>
+                                @can('viewAny', \App\Models\Classitem::class)
                                 <th scope="col" class="list-status-col">Status</th>
                                 <th class="d-none d-md-table-cell list-payment-col text-center" scope="col" >Payment</th>
+                                @endcan
                                 <th scope="col" class="text-center list-control-col" class="">
                                     <p class=" d-none d-md-block">Control</p>
                                 </th>
@@ -108,6 +116,7 @@
                                 </td>
                                 <td class="align-middle">{{Str::limit($classdata->course->name,20)}}</td>
                                 <td class="d-none d-md-table-cell align-middle" >{{Str::limit($classdata->users->pluck('name')->implode(', '),20)}} </td>
+                                @can('viewAny', $classdata)
                                 @php $isUnpaid = false; @endphp
                                 @foreach($classdata->payments as $payment)
                                 @if($payment->payment_type === 'unpaid')
@@ -127,18 +136,20 @@
                                         paid
                                     </div>
                                 </td>
-                                @endif
+                                @endif                                
                                 <td class="d-none d-md-table-cell align-middle text-center">
                                     <a href="{{route('payment.index')}}" class="btn table-btn-sm btn-primary">
                                         <i class="mdi mdi-credit-card-multiple h5"></i>
                                     </a>
                                 </td>
+                                @endcan
                                 <td class="text-end align-middle text-nowrap">
                                     <div class="d-none d-md-block control-btns">
+                                        @can('viewAny', $classdata)
                                         <a href="{{ route('classitem.edit', $classdata) }}" class="btn table-btn-sm btn-primary">
                                             <i class="mdi mdi-pencil h5"></i>
                                         </a>
-    
+                                        @endcan
                                         <a href="{{ route('classitem.show', $classdata) }}"
                                             class="btn table-btn-sm btn-primary">
                                             <i class="mdi mdi-information-outline h5"></i>
@@ -146,6 +157,8 @@
                                         {{-- <a href="" class="btn table-btn-sm btn-danger">
                                             <i class="mdi mdi-delete h5 text-white"></i>
                                         </a> --}}
+
+                                        @can('viewAny',$classdata)
                                         <form action="{{route('classitem.destroy', $classdata->id)}}" method="post" class="d-inline">
                                         @csrf
                                         <input name="_method" type="hidden" value="delete">
@@ -153,7 +166,7 @@
                                             <i class="mdi mdi-delete h5 text-white"></i>
                                         </button>
                                         </form>
-                                    
+                                        @endcan
 
                                     </div>
 
@@ -166,14 +179,21 @@
                                         <ul class="dropdown-menu mb-1">
                                             <div class="d-flex justify-content-around">
                                                 <li>
-                                                    <a href="{{ route('classitem.edit', 1) }}" class="btn table-btn-sm btn-outline-primary border border-0">
+                                                    <a href="{{ route('classitem.edit', $classdata) }}" class="btn table-btn-sm btn-outline-primary border border-0">
                                                         <i class="mdi mdi-pencil h5"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="" class="btn table-btn-sm btn-outline-danger border border-0">
+                                                    {{-- <a href="" class="btn table-btn-sm btn-outline-danger border border-0">
+                                                        <i class="mdi mdi-delete h5 "></i>
+                                                    </a> --}}
+                                                    <form action="{{route('classitem.destroy', $classdata->id)}}" method="post" class="d-inline">
+                                                        @csrf
+                                                        <input name="_method" type="hidden" value="delete">
+                                                    <a href="" class="btn table-btn-sm btn-outline-danger border border-0 alertbox">
                                                         <i class="mdi mdi-delete h5 "></i>
                                                     </a>
+                                                        </form>
                                                 </li>
                                                 <li>
                                                     <a href="{{ route('classitem.show', 'detail') }}" class="btn table-btn-sm btn-outline-secondary border border-0">
@@ -212,7 +232,7 @@
                             <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="coursesearchclassitem">
                                 <option value = "">Select Course</option>
                                 @foreach($courseoption as $courses)
-                                    <option value="{{$courses->id}}">{{$courses->name}}</option>
+                                    <option value="{{$courses->id}}" {{ $courses->id == request('coursesearchclassitem') ? 'selected' : '' }}>{{$courses->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -221,13 +241,13 @@
                             <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentsearchclassitem">
                                 <option value = "">Select Student</option>
                                 @foreach($studentoption as $students)
-                                    <option value="{{$students->id}}">{{$students->name}}</option>
+                                    <option value="{{$students->id}}" {{ $students->id == request('studentsearchclassitem') ? 'selected' : '' }}>{{$students->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="d-flex justify-content-center">
                             <div class="position-absolute filterbtn">
-                                <button class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</button>
+                                <a class="btn btn-secondary cnl-btn me-2" href="{{route('classitem.index')}}">Cancel</a>
                                 <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                             </div>
                         </div>
@@ -249,32 +269,30 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  position-relative">
-                    <form action="">
+                    <form action="{{route('classitem.index')}}" method="get">
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
+                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="coursesearchclassitem">
                                 <option>Select Course</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                                @foreach($courseoption as $courses)
+                                    <option value="{{$courses->name}}">{{$courses->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="">Student</label>
-                            <select class="select2  form-select shadow-none">
+                            <select class="select2  form-select shadow-none" name="studentsearchclassitem">
                                 <option>Select Class</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                            @foreach($studentoption as $students)
+                                <option value="{{$students->id}}">{{$students->name}}</option>
+                            @endforeach
                             </select>
                         </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 </form>
             </div>

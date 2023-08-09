@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\Classitem;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ClassitemPolicy
@@ -18,7 +19,7 @@ class ClassitemPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $user->role_id == Role::IS_ADMIN;
     }
 
     /**
@@ -30,7 +31,7 @@ class ClassitemPolicy
      */
     public function view(User $user, Classitem $classitem)
     {
-        //
+        return $user->role_id == Role::IS_ADMIN;
     }
 
     /**
@@ -41,7 +42,7 @@ class ClassitemPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->role_id == Role::IS_ADMIN;
     }
 
     /**
@@ -53,7 +54,7 @@ class ClassitemPolicy
      */
     public function update(User $user, Classitem $classitem)
     {
-        //
+        return $user->role_id == Role::IS_ADMIN;
     }
 
     /**
@@ -65,7 +66,7 @@ class ClassitemPolicy
      */
     public function delete(User $user, Classitem $classitem)
     {
-        //
+        return $user->role_id == Role::IS_ADMIN;
     }
 
     /**

@@ -39,13 +39,9 @@
                                 <img src="{{ asset('admin/assets/images/undraw_team_up_re_84ok.svg') }}" class="login-img img-fluid" alt="">
                                 <p class="my-2 fw-bolder text-white">School Management System</p>
                             </div>
-                        </div>                        
+                        </div>
                         <div class="col-8 login-right">
-                            <h4 class="text-center pb-2 border-bottom border-dark rmlogin">Login</h4>
-                            @if($errors->any())
-                            <h6 class="alert alert-danger success-alt p-2">@error ('email') {{$message}} @enderror</h6>
-                            <h6 class="alert alert-danger success-alt p-2">@error ('password') {{$message}} @enderror</h6>
-                            @endif
+                            <h4 class="text-center pb-2 border-bottom border-dark rmlogin">Reset Password</h4>
                             @if(session()->has('err'))
                             <div class="alert alert-danger success-alt">
                               <h6>{{session()->get('err')}}</h6>
@@ -54,26 +50,33 @@
                           </button>
                             </div>
                             @endif
-                            @if(session()->has('message'))
-                            <div class="alert alert-success success-alt">
-                              <h6>{{session()->get('message')}}</h6>
-                              <button type="button" class="close success-msg" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                          </button>
-                            </div>
-                            @endif                           
-                            <form class="d-flex flex-column justify-content-center align-items-center mt-5 rmlgform" method="post" action="{{route('user.login')}}">
+                            @if ($errors->has('email')) 
+                            <h6 class="alert alert-danger success-alt p-2">@error ('email') {{$message}} @enderror</h6>
+                            @endif
+                            @if($errors->has('password'))
+                            <h6 class="alert alert-danger success-alt p-2">@error ('password') {{$message}} @enderror</h6>
+                            @endif
+                            @if($errors->has('password_confirmation'))
+                            <h6 class="alert alert-danger success-alt p-2">@error ('password_confirmation') {{$message}} @enderror</h6>
+                            @endif
+                            <form class="d-flex flex-column justify-content-center align-items-center mt-5 rmlgform" method="post" action="{{route('user.postresetpwd')}}">
                                 @csrf
+                                <input type="hidden" value="{{$token}}" name="token">
                                 <div class="form-group d-flex align-items-center w-100 mb-4">
                                     <label   for="startdate">Email</label>
-                                    <input type="email" class="form-control w-75" id="enddate" placeholder="enter email" name="email">
+                                    <input type="email" class="form-control w-75" id="enddate" placeholder="enter email" name="email">                                    
                                 </div>
+                                
                                 <div class="form-group d-flex align-items-center w-100">
                                     <label   for="name">Password</label>
-                                    <input type="password" class="form-control w-75" id="name" placeholder="enter password" name="password">                                    
+                                    <input type="password" class="form-control w-75" id="name" placeholder="enter password" name="password">                                                                        
                                 </div>
-                                <a href="{{route('user.forgetpwdview')}}" class="h6 text-primary"><u>Forget Password  ?</u></a>
-                                <button type="submit" class="btn btn-primary btn-sm px-3 mt-3 fs-5">login</button>
+                                
+                                <div class="form-group d-flex align-items-center w-100">
+                                  <label   for="confirmpwd">Confirm Password</label>
+                                  <input type="password" class="form-control w-75" id="confirmpwd" placeholder="enter password" name="password_confirmation">                                  
+                              </div>                                                                  
+                                <button type="submit" class="btn btn-primary btn-sm px-3 mt-3 fs-5">Reset Password</button>
                             </form>
                         </div>
                     </div>
