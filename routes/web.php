@@ -54,4 +54,4 @@ Route::resource('student' , StudentController::class);
 Route::resource('classitem' , ClassitemController::class);
 
 Route::get('student/{student}' , [ StudentController::class , 'relatedPayment' ])->name("student.relatedPayment");
-Route::get('student/{$id}/' , [ StudentController::class , 'relatedClass' ])->name("student.relatedClass");
+Route::get('student/{student}/class' , [ StudentController::class , 'relatedClass' ])->name("student.relatedClass");

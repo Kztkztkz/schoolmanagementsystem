@@ -249,7 +249,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  position-relative">
-                    <form action="{{route('student.index')}}" method="get">
+                    {{-- <form action="{{route('student.index')}}" method="get">
                         <div class=" mb-3">
                             <label for="">Course</label>
                             <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
@@ -279,7 +279,7 @@
                                 <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                             </div>
                         </div>
-                    </form>
+                    </form> --}}
             </div>
         </div>
     </div>

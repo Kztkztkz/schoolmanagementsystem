@@ -31,20 +31,32 @@ class StudentController extends Controller
             $students = Student::whereHas('classitems' , function($query){
 
                 $query->where("classitems.id" , request('studentByClass'));
-            })->orWhereHas('classitems' , function($query){
+            })->whereHas('classitems' , function($query){
                 $query->where('course_id' , request('studentByCourse'));
+            })->when( request("keyword") , function ($query){
+                $keyword = request('keyword');
+                $query->where("name" , "like",  "%$keyword%")->where("name" , "like" , "%$keyword%")
+                ->orWhere( "email" , "like" , "%$keyword%");
             })
             ->paginate(7)->withQueryString();
+
+
         }
 
         else if (request('keyword')){
 
-            $keyword = request('keyword');
+
             $students = Student::when( request("keyword") , function ($query){
                 $keyword = request('keyword');
-                $query->where("name" ,  $keyword)->where("name" , "like" , "%$keyword%")
+                $query->where("name" , "like",  "%$keyword%")->where("name" , "like" , "%$keyword%")
                 ->orWhere( "email" , "like" , "%$keyword%");
-            })->paginate(7)->withQueryString();
+            })->whereHas('classitems' , function($query){
+
+                $query->where("classitems.id" , request('studentByClass'));
+            })->whereHas('classitems' , function($query){
+                $query->where('course_id' , request('studentByCourse'));
+            })
+            ->paginate(7)->withQueryString();
 
         }
         else{
@@ -77,14 +89,18 @@ class StudentController extends Controller
 
 
 
+
+
         $student = new Student();
         $student->name = $request->name;
         $student->email = $request->email;
         $student->address = $request->address;
         $student->phone = $request->phone;
         $student->save();
+        $student->classitems()->attach($request->classitem_id);
 
-        if($request->classitem_id == ''){
+        if($request->classitem_id !== "Select class"){
+
             $classitem = Classitem::find(request('classitem_id'));
             $classitemPrice = $classitem->price;
             $due_amount = (int) $classitemPrice - (int) request('due_amount');
@@ -96,9 +112,8 @@ class StudentController extends Controller
             $payment->student_id = $student->id;
 
             $payment_type = ( $due_amount === 0 ) ? 'paid' : 'unpaid';
-            $payment_method = ['cash', 'card', 'bank transfer'];
             $payment->payment_type = $payment_type;
-            $payment->payment_method = array_rand($payment_method);
+            $payment->payment_method = $request->payment_method;
             $payment->save();
 
         }
@@ -164,6 +179,7 @@ class StudentController extends Controller
         $courseoption = Course::all();
         $classitem = $student->classitems;
         $selectedStudent = $student;
+
         return view('students.class-student' , compact('classitem' , 'studentoption' , 'courseoption' , 'selectedStudent'));
     }
 

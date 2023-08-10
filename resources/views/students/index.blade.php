@@ -39,6 +39,10 @@
                         <div class="input-group">
                             <input class="form-control border-end-0 border" placeholder="search student" type="search"
                             name="keyword" value="{{ request('keyword') }}" id="example-search-input">
+                            @if (request('studentByCourse') || request('studentByClass'))
+                            <input hidden name="studentByCourse" value="{{ request('studentByCourse') }}">
+                            <input hidden name="studentByClass" value="{{ request('studentByClass') }}">
+                            @endif
                             <span class="input-group-append">
                                 <button class="btn btn-outline-secondary bg-white hover-none border-start-0 border-bottom-0 border ms-n5"
                                     type="submit">
@@ -167,180 +171,7 @@
 
 
 
-                                {{-- <tr>
-                                    <td scope="row">Kyaw</td>
-                                    <td>
-                                        <p class="mb-0">kyaw@email.com</p>
-                                        <p class="mb-0">0934355333</p>
-                                    </td>
-                                    <td class="d-none d-lg-table-cell">
-                                        <p>No.1 Pyay sit amet reprehenderit animi ea?</p>
-                                    </td>
-                                    <td class=" align-middle text-center">
-                                        <a href="" class="btn table-btn-sm btn-primary">
-                                            <i class="mdi mdi-credit-card-multiple h5"></i>
-                                        </a>
-                                    </td>
-                                    <td class=" align-middle text-center">
-                                        <a href="" class="btn table-btn-sm btn-primary">
-                                            <i class="mdi mdi-book-open-page-variant h5"></i>
-                                        </a>
-                                    </td>
-                                    <td class="text-end align-middle text-nowrap">
-                                        <div class="d-none d-md-block control-btns">
-                                            <a href="{{ route('student.edit', 1) }}"
-                                                class="btn table-btn-sm btn-primary">
-                                                <i class="mdi mdi-pencil h5"></i>
-                                            </a>
-                                            <a href="" class="btn table-btn-sm btn-danger">
-                                                <i class="mdi mdi-delete h5 text-white"></i>
-                                            </a>
-                                        </div>
 
-
-                                        <div class="btn-group control-btn dropup d-block d-md-none ">
-                                            <button type="button"
-                                                class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="mdi mdi-dots-vertical h4"></i>
-                                            </button>
-
-                                            <ul class="dropdown-menu mb-1">
-                                                <div class="d-flex ">
-                                                    <li>
-                                                        <a href="{{ route('classitem.edit', 1) }}"
-                                                            class="btn table-btn-sm btn-outline-primary border border-0">
-                                                            <i class="mdi mdi-pencil h5"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href=""
-                                                            class="btn table-btn-sm btn-outline-danger border border-0">
-                                                            <i class="mdi mdi-delete h5 "></i>
-                                                        </a>
-                                                    </li>
-
-                                                </div>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">Kyaw</td>
-                                    <td>
-                                        <p class="mb-0">kyaw@email.com</p>
-                                        <p class="mb-0">0934355333</p>
-                                    </td>
-                                    <td class="d-none d-lg-table-cell">
-                                        <p>No.1 Pyay sit amet reprehenderit animi ea?</p>
-                                    </td>
-                                    <td class=" align-middle text-center">
-                                        <a href="" class="btn table-btn-sm btn-primary">
-                                            <i class="mdi mdi-credit-card-multiple h5"></i>
-                                        </a>
-                                    </td>
-                                    <td class=" align-middle text-center">
-                                        <a href="" class="btn table-btn-sm btn-primary">
-                                            <i class="mdi mdi-book-open-page-variant h5"></i>
-                                        </a>
-                                    </td>
-                                    <td class="text-end align-middle">
-                                        <div class="d-none d-md-block control-btns">
-                                            <a href="{{ route('student.edit', 1) }}"
-                                                class="btn table-btn-sm btn-primary">
-                                                <i class="mdi mdi-pencil h5"></i>
-                                            </a>
-                                            <a href="" class="btn table-btn-sm btn-danger">
-                                                <i class="mdi mdi-delete h5 text-white"></i>
-                                            </a>
-                                        </div>
-
-
-                                        <div class="btn-group control-btn dropup d-block d-md-none ">
-                                            <button type="button"
-                                                class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="mdi mdi-dots-vertical h4"></i>
-                                            </button>
-
-                                            <ul class="dropdown-menu mb-1">
-                                                <div class="d-flex ">
-                                                    <li>
-                                                        <a href="{{ route('classitem.edit', 1) }}"
-                                                            class="btn table-btn-sm btn-outline-primary border border-0">
-                                                            <i class="mdi mdi-pencil h5"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href=""
-                                                            class="btn table-btn-sm btn-outline-danger border border-0">
-                                                            <i class="mdi mdi-delete h5 "></i>
-                                                        </a>
-                                                    </li>
-
-                                                </div>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">Kyaw</td>
-                                    <td>
-                                        <p class="mb-0">kyaw@email.com</p>
-                                        <p class="mb-0">0934355333</p>
-                                    </td>
-                                    <td class="d-none d-lg-table-cell">
-                                        <p>No.1 Pyay sit amet reprehenderit animi ea?</p>
-                                    </td>
-                                    <td class=" align-middle text-center">
-                                        <a href="" class="btn table-btn-sm btn-primary">
-                                            <i class="mdi mdi-credit-card-multiple h5"></i>
-                                        </a>
-                                    </td>
-                                    <td class=" align-middle text-center">
-                                        <a href="" class="btn table-btn-sm btn-primary">
-                                            <i class="mdi mdi-book-open-page-variant h5"></i>
-                                        </a>
-                                    </td>
-                                    <td class="text-end align-middle">
-                                        <div class="d-none d-md-block control-btns">
-                                            <a href="{{ route('student.edit', 1) }}"
-                                                class="btn table-btn-sm btn-primary">
-                                                <i class="mdi mdi-pencil h5"></i>
-                                            </a>
-                                            <a href="" class="btn table-btn-sm btn-danger">
-                                                <i class="mdi mdi-delete h5 text-white"></i>
-                                            </a>
-                                        </div>
-
-
-                                        <div class="btn-group control-btn dropup d-block d-md-none ">
-                                            <button type="button"
-                                                class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="mdi mdi-dots-vertical h4"></i>
-                                            </button>
-
-                                            <ul class="dropdown-menu mb-1">
-                                                <div class="d-flex ">
-                                                    <li>
-                                                        <a href="{{ route('classitem.edit', 1) }}"
-                                                            class="btn table-btn-sm btn-outline-primary border border-0">
-                                                            <i class="mdi mdi-pencil h5"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href=""
-                                                            class="btn table-btn-sm btn-outline-danger border border-0">
-                                                            <i class="mdi mdi-delete h5 "></i>
-                                                        </a>
-                                                    </li>
-
-                                                </div>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr> --}}
 
 
                             </tbody>
@@ -363,26 +194,29 @@
                     </div>
 
                     <form action="{{route('student.index')}}" method="get">
+                        @if (request('keyword') )
+                            <input hidden name="keyword" value="{{ request('keyword') }}">
+                        @endif
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
+                            <select id="courseId" class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
                                 <option value = "">Select Course</option>
-                                @foreach($courses as $course)
+                                {{-- @foreach($courses as $course)
                                     <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
                                         {{$course->name}}
                                     </option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select required class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
-                                <option value = "">Select Class</option>
-                                @foreach($classitems as $class)
+                            <select id="classId" required class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
+                                <option value = "-1">Select Class</option>
+                                {{-- @foreach($classitems as $class)
                                     <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
                                         {{$class->name}}
                                     </option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
 
@@ -409,28 +243,28 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  position-relative">
-                    
+
                     <form action="{{route('student.index')}}" method="get">
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
+                            <select id="courseId" class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
                                 <option value = "">Select Course</option>
-                                @foreach($courses as $course)
-                                    <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
+                                {{-- @foreach($courses as $course)
+                                    <option  value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
                                         {{$course->name}}
                                     </option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select required class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
+                            <select id="classId" required class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
                                 <option value = "">Select Class</option>
-                                @foreach($classitems as $class)
+                                {{-- @foreach($classitems as $class)
                                     <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
                                         {{$class->name}}
                                     </option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
 
@@ -445,5 +279,78 @@
             </div>
         </div>
     </div>
+
+    <script>
+
+
+        let courseId = [];
+        let classId = [];
+        let requestCourseId =  @php
+            if(request('studentByCourse')){
+                echo request('studentByCourse');
+            }else{
+                echo -1;
+            }
+        @endphp ;
+        console.log(requestCourseId);
+
+        let courses =  {!! json_encode($courses->toArray())  !!} ;
+        courses.forEach(element => {
+                 courseId.push(element.id);
+                $('#courseId').append(`
+                        <option  value="${element.id}" ${ element.id == requestCourseId ? 'selected' : '' }>
+                            ${element.name}
+                        </option>
+                `);
+        });
+
+
+
+
+        let classes =  {!! json_encode($classitems->toArray())  !!} ;
+        let requestClassId =  @php
+            if(request('studentByClass')){
+                echo request('studentByClass');
+            }else{
+                echo -1;
+            }
+        @endphp ;
+        console.log(requestClassId);
+        classes.forEach(element => {
+               classId.push(element.course_id);
+
+               $("#classId").append(`
+                    <option value="${element.id}" data-course="${element.course_id}" ${ element.id == requestClassId ? 'selected' : '' } >
+                        ${element.name}
+                    </option>
+
+               `);
+
+        });
+
+        $('#courseId').on("change" , function(){
+            console.log("change");
+                    let currentCourseId = $(this).val();
+                    console.log(currentCourseId);
+                    $("#classId option").hide();
+                    $(`[data-course=${currentCourseId}]`).show();
+        });
+
+        // $("#courseId").on("change",function(){
+        //     console.log('change');
+        // })
+
+
+
+        //     $("#c").on("change" , function(){
+            // // console.log($(this).val());
+            // let currentCagetoryId = $(this).val();
+            // $("#sc option").hide();
+            // $(`[data-cagetory=${currentCagetoryId}]`).show();
+
+
+
+
+    </script>
 
 @endpush

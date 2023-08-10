@@ -97,6 +97,14 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group">
+                                    <label for="class">Payment Method</label>
+                                    <select name="payment_method" class="form-select slectopt" id="class">
+                                        <option value="cash">Cash</option>
+                                        <option value="card">Card</option>
+                                        <option value="bank transfer">Bank Transfer</option>
+                                    </select>
+                                </div>
                                 <div class="form-group mt-5">
                                     <input name="slip" class=" form-check-input" type="checkbox" name="flexRadioDefault"
                                         id="flexRadioDefault1">

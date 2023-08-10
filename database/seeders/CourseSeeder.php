@@ -14,6 +14,16 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        Course::factory()->count(20)->create();
+        $courses = [
+            'Web Development',
+            'Software Development',
+            'Data Science Fundamentals',
+
+        ];
+        foreach ($courses as $course){
+            Course::factory()->create([
+               "name" => $course,
+            ]);
+        }
     }
 }

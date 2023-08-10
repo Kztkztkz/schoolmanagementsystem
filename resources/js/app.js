@@ -139,3 +139,4 @@ $(".nav-toggler").on("click", function (event) {
     $(".navbar-brand").toggleClass("d-none");
     $(".logo-text").toggleClass("add-logo-text");
 });
+
