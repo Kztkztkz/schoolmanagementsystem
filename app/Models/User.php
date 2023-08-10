@@ -46,7 +46,7 @@ class User extends Authenticatable
 
     public function classitems()
     {
-        return $this->belongsToMany(Classitem::class, 'user_classitems');
+        return $this->belongsToMany(Classitem::class, 'user_classitems')->withTimestamps();
     }
 
     public function role()

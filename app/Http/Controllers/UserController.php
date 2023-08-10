@@ -158,9 +158,10 @@ class UserController extends Controller
             'email' => "required|email|exists:users",
         ]);
         $token = Str::random(64);
+        $email = $request->email;
 
         DB::table('password_resets')->insert([
-            'email' => $request->email,
+            'email' => $email,
             'token' => $token,
             'created_at' => Carbon::now()
         ]);
@@ -170,7 +171,7 @@ class UserController extends Controller
             $message->Subject("Reset Password");
         });
 
-        return redirect()->to(route("auth.reset-password"))->with('message',"Please check your inbox to reset password");
+        return redirect()->back()->with('message',"Please check your inbox to reset password");
     }
 
     public function resetpwd($token)

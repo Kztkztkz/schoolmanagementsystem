@@ -138,7 +138,7 @@
                                 </td>
                                 @endif                                
                                 <td class="d-none d-md-table-cell align-middle text-center">
-                                    <a href="{{route('payment.index')}}" class="btn table-btn-sm btn-primary">
+                                    <a href="{{ route('classitem.classPayment' , $classdata->id ) }}" class="btn table-btn-sm btn-primary">
                                         <i class="mdi mdi-credit-card-multiple h5"></i>
                                     </a>
                                 </td>

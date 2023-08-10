@@ -24,6 +24,7 @@ class ClassitemController extends Controller
         
         $studentoption = Student::all();
         $courseoption = Course::all();
+        $users = User::all();
         if($request->has('coursesearchclassitem') || $request->has('studentsearchclassitem')){
             $classitem = Classitem::where('course_id', $request->coursesearchclassitem)
             ->orWhereHas('students', function ($query) use ($request) {
@@ -46,6 +47,7 @@ class ClassitemController extends Controller
         else {
             $classitem =  Classitem::orderBy('id', 'desc')->paginate(7);
         }
+
         return view('classitem.index', compact(['classitem','courseoption','studentoption']));
     }
 
@@ -173,5 +175,16 @@ class ClassitemController extends Controller
         $this->authorize('delete', $classitem);
         $classitem->delete();
         return redirect()->route('classitem.index')->with('del', 'Data is deleted');
+    }
+
+    public function classPayment(Classitem $classitem)
+    {
+        $payments = $classitem->payments()->get();
+        $studentoption = Student::all();
+        $courseoption = Course::all();
+        $classitems = Classitem::all();
+        $selectedStudent = $classitem;
+
+        return view('classitem.classpayment' , compact(['classitems' , 'studentoption' , 'courseoption' ,'selectedStudent' , 'payments']));
     }
 }

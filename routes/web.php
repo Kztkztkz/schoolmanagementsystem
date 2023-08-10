@@ -51,7 +51,10 @@ Route::resource('payment' , PaymentController::class);
 Route::resource('room' , RoomController::class);
 Route::resource('course' , CourseController::class);
 Route::resource('student' , StudentController::class);
-Route::resource('classitem' , ClassitemController::class);
+Route::resource('classitem' , ClassitemController::class)->middleware(['auth','verified']);
 
 Route::get('student/{student}' , [ StudentController::class , 'relatedPayment' ])->name("student.relatedPayment");
 Route::get('student/{student}/class' , [ StudentController::class , 'relatedClass' ])->name("student.relatedClass");
+
+Route::get('classpayment/{classitem}' , [ ClassitemController::class , 'classPayment' ])->name("classitem.classPayment");
+

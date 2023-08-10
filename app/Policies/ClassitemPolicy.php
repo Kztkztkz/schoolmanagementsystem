@@ -17,6 +17,7 @@ class ClassitemPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
+
     public function viewAny(User $user)
     {
         return $user->role_id == Role::IS_ADMIN;

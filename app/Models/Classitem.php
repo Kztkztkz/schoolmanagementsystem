@@ -13,12 +13,12 @@ class Classitem extends Model
 
     public function students()
     {
-        return $this->belongsToMany(Student::class, 'classitem_students');
+        return $this->belongsToMany(Student::class, 'classitem_students')->withTimestamps();
     }
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_classitems');
+        return $this->belongsToMany(User::class, 'user_classitems')->withTimestamps()   ;
     }
 
     public function users_classitems()
