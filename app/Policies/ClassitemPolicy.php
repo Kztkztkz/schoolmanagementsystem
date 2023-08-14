@@ -32,7 +32,7 @@ class ClassitemPolicy
      */
     public function view(User $user, Classitem $classitem)
     {
-        return $user->role_id == Role::IS_ADMIN;
+        return $user->role_id == Role::IS_ADMIN || $classitem->users()->where('user_id', $user->id)->exists();
     }
 
     /**

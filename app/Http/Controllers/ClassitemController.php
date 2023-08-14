@@ -24,29 +24,57 @@ class ClassitemController extends Controller
 
         $studentoption = Student::all();
         $courseoption = Course::all();
-        $users = User::all();
-        if($request->has('coursesearchclassitem') || $request->has('studentsearchclassitem')){
-            $classitem = Classitem::where('course_id', $request->coursesearchclassitem)
-            ->orWhereHas('students', function ($query) use ($request) {
-                $query->where('students.id', $request->studentsearchclassitem);
-            })
-            ->paginate(7)->withQueryString();
+
+        // if($request->has('coursesearchclassitem') || $request->has('studentsearchclassitem')){
+            // $classitemIdsQuery = Classitem::where('course_id', $request->coursesearchclassitem)
+            // ->orWhereHas('students', function ($query) use ($request) {
+            //     $query->where('students.id', $request->studentsearchclassitem);
+            // })
+            // ->paginate(7)->withQueryString();
+            
+            // $classids = $classitemIdsQuery->pluck('id')->toArray();
+            // $classitem = Classitem::where('name', 'like', '%' . $request->classitemsearch . '%')
+            // ->whereIn('id',$classids)
+            // ->paginate(7)->withQueryString();
+        
+        $classItemQuery = Classitem::query();
+        $coursesearchclassitem = $request->coursesearchclassitem;
+        $studentsearchclassitem = $request->studentsearchclassitem;
+
+
+        if($coursesearchclassitem && $studentsearchclassitem) {
+            $classItemQuery = $classItemQuery->where('course_id', $request->coursesearchclassitem)
+                                ->whereHas('students', function ($query) use ($request) {
+                                    $query->where('students.id', $request->studentsearchclassitem);
+                                });
+        } else {
+            
+
+            if($coursesearchclassitem) {
+                $classItemQuery = $classItemQuery->where('course_id', $request->coursesearchclassitem);
+            }
+    
+            if($studentsearchclassitem) {
+                $classItemQuery = $classItemQuery->orWhereHas('students', function ($query) use ($request) {
+                    $query->where('students.id', $request->studentsearchclassitem);
+                });
+            }
+        }
+       
+
+        if($request->classitemsearch) {
+            $classItemQuery = $classItemQuery->where('name', 'like', '%' . $request->classitemsearch . '%');
         }
 
-        else if($request->has('classitemsearch')){
-            $classitem = Classitem::where('name', 'like', '%' . $request->classitemsearch . '%')
-            ->orWhereHas('course', function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->classitemsearch . '%');
-            })
-            ->orWhereHas('users', function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->classitemsearch . '%');
-            })
-            ->paginate(7)->withQueryString();
-        }
+        // $classids = $classitemIdsQuery->pluck('id')->toArray();
 
-        else {
-            $classitem =  Classitem::orderBy('id', 'desc')->paginate(7);
-        }
+        $classitem =  $classItemQuery->orderBy('id', 'desc')->paginate(10)->withQueryString();
+
+        
+            // $classitem = $this->classitemfilter($classitem);
+        // } else {
+        //     $classitem =  Classitem::orderBy('id', 'desc')->paginate(7);
+        // }
 
         return view('classitem.index', compact(['classitem','courseoption','studentoption']));
     }
@@ -185,5 +213,262 @@ class ClassitemController extends Controller
         $selectedStudent = $classitem;
 
         return view('classitem.classpayment' , compact(['classitems' , 'studentoption' , 'courseoption' ,'selectedStudent' , 'payments']));
+    }
+
+    public function classitemsearch(Request $request)
+    {
+        
+        $output="";
+        $classItemQuery =  Classitem::query();
+        $coursesearchclassitem = $request->coursesearchclassitem;
+        $studentsearchclassitem = $request->studentsearchclassitem;
+
+        if($coursesearchclassitem && $studentsearchclassitem) {
+            $classItemQuery = $classItemQuery->where('course_id', $coursesearchclassitem)
+                                ->whereHas('students', function ($query) use ($studentsearchclassitem) {
+                                    $query->where('students.id', $studentsearchclassitem);
+                                });
+        } else {
+
+            if($coursesearchclassitem) {
+                $classItemQuery = $classItemQuery->where('course_id', $coursesearchclassitem);
+            }
+    
+            if($studentsearchclassitem) {
+                $classItemQuery = $classItemQuery->orWhereHas('students', function ($query) use ($studentsearchclassitem) {
+                    $query->where('students.id', $studentsearchclassitem);
+                });
+            }
+        }
+
+        if($request->classitemsearch) {
+            $classItemQuery = $classItemQuery->where('name', 'like', '%' . $request->classitemsearch . '%')
+            ->orWhereHas('course', function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->classitemsearch . '%');
+            })
+            ->orWhereHas('users', function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->classitemsearch . '%');
+            });
+        }
+        
+        $searchdata = $classItemQuery->orderBy('id', 'desc')->paginate(7)->withQueryString();
+
+if(count($searchdata)>0){
+    foreach($searchdata as $classdata)
+    {
+    $output .=
+    '
+    <tr>
+      <td class="align-middle">
+        <p class="d-none d-md-block text-cut">' .Str::limit($classdata->name,20). '</p>
+        <div class="d-block d-md-none">
+          <p>' . $classdata->name . '</p>
+          <p class=" text-black-50 text-cut">'.Str::limit($classdata->users->pluck('name')->implode(', '),20).' </p>
+        </div>
+      </td>
+      <td class="align-middle">'.Str::limit($classdata->course->name,20).'</td>
+      <td class="d-none d-md-table-cell align-middle" >'.Str::limit($classdata->users->pluck('name')->implode(', '),20).' </td>
+      ';
+      $isUnpaid = false;
+      foreach ($classdata->payments as $payment) {
+      if ($payment->payment_type === "unpaid") {
+      $isUnpaid = true;
+      break;
+      }
+      }
+      if ($isUnpaid) {
+      $output .= '
+      <td class=" align-middle">
+        <div
+          class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
+          unpaid
+        </div>
+      </td>
+      ';
+      } else {
+      $output .= '
+      <td class=" align-middle">
+        <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
+          paid
+        </div>
+      </td>
+      ';
+      }
+      $output .= '<td class="d-none d-md-table-cell align-middle text-center">
+      <a href="' . route('classitem.classPayment', $classdata->id) . '" class="btn table-btn-sm btn-primary">
+          <i class="mdi mdi-credit-card-multiple h5"></i>
+      </a>
+    </td>';
+    $output .= '<td class="text-end align-middle text-nowrap">
+        <div class="d-none d-md-block control-btns">';
+        $output .= '<a href="' . route('classitem.edit', $classdata) . '" class="btn table-btn-sm btn-primary">
+        <i class="mdi mdi-pencil h5"></i>
+    </a>';
+    $output .= '<a href="' . route('classitem.show', $classdata) . '" class="btn table-btn-sm btn-primary">
+    <i class="mdi mdi-information-outline h5"></i>
+    </a>';
+    $output .= '<form action="' . route('classitem.destroy', $classdata->id) . '" method="post" class="d-inline">
+    <input type="hidden" name="_token" value="' . csrf_token() . '">
+    <input type="hidden" name="_method" value="delete">
+    <button type="submit" class="btn table-btn-sm btn-danger del-btn alertbox">
+        <i class="mdi mdi-delete h5 text-white"></i>
+    </button>
+    </form>';
+    $output .= '</div>
+        
+    <div class="btn-group dropup d-block d-md-none control-btn">
+        <button type="button" class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="mdi mdi-dots-vertical h4"></i>
+        </button>
+    
+        <ul class="dropdown-menu mb-1">
+            <div class="d-flex justify-content-around">
+                <li>
+                    <a href="' . route('classitem.edit', $classdata) . '" class="btn table-btn-sm btn-outline-primary border border-0">
+                        <i class="mdi mdi-pencil h5"></i>
+                    </a>
+                </li>
+                <li>
+                    <form action="' . route('classitem.destroy', $classdata->id) . '" method="post" class="d-inline">
+                        <input type="hidden" name="_token" value="' . csrf_token() . '">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn table-btn-sm btn-outline-danger border border-0 alertbox">
+                            <i class="mdi mdi-delete h5 "></i>
+                        </button>
+                    </form>
+                </li>
+                <li>
+                    <a href="' . route('classitem.show', 'detail') . '" class="btn table-btn-sm btn-outline-secondary border border-0">
+                        <i class="mdi mdi-information-outline h4"></i>
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </div>
+    </td></tr>';
+}
+} else {
+    $output .= '<tr>
+    <td colspan="6" class="text-center text-danger">Data Not Found</td>
+</tr>';
+}
+
+ 
+// return response($output);
+
+    return response($output);
+
+    }
+
+    public function classitemfilter($searchdata)
+    {
+        $output="";
+        if(count($searchdata)>0){
+            foreach($searchdata as $classdata)
+            {
+            $output .=
+            '
+            <tr>
+              <td class="align-middle">
+                <p class="d-none d-md-block text-cut">' .Str::limit($classdata->name,20). '</p>
+                <div class="d-block d-md-none">
+                  <p>' . $classdata->name . '</p>
+                  <p class=" text-black-50 text-cut">'.Str::limit($classdata->users->pluck('name')->implode(', '),20).' </p>
+                </div>
+              </td>
+              <td class="align-middle">'.Str::limit($classdata->course->name,20).'</td>
+              <td class="d-none d-md-table-cell align-middle" >'.Str::limit($classdata->users->pluck('name')->implode(', '),20).' </td>
+              ';
+              $isUnpaid = false;
+              foreach ($classdata->payments as $payment) {
+              if ($payment->payment_type === "unpaid") {
+              $isUnpaid = true;
+              break;
+              }
+              }
+
+              if ($isUnpaid) {
+              $output .= '
+              <td class=" align-middle">
+                <div
+                  class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
+                  unpaid
+                </div>
+              </td>
+              ';
+              } else {
+              $output .= '
+              <td class=" align-middle">
+                <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
+                  paid
+                </div>
+              </td>
+              ';
+              }
+              $output .= '<td class="d-none d-md-table-cell align-middle text-center">
+              <a href="' . route('classitem.classPayment', $classdata->id) . '" class="btn table-btn-sm btn-primary">
+                  <i class="mdi mdi-credit-card-multiple h5"></i>
+              </a>
+            </td>';
+            $output .= '<td class="text-end align-middle text-nowrap">
+                <div class="d-none d-md-block control-btns">';
+                $output .= '<a href="' . route('classitem.edit', $classdata) . '" class="btn table-btn-sm btn-primary">
+                <i class="mdi mdi-pencil h5"></i>
+            </a>';
+            $output .= '<a href="' . route('classitem.show', $classdata) . '" class="btn table-btn-sm btn-primary">
+            <i class="mdi mdi-information-outline h5"></i>
+            </a>';
+            $output .= '<form action="' . route('classitem.destroy', $classdata->id) . '" method="post" class="d-inline">
+            <input type="hidden" name="_token" value="' . csrf_token() . '">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn table-btn-sm btn-danger del-btn alertbox">
+                <i class="mdi mdi-delete h5 text-white"></i>
+            </button>
+            </form>';
+            $output .= '</div>
+                
+            <div class="btn-group dropup d-block d-md-none control-btn">
+                <button type="button" class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="mdi mdi-dots-vertical h4"></i>
+                </button>
+            
+                <ul class="dropdown-menu mb-1">
+                    <div class="d-flex justify-content-around">
+                        <li>
+                            <a href="' . route('classitem.edit', $classdata) . '" class="btn table-btn-sm btn-outline-primary border border-0">
+                                <i class="mdi mdi-pencil h5"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <form action="' . route('classitem.destroy', $classdata->id) . '" method="post" class="d-inline">
+                                <input type="hidden" name="_token" value="' . csrf_token() . '">
+                                <input type="hidden" name="_method" value="delete">
+                                <button type="submit" class="btn table-btn-sm btn-outline-danger border border-0 alertbox">
+                                    <i class="mdi mdi-delete h5 "></i>
+                                </button>
+                            </form>
+                        </li>
+                        <li>
+                            <a href="' . route('classitem.show', 'detail') . '" class="btn table-btn-sm btn-outline-secondary border border-0">
+                                <i class="mdi mdi-information-outline h4"></i>
+                            </a>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+            </td></tr>';
+        }
+        } else {
+            $output .= '<tr>
+            <td colspan="6" class="text-center text-danger">Data Not Found</td>
+        </tr>';
+        }
+
+
+            return response($output);
+
+                
     }
 }

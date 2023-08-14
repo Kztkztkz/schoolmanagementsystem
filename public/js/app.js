@@ -2065,7 +2065,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 // import "noty/lib/noty.css";
 // import "noty/lib/themes/sunset.css";
 
-$(document).ready(function () {
+$(document).ready(function (e) {
   //select 2
   $(".js-example-basic-multiple").select2({
     placeholder: "Select days",
@@ -2084,6 +2084,68 @@ $(document).ready(function () {
       $(this).remove();
     });
   });
+
+  // classItemSearch();
+
+  //ajaxsearch
+  $("#classitemsearch").on("keyup", function (e) {
+    classItemSearch();
+  });
+  $("#coursesearchclassitem").change(function (e) {
+    classItemSearch();
+  });
+  $("#studentsearchclassitem").change(function (e) {
+    classItemSearch();
+  });
+  function classItemSearch() {
+    var classitemsearch = $("#classitemsearch").val();
+    var coursesearchclassitem = $("#coursesearchclassitem").val();
+    var studentsearchclassitem = $("#studentsearchclassitem").val();
+    var query = "?classitemsearch=".concat(classitemsearch, "&coursesearchclassitem=").concat(coursesearchclassitem, "&studentsearchclassitem=").concat(studentsearchclassitem);
+
+    // console.log(window.location.href + query);
+
+    // window.location.href = window.location.href + query;
+    window.history.pushState({}, "", "classitem" + query);
+
+    // if (
+    //     classitemsearch ||
+    //     coursesearchclassitem ||
+    //     studentsearchclassitem
+    // ) {
+    $(".original").hide();
+    $(".find").show();
+    // } else {
+    //     $(".original").show();
+    //     $(".find").hide();
+    // }
+
+    // if (!window.location.href.includes("search")) {
+    $.ajax({
+      url: "/classitemsearch",
+      method: "GET",
+      data: {
+        classitemsearch: classitemsearch,
+        coursesearchclassitem: coursesearchclassitem,
+        studentsearchclassitem: studentsearchclassitem
+      },
+      success: function success(data) {
+        $(".find").html(data);
+      }
+    });
+    // } else {
+    //     $.ajax({
+    //         url: "/classitemfilter",
+    //         method: "GET",
+    //         data: {
+    //             classitemsearch: classitemsearch,
+    //         },
+    //         success: function success(data) {
+    //             $(".find").html(data);
+    //         },
+    //     });
+    // }
+  }
 
   //sweetalert2
   $(".alertbox").click(function (event) {

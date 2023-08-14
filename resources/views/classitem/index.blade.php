@@ -37,7 +37,11 @@
                 <div class="mx-auto">
                     <div class="input-group">
                         <input class="form-control border-end-0 border" placeholder="search class" type="search"
-                        value="{{ request('classitemsearch') }}" id="example-search-input" name="classitemsearch">
+                        value="{{ request('classitemsearch') }}" id="classitemsearch" name="classitemsearch">
+                        @if (request('coursesearchclassitem') || request('studentsearchclassitem'))
+                        <input hidden name="coursesearchclassitem" value="{{ request('coursesearchclassitem') }}">
+                        <input hidden name="studentsearchclassitem" value="{{ request('studentsearchclassitem') }}">
+                        @endif
                         
                         <span class="input-group-append">
                             <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
@@ -104,8 +108,10 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="original">
+        
                             @forelse($classitem as $classdata)
+                            @can('view', $classdata) 
                             <tr>
                                 <td class="align-middle">
                                     <p class="d-none d-md-block text-cut">{{Str::limit($classdata->name,20)}}</p>
@@ -205,16 +211,20 @@
                                     </div>
                                 </td>
                             </tr>
+                            @endcan
                             @empty
                             <tr>
                                 <td colspan="6" class="text-center text-danger">Data Not Found</td>
                               </tr>
                             @endforelse
+                            </div>
+                        </tbody>
+                        <tbody class="find">
                         </tbody>
                     </table>                    
                 </div>
                 <div class="d-flex justify-content-end me-3">
-                {{$classitem->links()}}
+                {{-- {{$classitem->links()}} --}}
             </div>
             </div>
             
@@ -229,7 +239,7 @@
                     <form action="{{route('classitem.index')}}" method="get">
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="coursesearchclassitem">
+                            <select id="coursesearchclassitem" class="select2 form-select shadow-none" style="width: 100%; height:36px;" name="coursesearchclassitem">
                                 <option value = "">Select Course</option>
                                 @foreach($courseoption as $courses)
                                     <option value="{{$courses->id}}" {{ $courses->id == request('coursesearchclassitem') ? 'selected' : '' }}>{{$courses->name}}</option>
@@ -238,7 +248,7 @@
                         </div>
                         <div class=" mb-3">
                             <label for="">Student</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentsearchclassitem">
+                            <select id="studentsearchclassitem" class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentsearchclassitem" id="studentsearchclassitem">
                                 <option value = "">Select Student</option>
                                 @foreach($studentoption as $students)
                                     <option value="{{$students->id}}" {{ $students->id == request('studentsearchclassitem') ? 'selected' : '' }}>{{$students->name}}</option>
