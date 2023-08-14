@@ -12,6 +12,8 @@ use App\Models\Classitem;
 use App\Models\ClassitemStudent;
 use App\Models\Student;
 use Illuminate\Support\Facades\DB;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request as HttpRequest;
 
 class PaymentController extends Controller
 {
@@ -133,6 +135,7 @@ class PaymentController extends Controller
         $payment->save();
 
         return redirect()->route('payment.index');
+        
     }
 
     /**
@@ -179,5 +182,15 @@ class PaymentController extends Controller
     {
         //
     }
+
+    public function classdetail(HttpRequest $request){
+        
+        return $request;
+        // return $request->studentname;
+    }
+
+    
+
+
 
 }

@@ -26,7 +26,6 @@
             border-radius: 6px;
         }
 
-
         .page-title {
             font-size: 1.5rem;
         }
@@ -35,7 +34,6 @@
             background-color: #007AFF;
 
         }
-
 
         .row {
             margin-bottom: 10px;
@@ -49,6 +47,7 @@
             height: 600px;
         }
     </style>
+
 @endsection
 
 
@@ -66,6 +65,8 @@
                 </div>
             </div>
         </div>
+
+        {{-- Right side bar --}}
         <div class="card">
             <div class="card-body">
 
@@ -77,6 +78,8 @@
                 <div class="row d-flex justify-content-between">
                     <div class="col-xs-12 col-md-6 ">
                         <div class="col-xs-12 col-12 ">
+                        <h5 class="sub-header mb-5">{{ $classitem->name }} Class</h5>
+
                             <div class="row">
                                 <div class="col-4">Time</div>
                                 <div class="col-2">-</div>
@@ -126,19 +129,13 @@
                     </div>
 
 
+
                     <div class="col-12 d-flex justify-content-start d-block d-md-none mb-3">
                         <a href="{{ route('student.create') }}" type="button" class="btn btn-primary d-block d-md-none"
                             style="font-size: 14px; border:none;">Enroll New Student</a>
                     </div>
                     <div class="col-xs-12 col-md-6">
-                        <h5 class="sub-header">Enroll existing student</h5>
-
-                        {{-- <form action="{{ route('payment.store') }}" method="POST">
-                            @csrf
-
-
-
-                        </form> --}}
+                        <h5 class="sub-header mb-5">Enroll existing student</h5>
 
                         <form action="{{ route('payment.store') }}" method="post">
                             @csrf
@@ -167,6 +164,7 @@
                                             <div class=" invalid-feedback">{{ $message }}</div>
                                 @enderror
                                 </div>
+
                             </div>
 
                             <div class=" mt-3 mb-3 w-75">
