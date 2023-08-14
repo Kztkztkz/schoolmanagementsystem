@@ -44,7 +44,7 @@ Route::get('/reset-password/{token}',[UserController::class,'resetpwd'])->name('
 Route::post('/reset-password',[UserController::class,'postresetpwd'])->name('user.postresetpwd');
 
 Route::resource('user', UserController::class);
-Route::get('payment/paid/{id}',[PaymentController::class,'paid'])->name('payment.paid');
+// Route::get('payment/paid/{id}',[PaymentController::class,'paid'])->name('payment.paid');
 // Route::get('payment/{name}/{course}',[PaymentController::class,'paymentAll'])->name('payment.one');
 
 Route::resource('payment' , PaymentController::class);

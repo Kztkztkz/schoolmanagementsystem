@@ -160,7 +160,7 @@
               <div class="form-group test">
                 <label for="hex">Set Color</label>
                 <div class="d-flex">
-                <input type="text" placeholder="#958D8D" class="form-control" id="hex">
+            <input type="text" placeholder="#958D8D" class="form-control" id="hex">
                 <input type="color"  id="color" class = "class-colorpicker" name="color" value="{{ old('color') }}">
                 </div>
                 <span class="text-danger">@error('color') {{$message}} @enderror</span>

@@ -13,7 +13,7 @@ class StorePaymentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class StorePaymentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'classitem_id' => 'required|exists:classitems,id',
+            'student_id' => 'required|exists:students,id',
+            'due_amount' => 'required'
         ];
     }
 }

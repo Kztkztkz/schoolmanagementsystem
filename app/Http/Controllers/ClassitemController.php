@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Classitem; 
+use App\Models\Classitem;
 use App\Models\Room;
 use App\Models\Course;
 use App\Models\User;
@@ -21,7 +21,7 @@ class ClassitemController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $studentoption = Student::all();
         $courseoption = Course::all();
         $users = User::all();
@@ -91,7 +91,7 @@ class ClassitemController extends Controller
             'container_color' => $request->color,
             'code' => $request->shortcode,
         ]);
-        $classitemId->users()->attach($lecturerIds); 
+        $classitemId->users()->attach($lecturerIds);
 
         // $noty = new Noty('success');
         // $noty->setTitle('Success');
@@ -107,14 +107,13 @@ class ClassitemController extends Controller
      * @param  \App\Models\Classitem  $classitem
      * @return \Illuminate\Http\Response
      */
-    public function show(Classitem $classitem)
+    public function show(Classitem $classitem )
     {
         $students = Student::all();
-        return view('classitem.detail', compact('classitem','students'));
+        return view('classitem.show', compact('classitem','students'));
     }
 
-    public function detail(){
-    }
+
 
     /**
      * Show the form for editing the specified resource.

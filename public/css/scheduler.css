@@ -1,11 +1,12 @@
 .page-breadcrumb-fixed{
     position: fixed;
     top: 64px;
-    z-index: 999;
-    width: 85%;
-    background-color: #eee;
-    box-shadow: 0 0 3px #0001;
+    z-index: 9;
+    width: -webkit-fill-available;
+    background: #eeeeee ;
+
 }
+
 
 .time-fs {
     font-size: 12px;
@@ -34,7 +35,13 @@
 }
 
 .page-wrapper > .scheduler {
-    margin-top: 7rem;
+    margin-top: 6.4rem;
+}
+
+.room-row-ph{
+    background-color: #fff !important;
+    border-radius: 2px;
+    margin-bottom: 0.5rem;
 }
 
 .page-wrapper > .scheduler ~ .scheduler {
@@ -153,4 +160,22 @@
 
 .left-sidebar {
     position: fixed;
+}
+
+@media screen and (max-width: 460px){
+    .time-row{
+        font-size: smaller ;
+    }
+
+    .all-room{
+        padding-inline: 0 !important;
+    }
+
+    .p-auto{
+        padding: 0 !important;
+    }
+
+    .room-create{
+        margin-right: 0 !important;
+    }
 }

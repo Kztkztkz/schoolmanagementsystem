@@ -13,16 +13,18 @@ class CourseFactory extends Factory
      */
     public function definition()
     {
-        $courseNames = [
-            'Web Development',
-            'Software Development',
-            'Data Science Fundamentals',
+        // $courseNames = [
+        //     'Web Development',
+        //     'Software Development',
+        //     'Data Science Fundamentals',
 
-        ];
+        // ];
+
+
 
 
         return [
-            'name' => $courseNames[array_rand($courseNames)],
+        //     'name' => $courseNames[array_rand($courseNames)],
         ];
     }
 }

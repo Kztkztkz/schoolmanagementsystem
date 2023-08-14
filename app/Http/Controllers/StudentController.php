@@ -19,6 +19,8 @@ class StudentController extends Controller
      */
     public function index()
     {
+
+        
         $classitems = Classitem::all();
         $courses = Course::all();
         $totalStudents = Student::all()->count();
@@ -86,9 +88,6 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-
-
-
 
 
         $student = new Student();

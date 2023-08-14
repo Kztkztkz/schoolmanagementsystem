@@ -101,7 +101,7 @@
                                     <td>
                                         <p class="mb-0 d-block d-md-none"> {{Str::limit($student->email , 15 , '...')}} </p>
                                         <p class="mb-0 d-none d-md-block"> {{$student->email }} </p>
-                                        <p class="mb-0">{{ $student->phone}}</p>
+                                        <p class="mb-0 text-black-50">{{ $student->phone}}</p>
                                     </td>
                                     <td class="d-none d-lg-table-cell">
                                         <p> {{ Str::limit($student->address, 50 , '...') }} </p>
@@ -199,7 +199,7 @@
                         @endif
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select id="courseId" class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
+                            <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="studentByCourse">
                                 <option value = "">Select Course</option>
                                 {{-- @foreach($courses as $course)
                                     <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
@@ -210,8 +210,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select id="classId" required class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
-                                <option value = "-1">Select Class</option>
+                            <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="studentByClass">
+                                <option value = "">Select Class</option>
                                 {{-- @foreach($classitems as $class)
                                     <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
                                         {{$class->name}}
@@ -245,12 +245,15 @@
                 <div class="modal-body  position-relative">
 
                     <form action="{{route('student.index')}}" method="get">
+                        @if (request('keyword') )
+                            <input hidden name="keyword" value="{{ request('keyword') }}">
+                        @endif
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select id="courseId" class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
+                            <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="studentByCourse">
                                 <option value = "">Select Course</option>
                                 {{-- @foreach($courses as $course)
-                                    <option  value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
+                                    <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
                                         {{$course->name}}
                                     </option>
                                 @endforeach --}}
@@ -258,7 +261,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select id="classId" required class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
+                            <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="studentByClass">
                                 <option value = "">Select Class</option>
                                 {{-- @foreach($classitems as $class)
                                     <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
@@ -292,19 +295,22 @@
                 echo -1;
             }
         @endphp ;
-        console.log(requestCourseId);
+
 
         let courses =  {!! json_encode($courses->toArray())  !!} ;
         courses.forEach(element => {
                  courseId.push(element.id);
-                $('#courseId').append(`
+                
+
+                $('.courseId').map(function (el) {
+                    $(this).append(`
                         <option  value="${element.id}" ${ element.id == requestCourseId ? 'selected' : '' }>
                             ${element.name}
                         </option>
-                `);
+                    `);
+                });
+
         });
-
-
 
 
         let classes =  {!! json_encode($classitems->toArray())  !!} ;
@@ -315,39 +321,33 @@
                 echo -1;
             }
         @endphp ;
-        console.log(requestClassId);
+
+
         classes.forEach(element => {
+
                classId.push(element.course_id);
-
-               $("#classId").append(`
-                    <option value="${element.id}" data-course="${element.course_id}" ${ element.id == requestClassId ? 'selected' : '' } >
-                        ${element.name}
-                    </option>
-
-               `);
+               $('.classId').map(function (el) {
+                    $(this).append(`
+                        <option value="${element.id}" data-course="${element.course_id}" ${ element.id == requestClassId ? 'selected' : '' } >
+                            ${element.name}
+                        </option>
+                    `);
+               });
 
         });
 
-        $('#courseId').on("change" , function(){
-            console.log("change");
-                    let currentCourseId = $(this).val();
-                    console.log(currentCourseId);
-                    $("#classId option").hide();
-                    $(`[data-course=${currentCourseId}]`).show();
+
+
+        $('.courseId').map(function (el) {
+
+            $(this).on('change' , function () {
+                let currentCourseId = $(this).val();
+                console.log(currentCourseId);
+                $("#classId option").hide();
+                $(`[data-course=${currentCourseId}]`).show();
+            });
+
         });
-
-        // $("#courseId").on("change",function(){
-        //     console.log('change');
-        // })
-
-
-
-        //     $("#c").on("change" , function(){
-            // // console.log($(this).val());
-            // let currentCagetoryId = $(this).val();
-            // $("#sc option").hide();
-            // $(`[data-cagetory=${currentCagetoryId}]`).show();
-
 
 
 

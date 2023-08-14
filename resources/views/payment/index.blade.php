@@ -60,7 +60,7 @@
             <div class="card rounded-3 ">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
-                        <p class="mb-0 fw-bolder">Total - 10</p>
+                        <p class="mb-0 fw-bolder">Total - {{$total}}</p>
                         <div class="d-flex justify-content-end  d-xs-block d-md-none ">
                             <button type="button" class="btn plus-btn btn-outline-secondary d-flex " data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
@@ -87,15 +87,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($payments as $payment)
-                                <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                @foreach ($latestPayments as $payment)
+
+                                <tr data-bs-toggle="modal" id="pay-row" data-bs-target="#exampleModal">
+
+
 
                                     {{-- Mobile View --}}
                                     <td class="d-table-cell d-lg-none text-nowrap align-middle">
                                         {{-- <p>01-01-2023</p> --}}
                                         <p>{{$payment->created_at}}</p>
-                                        <p>{{$payment->student->name}}</p>
+                                        <p> {{$payment->student->name}}</p>
                                     </td>
+                                    <td class="relatedStudent d-none">
+                                         {{$payment->student->id}}
+                                    </td>
+                                    <td class="relatedClass d-none">
+                                        {{$payment->classitem->id}}
+                                   </td>
+
                                     {{-- Laptop View --}}
                                     <td class="d-none d-lg-table-cell align-middle">{{$payment->created_at->format('d-m-Y')}}</td>
                                     <td class="align-middle">{{Str::limit($payment->classitem->name, 20)}} </td>
@@ -106,7 +116,7 @@
                                     <td class=" align-middle">{{number_format(floatval($payment->fees))}}</td>
                                     <td class=" align-middle">{{number_format(floatval($payment->due_amount))}}</td>
                                     <td class=" align-middle">
-                                        
+
                                         @if ($payment->payment_type=="paid")
                                             <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
                                                 paid
@@ -116,7 +126,7 @@
                                                 unpaid
                                             </div>
                                         @endif
-                                      
+
                                     </td>
                                 </tr>
                                 @endforeach
@@ -144,7 +154,7 @@
                             </tbody>
                         </table>
                         <div class=" paginate ">
-                            {{$payments->links('pagination::bootstrap-4')}}
+                            {{ $latestPayments->links('pagination::bootstrap-4')}}
                         </div>
                     </div>
 
@@ -229,7 +239,7 @@
                         </thead>
                         <tbody>
                             {{-- @foreach ({{$payment->student->name}} as $student) --}}
-                                
+
                             <tr>
                                 <td class="col-3">01-01-2023</td>
                                 <td class="col-3">Class A</td>
@@ -341,4 +351,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $('#pay-row').on('click' , function(){
+
+            let studentId = $('.relatedStudent').html();
+            let classitemId = $('.relatedClass').html();
+           console.log(studentId);
+        })
+    </script>
 @endpush

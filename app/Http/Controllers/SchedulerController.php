@@ -51,6 +51,7 @@ class SchedulerController extends Controller
     public static function index()
     {
 
+
         // Month Array Create //
         $currentDate = Carbon::today()->startOfMonth();
         $dateDiff  = Carbon::today()->addMonths(5);
@@ -58,11 +59,11 @@ class SchedulerController extends Controller
         $monthArr = $period->toArray();
 
         // Time Array Create //
-        $currentTime = Carbon::create(2023 , 7 , 19 , 7 );
+        $currentTime = Carbon::create(2023 , 7 , 19 , 6 );
         $timeArr = [];
 
         for($i=0 ; $i<=12 ; $i++){
-            $time = $currentTime->addHours(1)->format('h:i a');
+            $time = $currentTime->addHours(1)->format('G:i');
             array_push($timeArr , $time);
         }
 
@@ -97,10 +98,10 @@ class SchedulerController extends Controller
         $monthArr = $period->toArray();
 
         // Time Array Create //
-        $currentTime = Carbon::create(2023 , 7 , 19 , 7 );
+        $currentTime = Carbon::create(2023 , 7 , 19 , 6 );
         $timeArr = [];
         for($i=0 ; $i<=12 ; $i++){
-            $time = $currentTime->addHours(1)->format('h:i a');
+            $time = $currentTime->addHours(1)->format('G:i');
             array_push($timeArr , $time);
         };
 
@@ -133,10 +134,10 @@ class SchedulerController extends Controller
         $monthArr = $period->toArray();
 
         // Time Array Create //
-        $currentTime = Carbon::create(2023 , 7 , 19 , 7 );
+        $currentTime = Carbon::create(2023 , 7 , 19 , 6 );
         $timeArr = [];
         for($i=0 ; $i<=12 ; $i++){
-            $time = $currentTime->addHours(1)->format('h:i a');
+            $time = $currentTime->addHours(1)->format('G:i');
             array_push($timeArr , $time);
         };
 

@@ -27,7 +27,8 @@ class StoreStudentRequest extends FormRequest
             'name' => 'required|unique:students,name|min:3',
             'address' => 'required|min:15',
             'email' => 'required|email|string|max:255|unique:students,email,',
-            'phone' => 'required|numeric'
+            'phone' => 'required|numeric',
+            'class_id'=> 'exists:classitems,id'
         ];
     }
 }

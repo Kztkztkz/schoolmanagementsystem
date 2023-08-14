@@ -29,14 +29,14 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group  margin-right">
                                     <label for="name">Name</label>
                                     <input type="text" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Name">
                                     @error('name')
                                         <div class=" invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group margin-right">
                                     <label for="name">Address</label>
                                     <textarea name="address" class="form-control form-text @error('address') is-invalid @enderror" id="address" cols="30" rows="5"
                                         placeholder="Address">{{old('address')}}</textarea>
@@ -49,14 +49,14 @@
                             </div>
 
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group margin-right">
                                     <label for="startdate">Email</label>
                                     <input type="email" name="email" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror" id="enddate" placeholder="Email">
                                     @error('email')
                                             <div class=" invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group margin-right">
                                     <label for="name">Phone</label>
                                     <input type="number" name="phone" value="{{old('phone')}}" class="form-control @error('phone') is-invalid @enderror" id="name" placeholder="Phone number">
                                     @error('phone')
@@ -70,7 +70,7 @@
 
                         <div class="row pt-2">
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group margin-right">
                                     <label for="course">Course Name</label>
                                     <select name="course_id" class="form-select slectopt" id="course">
                                         <option selected>Select course </option>
@@ -80,7 +80,7 @@
                                         <option value="2">Japanese N5</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group margin-right">
                                     <label for="amount">Amount</label>
                                     <input type="number" name="due_amount" class="form-control" id="amount" placeholder="Amount">
                                 </div>
@@ -88,7 +88,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <div class="form-group">
+                                <div class="form-group margin-right">
                                     <label for="class">Class</label>
                                     <select name="classitem_id" class="form-select slectopt" id="class">
                                         <option selected>Select class</option>
@@ -97,7 +97,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group margin-right">
                                     <label for="class">Payment Method</label>
                                     <select name="payment_method" class="form-select slectopt" id="class">
                                         <option value="cash">Cash</option>
@@ -105,7 +105,7 @@
                                         <option value="bank transfer">Bank Transfer</option>
                                     </select>
                                 </div>
-                                <div class="form-group mt-5">
+                                <div class="form-group margin-right mt-5">
                                     <input name="slip" class=" form-check-input" type="checkbox" name="flexRadioDefault"
                                         id="flexRadioDefault1">
                                     <label class="form-check-label mb-0" for="flexRadioDefault1">

@@ -8,7 +8,7 @@
     <input type="hidden" id="scheduler" value="{{ json_encode($data) }}" />
     {{-- dd({{$data}}) --}}
     <div class="page-breadcrumb-fixed">
-        <div class="page-breadcrumb">
+        <div class="page-breadcrumb ">
             <div class="row">
                 <div class="col-12  d-flex justify-content-between">
                     <div class="">
@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center gap-2">
-                        <div class="mx-auto">
+                        {{-- <div class="mx-auto">
                             <form action="{{ route('schdeuler.index') }}">
                                 <div class="input-group">
                                     <input class="form-control border-end-0 border" placeholder="search" type="search"
@@ -39,7 +39,7 @@
                                     </span>
                                 </div>
                             </form>
-                        </div>
+                        </div> --}}
                         <div class="d-flex justify-content-center align-items-center bg-light shadow-sm ">
                             <form action="{{ route('schedular.preMonth', date_format(current($monthArr), 'Y-M-d')) }}"
                                 method="GET" id="nextMonth">
@@ -60,8 +60,8 @@
         </div>
 
 
-        <div class="row  px-3 row">
-            <div class="col-2 mb-2 position-relative">
+        <div class="row  px-3">
+            <div class="col-6 col-md-2 mb-2 position-relative all-room  ">
                 <div style="width: auto">
                     <a class="btn btn-light w-100 dropdown-toggle" href="#" role="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false" role="button" data-bs-toggle="dropdown"
@@ -168,8 +168,13 @@
 
     @forelse ($rooms as $room)
         <div class="row pb-4 px-3 scheduler " style="">
+            <div class="col-12 d-block d-md-none p-0">
+                <div class="room-row-ph">
+                    <p class=" fs-4 fw-bolder h4  text-center p-2"> {{ $room->name }} </p>
+                </div>
+            </div>
 
-            <div class="col-2">
+            <div class="col-2 d-none d-md-block ">
 
                 <div class="card ">
                     <div class="card-body position-relative">
@@ -270,7 +275,7 @@
             </div>
 
 
-            <div class="col-10">
+            <div class="col-12 col-md-10 p-auto">
                 <div class="card rounded-3 ">
                     <div class="card-body">
 
@@ -449,6 +454,14 @@
                     </div>
                 </div>
             </div>
+            <div class="d-flex justify-content-center align-items-center  ">
+                <div class="">
+                    <a href="{{ route('classitem.create') }}" class="btn btn-primary  mt-1"
+                        type="submit ">Add Class</a>
+                </div>
+            </div>
+
+
         </div>
     @empty
         <div class=" vh-100 text-center h3 py-2 text-black-50">No Such Data</div>
