@@ -63,7 +63,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="{{ route('course.index') }}">Courses</a></li>
-                                <li><a class="dropdown-item" href="#">Lecturers</a></li>
+                                <li><a class="dropdown-item" href=" {{ route('lecturer.index')  }} ">Lecturers</a></li>
 
                             </ul>
                         </li>

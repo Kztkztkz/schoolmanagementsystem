@@ -6,7 +6,9 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClassitemController;
+use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\SchedulerController;
+use App\Models\Lecturer;
 use App\Models\Payment;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +49,7 @@ Route::post('/reset-password',[UserController::class,'postresetpwd'])->name('use
 Route::resource('user', UserController::class);
 
 Route::resource('payment' , PaymentController::class);
+Route::resource('lecturer' , LecturerController::class);
 
 Route::resource('room' , RoomController::class);
 Route::resource('course' , CourseController::class);

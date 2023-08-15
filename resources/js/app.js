@@ -1,4 +1,5 @@
 require("./bootstrap");
+import Noty from "noty";
 // import Noty from "noty";
 // import "noty/lib/noty.css";
 // import "noty/lib/themes/sunset.css";
@@ -203,3 +204,6 @@ $(".nav-toggler").on("click", function (event) {
     $(".navbar-brand").toggleClass("d-none");
     $(".logo-text").toggleClass("add-logo-text");
 });
+
+
+

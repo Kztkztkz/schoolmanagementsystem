@@ -70,7 +70,7 @@
                             <tr style="border-bottom: 2px solid black">
                                 <th scope="col">
                                    <p class="d-none d-lg-block">Name</p>
-                                   <p class="d-block d-lg-none">Name & Role</p>
+
                                 </th>
                                 <th scope="col">Email</th>
                                 <th scope="col" class="text-end">Control</th>
@@ -83,7 +83,7 @@
                                     <p class="d-none d-lg-block">Name</p>
                                     <div class="d-block d-lg-none">
                                         <p>{{$user->name}}</p>
-                                        <p class=" text-black-50">{{$user->role->name}}</p>
+
                                     </div>
                                  </th>
                                 <td class="align-middle">{{$user->email}}</td>
@@ -139,7 +139,7 @@
                             <tr style="border-bottom: 2px solid black">
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Role</th>
+
                                 <th scope="col" class="text-end">Control</th>
                             </tr>
                         </thead>
@@ -148,7 +148,7 @@
                             <tr>
                                 <td class="align-middle">{{$user->name}} </td>
                                 <td class="align-middle">{{$user->email}}</td>
-                                <td class="align-middle">{{$user->role->name}}</td>
+
                                 <td class="text-end">
                                     <a href="{{ route('user.edit', 1) }}" class="btn table-btn-sm btn-primary">
                                         <i class="mdi mdi-pencil h5"></i>
@@ -177,7 +177,7 @@
         <div class="col-3">
             <div class="card">
                 <div class="card-body position-relative">
-                    <p class="  fs-4 mb-2 text-center">User Filter</p>
+                    <p class="  fs-4 mb-2 text-center">Admin Filter</p>
                     <form action="">
                         {{-- <div class=" mb-3">
                             <label for="">Name</label>

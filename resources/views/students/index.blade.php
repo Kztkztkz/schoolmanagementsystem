@@ -17,6 +17,7 @@
 @endsection
 
 @section('content')
+
     <div class="page-breadcrumb">
         <div class="row">
             <div class=" col-12 col-md-9 d-flex ">
@@ -57,13 +58,13 @@
     </div>
 
 
-    <div class="row  px-3 max-height">
+    <div class="row  px-3 max-height ">
         <div class="col-12 col-md-9 table-container">
             <div class="card rounded-3 ">
                 <div class="card-body">
-                    @if(session('message'))
+                    {{-- @if(session('message'))
                         <span class=" alert alert-success ">{{ session('message') }}</span>
-                    @endif
+                    @endif --}}
                     <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
                         <p class="mb-0 fw-bolder">Total - {{ $totalStudents }}</p>
                         <div class="d-flex justify-content-center align-items-center gap-2">
@@ -200,23 +201,15 @@
                         <div class=" mb-3">
                             <label for="">Course</label>
                             <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="studentByCourse">
-                                <option value = "">Select Course</option>
-                                {{-- @foreach($courses as $course)
-                                    <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
-                                        {{$course->name}}
-                                    </option>
-                                @endforeach --}}
+                                <option value="" >Select Course</option>
+
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
                             <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="studentByClass">
-                                <option value = "">Select Class</option>
-                                {{-- @foreach($classitems as $class)
-                                    <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
-                                        {{$class->name}}
-                                    </option>
-                                @endforeach --}}
+                                <option value="" >Select Class</option>
+
                             </select>
                         </div>
 
@@ -251,7 +244,7 @@
                         <div class=" mb-3">
                             <label for="">Course</label>
                             <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="studentByCourse">
-                                <option value = "">Select Course</option>
+                                <option value = "-1">Select Course</option>
                                 {{-- @foreach($courses as $course)
                                     <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
                                         {{$course->name}}
@@ -262,7 +255,7 @@
                         <div class="mb-3">
                             <label for="">Class</label>
                             <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="studentByClass">
-                                <option value = "">Select Class</option>
+                                <option value = "-1">Select Class</option>
                                 {{-- @foreach($classitems as $class)
                                     <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
                                         {{$class->name}}
@@ -285,6 +278,21 @@
 
     <script>
 
+        let test = $('#test');
+        @if(session('message'))
+        new Noty({
+                type: 'success',
+                layout: 'bottomLeft',
+                theme: 'nest',
+                text:  'Student create successfully',
+                timeout: '4000',
+                progressBar: true,
+                closeWith: ['click'],
+                killer: true,
+
+                }).show();
+
+        @endif
 
         let courseId = [];
         let classId = [];
@@ -300,7 +308,7 @@
         let courses =  {!! json_encode($courses->toArray())  !!} ;
         courses.forEach(element => {
                  courseId.push(element.id);
-                
+
 
                 $('.courseId').map(function (el) {
                     $(this).append(`
@@ -348,6 +356,9 @@
             });
 
         });
+
+
+
 
 
 

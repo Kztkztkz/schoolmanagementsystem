@@ -20,7 +20,7 @@ class StudentController extends Controller
     public function index()
     {
 
-        
+
         $classitems = Classitem::all();
         $courses = Course::all();
         $totalStudents = Student::all()->count();
@@ -65,7 +65,7 @@ class StudentController extends Controller
             $students = Student::latest()->paginate(7);
         }
 
-        return view('students.index' , compact('students' , 'totalStudents' , 'classitems' , 'courses' , 'searchByClass'));
+        return view('students.index' , compact('students' , 'totalStudents' , 'classitems' , 'courses' , 'searchByClass'))->with('message' , 'Students create successful');
     }
 
     /**
@@ -96,9 +96,9 @@ class StudentController extends Controller
         $student->address = $request->address;
         $student->phone = $request->phone;
         $student->save();
-        $student->classitems()->attach($request->classitem_id);
 
-        if($request->classitem_id !== "Select class"){
+
+        if($request->classitem_id > -1 ){
 
             $classitem = Classitem::find(request('classitem_id'));
             $classitemPrice = $classitem->price;
@@ -114,6 +114,7 @@ class StudentController extends Controller
             $payment->payment_type = $payment_type;
             $payment->payment_method = $request->payment_method;
             $payment->save();
+            $student->classitems()->attach($request->classitem_id);
 
         }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Lecturer;
 use App\Http\Requests\StoreLecturerRequest;
 use App\Http\Requests\UpdateLecturerRequest;
+use App\Models\User;
 
 class LecturerController extends Controller
 {
@@ -15,7 +16,8 @@ class LecturerController extends Controller
      */
     public function index()
     {
-        //
+        $lecturers = User::where('role_id' , 2)->get();
+        return view('setting.lecturer.index' , compact('lecturers'));
     }
 
     /**

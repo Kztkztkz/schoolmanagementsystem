@@ -73,7 +73,7 @@
                                 <div class="form-group margin-right">
                                     <label for="course">Course Name</label>
                                     <select name="course_id" class="form-select slectopt" id="course">
-                                        <option selected>Select course </option>
+                                        <option value="-1" selected>Select course </option>
                                         @foreach ($courses as $course)
                                         <option value="{{ $course->id }}">{{$course->name}}</option>
                                         @endforeach
@@ -91,7 +91,7 @@
                                 <div class="form-group margin-right">
                                     <label for="class">Class</label>
                                     <select name="classitem_id" class="form-select slectopt" id="class">
-                                        <option selected>Select class</option>
+                                        <option value="-1" selected>Select class</option>
                                         @foreach ($classes as $class)
                                         <option value="{{ $class->id }}">{{$class->name}}</option>
                                         @endforeach
