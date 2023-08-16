@@ -95,7 +95,7 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="tbody-container">
                                 @forelse ($students as $student)
                                 <tr>
                                     <td scope="row" class="">{{ $student->name }}</td>
@@ -204,6 +204,7 @@
                                 <option value="" >Select Course</option>
 
                             </select>
+
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
@@ -277,6 +278,8 @@
     </div>
 
     <script>
+
+        
 
         let test = $('#test');
         @if(session('message'))
@@ -356,6 +359,8 @@
             });
 
         });
+
+
 
 
 

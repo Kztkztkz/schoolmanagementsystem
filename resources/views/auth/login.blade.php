@@ -39,7 +39,7 @@
                                 <img src="{{ asset('admin/assets/images/undraw_team_up_re_84ok.svg') }}" class="login-img img-fluid" alt="">
                                 <p class="my-2 fw-bolder text-white">School Management System</p>
                             </div>
-                        </div>                        
+                        </div>
                         <div class="col-8 login-right">
                             <h4 class="text-center pb-2 border-bottom border-dark rmlogin">Login</h4>
                             @if($errors->any())
@@ -61,7 +61,7 @@
                               <span aria-hidden="true">&times;</span>
                           </button>
                             </div>
-                            @endif                           
+                            @endif
                             <form class="d-flex flex-column justify-content-center align-items-center mt-5 rmlgform" method="post" action="{{route('user.login')}}">
                                 @csrf
                                 <div class="form-group d-flex align-items-center w-100 mb-4">
@@ -70,7 +70,8 @@
                                 </div>
                                 <div class="form-group d-flex align-items-center w-100">
                                     <label   for="name">Password</label>
-                                    <input type="password" class="form-control w-75" id="name" placeholder="enter password" name="password">                                    
+                                    <input type="password" id="password" class="form-control w-75"  placeholder="enter password" name="password">
+                                    <i class="mdi mdi-eye " id="togglePassword" style="margin-left: -30px; cursor:pointer" ></i>
                                 </div>
                                 <a href="{{route('user.forgetpwdview')}}" class="h6 text-primary"><u>Forget Password  ?</u></a>
                                 <button type="submit" class="btn btn-primary btn-sm px-3 mt-3 fs-5">login</button>
@@ -85,6 +86,14 @@
     </div>
 
     @include('layout.script')
+    <script>
+
+        $('#togglePassword').on('click' , function(){
+            let type = $('#password').attr('type') === 'password' ? 'text' : 'password';
+            $('#password').attr('type' , type);
+            $(this).toggleClass('mdi-eye-off');
+        })
+    </script>
 
 </body>
 

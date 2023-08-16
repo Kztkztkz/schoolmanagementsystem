@@ -9,6 +9,7 @@ use App\Models\Classitem;
 use App\Models\Course;
 use App\Models\Payment;
 use Faker\Core\Number;
+use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
@@ -17,7 +18,7 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
 
@@ -26,12 +27,15 @@ class StudentController extends Controller
         $totalStudents = Student::all()->count();
         $searchByClass = Classitem::where('id' , request('studentByClass'))->get();
 
+        $students = Student::query();
+        $studentByClass = $request->studentByClass;
+        $studentByCourse = $request->studentByCourse;
+
 
 
         if(request()->has('studentByCourse') || request()->has('studentByClass')){
 
-            $students = Student::whereHas('classitems' , function($query){
-
+            $students = $students->whereHas('classitems' , function($query){
                 $query->where("classitems.id" , request('studentByClass'));
             })->whereHas('classitems' , function($query){
                 $query->where('course_id' , request('studentByCourse'));
@@ -40,7 +44,7 @@ class StudentController extends Controller
                 $query->where("name" , "like",  "%$keyword%")->where("name" , "like" , "%$keyword%")
                 ->orWhere( "email" , "like" , "%$keyword%");
             })
-            ->paginate(7)->withQueryString();
+            ->paginate(8);
 
 
         }
@@ -48,7 +52,7 @@ class StudentController extends Controller
         else if (request('keyword')){
 
 
-            $students = Student::when( request("keyword") , function ($query){
+            $students = $students->when( request("keyword") , function ($query){
                 $keyword = request('keyword');
                 $query->where("name" , "like",  "%$keyword%")->where("name" , "like" , "%$keyword%")
                 ->orWhere( "email" , "like" , "%$keyword%");
@@ -58,11 +62,11 @@ class StudentController extends Controller
             })->whereHas('classitems' , function($query){
                 $query->where('course_id' , request('studentByCourse'));
             })
-            ->paginate(7)->withQueryString();
+            ->paginate(8);
 
         }
         else{
-            $students = Student::latest()->paginate(7);
+            $students = Student::latest()->paginate(8);
         }
 
         return view('students.index' , compact('students' , 'totalStudents' , 'classitems' , 'courses' , 'searchByClass'))->with('message' , 'Students create successful');

@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $userdata = User::orderBy('id', 'desc')->paginate(7);
+        $userdata = User::orderBy('id', 'desc')->paginate(11);
         $roles = Role::all();
 
         if($request->has('usersearch')){
@@ -35,9 +35,9 @@ class UserController extends Controller
             ->orWhereHas('role', function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->usersearch . '%');
             })
-            ->paginate(7)->withQueryString();
+            ->paginate(11)->withQueryString();
         } else if($request->has('userrolefilter')){
-            $userdata = User::where('role_id',$request->userrolefilter)->paginate(7)->withQueryString();
+            $userdata = User::where('role_id',$request->userrolefilter)->paginate(11)->withQueryString();
         }
 
         return view('user.index', compact(['userdata','roles']));
@@ -184,7 +184,7 @@ class UserController extends Controller
         $updatePassword = DB::table('password_resets')
         ->where([
             'email' => $request->email,
-            'token' => $request->token,            
+            'token' => $request->token,
         ])->first();
 
         if(!$updatePassword){

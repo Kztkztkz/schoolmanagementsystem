@@ -172,33 +172,33 @@
                     <form action="">
                         <div class=" mb-3">
                             <label for="">Student</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
+                            <select class="select2  form-select shadow-none js-example-basic-single"  name="student_id" style="width: 100%; height:36px;">
                                 <option>Select Student</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                                @foreach ($students as $student)
+                                    <option value="{{ $student->id }}">{{ $student->name }}</option>
+                                @endforeach
                             </select>
                         </div>
-                        <div class="mb-3">
+                        <div class=" mb-3">
                             <label for="">Course</label>
-                            <select class="select2  form-select shadow-none">
-                                <option>Select Course</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                            <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="studentByCourse">
+                                <option value = "-1">Select Course</option>
+                                {{-- @foreach($courses as $course)
+                                    <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
+                                        {{$course->name}}
+                                    </option>
+                                @endforeach --}}
                             </select>
                         </div>
-
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select class="select2  form-select shadow-none">
-                                <option>Select Class</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
+                            <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="studentByClass">
+                                <option value = "-1">Select Class</option>
+                                {{-- @foreach($classitems as $class)
+                                    <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
+                                        {{$class->name}}
+                                    </option>
+                                @endforeach --}}
                             </select>
                         </div>
                         <div class="d-flex justify-content-center">
@@ -313,32 +313,34 @@
                     <form action="">
                         <div class=" mb-3">
                             <label for="">Student</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
+                            <select class="select2  form-select shadow-none js-example-basic-single" class="" name="student_id" style="width: 100%; height:36px;">
                                 <option>Select Student</option>
-                                <option value="CA">David</option>
-                                <option value="NV">Steven</option>
-                                <option value="OR">Michael</option>
-                                <option value="WA">Earthshaker</option>
+                                @foreach ($students as $student)
+                                    <option value="{{ $student->id }}">{{ $student->name }}</option>
+                                @endforeach
                             </select>
+
                         </div>
-                        <div class="mb-3">
+                        <div class=" mb-3">
                             <label for="">Course</label>
-                            <select class="select2  form-select shadow-none">
-                                <option>Select Course</option>
-                                <option value="CA">Html</option>
-                                <option value="NV">Css</option>
-                                <option value="OR">Php</option>
-                                <option value="WA">Laravel</option>
+                            <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="studentByCourse">
+                                <option value = "-1">Select Course</option>
+                                {{-- @foreach($courses as $course)
+                                    <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
+                                        {{$course->name}}
+                                    </option>
+                                @endforeach --}}
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select class="select2  form-select shadow-none">
-                                <option>Select Class</option>
-                                <option value="CA">Basic</option>
-                                <option value="NV">Intermediate</option>
-                                <option value="OR">Advance</option>
-                                <option value="WA">Washington</option>
+                            <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="studentByClass">
+                                <option value = "-1">Select Class</option>
+                                {{-- @foreach($classitems as $class)
+                                    <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
+                                        {{$class->name}}
+                                    </option>
+                                @endforeach --}}
                             </select>
                         </div>
 
@@ -353,11 +355,79 @@
     </div>
 
     <script>
+
+
+
+
         $('#pay-row').on('click' , function(){
 
             let studentId = $('.relatedStudent').html();
             let classitemId = $('.relatedClass').html();
            console.log(studentId);
-        })
+        });
+
+        let courseId = [];
+        let classId = [];
+        let requestCourseId =  @php
+            if(request('studentByCourse')){
+                echo request('studentByCourse');
+            }else{
+                echo -1;
+            }
+        @endphp ;
+
+
+        let courses =  {!! json_encode($courses->toArray())  !!} ;
+        courses.forEach(element => {
+                 courseId.push(element.id);
+
+
+                $('.courseId').map(function (el) {
+                    $(this).append(`
+                        <option  value="${element.id}" ${ element.id == requestCourseId ? 'selected' : '' }>
+                            ${element.name}
+                        </option>
+                    `);
+                });
+
+        });
+
+
+        let classes =  {!! json_encode($classitems->toArray())  !!} ;
+        let requestClassId =  @php
+            if(request('studentByClass')){
+                echo request('studentByClass');
+            }else{
+                echo -1;
+            }
+        @endphp ;
+
+
+        classes.forEach(element => {
+
+               classId.push(element.course_id);
+               $('.classId').map(function (el) {
+                    $(this).append(`
+                        <option value="${element.id}" data-course="${element.course_id}" ${ element.id == requestClassId ? 'selected' : '' } >
+                            ${element.name}
+                        </option>
+                    `);
+               });
+
+        });
+
+
+
+        $('.courseId').map(function (el) {
+
+            $(this).on('change' , function () {
+                let currentCourseId = $(this).val();
+                console.log(currentCourseId);
+                $("#classId option").hide();
+                $(`[data-course=${currentCourseId}]`).show();
+            });
+
+        });
+
     </script>
 @endpush

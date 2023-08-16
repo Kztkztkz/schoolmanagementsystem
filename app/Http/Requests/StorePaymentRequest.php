@@ -26,7 +26,8 @@ class StorePaymentRequest extends FormRequest
         return [
             'classitem_id' => 'required|exists:classitems,id',
             'student_id' => 'required|exists:students,id',
-            'due_amount' => 'required'
+            'due_amount' => 'required',
+
         ];
     }
 }

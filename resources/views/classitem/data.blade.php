@@ -1,5 +1,5 @@
 @forelse($classitem as $classdata)
-@can('view', $classdata) 
+@can('view', $classdata)
 <tr>
     <td class="align-middle">
         <p class="d-none d-md-block text-cut">{{Str::limit($classdata->name,20)}}</p>
@@ -30,7 +30,7 @@
             paid
         </div>
     </td>
-    @endif                                
+    @endif
     <td class="d-none d-md-table-cell align-middle text-center">
         <a href="{{ route('classitem.classPayment' , $classdata->id ) }}" class="btn table-btn-sm btn-primary">
             <i class="mdi mdi-credit-card-multiple h5"></i>

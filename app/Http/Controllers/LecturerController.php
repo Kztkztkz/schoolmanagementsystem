@@ -16,7 +16,7 @@ class LecturerController extends Controller
      */
     public function index()
     {
-        $lecturers = User::where('role_id' , 2)->get();
+        $lecturers = User::where('role_id' , 2)->paginate();
         return view('setting.lecturer.index' , compact('lecturers'));
     }
 

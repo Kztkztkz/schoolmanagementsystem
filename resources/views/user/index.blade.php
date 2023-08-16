@@ -19,7 +19,7 @@
                 <div class="">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item asdf"><a href="#">User</a></li>
+                            <li class="breadcrumb-item asdf"><a href="#">Admins</a></li>
                             <li class="breadcrumb-item active " aria-current="page">List</li>
                         </ol>
                     </nav>
@@ -215,7 +215,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">User Filter</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Admin Filter</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  position-relative">

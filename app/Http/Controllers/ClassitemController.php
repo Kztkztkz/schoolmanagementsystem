@@ -31,12 +31,12 @@ class ClassitemController extends Controller
             //     $query->where('students.id', $request->studentsearchclassitem);
             // })
             // ->paginate(7)->withQueryString();
-            
+
             // $classids = $classitemIdsQuery->pluck('id')->toArray();
             // $classitem = Classitem::where('name', 'like', '%' . $request->classitemsearch . '%')
             // ->whereIn('id',$classids)
             // ->paginate(7)->withQueryString();
-        
+
         $classItemQuery = Classitem::query();
         $coursesearchclassitem = $request->coursesearchclassitem;
         $studentsearchclassitem = $request->studentsearchclassitem;
@@ -48,19 +48,19 @@ class ClassitemController extends Controller
                                     $query->where('students.id', $request->studentsearchclassitem);
                                 });
         } else {
-            
+
 
             if($coursesearchclassitem) {
                 $classItemQuery = $classItemQuery->where('course_id', $request->coursesearchclassitem);
             }
-    
+
             if($studentsearchclassitem) {
                 $classItemQuery = $classItemQuery->orWhereHas('students', function ($query) use ($request) {
                     $query->where('students.id', $request->studentsearchclassitem);
                 });
             }
         }
-       
+
 
         if($request->classitemsearch) {
             $classItemQuery = $classItemQuery->where('name', 'like', '%' . $request->classitemsearch . '%');
@@ -70,7 +70,7 @@ class ClassitemController extends Controller
 
         $classitem =  $classItemQuery->orderBy('id', 'desc')->paginate(15)->withQueryString();
 
-        
+
             // $classitem = $this->classitemfilter($classitem);
         // } else {
         //     $classitem =  Classitem::orderBy('id', 'desc')->paginate(7);
@@ -78,7 +78,7 @@ class ClassitemController extends Controller
 
         if ($request->ajax()) {
             $view = view('classitem.data', compact('classitem'))->render();
-  
+
             return response()->json(['html' => $view]);
         }
 
@@ -141,10 +141,11 @@ class ClassitemController extends Controller
      * @param  \App\Models\Classitem  $classitem
      * @return \Illuminate\Http\Response
      */
-    public function show(Classitem $classitem )
+    public function show(Classitem $classitem , Request $request)
     {
+        $selectedStudent = $request->ss;
         $students = Student::all();
-        return view('classitem.show', compact('classitem','students'));
+        return view('classitem.show', compact('classitem','students', 'selectedStudent'));
     }
 
 
@@ -223,7 +224,7 @@ class ClassitemController extends Controller
 
     public function classitemsearch(Request $request)
     {
-        
+
         $output="";
         $classItemQuery =  Classitem::query();
         $coursesearchclassitem = $request->coursesearchclassitem;
@@ -239,7 +240,7 @@ class ClassitemController extends Controller
             if($coursesearchclassitem) {
                 $classItemQuery = $classItemQuery->where('course_id', $coursesearchclassitem);
             }
-    
+
             if($studentsearchclassitem) {
                 $classItemQuery = $classItemQuery->orWhereHas('students', function ($query) use ($studentsearchclassitem) {
                     $query->where('students.id', $studentsearchclassitem);
@@ -256,7 +257,7 @@ class ClassitemController extends Controller
                 $query->where('name', 'like', '%' . $request->classitemsearch . '%');
             });
         }
-        
+
         $searchdata = $classItemQuery->orderBy('id', 'desc')->paginate(15)->withQueryString();
 
 if(count($searchdata)>0){
@@ -321,13 +322,13 @@ if(count($searchdata)>0){
     </button>
     </form>';
     $output .= '</div>
-        
+
     <div class="btn-group dropup d-block d-md-none control-btn">
         <button type="button" class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
             data-bs-toggle="dropdown" aria-expanded="false">
             <i class="mdi mdi-dots-vertical h4"></i>
         </button>
-    
+
         <ul class="dropdown-menu mb-1">
             <div class="d-flex justify-content-around">
                 <li>
@@ -360,8 +361,13 @@ if(count($searchdata)>0){
 </tr>';
 }
 
- 
+
 // return response($output);
+// if ($request->ajax()) {
+//     $view = view('classitem.data', compact('searchdata'))->render();
+
+//     $data =  response()->json(['html' => $view]);
+// }
 
     return response($output);
 
@@ -433,13 +439,13 @@ if(count($searchdata)>0){
             </button>
             </form>';
             $output .= '</div>
-                
+
             <div class="btn-group dropup d-block d-md-none control-btn">
                 <button type="button" class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="mdi mdi-dots-vertical h4"></i>
                 </button>
-            
+
                 <ul class="dropdown-menu mb-1">
                     <div class="d-flex justify-content-around">
                         <li>
@@ -475,6 +481,6 @@ if(count($searchdata)>0){
 
             return response($output);
 
-                
+
     }
 }

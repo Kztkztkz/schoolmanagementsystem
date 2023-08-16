@@ -21,8 +21,8 @@
                 <div class="">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item asdf"><a href="#">Class</a></li>
-                            <li class="breadcrumb-item active " aria-current="page">List</li>
+                            <li class="breadcrumb-item asdf"><a href="{{route('student.index')}}">Students</a></li>
+                            <li class="breadcrumb-item active " aria-current="page">Class related by Student</li>
                         </ol>
                     </nav>
                 </div>
@@ -138,9 +138,10 @@
                                             <i class="mdi mdi-pencil h5"></i>
                                         </a>
 
-                                        <a href="{{ route('classitem.show', $classdata) }}"
+                                        <a href="{{ route('classitem.show',  [ $classdata->id , 'ss' => $selectedStudent->id] ) }}"
                                             class="btn table-btn-sm btn-primary">
                                             <i class="mdi mdi-information-outline h5"></i>
+
                                         </a>
                                         {{-- <a href="" class="btn table-btn-sm btn-danger">
                                             <i class="mdi mdi-delete h5 text-white"></i>
@@ -249,25 +250,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  position-relative">
-                    {{-- <form action="{{route('student.index')}}" method="get">
+                    <form action="{{route('student.index')}}" method="get">
+
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
+                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
                                 <option value = "">Select Course</option>
-                                @foreach($courses as $course)
-                                    <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
-                                        {{$course->name}}
-                                    </option>
+                                @foreach($courseoption as $courses)
+                                    <option value="{{$courses->id}}">{{$courses->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="">Class</label>
-                            <select required class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
-                                <option value = "">Select Class</option>
-                                @foreach($classitems as $class)
-                                    <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
-                                        {{$class->name}}
+                            <label for="">Student</label>
+                            <select class="select2  form-select shadow-none">
+                                <option>Select Class</option>
+                                @foreach($studentoption as $students)
+                                    <option value="{{$students->id}}" {{ $students->id == $selectedStudent->id ? 'selected' : '' }}>
+                                        {{$students->name}}
                                     </option>
                                 @endforeach
                             </select>
@@ -279,7 +279,7 @@
                                 <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                             </div>
                         </div>
-                    </form> --}}
+                    </form>
             </div>
         </div>
     </div>

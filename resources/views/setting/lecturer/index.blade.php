@@ -19,7 +19,7 @@
                 <div class="">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item asdf"><a href="#">User</a></li>
+                            <li class="breadcrumb-item asdf"><a href="#">Lecturers</a></li>
                             <li class="breadcrumb-item active " aria-current="page">List</li>
                         </ol>
                     </nav>
@@ -169,7 +169,7 @@
                     </table>
                 </div>
                 <div class="d-flex justify-content-end me-3">
-                    {{-- {{$userdata->links()}} --}}
+                    {{$lecturers->links()}}
                 </div>
             </div>
         </div>

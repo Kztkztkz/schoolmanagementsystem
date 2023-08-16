@@ -7,6 +7,9 @@ body::-webkit-scrollbar{
     display: none;
 }
 
+.breadcrumb a{
+    color: #6c757d !important;
+}
 
 
 .bg-primary {
@@ -151,9 +154,9 @@ p {
     padding: 1rem !important;
 }
 
-.card {
-    height: 100% !important;
-}
+/*.card {*/
+/*    height: 100% !important;*/
+/*}*/
 
 .max-height{
     height: 100%;
@@ -310,6 +313,7 @@ p {
     .nav-item .dropdown-menu {
         width: 110px !important;
     }
+
 
 
 }

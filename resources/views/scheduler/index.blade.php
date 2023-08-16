@@ -174,7 +174,7 @@
                 </div>
             </div>
 
-            <div class="col-2 d-none d-md-block ">
+            <div class="col-2 d-none d-lg-block ">
 
                 <div class="card ">
                     <div class="card-body position-relative">
@@ -275,7 +275,7 @@
             </div>
 
 
-            <div class="col-12 col-md-10 p-auto">
+            <div class="col-12 col-lg-10 p-auto">
                 <div class="card rounded-3 ">
                     <div class="card-body">
 
@@ -454,7 +454,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-center align-items-center  ">
+            <div class="d-flex justify-content-center align-items-center d-lg-none">
                 <div class="">
                     <a href="{{ route('classitem.create') }}" class="btn btn-primary  mt-1"
                         type="submit ">Add Class</a>

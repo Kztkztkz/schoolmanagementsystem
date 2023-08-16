@@ -26,39 +26,16 @@ class PaymentController extends Controller
     {
 
 
-        // $classitemId = ClassitemStudent::pluck('classitem_id');
-        // $studentId = ClassitemStudent::pluck('student_id');
-        // $payments = Payment::where('student_id' , 22)->get();
-        // return $payments;
-        // $students  = Student::all();
-        // $classitemId = Student::pluck('classitem_id');
-        // return $classitemId;
 
-        // $distinct= Payment::orderBy('id' , 'desc')->get()->unique('classitem_id' , 'student_id');
-
-
-        // // return $studentId;
-
-        // foreach($distinct as $value){
-
-        //     echo "<pre>";
-        //     echo $value;
-        //     echo "</pre>";
-        // //    $paymentsByStudent = Payment::where('student_id' , $value )->get();
-        // //    array_push($payments , $paymentsByStudent);
-
-
-
-
-        // }
-
-
+        $classitems = Classitem::all();
+        $courses = Course::all();
+        $students = Student::all();
         $payments = Payment::all();
         $latestPayments = Payment::whereIn('id', function ($query) {
             $query->select(DB::raw('MAX(id)'))
                   ->from('payments')
                   ->groupBy('classitem_id', 'student_id');
-        })->paginate(7);
+        })->paginate(10);
 
         $totalPayment =  Payment::whereIn('id', function ($query) {
             $query->select(DB::raw('MAX(id)'))
@@ -84,7 +61,7 @@ class PaymentController extends Controller
 
 
 
-        return view('payment.index',compact('latestPayments' , 'total' , 'payments'));
+        return view('payment.index',compact('latestPayments' , 'total' , 'payments' , 'classitems' , 'courses' , 'students'));
 
         // 27.7.23
 
@@ -108,6 +85,8 @@ class PaymentController extends Controller
      */
     public function store(StorePaymentRequest $request)
     {
+
+
         // $currentStudentId = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first()->student_id;
 
         $currentStudentPayment = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first();
@@ -123,19 +102,25 @@ class PaymentController extends Controller
             $due_amount = (int) $classitemPrice - (int) request('due_amount');
         }
 
+
+
         $payment = new Payment();
         $payment->fees = $classitemPrice;
-        $payment->due_amount = $due_amount;
+
         $payment->classitem_id = $request->classitem_id;
         $payment->student_id = $request->student_id;
-
+        if(request('due_amount') > $due_amount || request('due_amount') > $classitemPrice){
+           return redirect()->route('classitem.show' , $classitem->id )->with('message', 'This amount is exceeded');
+        }else{
+            $payment->due_amount = $due_amount;
+        }
         $payment_type = ( $due_amount === 0 ) ? 'paid' : 'unpaid';
         $payment->payment_type = $payment_type;
         $payment->payment_method = $request->payment_method;
         $payment->save();
 
         return redirect()->route('payment.index');
-        
+
     }
 
     /**
@@ -184,12 +169,12 @@ class PaymentController extends Controller
     }
 
     public function classdetail(HttpRequest $request){
-        
+
         return $request;
         // return $request->studentname;
     }
 
-    
+
 
 
 

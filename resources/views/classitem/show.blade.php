@@ -47,7 +47,6 @@
             height: 600px;
         }
     </style>
-
 @endsection
 
 
@@ -78,7 +77,7 @@
                 <div class="row d-flex justify-content-between">
                     <div class="col-xs-12 col-md-6 ">
                         <div class="col-xs-12 col-12 ">
-                        <h5 class="sub-header mb-5">{{ $classitem->name }} Class</h5>
+                            <h5 class="sub-header mb-5">{{ $classitem->name }} Class</h5>
 
                             <div class="row">
                                 <div class="col-4">Time</div>
@@ -137,6 +136,7 @@
                     <div class="col-xs-12 col-md-6">
                         <h5 class="sub-header mb-5">Enroll existing student</h5>
 
+
                         <form action="{{ route('payment.store') }}" method="post">
                             @csrf
                             <input type="text" hidden name="classitem_id" value="{{ $classitem->id }}">
@@ -144,49 +144,64 @@
                             <div class="mt-3 mb-3">
                                 <label for="">Select Existing Student</label>
                                 <div class="input-group w-75">
-                                    <select name="student_id"  class="form-select @error('due_amount') is-invalid @enderror" id="inputGroupSelect04"
-                                        aria-label="Example select with button addon">
+                                    <select name="student_id"
+                                        class="form-select @error('due_amount') is-invalid @enderror js-example-basic-single"
+                                        id="inputGroupSelect04" aria-label="Example select with button addon">
 
-                                        <optgroup  label="Existing students">
+                                        <optgroup label="Existing students">
                                             <option disabled selected>Select Student</option>
                                             @foreach ($classitem->students as $student)
-                                                <option value="{{ $student->id }}">{{ $student->name }}</option>
+                                                <option value="{{ $student->id }}"
+                                                    {{ $student->id == request('ss') ? 'selected' : '' }}>
+                                                    {{ $student->name }}</option>
                                             @endforeach
+
                                         </optgroup>
                                         <optgroup label="All students">
                                             <option selected>Select Student</option>
                                             @foreach ($students as $student)
-                                                <option value="{{ $student->id }}">{{ $student->name }}</option>
+                                                <option value="{{ $student->id }}"
+                                                    {{ $student->id == request('ss') ? 'selected' : '' }}>
+                                                    {{ $student->name }}</option>
                                             @endforeach
                                         </optgroup>
                                     </select>
                                     @error('student_id')
-                                            <div class=" invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                        <div class=" invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                             </div>
 
                             <div class=" mt-3 mb-3 w-75">
                                 <label for="class">Payment Method</label>
-                                <select name="payment_method" class="form-select slectopt @error('due_amount') is-invalid @enderror" id="class">
+                                <select name="payment_method"
+                                    class="form-select slectopt @error('due_amount') is-invalid @enderror" id="class">
                                     <option value="cash">Cash</option>
                                     <option value="card">Card</option>
                                     <option value="bank transfer">Bank Transfer</option>
                                 </select>
                                 @error('payment_method')
-                                            <div class=" invalid-feedback">{{ $message }}</div>
+                                    <div class=" invalid-feedback">{{ $message }}</div>
                                 @enderror
+
                             </div>
 
                             <div class="mt-3 mb-3">
                                 <label for="amount mb-0">
-                                    <p class="small-header mb-0">Amount</p>
+                                    <p class="small-header mb-0 d-inline-block">Amount</p>
+                                    @if (session('message'))
+                                        <span class=" fs-6 text-danger ">
+                                           ( {{ session('message') }} )
+                                        </span>
+                                    @endif
                                 </label>
-                                <input name="due_amount" type="text" class="form-control w-75 @error('due_amount') is-invalid @enderror" id="amount">
+                                <input name="due_amount" type="text"
+                                    class="form-control w-75 @error('due_amount') is-invalid @enderror" id="amount">
                                 @error('due_amount')
-                                            <div class=" invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <div class=" invalid-feedback">{{ $message }}</div>
+                                @enderror
+
                             </div>
 
                             <div class="mt-3 mb-3">
@@ -198,7 +213,8 @@
                             </div>
 
                             <div>
-                                <button type="button" class="btn btn-secondary">Cancel</button>
+                                <a href="{{ route('classitem.index') }}" type="button"
+                                    class="btn btn-secondary">Cancel</a>
                                 <button type="submit" class="btn btn-primary">Enroll</button>
                             </div>
                         </form>
