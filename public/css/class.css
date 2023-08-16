@@ -47,8 +47,6 @@
     padding: 3px 0;
 }
 
-
-
 .dropdown-arrowIcon,
 .dropup-arrowIcon,
 .dropdown-arrowIcon2,
@@ -78,11 +76,11 @@
     height: 0;
 } */
 
-.dropdown-toggle::after  {
+.dropdown-toggle::after {
     display: none !important;
 }
 
-.dropdown-menu  {
+.dropdown-menu {
     min-width: auto !important;
     padding: 0.3rem !important;
 }
@@ -107,6 +105,13 @@
     width: 14%;
 }
 
+.table-responsive {
+    max-height: 34rem;
+}
+
+.table-responsive::-webkit-scrollbar {
+    display: none;
+}
 
 @media screen and (max-width: 768px) {
     .control-btns {
@@ -158,9 +163,9 @@
     }
 }
 
-@media screen and (max-width:460px){
-    .test{
-        margin-right: 0 ;
+@media screen and (max-width: 460px) {
+    .test {
+        margin-right: 0;
     }
 
     .list-lecturer-col {

@@ -68,13 +68,19 @@ class ClassitemController extends Controller
 
         // $classids = $classitemIdsQuery->pluck('id')->toArray();
 
-        $classitem =  $classItemQuery->orderBy('id', 'desc')->paginate(10)->withQueryString();
+        $classitem =  $classItemQuery->orderBy('id', 'desc')->paginate(15)->withQueryString();
 
         
             // $classitem = $this->classitemfilter($classitem);
         // } else {
         //     $classitem =  Classitem::orderBy('id', 'desc')->paginate(7);
         // }
+
+        if ($request->ajax()) {
+            $view = view('classitem.data', compact('classitem'))->render();
+  
+            return response()->json(['html' => $view]);
+        }
 
         return view('classitem.index', compact(['classitem','courseoption','studentoption']));
     }
@@ -251,7 +257,7 @@ class ClassitemController extends Controller
             });
         }
         
-        $searchdata = $classItemQuery->orderBy('id', 'desc')->paginate(7)->withQueryString();
+        $searchdata = $classItemQuery->orderBy('id', 'desc')->paginate(15)->withQueryString();
 
 if(count($searchdata)>0){
     foreach($searchdata as $classdata)
@@ -260,7 +266,7 @@ if(count($searchdata)>0){
     '
     <tr>
       <td class="align-middle">
-        <p class="d-none d-md-block text-cut">' .Str::limit($classdata->name,20). '</p>
+        <p class="d-none d-md-block text-cut">' .Str::limit($classdata->id,20). '</p>
         <div class="d-block d-md-none">
           <p>' . $classdata->name . '</p>
           <p class=" text-black-50 text-cut">'.Str::limit($classdata->users->pluck('name')->implode(', '),20).' </p>

@@ -13,7 +13,9 @@
 }
 </style>
 @endsection
-
+@section('ajaxcsrf')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('content')
     <div class="page-breadcrumb">
         <div class="row">
@@ -59,7 +61,7 @@
     <div class="row  px-3 max-height  d-sm-flex">
         <div class="col-12 col-md-9 class-table">
             <div class="card rounded-3">
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
                         <p class="mb-0 fw-bolder">Total - 10</p>
                         <div class="d-flex justify-content-center align-items-center">
@@ -90,7 +92,7 @@
                   </button>
                     </div>
                     @endif
-                    <table class="table table-striped">
+                    <table class="table table-striped highscro">
                         <thead>
                             <tr style="border-bottom: 2px solid black">
                                 <th scope="col" class="list-lecturer-col" >
@@ -108,120 +110,29 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody class="original">
-        
-                            @forelse($classitem as $classdata)
-                            @can('view', $classdata) 
-                            <tr>
-                                <td class="align-middle">
-                                    <p class="d-none d-md-block text-cut">{{Str::limit($classdata->name,20)}}</p>
-                                    <div class="d-block d-md-none">
-                                        <p>{{$classdata->name}} </p>
-                                        <p class=" text-black-50 text-cut">{{Str::limit($classdata->users->pluck('name')->implode(', '),20)}} </p>
-                                    </div>
-                                </td>
-                                <td class="align-middle">{{Str::limit($classdata->course->name,20)}}</td>
-                                <td class="d-none d-md-table-cell align-middle" >{{Str::limit($classdata->users->pluck('name')->implode(', '),20)}} </td>
-                                @can('viewAny', $classdata)
-                                @php $isUnpaid = false; @endphp
-                                @foreach($classdata->payments as $payment)
-                                @if($payment->payment_type === 'unpaid')
-                                @php $isUnpaid = true; @endphp @break
-                                @endif
-                                @endforeach
-                                @if($isUnpaid)
-                                <td class=" align-middle">
-                                    <div
-                                        class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
-                                        unpaid
-                                    </div>
-                                </td>
-                                @else
-                                <td class=" align-middle">
-                                    <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
-                                        paid
-                                    </div>
-                                </td>
-                                @endif                                
-                                <td class="d-none d-md-table-cell align-middle text-center">
-                                    <a href="{{ route('classitem.classPayment' , $classdata->id ) }}" class="btn table-btn-sm btn-primary">
-                                        <i class="mdi mdi-credit-card-multiple h5"></i>
-                                    </a>
-                                </td>
-                                @endcan
-                                <td class="text-end align-middle text-nowrap">
-                                    <div class="d-none d-md-block control-btns">
-                                        @can('viewAny', $classdata)
-                                        <a href="{{ route('classitem.edit', $classdata) }}" class="btn table-btn-sm btn-primary">
-                                            <i class="mdi mdi-pencil h5"></i>
-                                        </a>
-                                        @endcan
-                                        <a href="{{ route('classitem.show', $classdata) }}"
-                                            class="btn table-btn-sm btn-primary">
-                                            <i class="mdi mdi-information-outline h5"></i>
-                                        </a>
-                                        {{-- <a href="" class="btn table-btn-sm btn-danger">
-                                            <i class="mdi mdi-delete h5 text-white"></i>
-                                        </a> --}}
-
-                                        @can('viewAny',$classdata)
-                                        <form action="{{route('classitem.destroy', $classdata->id)}}" method="post" class="d-inline">
-                                        @csrf
-                                        <input name="_method" type="hidden" value="delete">
-                                        <button type="submit" class="btn table-btn-sm btn-danger del-btn alertbox">
-                                            <i class="mdi mdi-delete h5 text-white"></i>
-                                        </button>
-                                        </form>
-                                        @endcan
-
-                                    </div>
-
-                                    <div class="btn-group dropup d-block d-md-none control-btn">
-                                        <button type="button" class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="mdi mdi-dots-vertical h4"></i>
-                                        </button>
-
-                                        <ul class="dropdown-menu mb-1">
-                                            <div class="d-flex justify-content-around">
-                                                <li>
-                                                    <a href="{{ route('classitem.edit', $classdata) }}" class="btn table-btn-sm btn-outline-primary border border-0">
-                                                        <i class="mdi mdi-pencil h5"></i>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    {{-- <a href="" class="btn table-btn-sm btn-outline-danger border border-0">
-                                                        <i class="mdi mdi-delete h5 "></i>
-                                                    </a> --}}
-                                                    <form action="{{route('classitem.destroy', $classdata->id)}}" method="post" class="d-inline">
-                                                        @csrf
-                                                        <input name="_method" type="hidden" value="delete">
-                                                    <a href="" class="btn table-btn-sm btn-outline-danger border border-0 alertbox">
-                                                        <i class="mdi mdi-delete h5 "></i>
-                                                    </a>
-                                                        </form>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ route('classitem.show', 'detail') }}" class="btn table-btn-sm btn-outline-secondary border border-0">
-                                                        <i class="mdi mdi-information-outline h4"></i>
-                                                    </a>
-                                                </li>
-                                            </div>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endcan
-                            @empty
-                            <tr>
-                                <td colspan="6" class="text-center text-danger">Data Not Found</td>
-                              </tr>
-                            @endforelse
+                        <tbody class="original" id="data-wrapper">
+                            @include('classitem.data');
                             </div>
-                        </tbody>
-                        <tbody class="find">
-                        </tbody>
-                    </table>                    
+                          </tbody>
+                          <tbody class="find" id="data-wrapper2">
+                          </tbody>
+                          <tr>
+                            <td colspan="6" class="text-center">
+                                <button class="btn btn-secondary load-more-data"><i class="fa fa-refresh"></i> Load More Data...</button>
+                            </td>
+                          </tr>
+                    </table>
+                     <!-- Data Loader -->
+    <div class="auto-load text-center" style="display: none;">
+        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+            <path fill="#000"
+                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                    from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+            </path>
+        </svg>
+    </div>                    
                 </div>
                 <div class="d-flex justify-content-end me-3">
                 {{-- {{$classitem->links()}} --}}
@@ -268,7 +179,9 @@
     </div>
 @endsection
 
-
+@section('dataloader')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@endsection
 @push('scripts')
     <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -308,4 +221,51 @@
             </div>
         </div>
     </div>
+
+    <script>
+    var ENDPOINT = "{{ route('classitem.index') }}";
+    var page = 1;
+  
+    $(".load-more-data").click(function(){
+        page++;
+        infinteLoadMore(page);
+    });
+  
+    /*------------------------------------------
+    --------------------------------------------
+    call infinteLoadMore()
+    --------------------------------------------
+    --------------------------------------------*/
+    function infinteLoadMore(page) {
+        $.ajax({
+                url: ENDPOINT + "?page=" + page,
+                datatype: "html",
+                type: "get",
+                beforeSend: function () {
+                    $('.auto-load').show();
+                }
+            })
+            .done(function (response) {
+                if (response.html == '') {
+                    $('.auto-load').html("We don't have more data to display :(");
+                    return;
+                }
+                $('.auto-load').hide();
+                if(!window.location.href.includes("search")){
+                    $("#data-wrapper").append(response.html);
+                } else {
+                    $("#data-wrapper2").append(response.html);
+                }
+                
+                
+                if (response.html.includes('Data is Empty')) {
+            $('.load-more-data').hide();
+          }
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('Server error occured');
+            });
+    }
+    </script>
+
 @endpush

@@ -11,6 +11,7 @@
     <meta name="description"
         content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
+    @yield('ajaxcsrf')
     <title>School Management</title>
    @include('layout.css')
    @yield('custom')
@@ -90,6 +91,7 @@
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
+    @yield('dataloader')
     @include('layout.script')
 
     @stack('scripts')

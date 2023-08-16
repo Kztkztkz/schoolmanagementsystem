@@ -28,23 +28,21 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
-Route::get('/', [ SchedulerController::class , 'index'])->name('schdeuler.index');
-Route::get('/nextMonth/{from}' , [ SchedulerController::class , 'nextMonth' ])->name('schedular.nextMonth');
-Route::get('/preMonth/{from}' , [ SchedulerController::class , 'preMonth' ])->name('schedular.preMonth');
-
-
 Route::get('/login',function(){
     return view('auth.login');
-})->name('auth.login');
+})->name('auth.login')->middleware('guest');
 
 Route::post('/login',[UserController::class,'login'])->name('user.login');
 Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
-
 Route::get('/forgot-password',[UserController::class,'forgetpwdview'])->name('user.forgetpwdview');
 Route::post('/forgot-password',[UserController::class,'forgetpwd'])->name('user.forgetpwd');
 Route::get('/reset-password/{token}',[UserController::class,'resetpwd'])->name('user.resetpwd');
 Route::post('/reset-password',[UserController::class,'postresetpwd'])->name('user.postresetpwd');
+
+Route::middleware(['auth','verified'])->group(function(){
+Route::get('/', [ SchedulerController::class , 'index'])->name('schdeuler.index');
+Route::get('/nextMonth/{from}' , [ SchedulerController::class , 'nextMonth' ])->name('schedular.nextMonth');
+Route::get('/preMonth/{from}' , [ SchedulerController::class , 'preMonth' ])->name('schedular.preMonth');
 
 Route::resource('user', UserController::class);
 
@@ -63,3 +61,4 @@ Route::get('classpayment/{classitem}' , [ ClassitemController::class , 'classPay
 
 Route::get('/classitemsearch',[ClassitemController::class, 'classitemsearch'])->name('classitem.search');
 Route::get('/classitemfilter',[ClassitemController::class, 'classitemfilter'])->name('classitem.filter');
+});
