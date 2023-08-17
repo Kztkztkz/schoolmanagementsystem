@@ -115,10 +115,17 @@
                             </div>
                           </tbody>
                           <tbody class="find" id="data-wrapper2">
-                          </tbody>
+                        </tbody>
+                        @if(count($classitem)>=15)
                           <tr>
                             <td colspan="6" class="text-center">
                                 <button class="btn btn-secondary load-more-data"><i class="fa fa-refresh"></i> Load More Data...</button>
+                            </td>
+                          </tr>
+                          @endif
+                          <tr>
+                            <td colspan="6" class="text-center">
+                                <button class="btn btn-secondary load-more-data2" style="display: none;"><i class="fa fa-refresh"></i> Load More Data...</button>
                             </td>
                           </tr>
                     </table>
@@ -223,9 +230,11 @@
     </div>
 
     <script>
+
+
     var ENDPOINT = "{{ route('classitem.index') }}";
     var page = 1;
-  
+    // $('.load-more-data2').hide();
     $(".load-more-data").click(function(){
         page++;
         infinteLoadMore(page);
@@ -251,11 +260,7 @@
                     return;
                 }
                 $('.auto-load').hide();
-                if(!window.location.href.includes("search")){
                     $("#data-wrapper").append(response.html);
-                } else {
-                    $("#data-wrapper2").append(response.html);
-                }
                 
                 
                 if (response.html.includes('Data is Empty')) {
@@ -265,7 +270,61 @@
             .fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('Server error occured');
             });
+    } 
+
+    var ENDPOINT2 = "{{ route('classitem.search') }}";
+    var pagetwo = 1;
+    $(".load-more-data2").click(function(){
+        pagetwo++;
+        infinteLoadMore2(pagetwo);
+    });
+  
+    /*------------------------------------------
+    --------------------------------------------
+    call infinteLoadMore()
+    --------------------------------------------
+    --------------------------------------------*/
+    function infinteLoadMore2(page) {
+        var classitemsearch = $("#classitemsearch").val();
+        var coursesearchclassitem = $("#coursesearchclassitem").val();
+        var studentsearchclassitem = $("#studentsearchclassitem").val();
+
+        let query = `?classitemsearch=${classitemsearch}&coursesearchclassitem=${coursesearchclassitem}&studentsearchclassitem=${studentsearchclassitem}`;
+        $.ajax({
+
+                url: ENDPOINT2 + query +"&page=" + pagetwo,
+                datatype: "html",
+                type: "get",
+                beforeSend: function () {
+                    $('.auto-load').show();
+                }
+            })
+            .done(function (response) {
+                if (response== '') {
+                    $('.auto-load').html("We don't have more data to display :(");
+                    return;
+                }
+                $('.auto-load').hide();
+                    $("#data-wrapper2").append(response);
+                
+                
+                if (response.includes('Data is Empty')) {
+            $('.load-more-data2').hide();
+          }
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('Server error occured');
+            });
     }
+
+// }
+   
+
+    
+
+
+
+    
     </script>
 
 @endpush

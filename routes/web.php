@@ -52,7 +52,7 @@ Route::resource('lecturer' , LecturerController::class);
 Route::resource('room' , RoomController::class);
 Route::resource('course' , CourseController::class);
 Route::resource('student' , StudentController::class);
-Route::resource('classitem' , ClassitemController::class)->middleware(['auth','verified']);
+Route::resource('classitem' , ClassitemController::class);
 
 Route::get('student/{student}' , [ StudentController::class , 'relatedPayment' ])->name("student.relatedPayment");
 Route::get('student/{student}/class' , [ StudentController::class , 'relatedClass' ])->name("student.relatedClass");

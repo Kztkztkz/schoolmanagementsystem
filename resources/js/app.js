@@ -46,13 +46,32 @@ $(document).ready(function (e) {
 
         let query = `?classitemsearch=${classitemsearch}&coursesearchclassitem=${coursesearchclassitem}&studentsearchclassitem=${studentsearchclassitem}`;
 
+        // console.log(window.location.href + query);
 
+        // window.location.href = window.location.href + query;
         window.history.pushState({}, "", "classitem" + query);
 
+        if (
+            classitemsearch ||
+            coursesearchclassitem ||
+            studentsearchclassitem
+        ) {
+            $(".original").hide();
+            $(".find").show();
+            $(".load-more-data").hide();
+            $(".load-more-data2").show();
+        } else {
+            $(".original").show();
+            $(".find").hide();
+            $(".load-more-data").show();
+            $(".load-more-data2").hide();
+        }
 
-        $(".original").hide();
-        $(".find").show();
+        if ($(".find tr").length < 15) {
+            $(".load-more-data2").hide();
+        }
 
+        // if (!window.location.href.includes("search")) {
         $.ajax({
             url: "/classitemsearch",
             method: "GET",
@@ -65,7 +84,18 @@ $(document).ready(function (e) {
                 $(".find").html(data);
             },
         });
-
+        // } else {
+        //     $.ajax({
+        //         url: "/classitemfilter",
+        //         method: "GET",
+        //         data: {
+        //             classitemsearch: classitemsearch,
+        //         },
+        //         success: function success(data) {
+        //             $(".find").html(data);
+        //         },
+        //     });
+        // }
     }
 
     //sweetalert2
@@ -182,28 +212,3 @@ $(".nav-toggler").on("click", function (event) {
     $(".navbar-brand").toggleClass("d-none");
     $(".logo-text").toggleClass("add-logo-text");
 });
-
-
-//Select 2
-$(document).ready(function() {
-    $('.js-example-basic-single').map(function(){
-        $(this).select2();
-    });
-});
-
-//card height
-$('.card').map(function(){
-    let cardHeight = $(this).innerHeight();
-    // console.log('card' + cardHeight);
-    let mainHeight = window.innerHeight - 120;
-    // console.log(mainHeight);
-    $(this).css('height' , mainHeight);
-});
-
-// $('table').map(function(){
-//     let tbodyHeight = $(this).innerHeight();
-//     let cardHeight = $('.card').innnerHeight();
-//     let mainHeight = cardHeight - 50;
-//     $(this).css('height' , mainHeight);
-//     console.log(tbodyHeight);
-// })
