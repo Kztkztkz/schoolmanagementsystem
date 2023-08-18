@@ -47,6 +47,12 @@ Route::get('/preMonth/{from}' , [ SchedulerController::class , 'preMonth' ])->na
 Route::resource('user', UserController::class);
 
 Route::resource('payment' , PaymentController::class);
+Route::get('payments/get' , [ PaymentController::class , 'getPayments' ])->name("payments.get");
+Route::post('payments/get' , [ PaymentController::class , 'paymentFromModal' ])->name("payments.createModal");
+
+
+
+
 Route::resource('lecturer' , LecturerController::class);
 
 Route::resource('room' , RoomController::class);

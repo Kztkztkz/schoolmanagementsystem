@@ -11,9 +11,9 @@ use App\Models\Course;
 use App\Models\Classitem;
 use App\Models\ClassitemStudent;
 use App\Models\Student;
+use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Support\Facades\DB;
-use GuzzleHttp\Psr7\Request;
-use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
@@ -67,6 +67,14 @@ class PaymentController extends Controller
 
     }
 
+    public function getPayments(Request $request)
+    {
+        $payments = Payment::where('student_id', $request->studentId)->where('classitem_id', $request->classitemId)->with('student')->get();
+        return response()->json($payments);
+
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -86,7 +94,7 @@ class PaymentController extends Controller
     public function store(StorePaymentRequest $request)
     {
 
-
+        
         // $currentStudentId = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first()->student_id;
 
         $currentStudentPayment = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first();
@@ -168,11 +176,46 @@ class PaymentController extends Controller
         //
     }
 
-    public function classdetail(HttpRequest $request){
+    public function classdetail(Request $request){
 
         return $request;
         // return $request->studentname;
     }
+
+    public function paymentFromModal (Request $request){
+        $classitem = Classitem::find(request('classitem_id'));
+        $classitemPrice = $classitem->price;
+        $currentStudentPayment = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first();
+
+
+        if($currentStudentPayment !== null){
+            $currentStudentLastPayment = $currentStudentPayment->due_amount;
+            $due_amount = (int) $currentStudentLastPayment - (int) request('due_amount');
+        }else{
+            $due_amount = (int) $classitemPrice - (int) request('due_amount');
+        }
+
+        // return $due_amount;
+
+        $payment = new Payment();
+        $payment->fees = $classitemPrice;
+
+        $payment->classitem_id = $request->classitem_id;
+        $payment->student_id = $request->student_id;
+        if(request('due_amount') > $due_amount || request('due_amount') > $classitemPrice){
+           return redirect()->route('payment.index' )->with('message', 'This amount is exceeded');
+        }else{
+            $payment->due_amount = $due_amount;
+        }
+        $payment_type = ( $due_amount === 0 ) ? 'paid' : 'unpaid';
+        $payment->payment_type = $payment_type;
+        $payment->payment_method = $request->payment_method;
+        $payment->save();
+
+        return redirect()->route('payment.index');
+    }
+
+    
 
 
 
