@@ -2093,9 +2093,9 @@ $(document).ready(function (e) {
   // classItemSearch();
 
   //ajaxsearch
-  $("#classitemsearch").on("keyup", function (e) {
+  $("#classitemsearch").on("keyup", _.debounce(function (e) {
     classItemSearch();
-  });
+  }, 600));
   $("#coursesearchclassitem").change(function (e) {
     classItemSearch();
   });

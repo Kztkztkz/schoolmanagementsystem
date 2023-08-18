@@ -270,7 +270,7 @@ if(count($searchdata)>0){
     '
     <tr>
       <td class="align-middle">
-        <p class="d-none d-md-block text-cut">' .Str::limit($classdata->id,20). '</p>
+        <p class="d-none d-md-block text-cut">' .Str::limit($classdata->name,20). '</p>
         <div class="d-block d-md-none">
           <p>' . $classdata->name . '</p>
           <p class=" text-black-50 text-cut">'.Str::limit($classdata->users->pluck('name')->implode(', '),20).' </p>

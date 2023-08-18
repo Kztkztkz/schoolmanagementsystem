@@ -333,17 +333,16 @@
                                                                 @if (
                                                                     $month->between(Carbon\Carbon::parse($classitem->start_date)->format('Y-m'),
                                                                         Carbon\Carbon::parse($classitem->end_date)->format('Y-m')) && $hourstring === date('H', strtotime($classitem->start_time)))
-                                                                    <div id="asdf" class="active-classitem"
+                                        
+                                                                    <div class="active-classitem"
                                                                         style=" background-color: {{ $classitem->container_color }}; border: 1px solid {{ $classitem->container_color }}; border-right: 1px solid {{ $classitem->container_color }}; border-bottom: 1px solid {{ $classitem->container_color }};"
-                                                                        style="">
+                                                                        data-bs-placement="bottom"
+                                                                        title="{{ $classitem->name }}"
+                                                                        >
 
-                                                                        @if ($k == 1 && $month->format('m') == date('m', strtotime($classitem->start_date)))
-                                                                            <span style=" z-index:1;"
-                                                                                data-bs-placement="bottom"
-                                                                                title="{{ $classitem->name }}">
-                                                                                {{ $classitem->code }}
-                                                                            </span>
-                                                                            {{-- @push('scripts')
+                                                                        @if ($k == round(($timedif-1)/2) && $month->format('m') == date('m', strtotime($classitem->start_date)))
+                                                                            
+                                                                                {{ $classitem->code }}              {{-- @push('scripts')
                                                                             <script>
                                                                                 let activeColor = "@php echo $classitem->container_color @endphp";
                                                                                 $('.active-classitem').parent().css('border-right', activeColor);
@@ -353,6 +352,7 @@
 
 
                                                                     </div>
+
                                                                 @endif
                                                                 {{-- @endfor --}}
                                                             @endfor
@@ -420,14 +420,13 @@
                                                                         Carbon\Carbon::parse($classitem->end_date)->format('Y-m')) && $hourstring === date('H', strtotime($classitem->start_time)))
                                                                     <div id="asdf" class="active-classitem"
                                                                         style=" background-color: {{ $classitem->container_color }}; border: 1px solid {{ $classitem->container_color }}; border-right: 1px solid {{ $classitem->container_color }}; border-bottom: 1px solid {{ $classitem->container_color }};"
-                                                                        style="">
-
-                                                                        @if ($k == 1 && $month->format('m') == date('m', strtotime($classitem->start_date)))
-                                                                            <span style=" z-index:1;"
-                                                                                data-bs-placement="bottom"
+                                                                        data-bs-placement="bottom"
                                                                                 title="{{ $classitem->name }}">
+
+                                                                        @if ($k == round(($timedif-1)/2) && $month->format('m') == date('m', strtotime($classitem->start_date)))
+
                                                                                 {{ $classitem->code }}
-                                                                            </span>
+
                                                                             {{-- @push('scripts')
                                                                             <script>
                                                                                 // let activeColor = "@php echo $classitem->container_color @endphp";

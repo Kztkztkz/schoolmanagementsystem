@@ -50,15 +50,7 @@
                           </button>
                             </div>
                             @endif
-                            @if ($errors->has('email')) 
-                            <h6 class="alert alert-danger success-alt p-2">@error ('email') {{$message}} @enderror</h6>
-                            @endif
-                            @if($errors->has('password'))
-                            <h6 class="alert alert-danger success-alt p-2">@error ('password') {{$message}} @enderror</h6>
-                            @endif
-                            @if($errors->has('password_confirmation'))
-                            <h6 class="alert alert-danger success-alt p-2">@error ('password_confirmation') {{$message}} @enderror</h6>
-                            @endif
+                           
                             <form class="d-flex flex-column justify-content-center align-items-center mt-5 rmlgform" method="post" action="{{route('user.postresetpwd')}}">
                                 @csrf
                                 <input type="hidden" value="{{$token}}" name="token">
@@ -66,16 +58,17 @@
                                     <label   for="startdate">Email</label>
                                     <input type="email" class="form-control w-75" id="enddate" placeholder="enter email" name="email">                                    
                                 </div>
-                                
+                                <span class="text-danger" style="margin: -16px 0 10px 0;">@error ('email') {{$message}} @enderror</span>
                                 <div class="form-group d-flex align-items-center w-100">
                                     <label   for="name">Password</label>
                                     <input type="password" class="form-control w-75" id="name" placeholder="enter password" name="password">                                                                        
                                 </div>
-                                
+                                <span class="text-danger" style="margin: -10px 0 10px 0;">@error ('password') {{$message}} @enderror</span>
                                 <div class="form-group d-flex align-items-center w-100">
                                   <label   for="confirmpwd">Confirm Password</label>
                                   <input type="password" class="form-control w-75" id="confirmpwd" placeholder="enter password" name="password_confirmation">                                  
-                              </div>                                                                  
+                              </div>
+                              <span class="text-danger" style="margin: -10px 0 10px 0;">@error ('password') {{$message}} @enderror</span>                                                                  
                                 <button type="submit" class="btn btn-primary btn-sm px-3 mt-3 fs-5">Reset Password</button>
                             </form>
                         </div>

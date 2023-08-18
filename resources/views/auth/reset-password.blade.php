@@ -42,9 +42,6 @@
                         </div>                        
                         <div class="col-8 login-right">
                             <h4 class="text-center pb-2 border-bottom border-dark rmlogin">Reset Password</h4>
-                            @if($errors->any())
-                            <h6 class="alert alert-danger success-alt p-2">@error ('email') {{$message}} @enderror</h6>
-                            @endif
                             @if(session()->has('err'))
                             <div class="alert alert-danger success-alt">
                               <h6>{{session()->get('err')}}</h6>
@@ -68,6 +65,7 @@
                                     <label   for="startdate">Email</label>
                                     <input type="email" class="form-control w-75" id="enddate" placeholder="enter email" name="email">                                    
                                 </div>
+                                <span class="text-danger">@error ('email') {{$message}} @enderror</span>
                                 <div class="mt-2">
                                 <a href="{{route('user.login')}}" class="btn btn-secondary btn-sm px-3 mt-3 fs-5 mx-3">Cancel</a>
                                 <button type="submit" class="btn btn-primary btn-sm px-3 mt-3 fs-5">Reset Password</button>
