@@ -20,17 +20,30 @@
 @section('content')
     <div class="page-breadcrumb">
         <div class="row">
-            <div class="col-12 d-flex ">
-
+            <div class="col-sm-9 col-xs-12 d-flex ">
                 <div class="">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-
-                            <li class="breadcrumb-item active " aria-current="page">Course List</li>
+                            <li class="breadcrumb-item asdf"><a href="#">Course</a></li>
+                            <li class="breadcrumb-item active " aria-current="page">List</li>
                         </ol>
                     </nav>
                 </div>
             </div>
+            <form class="col-md-3" method="get" action="{{route('course.index')}}">
+                <div class="mx-auto">
+                    <div class="input-group">
+                        <input class="form-control border-end-0 border" placeholder="search user" type="search"
+                            value="{{request('search')}}" id="example-search-input" name="search">
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
+                                type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -66,8 +79,9 @@
                             @endforeach
 
                             <form action="{{ route('course.store') }}" method="POST">
+                                @csrf
                                 <div class="row-item mb-3 grid-container">
-                                    @csrf
+
                                     <button type="submit" class=" btn course-btn  btn-primary px-1 me-2">
                                         Add
                                     </button>

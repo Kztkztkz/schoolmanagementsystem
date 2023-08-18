@@ -105,3 +105,5 @@
     <td colspan="6" class="text-center text-danger">Data is Empty</td>
   </tr>
 @endforelse
+
+

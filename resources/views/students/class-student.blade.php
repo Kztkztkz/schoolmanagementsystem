@@ -96,7 +96,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($classitem as $classdata)
+                            @forelse($classitems as $classdata)
                             <tr>
                                 <td class="align-middle">
                                     <p class="d-none d-md-block text-cut">{{Str::limit($classdata->name,20)}}</p>
@@ -128,9 +128,16 @@
                                 </td>
                                 @endif
                                 <td class="d-none d-md-table-cell align-middle text-center">
-                                    <a href="{{route('payment.index')}}" class="btn table-btn-sm btn-primary">
-                                        <i class="mdi mdi-credit-card-multiple h5"></i>
-                                    </a>
+                                    <form action="{{ route( 'payment.allhistory' ) }}" method="POST">
+                                        <button " class="btn table-btn-sm btn-primary">
+                                            @csrf
+                                            @method('post')
+                                            <i class="mdi mdi-credit-card-multiple h5"></i>
+                                            <input type="text" name="student_id" value="{{ $selectedStudent->id }}" hidden>
+                                            <input type="text" name="classitem_id" value="{{ $classdata->id }}" hidden>
+
+                                        </button>
+                                    </form>
                                 </td>
                                 <td class="text-end align-middle text-nowrap">
                                     <div class="d-none d-md-block control-btns">

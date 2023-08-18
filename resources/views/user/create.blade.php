@@ -31,14 +31,14 @@
 <div class="col-md-12">
   <div class="card rounded-3 " style="height: 600px">
     <div class="card-body">
-      @if(session()->has('message'))
+      {{-- @if(session()->has('message'))
                     <div class="alert alert-success success-alt mt-2">
                       {{session()->get('message')}}
                       <button type="button" class="close success-msg" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>
                     </div>
-                    @endif
+                    @endif --}}
 
                     {{-- @if(session()->has('message'))
                     <script>
@@ -87,7 +87,7 @@ noty.show();
             <span class="text-danger">@error ('role') {{$message}} @enderror</span>
           </div>
         </div>
-        <div class = "mt-5 text-center">
+        <div class = "mt-5 text-center create-filterbtn">
           <a href="{{route('user.index')}}" class="btn btn-secondary ss">Cancel</a>
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
@@ -97,3 +97,4 @@ noty.show();
 </div>
 
 @endsection
+

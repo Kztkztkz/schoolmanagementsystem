@@ -10,6 +10,7 @@ use App\Models\Course;
 use App\Models\Payment;
 use Faker\Core\Number;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -104,16 +105,29 @@ class StudentController extends Controller
 
         if($request->classitem_id > -1 ){
 
+        $currentStudentPayment = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first();
+
+
             $classitem = Classitem::find(request('classitem_id'));
             $classitemPrice = $classitem->price;
             $due_amount = (int) $classitemPrice - (int) request('due_amount');
+            if($currentStudentPayment !== null){
+                $currentStudentLastPayment = $currentStudentPayment->due_amount;
+                $due_amount = (int) $currentStudentLastPayment - (int) request('due_amount');
+            }else{
+                $due_amount = (int) $classitemPrice - (int) request('due_amount');
+            }
 
             $payment = new Payment();
             $payment->fees = $classitemPrice;
             $payment->due_amount = $due_amount;
             $payment->classitem_id = $request->classitem_id;
             $payment->student_id = $student->id;
-
+            if(request('due_amount') > $due_amount || request('due_amount') > $classitemPrice){
+                return redirect()->route('classitem.show' , $classitem->id )->with('message', 'This amount is exceeded');
+             }else{
+                 $payment->due_amount = $due_amount;
+             }
             $payment_type = ( $due_amount === 0 ) ? 'paid' : 'unpaid';
             $payment->payment_type = $payment_type;
             $payment->payment_method = $request->payment_method;
@@ -175,21 +189,26 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
-        return redirect()->back();
+        return redirect()->route('student.index')->with('del' , 'Student delete successfully');
     }
 
     public function relatedClass(Student $student){
         $studentoption = Student::all();
         $courseoption = Course::all();
-        $classitem = $student->classitems;
+        $classitems = $student->classitems;
         $selectedStudent = $student;
 
-        return view('students.class-student' , compact('classitem' , 'studentoption' , 'courseoption' , 'selectedStudent'));
+        return view('students.class-student' , compact('classitems' , 'studentoption' , 'courseoption' , 'selectedStudent'));
     }
 
     public function relatedPayment(Student $student){
 
-        $payments = $student->payments()->get();
+
+        $payments = $student->payments()->whereIn('id', function ($query) {
+            $query->select(DB::raw('MAX(id)'))
+                  ->from('payments')
+                  ->groupBy('classitem_id', 'student_id');
+        })->paginate(10);
         $studentoption = Student::all();
         $courseoption = Course::all();
         $classitems = Classitem::all();

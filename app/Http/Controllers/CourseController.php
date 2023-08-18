@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
+use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
@@ -13,9 +14,13 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $courses = Course::latest()->get();
+
+        if($request->has('search')){
+            $courses = Course::where('name', 'like', '%' . $request->search . '%')->get();
+        }
         return view('setting.course.index' , compact('courses'));
     }
 

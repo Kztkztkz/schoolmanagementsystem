@@ -69,7 +69,7 @@ class UserController extends Controller
             'role_id' => $request->role,
         ]);
 
-        return redirect()->back()->with('message','Data Inserted Successfully');
+        return redirect()->route('user.index')->with('message','Data Inserted Successfully');
     }
 
     /**
@@ -127,7 +127,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('user.index')->with('del', 'Data is deleted');
+        return redirect()->route('user.index')->with('del', 'User is deleted');
     }
 
     public function login(LoginUserRequest $request)

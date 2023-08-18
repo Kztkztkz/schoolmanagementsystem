@@ -106,7 +106,7 @@
     </div>
     <!-- end responsive -->
     <div class="row  px-3 max-height d-none d-sm-flex">
-        <div class="col-9">
+        <div class="col-12">
             <div class="card rounded-3">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -173,37 +173,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
-            <div class="card">
-                <div class="card-body position-relative">
-                    <p class="  fs-4 mb-2 text-center">Lecturer Filter</p>
-                    <form action="">
-                        {{-- <div class=" mb-3">
-                            <label for="">Name</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
-                                <option>Select Name</option>
-                                <option value="CA">dfa</option>
-                            </select>
-                        </div> --}}
-                        <div class="mb-3">
-                            <label for="">Role</label>
-                            <select class="select2  form-select shadow-none" name="userrolefilter">
-                                <option>Select Role</option>
-                                {{-- @foreach($roles as $roledata)
-                                <option value="{{$roledata->id}}" {{$roledata->id == request('userrolefilter') ? 'selected' : ''}}>{{$roledata->name}}</option>
-                                @endforeach --}}
-                            </select>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="position-absolute filterbtn">
-                                <button class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</button>
-                                <button class="btn btn-primary sub-btn " type="submit">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+        
     </div>
 @endsection
 

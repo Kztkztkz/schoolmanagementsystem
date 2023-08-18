@@ -11,6 +11,8 @@ $(document).ready(function (e) {
         allowClear: true,
     });
 
+
+
     //colorpicker
     $("#color").on("input", () => {
         var color = $("#color").val();
@@ -45,6 +47,8 @@ $(document).ready(function (e) {
         var studentsearchclassitem = $("#studentsearchclassitem").val();
 
         let query = `?classitemsearch=${classitemsearch}&coursesearchclassitem=${coursesearchclassitem}&studentsearchclassitem=${studentsearchclassitem}`;
+
+
 
         // console.log(window.location.href + query);
 
@@ -99,28 +103,30 @@ $(document).ready(function (e) {
     }
 
     //sweetalert2
-    $(".alertbox").click(function (event) {
-        var form = $(this).closest("form");
-        var name = $(this).data("name");
-        event.preventDefault();
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                Swal.fire("Deleted!", "Your file has been deleted.", "success");
-                setTimeout(() => {
-                    form.submit();
-                }, 3000);
-            }
+    $(".alertbox").map(function(){
+        $(this).click(function (event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire("Deleted!", "Your file has been deleted.", "success");
+                    setTimeout(() => {
+                        form.submit();
+                    }, 3000);
+                }
+            });
         });
-    });
 
+    });
     //classitem index table expend
     $(".dropdown-arrowIcon").click(function () {
         $(this).toggleClass("dropup-arrowIcon");
@@ -184,19 +190,20 @@ $(document).ready(function (e) {
 $("#addCourse").click(function () {
     $("#courseRow").append(`
     <form action="{{ route('course.store') }}" method="POST">
-    <div class="row-item mb-3 grid-container">
         @csrf
-        <button type="submit" class=" btn course-btn  btn-primary px-1 me-2">
-            Add
-        </button>
+        <div class="row-item mb-3 grid-container">
 
-        <input type="text" name="name" class=" form-control d-inline-block"
-            placeholder="Add new course">
-        <button class=" btn course-btn btn-secondary px-1 ms-2 course-del">
-            Cancel
-        </button>
-    </div>
-</form>
+            <button type="submit" class=" btn course-btn  btn-primary px-1 me-2">
+                Add
+            </button>
+
+            <input type="text" name="name" class=" form-control d-inline-block"
+                placeholder="Add new course">
+            <button class=" btn course-btn btn-secondary px-1 ms-2 course-del">
+                Cancel
+            </button>
+        </div>
+    </form>
     `);
 });
 
@@ -211,4 +218,21 @@ $(".nav-toggler").on("click", function (event) {
     $(".nav-toggler").toggleClass("add-nav-toggler");
     $(".navbar-brand").toggleClass("d-none");
     $(".logo-text").toggleClass("add-logo-text");
+});
+
+
+//Select 2
+$(document).ready(function() {
+    $('.js-example-basic-single').map(function(){
+        $(this).select2();
+    });
+});
+
+//card height
+$('.card').map(function(){
+    let cardHeight = $(this).innerHeight();
+    // console.log('card' + cardHeight);
+    let mainHeight = window.innerHeight - 120;
+    // console.log(mainHeight);
+    $(this).css('height' , mainHeight);
 });

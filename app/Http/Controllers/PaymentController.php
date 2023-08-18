@@ -13,7 +13,12 @@ use App\Models\ClassitemStudent;
 use App\Models\Student;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
+
+use Illuminate\Http\Request as HttpRequest;
+
+
 
 class PaymentController extends Controller
 {
@@ -22,7 +27,7 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(  )
     {
 
 
@@ -31,6 +36,8 @@ class PaymentController extends Controller
         $courses = Course::all();
         $students = Student::all();
         $payments = Payment::all();
+
+
         $latestPayments = Payment::whereIn('id', function ($query) {
             $query->select(DB::raw('MAX(id)'))
                   ->from('payments')
@@ -94,7 +101,7 @@ class PaymentController extends Controller
     public function store(StorePaymentRequest $request)
     {
 
-        
+
         // $currentStudentId = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first()->student_id;
 
         $currentStudentPayment = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first();
@@ -126,6 +133,15 @@ class PaymentController extends Controller
         $payment->payment_type = $payment_type;
         $payment->payment_method = $request->payment_method;
         $payment->save();
+
+
+        $stuCla = ClassitemStudent::where('student_id' , $request->student_id)->where('classitem_id' , $request->classitem_id )->get();
+        if($stuCla == ''){
+            $studentClass = new ClassitemStudent();
+            $studentClass->student_id = $request->student_id;
+            $studentClass->classitem_id = $request->classitem_id;
+            $studentClass->save();
+        }
 
         return redirect()->route('payment.index');
 
@@ -182,6 +198,7 @@ class PaymentController extends Controller
         // return $request->studentname;
     }
 
+
     public function paymentFromModal (Request $request){
         $classitem = Classitem::find(request('classitem_id'));
         $classitemPrice = $classitem->price;
@@ -215,7 +232,16 @@ class PaymentController extends Controller
         return redirect()->route('payment.index');
     }
 
-    
+
+
+    public function allPaymentHistory(HttpRequest $request){
+
+
+        $paymentHistory = Student::find($request->student_id)->payments;
+        $paymentHistory =  $paymentHistory->where('classitem_id' , 1);
+        return view('students.pay-history-student' , compact('paymentHistory'));
+    }
+
 
 
 

@@ -40,7 +40,7 @@
             </select>
           </div>
         </div>
-        <div class = "mt-5 text-center">
+        <div class = "mt-5 text-center create-filterbtn">
           <a href="{{route('user.index')}}" class="btn btn-secondary">Cancel</a>
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>

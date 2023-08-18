@@ -24,14 +24,14 @@
       <div class="card-body">
         <form method="post" action="{{route('classitem.store')}}">
           @csrf
-          @if(session()->has('message'))
+          {{-- @if(session()->has('message'))
           <div class="alert alert-success success-alt">
             {{session()->get('message')}}
             <button type="button" class="close success-msg" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
           </div>
-          @endif
+          @endif --}}
           {{-- @if(session()->has('message'))
           <script>
             noty({

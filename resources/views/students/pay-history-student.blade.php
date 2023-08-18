@@ -85,7 +85,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($payments as $payment)
+                                @forelse ($paymentHistory as $payment)
                                 <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
 
                                     {{-- Mobile View --}}
@@ -118,7 +118,26 @@
                                 @empty
                                 <td colspan="7" class="text-center">No search data</td>
                                 @endforelse
-                               
+                                {{-- <tr data-bs-toggle="modal" data-bs-target="#exampleModal"> --}}
+                                    {{-- Mobile View --}}
+                                    {{-- <td class="d-table-cell d-lg-none text-nowrap align-middle">
+                                        <p>01-01-2023</p>
+                                        <p>Kyaw Kyaw</p>
+                                    </td> --}}
+                                    {{-- Laptop View --}}
+                                    {{-- <td class="d-none d-lg-table-cell align-middle">01-01-2023</td>
+                                    <td class="align-middle">Class A</td>
+                                    <td class="d-none d-lg-table-cell align-middle">Python</td>
+                                    <td class="d-none d-lg-table-cell align-middle">Kyaw Kyaw</td>
+                                    <td class=" align-middle">150000</td>
+                                    <td class=" align-middle">50000</td>
+                                    <td class=" align-middle">
+                                        <div
+                                            class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
+                                            Unpaid
+                                        </div>
+                                    </td> --}}
+                                {{-- </tr> --}}
 
                             </tbody>
                         </table>
@@ -140,20 +159,20 @@
                             <label for="">Student</label>
                             <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
                                 <option>Select Student</option>
-                                @foreach($studentoption as $students)
+                                {{-- @foreach($studentoption as $students)
                                     <option value="{{$students->id}}" {{ $students->id == $selectedStudent->id ? 'selected' : '' }}>
                                         {{$students->name}}
                                     </option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="">Course</label>
                             <select class="select2  form-select shadow-none">
                                 <option>Select Course</option>
-                                @foreach($courseoption as $courses)
+                                {{-- @foreach($courseoption as $courses)
                                     <option value="{{$courses->id}}">{{$courses->name}}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
 
@@ -161,9 +180,9 @@
                             <label for="">Class</label>
                             <select class="select2  form-select shadow-none">
                                 <option>Select Class</option>
-                                @foreach($classitems as $classitem)
+                                {{-- @foreach($classitems as $classitem)
                                     <option value="{{$classitem->id}}">{{$classitem->name}}</option>
-                                @endforeach
+                                @endforeach --}}
                             </select>
                         </div>
                         <div class="d-flex justify-content-center">

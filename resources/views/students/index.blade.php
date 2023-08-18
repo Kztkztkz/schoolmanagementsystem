@@ -66,7 +66,7 @@
                         <span class=" alert alert-success ">{{ session('message') }}</span>
                     @endif --}}
                     <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
-                        <p class="mb-0 fw-bolder">Total - {{ $totalStudents }}</p>
+                        <p class="mb-0 fw-bolder">Total - {{ $students->total() }}</p>
                         <div class="d-flex justify-content-center align-items-center gap-2">
                             <a href="{{ route('student.create') }}"
                                 class="btn d-flex justify-content-center align-items-center plus-btn btn-outline-secondary ">
@@ -126,7 +126,7 @@
                                             <form action="{{ route('student.destroy' , $student->id ) }}" class=" d-inline-block" method="post">
                                                 @csrf
                                                 @method('delete')
-                                                <button type="submit" onclick=" return confirm('Are you sure to delete?') " class="btn table-btn-sm btn-danger del-btn">
+                                                <button type="submit"  class="btn table-btn-sm btn-danger del-btn alertbox">
                                                     <i class="mdi mdi-delete h5 text-white"></i>
                                                 </button>
                                             </form>
@@ -190,7 +190,7 @@
             <div class="card ">
                 <div class="card-body position-relative filter-card">
                     <div class="d-flex align-items-center justify-content-center mb-2">
-                        <i class="mdi mdi-file-find h3 me-1"></i>
+                        <i class="mdi mdi-filter-outline h3 me-1"></i>
                         <p class="  fs-4 mb-2 text-center">Student Filter</p>
                     </div>
 
@@ -279,7 +279,7 @@
 
     <script>
 
-        
+
 
         let test = $('#test');
         @if(session('message'))
@@ -296,6 +296,21 @@
                 }).show();
 
         @endif
+
+        @if(session('del'))
+        new Noty({
+                type: 'success',
+                layout: 'bottomLeft',
+                theme: 'nest',
+                text:  'Classitem delete successfully',
+                timeout: '2000',
+                progressBar: true,
+                closeWith: ['click'],
+                killer: true,
+
+                }).show();
+
+    @endif
 
         let courseId = [];
         let classId = [];

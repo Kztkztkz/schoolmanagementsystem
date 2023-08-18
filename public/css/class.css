@@ -4,6 +4,12 @@
     border: none;
 }
 
+
+
+.select2-container--default .select2-selection--multiple{
+    height: auto !important;
+}
+
 /* .form-control,
 .slectopt {
     width: 14.5rem;

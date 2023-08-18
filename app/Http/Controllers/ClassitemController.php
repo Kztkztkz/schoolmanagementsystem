@@ -132,7 +132,7 @@ class ClassitemController extends Controller
         // $noty->setMessage('Your file has been uploaded successfully.');
         // $noty->show();
 
-       return redirect()->back()->with('message','Data Inserted Successfully');
+       return redirect()->route('classitem.index')->with('message','Data Inserted Successfully');
     }
 
     /**
@@ -265,7 +265,7 @@ class ClassitemController extends Controller
 if(count($searchdata)>0){
     foreach($searchdata as $classdata)
     {
-        
+
     $output .=
     '
     <tr>
@@ -378,6 +378,6 @@ return response()->json($output);
     public function classitemfilter(Request $request)
     {
 
-                
+
     }
 }

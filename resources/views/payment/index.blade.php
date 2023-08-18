@@ -60,7 +60,7 @@
             <div class="card rounded-3 ">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
-                        <p class="mb-0 fw-bolder">Total - {{$total}}</p>
+                        <p class="mb-0 fw-bolder">Total - {{$latestPayments->total()}}</p>
                         <div class="d-flex justify-content-end  d-xs-block d-md-none ">
                             <button type="button" class="btn plus-btn btn-outline-secondary d-flex " data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
@@ -87,8 +87,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+
                                 @foreach ($latestPayments as $payment)
+
                                 <tr onclick="showPayments({{ $payment->classitem_id }}, {{ $payment->student_id }})" class="history" data-className="{{$payment->classitem->name}}" data-studentName="{{$payment->student->name}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
 
 
@@ -130,26 +131,7 @@
                                     </td>
                                 </tr>
                                 @endforeach
-                                {{-- <tr data-bs-toggle="modal" data-bs-target="#exampleModal"> --}}
-                                    {{-- Mobile View --}}
-                                    {{-- <td class="d-table-cell d-lg-none text-nowrap align-middle">
-                                        <p>01-01-2023</p>
-                                        <p>Kyaw Kyaw</p>
-                                    </td> --}}
-                                    {{-- Laptop View --}}
-                                    {{-- <td class="d-none d-lg-table-cell align-middle">01-01-2023</td>
-                                    <td class="align-middle">Class A</td>
-                                    <td class="d-none d-lg-table-cell align-middle">Python</td>
-                                    <td class="d-none d-lg-table-cell align-middle">Kyaw Kyaw</td>
-                                    <td class=" align-middle">150000</td>
-                                    <td class=" align-middle">50000</td>
-                                    <td class=" align-middle">
-                                        <div
-                                            class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
-                                            Unpaid
-                                        </div>
-                                    </td> --}}
-                                {{-- </tr> --}}
+
 
                             </tbody>
                         </table>
@@ -162,11 +144,11 @@
             </div>
         </div>
 
-        <div class="col-3 d-none d-md-block" id="exampleModal2">
+        <div class="col-3 d-none d-md-block" >
             <div class="card" style="height: 100%">
                 <div class="card-body position-relative filter-card">
                     <div class="d-flex align-items-center justify-content-center mb-2">
-                        <i class="mdi mdi-file-find h3 me-1"></i>
+                        <i class="mdi mdi-filter-outline h3 me-1"></i>
                         <p class="  fs-4 mb-2 text-center">Payment Filter</p>
                     </div>
                     <form action="">
@@ -221,8 +203,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="mymodal">Payment For Web Foundation (Batch 01)</h1>
+
+   @foreach ($latestPayments as $payment)
+
+
+
+
+
+         <!-- Modal -->
+    <div class="modal fade" id="exampleModal{{$payment->id}}" tabindex="-1" aria-labelledby="exampleModal{{$payment->id}}Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModal{{$payment->id}}Label">{{$payment->classitem->name}}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+
                 <div class="modal-body">
                     <h6>Student Name - <span id="modalStudentName"></span></h6>
 
@@ -235,6 +231,7 @@
                                 <th scope="col">Type</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             @foreach ({{$payment->student->name}} as $student)
 
@@ -246,6 +243,13 @@
                             </tr>
                             @endforeach
                             <tr>
+
+                        <tbody class="payHistory">
+
+
+                            {{-- @endforeach --}}
+                            {{-- <tr>
+
                                 <td class="col-3">01-01-2023</td>
                                 <td class="col-3">Class A</td>
                                 <td class="col-3">Python</td>
@@ -296,6 +300,7 @@
                 </div>
             </div>
         </div>
+
     </div> --}}
 
     <div class="modal fade hide" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -307,7 +312,7 @@
             </div>
             <form action="{{route('payments.createModal')}}" method="POST">
             <div class="modal-body">
-                  
+
                 <h3 class="studentName"></h3>
 
                 <table class="table table-striped table-hover">
@@ -331,7 +336,7 @@
                         </tr> --}}
                     </tbody>
                 </table>
-               
+
                 @csrf
                 <input type="text" class="d-none" name="student_id" hidden id="curStudentId" value="">
                 <input type="text" class="d-none" name="classitem_id" hidden id="curClassId" value="">
@@ -355,7 +360,7 @@
                                     <option value="card">Card</option>
                                     <option value="bank transfer">Bank Transfer</option>
                                 </select>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -373,15 +378,19 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="submit" class="btn btn-primary">Pay</button>
                 </div>
-               
-              
+
+
             </div>
         </form>
           </div>
         </div>
       </div>
 
-   
+
+
+    </div>
+   @endforeach
+
 
     {{-- Modal for right side bar --}}
     <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
@@ -392,11 +401,12 @@
                     <h5 class="modal-title" id="staticBackdropLabel">Payment Filter</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body  position-relative">
-                    <form action="">
+                <form action="" method="POST">
+                    <div class="modal-body  position-relative">
+
                         <div class=" mb-3">
                             <label for="">Student</label>
-                            <select class="select2  form-select shadow-none js-example-basic-single" class="" name="student_id" style="width: 100%; height:36px;">
+                            <select class="select2  form-select shadow-none js-example-basic-single" class="" name="paymentByStudent" style="width: 100%; height:36px;">
                                 <option>Select Student</option>
                                 @foreach ($students as $student)
                                     <option value="{{ $student->id }}">{{ $student->name }}</option>
@@ -406,7 +416,7 @@
                         </div>
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="studentByCourse">
+                            <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="paymentByCourse">
                                 <option value = "-1">Select Course</option>
                                 {{-- @foreach($courses as $course)
                                     <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
@@ -417,7 +427,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="studentByClass">
+                            <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="PaymentByCourse">
                                 <option value = "-1">Select Class</option>
                                 {{-- @foreach($classitems as $class)
                                     <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
@@ -430,9 +440,10 @@
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
                 </form>
+
             </div>
         </div>
     </div>
@@ -463,39 +474,39 @@
                             <td class="col-3">${el.due_amount}</td>
                             <td class="col-3">${el.payment_method}</td>
                         </tr>
-                    
+
                     `);
-                });            
+                });
                 $('#exampleModal').modal('show');
             };
-        
+
 
         var ENDPOINT = "{{ route('classitem.index') }}";
-      
-        
 
-        
-        
 
-        
 
-        
+
+
+
+
+
+
         function showPayments(classitemId, studentId ) {
 
-        
+
             $('#curStudentId').val(studentId);
             $('#curClassId').val(classitemId);
-            
+
             console.log(classitemId, studentId);
             $.ajax({
-                url: "{{ route('payments.get') }}?classitemId="+classitemId+"&studentId="+studentId,               
-                type: "get",             
+                url: "{{ route('payments.get') }}?classitemId="+classitemId+"&studentId="+studentId,
+                type: "get",
             })
-            .done(function (response) {            
+            .done(function (response) {
                 showModal(response);
-                              
-                          
-             
+
+
+
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('Server error occured');
@@ -504,22 +515,45 @@
             $('.payHistory').empty();
             className = '';
             studentName = '';
-                
+
 
             // console.log(allHistory);
         }
 
-        
 
 
 
+        let payments =  {!! json_encode($payments->toArray())  !!} ;
 
-        $('#pay-row').on('click' , function(){
 
-            let studentId = $('.relatedStudent').html();
-            let classitemId = $('.relatedClass').html();
-           console.log(studentId);
+
+        $('.pay-row').map(function(){
+            $(this).on('click' , function(){
+            let studentId = $(this).children('.relatedStudent').text();
+            let classitemId = $(this).children('.relatedClass').text();
+
+            let studentPay = payments.filter( el => el.student_id == studentId );
+            console.log(studentPay);
+
+            studentPay.forEach(el => {
+                $('.payHistory').map(function(){
+                    $(this).append(`
+                        <tr>
+                            <td class="col-3">${el.created_at}</td>
+                            <td class="col-3">${el.fees}</td>
+                            <td class="col-3">${el.due_amount}</td>
+                            <td class="col-3">${el.payment_method}</td>
+                        </tr>
+
+                    `);
+                });
+            });
+
+            console.log(studentId , classitemId);
+            });
         });
+
+
 
         let courseId = [];
         let classId = [];

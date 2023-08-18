@@ -51,18 +51,18 @@
             <div class="card rounded-3 d-sm-block d-md-none">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
-                        <p class="mb-0 fw-bolder">Total - 10</p>
+                        <p class="mb-0 fw-bolder">Total - {{$userdata->total()}}</p>
                         <div class="d-flex justify-content-center align-items-center gap-2">
                             <a href="{{ route('user.create') }}" class="btn plus-btn btn-outline-secondary">
                                 <i class="mdi mdi-plus h5"></i>
                             </a>
                             <!-- Button trigger modal -->
-                            <div class="d-flex justify-content-end  d-xs-block d-md-none filter-btn">
+                            {{-- <div class="d-flex justify-content-end  d-xs-block d-md-none filter-btn">
                                 <button type="button" class="btn plus-btn btn-outline-secondary d-flex "
                                     data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     <i class="mdi mdi-filter-outline h5 mb-0"></i>
                                 </button>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <table class="table table-striped">
@@ -88,12 +88,16 @@
                                  </th>
                                 <td class="align-middle">{{$user->email}}</td>
                                 <td class="text-end align-middle">
-                                    <a href="{{ route('user.edit', 1) }}" class="btn table-btn-sm btn-primary">
+                                    <a href="{{ route('user.edit', $user->id) }}" class="btn table-btn-sm btn-primary">
                                         <i class="mdi mdi-pencil h5"></i>
                                     </a>
-                                    <a href="" class="btn table-btn-sm btn-danger">
-                                        <i class="mdi mdi-delete h5 text-white"></i>
-                                    </a>
+                                    <form action="{{route('user.destroy' , $user->id)}}" method="POST">
+                                        @method('delete')
+                                        @csrf
+                                        <btn  class="btn table-btn-sm btn-danger alertbox">
+                                            <i class="mdi mdi-delete h5 text-white"></i>
+                                        </btn>
+                                    </form>
                                 </td>
 
                             </tr>
@@ -106,18 +110,18 @@
     </div>
     <!-- end responsive -->
     <div class="row  px-3 max-height d-none d-sm-flex">
-        <div class="col-9">
+        <div class="col-12">
             <div class="card rounded-3">
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
-                        <p class="mb-0 fw-bolder">Total - 10</p>
+                        <p class="mb-0 fw-bolder">Total - {{$userdata->total()}}</p>
                         <div class="">
-                            <a href="{{ route('user.create') }}" class="btn plus-btn btn-secondary">
+                            <a href="{{ route('user.create') }}" class="btn plus-btn btn-outline-secondary">
                                 <i class="mdi mdi-plus h5"></i>
                             </a>
                         </div>
                     </div>
-                    @if(session()->has('message'))
+                    {{-- @if(session()->has('message'))
                     <div class="alert alert-success success-alt mt-2">
                       {{session()->get('message')}}
                       <button type="button" class="close success-msg" data-dismiss="alert" aria-label="Close">
@@ -132,7 +136,7 @@
                       <span aria-hidden="true">&times;</span>
                   </button>
                     </div>
-                    @endif
+                    @endif --}}
 
                     <table class="table table-striped">
                         <thead>
@@ -174,37 +178,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
-            <div class="card">
-                <div class="card-body position-relative">
-                    <p class="  fs-4 mb-2 text-center">Admin Filter</p>
-                    <form action="">
-                        {{-- <div class=" mb-3">
-                            <label for="">Name</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
-                                <option>Select Name</option>
-                                <option value="CA">dfa</option>
-                            </select>
-                        </div> --}}
-                        <div class="mb-3">
-                            <label for="">Role</label>
-                            <select class="select2  form-select shadow-none" name="userrolefilter">
-                                <option>Select Role</option>
-                                @foreach($roles as $roledata)
-                                <option value="{{$roledata->id}}" {{$roledata->id == request('userrolefilter') ? 'selected' : ''}}>{{$roledata->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="position-absolute filterbtn">
-                                <button class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</button>
-                                <button class="btn btn-primary sub-btn " type="submit">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+
     </div>
 @endsection
 
@@ -239,4 +213,36 @@
             </div>
         </div>
     </div>
+
+    <script>
+         @if(session('message'))
+        new Noty({
+                type: 'success',
+                layout: 'bottomLeft',
+                theme: 'nest',
+                text:  'User create successfully',
+                timeout: '2000',
+                progressBar: true,
+                closeWith: ['click'],
+                killer: true,
+
+                }).show();
+
+        @endif
+
+        @if(session('del'))
+        new Noty({
+                type: 'success',
+                layout: 'bottomLeft',
+                theme: 'nest',
+                text:  'User delete successfully',
+                timeout: '2000',
+                progressBar: true,
+                closeWith: ['click'],
+                killer: true,
+
+                }).show();
+
+    @endif
+    </script>
 @endpush

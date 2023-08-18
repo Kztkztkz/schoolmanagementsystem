@@ -44,7 +44,7 @@
                         <input hidden name="coursesearchclassitem" value="{{ request('coursesearchclassitem') }}">
                         <input hidden name="studentsearchclassitem" value="{{ request('studentsearchclassitem') }}">
                         @endif
-                        
+
                         <span class="input-group-append">
                             <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
                                 type="button">
@@ -59,11 +59,11 @@
 
 
     <div class="row  px-3 max-height  d-sm-flex">
-        <div class="col-12 col-md-9 class-table">
+        <div class="col-12 col-md-9 table-container">
             <div class="card rounded-3">
                 <div class="card-body table-responsive">
                     <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
-                        <p class="mb-0 fw-bolder">Total - 10</p>
+                        <p class="mb-0 fw-bolder">Total - {{$classitem->total()}}</p>
                         <div class="d-flex justify-content-center align-items-center">
                             <a href="{{ route('classitem.create') }}" class="btn d-flex me-2 justify-content-center align-items-center plus-btn btn-outline-secondary ">
                                 <i class="mdi mdi-plus h5 mb-0"></i>
@@ -76,22 +76,7 @@
                             </div>
                         </div>
                     </div>
-                    @if(session()->has('message'))
-                    <div class="alert alert-success success-alt mt-2">
-                      {{session()->get('message')}}
-                      <button type="button" class="close success-msg" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-                    </div>
-                    @endif
-                    @if(session()->has('del'))
-                    <div class="alert alert-success success-alt mt-2">
-                      {{session()->get('del')}}
-                      <button type="button" class="close success-msg" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-                    </div>
-                    @endif
+
                     <table class="table table-striped highscro">
                         <thead>
                             <tr style="border-bottom: 2px solid black">
@@ -111,7 +96,7 @@
                             </tr>
                         </thead>
                         <tbody class="original" id="data-wrapper">
-                            @include('classitem.data');
+                            @include('classitem.data')
                             </div>
                           </tbody>
                           <tbody class="find" id="data-wrapper2">
@@ -139,19 +124,19 @@
                     from="0 50 50" to="360 50 50" repeatCount="indefinite" />
             </path>
         </svg>
-    </div>                    
+    </div>
                 </div>
                 <div class="d-flex justify-content-end me-3">
                 {{-- {{$classitem->links()}} --}}
             </div>
             </div>
-            
+
         </div>
         <div class="col-3 d-none d-md-block class-filter-container">
             <div class="card">
                 <div class="card-body position-relative filter-card">
                     <div class="d-flex align-items-center justify-content-center mb-2">
-                        <i class="mdi mdi-file-find h3 me-1"></i>
+                        <i class="mdi mdi-filter-outline h3 me-1"></i>
                         <p class="  fs-4 mb-2 text-center">Class Filter</p>
                     </div>
                     <form action="{{route('classitem.index')}}" method="get">
@@ -239,7 +224,7 @@
         page++;
         infinteLoadMore(page);
     });
-  
+
     /*------------------------------------------
     --------------------------------------------
     call infinteLoadMore()
@@ -261,8 +246,8 @@
                 }
                 $('.auto-load').hide();
                     $("#data-wrapper").append(response.html);
-                
-                
+
+
                 if (response.html.includes('Data is Empty')) {
             $('.load-more-data').hide();
           }
@@ -270,7 +255,7 @@
             .fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('Server error occured');
             });
-    } 
+    }
 
     var ENDPOINT2 = "{{ route('classitem.search') }}";
     var pagetwo = 1;
@@ -278,7 +263,7 @@
         pagetwo++;
         infinteLoadMore2(pagetwo);
     });
-  
+
     /*------------------------------------------
     --------------------------------------------
     call infinteLoadMore()
@@ -306,8 +291,8 @@
                 }
                 $('.auto-load').hide();
                     $("#data-wrapper2").append(response);
-                
-                
+
+
                 if (response.includes('Data is Empty')) {
             $('.load-more-data2').hide();
           }
@@ -318,13 +303,42 @@
     }
 
 // }
-   
-
-    
 
 
 
-    
+    //addToast
+    @if(session('message'))
+        new Noty({
+                type: 'success',
+                layout: 'bottomLeft',
+                theme: 'nest',
+                text:  'Classitem create successfully',
+                timeout: '2000',
+                progressBar: true,
+                closeWith: ['click'],
+                killer: true,
+
+                }).show();
+
+    @endif
+
+    @if(session('del'))
+        new Noty({
+                type: 'success',
+                layout: 'bottomLeft',
+                theme: 'nest',
+                text:  'Classitem delete successfully',
+                timeout: '2000',
+                progressBar: true,
+                closeWith: ['click'],
+                killer: true,
+
+                }).show();
+
+    @endif
+
+
+
     </script>
 
 @endpush
