@@ -1,9 +1,9 @@
 <a class="navbar-brand d-none d-md-flex" href="index.html">
                         <!-- Logo icon -->
-                        <b class="logo-icon ps-2">
+                        <b class="logo-icon">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="{{asset('admin/assets/images/logo-icon.png')}}" alt="homepage" class="light-logo" />
+                            <img src="{{asset('admin/assets/images/[removal.ai]_535d621a-bef4-4b84-a129-576bf5f0ac1f-o-technique200.png')}}" alt="homepage" class="light-logo" />
 
                         </b>
                         <!--End Logo icon -->
@@ -75,7 +75,7 @@
                         <!-- ============================================================== -->
 
                             <li class="nav-item dropdown">
-                                <a class="acc-container nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#"
+                                <a class="acc-container d-flex justify-content-center align-items-center  nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="#"
                                     id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{-- <img src="{{ asset('admin/assets/images/users/1.jpg') }}" alt="user" class="rounded-circle"
                                         width="31"> --}}

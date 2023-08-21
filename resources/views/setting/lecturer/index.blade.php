@@ -12,6 +12,9 @@
         }
     </style>
 @endsection
+@section('ajaxcsrf')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('content')
     <div class="page-breadcrumb">
         <div class="row">
@@ -29,7 +32,7 @@
                 <div class="mx-auto">
                     <div class="input-group">
                         <input class="form-control border-end-0 border" placeholder="search user" type="search"
-                            value="{{request('usersearch')}}" id="example-search-input" name="usersearch">
+                            value="{{request('usersearch')}}" id="lecturersearch" name="lecturersearch">
                         <span class="input-group-append">
                             <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
                                 type="button">
@@ -46,7 +49,7 @@
 
     <!-- end filter button -->
     <!-- responsive table -->
-    <div class="row  px-3 max-height d-xs-block d-sm-none">
+    {{-- <div class="row  px-3 max-height d-xs-block d-sm-none">
         <div class="col-12 col-md-9 table-container">
             <div class="card rounded-3 d-sm-block d-md-none">
                 <div class="card-body">
@@ -103,12 +106,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- end responsive -->
     <div class="row  px-3 max-height d-none d-sm-flex">
         <div class="col-12">
             <div class="card rounded-3">
-                <div class="card-body">
+                <div class="card-body table-responsive">
                     <div class="d-flex justify-content-between">
                         <p class="mb-0 fw-bolder">Total - 10</p>
                         <div class="">
@@ -142,39 +145,47 @@
                                 <th scope="col" class="text-end">Control</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            @foreach($lecturers as $user)
-                            <tr>
-                                <td class="align-middle">{{$user->name}} </td>
-                                <td class="align-middle">{{$user->email}}</td>
-
-                                <td class="text-end">
-                                    <a href="{{ route('user.edit', 1) }}" class="btn table-btn-sm btn-primary">
-                                        <i class="mdi mdi-pencil h5"></i>
-                                    </a>
-                                    {{-- <a href="" class="btn table-btn-sm btn-danger">
-                                        <i class="mdi mdi-delete h5 text-white"></i>
-                                    </a> --}}
-                                    <form action="{{route('user.destroy', $user->id)}}" method="post" class="d-inline">
-                                        @csrf
-                                        <input name="_method" type="hidden" value="delete">
-                                        <button type="submit" class="btn table-btn-sm btn-danger del-btn alertbox">
-                                            <i class="mdi mdi-delete h5 text-white"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            @endforeach
+                        <tbody class="original" id="data-wrapper">
+                           @include('setting.lecturer.data')
                         </tbody>
+                        <tbody class="find" id="data-wrapper2">
+                        </tbody>
+                        @if(count($lecturers)>=15)
+                          <tr>
+                            <td colspan="6" class="text-center">
+                                <button class="btn btn-secondary load-more-data"><i class="fa fa-refresh"></i> Load More Data...</button>
+                            </td>
+                          </tr>
+                          @endif
+                          <tr>
+                            <td colspan="6" class="text-center">
+                                <button class="btn btn-secondary load-more-data2" style="display: none;"><i class="fa fa-refresh"></i> Load More Data...</button>
+                            </td>
+                          </tr>
                     </table>
+        <!-- Data Loader -->
+    <div class="auto-load text-center" style="display: none;">
+        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+            <path fill="#000"
+                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                    from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+            </path>
+        </svg>
+    </div>
                 </div>
                 <div class="d-flex justify-content-end me-3">
-                    {{$lecturers->links()}}
+                    {{-- {{$lecturers->links()}} --}}
                 </div>
             </div>
         </div>
         
     </div>
+@endsection
+
+@section('dataloader')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endsection
 
 @push('scripts')
@@ -208,4 +219,90 @@
             </div>
         </div>
     </div>
+
+    <script>
+    //load data with button
+    var ENDPOINT = "{{ route('lecturer.index') }}";
+    var page = 1;
+    // $('.load-more-data2').hide();
+    $(".load-more-data").click(function(){
+        page++;
+        infinteLoadMore(page);
+    });
+
+    /*------------------------------------------
+    --------------------------------------------
+    call infinteLoadMore()
+    --------------------------------------------
+    --------------------------------------------*/
+    function infinteLoadMore(page) {
+        $.ajax({
+                url: ENDPOINT + "?page=" + page,
+                datatype: "html",
+                type: "get",
+                beforeSend: function () {
+                    $('.auto-load').show();
+                }
+            })
+            .done(function (response) {
+                if (response.html == '') {
+                    $('.auto-load').html("We don't have more data to display :(");
+                    return;
+                }
+                $('.auto-load').hide();
+                    $("#data-wrapper").append(response.html);
+
+
+                if (response.html.includes('Data is Empty')) {
+            $('.load-more-data').hide();
+          }
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('Server error occured');
+            });
+    }
+
+    var ENDPOINT2 = "{{ route('lecturer.search') }}";
+    var pagetwo = 1;
+    $(".load-more-data2").click(function(){
+        pagetwo++;
+        infinteLoadMore2(pagetwo);
+    });
+
+    /*------------------------------------------
+    --------------------------------------------
+    call infinteLoadMore()
+    --------------------------------------------
+    --------------------------------------------*/
+    function infinteLoadMore2(page) {
+        var usersearch = $("#lecturersearch").val();
+
+        let query = `?lecturersearch=${usersearch}`;
+        $.ajax({
+
+                url: ENDPOINT2 + query +"&page=" + pagetwo,
+                datatype: "html",
+                type: "get",
+                beforeSend: function () {
+                    $('.auto-load').show();
+                }
+            })
+            .done(function (response) {
+                if (response== '') {
+                    $('.auto-load').html("We don't have more data to display :(");
+                    return;
+                }
+                $('.auto-load').hide();
+                    $("#data-wrapper2").append(response);
+
+
+                if (response.includes('Data is Empty')) {
+            $('.load-more-data2').hide();
+          }
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('Server error occured');
+            });
+    }
+    </script>
 @endpush

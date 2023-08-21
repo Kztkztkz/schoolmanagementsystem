@@ -26,7 +26,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $userdata = User::orderBy('id', 'desc')->paginate(11);
+        $userdata = User::orderBy('id', 'desc')->paginate(15);
         $roles = Role::all();
 
         if($request->has('usersearch')){
@@ -35,9 +35,15 @@ class UserController extends Controller
             ->orWhereHas('role', function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->usersearch . '%');
             })
-            ->paginate(11)->withQueryString();
+            ->paginate(15)->withQueryString();
         } else if($request->has('userrolefilter')){
-            $userdata = User::where('role_id',$request->userrolefilter)->paginate(11)->withQueryString();
+            $userdata = User::where('role_id',$request->userrolefilter)->paginate(15)->withQueryString();
+        }
+
+        if ($request->ajax()) {
+            $view = view('user.data', compact('userdata'))->render();
+
+            return response()->json(['html' => $view]);
         }
 
         return view('user.index', compact(['userdata','roles']));
@@ -197,5 +203,99 @@ class UserController extends Controller
         DB::table("password_resets")->where(["email" => $request->email])->delete();
 
         return redirect()->to(route("user.login"))->with('message',"Password reset success");
+    }
+
+    public function adminsearch(Request $request){
+        $output="";
+        $userdata = User::orderBy('id', 'desc')->paginate(11);
+
+        if($request->has('usersearch')){
+            $userdata = User::where('name', 'like', '%' . $request->usersearch . '%')
+            ->orWhere('email','like','%'.$request->usersearch.'%')
+            ->orWhereHas('role', function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->usersearch . '%');
+            })
+            ->paginate(15)->withQueryString();
+        } else if($request->has('userrolefilter')){
+            $userdata = User::where('role_id',$request->userrolefilter)->paginate(15)->withQueryString();
+        }
+
+        if(count($userdata)>0){
+            foreach($userdata as $user)
+            {
+        
+                $output .= '
+                <tr>
+                <td class="align-middle">
+    <p class="d-none d-md-block">' . $user->name . '</p>
+    <div class="d-block d-md-none">
+        <p>' . $user->name . '</p>
+    </div>
+</td>
+<td class="align-middle">
+    <p class="d-none d-md-block">' . $user->email . '</p>
+    <div class="d-block d-md-none">
+        <p>' . $user->email . '</p>
+    </div>
+</td>
+<td class="text-end">
+    <div class="d-none d-md-block">
+        <a href="' . route('user.edit', 1) . '" class="btn table-btn-sm btn-primary">
+            <i class="mdi mdi-pencil h5"></i>
+        </a>
+        <form action="' . route('user.destroy', $user->id) . '" method="post" class="d-inline">
+        <input type="hidden" name="_token" value="' . csrf_token() . '">
+        <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn table-btn-sm btn-danger del-btn alertbox">
+                <i class="mdi mdi-delete h5 text-white"></i>
+            </button>
+        </form>
+    </div>
+    <div class="btn-group dropup d-block d-md-none control-btn">
+        <button type="button" class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="mdi mdi-dots-vertical h4"></i>
+        </button>
+        <ul class="dropdown-menu mb-1">
+            <div class="d-flex justify-content-around">
+                <li>
+                    <a href="' . route('user.edit', 1) . '" class="btn table-btn-sm btn-outline-primary border border-0">
+                        <i class="mdi mdi-pencil h5"></i>
+                    </a>
+                </li>
+                <li>
+                    <form action="' . route('user.destroy', $user->id) . '" method="post" class="d-inline">
+                    <input type="hidden" name="_token" value="' . csrf_token() . '">
+                    <input type="hidden" name="_method" value="delete">
+                        <a href="" class="btn table-btn-sm btn-outline-danger border border-0 alertbox">
+                            <i class="mdi mdi-delete h5 "></i>
+                        </a>
+                    </form>
+                </li>                                               
+            </div>
+        </ul>
+    </div>
+</td>
+                </tr>';
+        }
+        } 
+        else 
+        {
+            $output .= '<tr>
+            <td colspan="3" class="text-center text-danger">Data is Empty</td>
+        </tr>';
+        }
+        
+        
+        
+        // return response($output);
+        // if ($request->ajax()) {
+        //     $view = view('classitem.data', compact('searchdata'))->render();
+        
+        //     $data =  response()->json(['html' => $view]);
+        // }
+        
+        return response()->json($output);
+
     }
 }

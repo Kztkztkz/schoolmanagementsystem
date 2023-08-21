@@ -15,7 +15,9 @@
     </style>
     <link rel="stylesheet" href="{{ asset('css/student.css') }}">
 @endsection
-
+@section('ajaxcsrf')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('content')
 
     <div class="page-breadcrumb">
@@ -39,7 +41,7 @@
                     <form action="{{ route('student.index') }}" >
                         <div class="input-group">
                             <input class="form-control border-end-0 border" placeholder="search student" type="search"
-                            name="keyword" value="{{ request('keyword') }}" id="example-search-input">
+                            name="keyword" value="{{ request('keyword') }}" id="keyword">
                             @if (request('studentByCourse') || request('studentByClass'))
                             <input hidden name="studentByCourse" value="{{ request('studentByCourse') }}">
                             <input hidden name="studentByClass" value="{{ request('studentByClass') }}">
@@ -81,7 +83,7 @@
                         </div>
 
                     </div>
-                    <div class="student-table">
+                    <div class="student-table table-responsive">
                         <table class="table table-striped table-hover  student-list mt-1">
                             <thead>
                                 <tr style="border-bottom: 2px solid black">
@@ -95,91 +97,37 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="tbody-container">
-                                @forelse ($students as $student)
-                                <tr>
-                                    <td scope="row" class="">{{ $student->name }}</td>
-                                    <td>
-                                        <p class="mb-0 d-block d-md-none"> {{Str::limit($student->email , 15 , '...')}} </p>
-                                        <p class="mb-0 d-none d-md-block"> {{$student->email }} </p>
-                                        <p class="mb-0 text-black-50">{{ $student->phone}}</p>
-                                    </td>
-                                    <td class="d-none d-lg-table-cell">
-                                        <p> {{ Str::limit($student->address, 50 , '...') }} </p>
-                                    </td>
-                                    <td class=" align-middle text-center">
-                                        <a href="{{ route('student.relatedPayment' , $student->id ) }}" class="btn table-btn-sm btn-primary">
-                                            <i class="mdi mdi-credit-card-multiple h5"></i>
-                                        </a>
-                                    </td>
-                                    <td class=" align-middle text-center">
-                                        <a href="{{ route('student.relatedClass' , $student->id ) }}" class="btn table-btn-sm btn-primary">
-                                            <i class="mdi mdi-book-open-page-variant h5"></i>
-                                        </a>
-                                    </td>
-                                    <td class="text-end align-middle text-nowrap">
-                                        <div class="d-none d-md-block control-btns">
-                                            <a href="{{ route('student.edit', $student->id ) }}" class="btn table-btn-sm btn-primary">
-                                                <i class="mdi mdi-pencil h5"></i>
-                                            </a>
-
-                                            <form action="{{ route('student.destroy' , $student->id ) }}" class=" d-inline-block" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <button type="submit"  class="btn table-btn-sm btn-danger del-btn alertbox">
-                                                    <i class="mdi mdi-delete h5 text-white"></i>
-                                                </button>
-                                            </form>
-
-
-                                        </div>
-
-
-                                        <div class="btn-group control-btn dropup d-block d-md-none ">
-                                            <button type="button"
-                                                class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
-                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="mdi mdi-dots-vertical h4"></i>
-                                            </button>
-
-                                            <ul class="dropdown-menu mb-1">
-                                                <div class="d-flex ">
-                                                    <li>
-                                                        <a href="{{ route('student.edit' , $student->id ) }}"
-                                                            class="btn table-btn-sm btn-outline-primary border border-0">
-                                                            <i class="mdi mdi-pencil h5"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <form action="{{ route('student.destroy' , $student->id ) }}" method="post">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button type="submit" class="btn table-btn-sm btn-outline-danger border border-0">
-                                                                <i class="mdi mdi-delete h5 "></i>
-                                                            </button>
-                                                        </form>
-
-                                                    </li>
-
-                                                </div>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @empty
-                                <td colspan="6" class="text-center">No search data</td>
-                                @endforelse
-
-
-
-
-
-
+                            <tbody class="tbody-container original" id="data-wrapper">
+                                @include('students.data')
                             </tbody>
+                            <tbody class="find" id="data-wrapper2">
+                            </tbody>
+                            @if(count($students)>=15)
+                              <tr>
+                                <td colspan="6" class="text-center">
+                                    <button class="btn btn-secondary load-more-data"><i class="fa fa-refresh"></i> Load More Data...</button>
+                                </td>
+                              </tr>
+                              @endif
+                              <tr>
+                                <td colspan="6" class="text-center">
+                                    <button class="btn btn-secondary load-more-data2" style="display: none;"><i class="fa fa-refresh"></i> Load More Data...</button>
+                                </td>
+                              </tr>
                         </table>
-
+                         <!-- Data Loader -->
+    <div class="auto-load text-center" style="display: none;">
+        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+            <path fill="#000"
+                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                    from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+            </path>
+        </svg>
+    </div>
                         <div class=" paginate ">
-                            {{$students->links('pagination::bootstrap-4')}}
+                            {{-- {{$students->links('pagination::bootstrap-4')}} --}}
                         </div>
                     </div>
 
@@ -208,7 +156,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="studentByClass">
+                            <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="studentByClass" >                                
                                 <option value="" >Select Class</option>
 
                             </select>
@@ -376,6 +324,91 @@
         });
 
 
+        //student load data
+        var ENDPOINT = "{{ route('student.index') }}";
+    var page = 1;
+    // $('.load-more-data2').hide();
+    $(".load-more-data").click(function(){
+        page++;
+        infinteLoadMore(page);
+    });
+
+    /*------------------------------------------
+    --------------------------------------------
+    call infinteLoadMore()
+    --------------------------------------------
+    --------------------------------------------*/
+    function infinteLoadMore(page) {
+        $.ajax({
+                url: ENDPOINT + "?page=" + page,
+                datatype: "html",
+                type: "get",
+                beforeSend: function () {
+                    $('.auto-load').show();
+                }
+            })
+            .done(function (response) {
+                if (response.html == '') {
+                    $('.auto-load').html("We don't have more data to display :(");
+                    return;
+                }
+                $('.auto-load').hide();
+                    $("#data-wrapper").append(response.html);
+
+
+                if (response.html.includes('Data is Empty')) {
+            $('.load-more-data').hide();
+          }
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('Server error occured');
+            });
+    }
+
+    var ENDPOINT2 = "{{ route('student.search') }}";
+    var pagetwo = 1;
+    $(".load-more-data2").click(function(){
+        pagetwo++;
+        infinteLoadMore2(pagetwo);
+    });
+
+    /*------------------------------------------
+    --------------------------------------------
+    call infinteLoadMore()
+    --------------------------------------------
+    --------------------------------------------*/
+    function infinteLoadMore2(page) {
+        var keyword = $("#keyword").val();
+        var courseId = $("#courseId").val();
+        var classId = $("#classId").val();
+
+        let query = `?studentsearch=${keyword}&studentByCourse=${courseId}&studentByClass=${classId}`;
+        $.ajax({
+
+                url: ENDPOINT2 + query +"&page=" + pagetwo,
+                datatype: "html",
+                type: "get",
+                beforeSend: function () {
+                    $('.auto-load').show();
+                }
+            })
+            .done(function (response) {
+                if (response== '') {
+                    $('.auto-load').html("We don't have more data to display :(");
+                    return;
+                }
+                $('.auto-load').hide();
+                    $("#data-wrapper2").append(response);
+
+
+                if (response.includes('Data is Empty')) {
+            $('.load-more-data2').hide();
+          }
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('Server error occured');
+            });
+    }
 
 
 

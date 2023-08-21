@@ -25,12 +25,8 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item asdf"><a href="#">Class</a></li>
                             <li class="breadcrumb-item active " aria-current="page">List</li>
-                            {{-- @if(request('coursesearchclassitem'))
-                            <li class="breadcrumb-item active d-xs-block d-sm-none" aria-current="page"> search by {{request('coursesearchclassitem')}}</li>
-                            @endif
-                            @if(request('studentsearchclassitem'))
-                            <li class="mx-2 d-xs-block d-sm-none" style="color: #6c757d; font-weight: normal; margin-top: 5px; font-size: 16px;">/ search by {{request('studentsearchclassitem')}}</li>
-                            @endif --}}
+                                <li class="breadcrumb-item active seachby" aria-current="page" style="display:none;">Search by <span
+                                        class="text-primary" id="liveText"></span></li>
                         </ol>
                     </nav>
                 </div>
@@ -40,10 +36,10 @@
                     <div class="input-group">
                         <input class="form-control border-end-0 border" placeholder="search class" type="search"
                         value="{{ request('classitemsearch') }}" id="classitemsearch" name="classitemsearch">
-                        @if (request('coursesearchclassitem') || request('studentsearchclassitem'))
+                        {{-- @if (request('coursesearchclassitem') || request('studentsearchclassitem'))
                         <input hidden name="coursesearchclassitem" value="{{ request('coursesearchclassitem') }}">
                         <input hidden name="studentsearchclassitem" value="{{ request('studentsearchclassitem') }}">
-                        @endif
+                        @endif --}}
 
                         <span class="input-group-append">
                             <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"

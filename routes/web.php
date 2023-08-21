@@ -70,5 +70,9 @@ Route::get('student/{student}/class' , [ StudentController::class , 'relatedClas
 Route::get('classpayment/{classitem}' , [ ClassitemController::class , 'classPayment' ])->name("classitem.classPayment");
 
 Route::get('/classitemsearch',[ClassitemController::class, 'classitemsearch'])->name('classitem.search');
+Route::get('/adminmsearch',[UserController::class,'adminsearch'])->name('admin.search');
+Route::get('/lecturersearch',[LecturerController::class,'lecturersearch'])->name('lecturer.search');
+Route::get('/studentsearch',[StudentController::class,'studentsearch'])->name('student.search');
+Route::get('/paymentsearch',[PaymentController::class,'paymentsearch'])->name('payment.search');
 Route::get('/classitemfilter',[ClassitemController::class, 'classitemfilter'])->name('classitem.filter');
 });

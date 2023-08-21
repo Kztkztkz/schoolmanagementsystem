@@ -1,3 +1,4 @@
+
 @extends('layout.template')
 
 @section('custom')
@@ -108,4 +109,33 @@
         </div>
 
     </div>
+
+    
 @endsection
+@push('scripts')
+<script>
+    $("#addCourse").click(function () {
+    $("#courseRow").append(`
+    <form action="{{ route('course.store') }}" method="POST">
+        @csrf
+        <div class="row-item mb-3 grid-container">
+
+            <button type="submit" class=" btn course-btn  btn-primary px-1 me-2">
+                Add
+            </button>
+
+            <input type="text" name="name" class=" form-control d-inline-block"
+                placeholder="Add new course">
+            <button class=" btn course-btn btn-secondary px-1 ms-2 course-del">
+                Cancel
+            </button>
+        </div>
+    </form>
+    `);
+});
+
+$(".course-row").delegate(".course-del", "click", function () {
+    $(this).parent().remove();
+});
+</script>
+@endpush

@@ -11,6 +11,7 @@ use App\Models\Payment;
 use Faker\Core\Number;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class StudentController extends Controller
 {
@@ -45,7 +46,7 @@ class StudentController extends Controller
                 $query->where("name" , "like",  "%$keyword%")->where("name" , "like" , "%$keyword%")
                 ->orWhere( "email" , "like" , "%$keyword%");
             })
-            ->paginate(8);
+            ->paginate(15);
 
 
         }
@@ -63,11 +64,17 @@ class StudentController extends Controller
             })->whereHas('classitems' , function($query){
                 $query->where('course_id' , request('studentByCourse'));
             })
-            ->paginate(8);
+            ->paginate(15);
 
         }
         else{
-            $students = Student::latest()->paginate(8);
+            $students = Student::latest()->paginate(15);
+        }
+
+        if ($request->ajax()) {
+            $view = view('students.data', compact('students'))->render();
+
+            return response()->json(['html' => $view]);
         }
 
         return view('students.index' , compact('students' , 'totalStudents' , 'classitems' , 'courses' , 'searchByClass'))->with('message' , 'Students create successful');
@@ -216,4 +223,128 @@ class StudentController extends Controller
 
         return view('students.payment-student' , compact(['classitems' , 'studentoption' , 'courseoption' ,'selectedStudent' , 'payments']));
     }
+
+    public function studentsearch(Request $request)
+    {
+        $output="";
+        $classitems = Classitem::all();
+        $courses = Course::all();
+        $totalStudents = Student::all()->count();
+        $searchByClass = Classitem::where('id' , request('studentByClass'))->get();
+
+        $students = Student::query();
+        $studentByClass = $request->studentByClass;
+        $studentByCourse = $request->studentByCourse;
+
+
+        if(request()->has('studentByCourse') || request()->has('studentByClass')){
+            $students = $students->whereHas('classitems' , function($query){
+                $query->where("classitems.id" , request('studentByClass'));
+            })->whereHas('classitems' , function($query){
+                $query->where('course_id' , request('studentByCourse'));
+            })->when( request("keyword") , function ($query){
+                $keyword = request('keyword');
+                $query->where("name" , "like",  "%$keyword%")->where("name" , "like" , "%$keyword%")
+                ->orWhere( "email" , "like" , "%$keyword%");
+            })
+            ->paginate(15);
+
+
+        }
+
+        else if (request('keyword')){
+
+
+            $students = $students->when( request("keyword") , function ($query){
+                $keyword = request('keyword');
+                $query->where("name" , "like",  "%$keyword%")->where("name" , "like" , "%$keyword%")
+                ->orWhere( "email" , "like" , "%$keyword%");
+            })->whereHas('classitems' , function($query){
+
+                $query->where("classitems.id" , request('studentByClass'));
+            })->whereHas('classitems' , function($query){
+                $query->where('course_id' , request('studentByCourse'));
+            })
+            ->paginate(15);
+
+        }
+        else{
+            $students = Student::latest()->paginate(15);
+        }
+
+        if(count($students)>0){
+            foreach($students as $student)
+            {
+                $output.='
+                <tr>
+    <td scope="row">' . $student->name . '</td>
+    <td>
+        <p class="mb-0 d-block d-md-none">' . Str::limit($student->email, 15, '...') . '</p>
+        <p class="mb-0 d-none d-md-block">' . $student->email . '</p>
+        <p class="mb-0 text-black-50">' . $student->phone . '</p>
+    </td>
+    <td class="d-none d-lg-table-cell">
+        <p>' . Str::limit($student->address, 50, '...') . '</p>
+    </td>
+    <td class="align-middle text-center">
+        <a href="' . route('student.relatedPayment', $student->id) . '" class="btn table-btn-sm btn-primary">
+            <i class="mdi mdi-credit-card-multiple h5"></i>
+        </a>
+    </td>
+    <td class="align-middle text-center">
+        <a href="' . route('student.relatedClass', $student->id) . '" class="btn table-btn-sm btn-primary">
+            <i class="mdi mdi-book-open-page-variant h5"></i>
+        </a>
+    </td>
+    <td class="text-end align-middle text-nowrap">
+        <div class="d-none d-md-block control-btns">
+            <a href="' . route('student.edit', $student->id) . '" class="btn table-btn-sm btn-primary">
+                <i class="mdi mdi-pencil h5"></i>
+            </a>
+            <form action="' . route('student.destroy', $student->id) . '" class="d-inline-block" method="post">
+            <input type="hidden" name="_token" value="' . csrf_token() . '">
+            <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="btn table-btn-sm btn-danger del-btn alertbox">
+                    <i class="mdi mdi-delete h5 text-white"></i>
+                </button>
+            </form>
+        </div>
+        <div class="btn-group control-btn dropup d-block d-md-none">
+            <button type="button"
+                class="btn table-btn-sm btn-outline-dark border border-0 dropdown-toggle"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="mdi mdi-dots-vertical h4"></i>
+            </button>
+            <ul class="dropdown-menu mb-1">
+                <div class="d-flex">
+                    <li>
+                        <a href="' . route('student.edit', $student->id) . '"
+                            class="btn table-btn-sm btn-outline-primary border border-0">
+                            <i class="mdi mdi-pencil h5"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <form action="' . route('student.destroy', $student->id) . '" method="post">
+                        <input type="hidden" name="_token" value="' . csrf_token() . '">
+                        <input type="hidden" name="_method" value="delete">
+                            <button type="submit" class="btn table-btn-sm btn-outline-danger border border-0">
+                                <i class="mdi mdi-delete h5 "></i>
+                            </button>
+                        </form>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </td>
+</tr>';
+
+}
+} else {
+    $output .= '<tr>
+    <td colspan="6" class="text-center text-danger">Data is Empty</td>
+</tr>';
+}
+return response()->json($output);
+    }
+
 }

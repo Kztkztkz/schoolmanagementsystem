@@ -15,6 +15,9 @@
     </style>
     <link rel="stylesheet" href="{{ asset('css/payment.css') }}">
 @endsection
+@section('ajaxcsrf')
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 @section('content')
     <div class="page-breadcrumb">
         <div class="row">
@@ -34,7 +37,7 @@
                 <div class="mx-auto">
                     <div class="input-group">
                         <input class="form-control border-end-0 border" placeholder="search payment" type="search"
-                            value="" id="example-search-input ">
+                            value="" id="paymentId" name="search">
                         <span class="input-group-append">
                             <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
                                 type="button">
@@ -86,57 +89,37 @@
                                     <th scope="col" class=" text-center list-type-col">Type</th>
                                 </tr>
                             </thead>
-                            <tbody>
-
-                                @foreach ($latestPayments as $payment)
-
-                                <tr onclick="showPayments({{ $payment->classitem_id }}, {{ $payment->student_id }})" class="history" data-className="{{$payment->classitem->name}}" data-studentName="{{$payment->student->name}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
-
-
-
-                                    {{-- Mobile View --}}
-                                    <td class="d-table-cell d-lg-none text-nowrap align-middle">
-                                        {{-- <p>01-01-2023</p> --}}
-                                        <p>{{$payment->created_at}}</p>
-                                        <p> {{$payment->student->name}}</p>
-                                    </td>
-                                    <td class="relatedStudent d-none">
-                                         {{$payment->student->id}}
-                                    </td>
-                                    <td class="relatedClass d-none">
-                                        {{$payment->classitem->id}}
-                                   </td>
-
-                                    {{-- Laptop View --}}
-                                    <td class="d-none d-lg-table-cell align-middle">{{$payment->created_at->format('d-m-Y')}}</td>
-                                    <td class="align-middle">{{Str::limit($payment->classitem->name, 20)}} </td>
-                                    <td class="d-none d-lg-table-cell align-middle">
-                                        {{Str::limit($payment->classitem->course->name, 15)}}</td>
-                                    <td class="d-none d-lg-table-cell align-middle">
-                                        {{Str::limit($payment->student->name, 15)}}</td>
-                                    <td class=" align-middle">{{number_format(floatval($payment->fees))}}</td>
-                                    <td class=" align-middle">{{number_format(floatval($payment->due_amount))}}</td>
-                                    <td class=" align-middle">
-
-                                        @if ($payment->payment_type=="paid")
-                                            <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
-                                                paid
-                                            </div>
-                                        @else
-                                            <div class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
-                                                unpaid
-                                            </div>
-                                        @endif
-
-                                    </td>
-                                </tr>
-                                @endforeach
-
-
+                            <tbody class="original" id="data-wrapper">
+                                @include('payment.data')    
                             </tbody>
+                            <tbody class="find" id="data-wrapper2">
+                            </tbody>
+                            @if(count($latestPayments)>=15)
+                              <tr>
+                                <td colspan="7" class="text-center">
+                                    <button class="btn btn-secondary load-more-data"><i class="fa fa-refresh"></i> Load More Data...</button>
+                                </td>
+                              </tr>
+                              @endif
+                              <tr>
+                                <td colspan="7" class="text-center">
+                                    <button class="btn btn-secondary load-more-data2" style="display: none;"><i class="fa fa-refresh"></i> Load More Data...</button>
+                                </td>
+                              </tr>
                         </table>
+                         <!-- Data Loader -->
+    <div class="auto-load text-center" style="display: none;">
+        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+            <path fill="#000"
+                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                    from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+            </path>
+        </svg>
+    </div>
                         <div class=" paginate ">
-                            {{ $latestPayments->links('pagination::bootstrap-4')}}
+                            {{-- {{ $latestPayments->links('pagination::bootstrap-4')}} --}}
                         </div>
                     </div>
 
@@ -154,8 +137,8 @@
                     <form action="">
                         <div class=" mb-3">
                             <label for="">Student</label>
-                            <select class="select2  form-select shadow-none js-example-basic-single"  name="student_id" style="width: 100%; height:36px;">
-                                <option>Select Student</option>
+                            <select class="select2  form-select shadow-none js-example-basic-single"  name="paymentByStudent" style="width: 100%; height:36px;" id="studentId">
+                                <option value="">Select Student</option>
                                 @foreach ($students as $student)
                                     <option value="{{ $student->id }}">{{ $student->name }}</option>
                                 @endforeach
@@ -163,8 +146,8 @@
                         </div>
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="studentByCourse">
-                                <option value = "-1">Select Course</option>
+                            <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="paymentByCourse">
+                                <option value = "">Select Course</option>
                                 {{-- @foreach($courses as $course)
                                     <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
                                         {{$course->name}}
@@ -174,8 +157,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="studentByClass">
-                                <option value = "-1">Select Class</option>
+                            <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="paymentByClass">
+                                <option value = "">Select Class</option>
                                 {{-- @foreach($classitems as $class)
                                     <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
                                         {{$class->name}}
@@ -195,7 +178,9 @@
         </div>
     </div>
 @endsection
-
+@section('dataloader')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@endsection
 @push('scripts')
     <!-- Modal -->
     {{-- <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="mymodal" aria-hidden="true">
@@ -389,7 +374,7 @@
 
 
     </div>
-   @endforeach
+   
 
 
     {{-- Modal for right side bar --}}
@@ -408,6 +393,7 @@
                             <label for="">Student</label>
                             <select class="select2  form-select shadow-none js-example-basic-single" class="" name="paymentByStudent" style="width: 100%; height:36px;">
                                 <option>Select Student</option>
+                                <option value = "-1">Select Student</option>
                                 @foreach ($students as $student)
                                     <option value="{{ $student->id }}">{{ $student->name }}</option>
                                 @endforeach
@@ -617,6 +603,93 @@
             });
 
         });
+
+        //ajaxloaddata
+        var ENDPOINT = "{{ route('payment.index') }}";
+    var page = 1;
+    // $('.load-more-data2').hide();
+    $(".load-more-data").click(function(){
+        page++;
+        infinteLoadMore(page);
+    });
+
+    /*------------------------------------------
+    --------------------------------------------
+    call infinteLoadMore()
+    --------------------------------------------
+    --------------------------------------------*/
+    function infinteLoadMore(page) {
+        $.ajax({
+                url: ENDPOINT + "?page=" + page,
+                datatype: "html",
+                type: "get",
+                beforeSend: function () {
+                    $('.auto-load').show();
+                }
+            })
+            .done(function (response) {
+                if (response.html == '') {
+                    $('.auto-load').html("We don't have more data to display :(");
+                    return;
+                }
+                $('.auto-load').hide();
+                    $("#data-wrapper").append(response.html);
+
+
+                if (response.html.includes('Data is Empty')) {
+            $('.load-more-data').hide();
+          }
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('Server error occured');
+            });
+    }
+
+    var ENDPOINT2 = "{{ route('payment.search') }}";
+    var pagetwo = 1;
+    $(".load-more-data2").click(function(){
+        pagetwo++;
+        infinteLoadMore2(pagetwo);
+    });
+
+    /*------------------------------------------
+    --------------------------------------------
+    call infinteLoadMore()
+    --------------------------------------------
+    --------------------------------------------*/
+    function infinteLoadMore2(page) {
+        var paymentId = $("#paymentId").val();
+        var studentId = $("#studentId").val();
+        var courseId = $("#courseId").val();
+        var classId = $("#classId").val();
+
+        let query = `?search=${paymentId}&paymentByStudent=${studentId}&paymentByCourse=${courseId}&paymentByClass=${classId}`;
+        $.ajax({
+
+                url: ENDPOINT2 + query +"&page=" + pagetwo,
+                datatype: "html",
+                type: "get",
+                beforeSend: function () {
+                    $('.auto-load').show();
+                }
+            })
+            .done(function (response) {
+                if (response== '') {
+                    $('.auto-load').html("We don't have more data to display :(");
+                    return;
+                }
+                $('.auto-load').hide();
+                    $("#data-wrapper2").append(response);
+
+
+                if (response.includes('Data is Empty')) {
+            $('.load-more-data2').hide();
+          }
+            })
+            .fail(function (jqXHR, ajaxOptions, thrownError) {
+                console.log('Server error occured');
+            });
+    }
 
     </script>
 @endpush

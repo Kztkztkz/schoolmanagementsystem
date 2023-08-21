@@ -365,6 +365,7 @@ if(count($searchdata)>0){
 }
 
 
+
 // return response($output);
 // if ($request->ajax()) {
 //     $view = view('classitem.data', compact('searchdata'))->render();

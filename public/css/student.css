@@ -1,44 +1,47 @@
-.student-table .w-15{
-    width: 15% ;
+.student-table .w-15 {
+    width: 15%;
 }
 
-.student-table .w-30{
+.student-table .w-30 {
     width: 30%;
+}
+
+.table-responsive {
+    max-height: 34rem;
+}
+
+.table-responsive::-webkit-scrollbar {
+    display: none;
 }
 
 /* .student-table td:last-child{
     text-align: end !important;
 } */
 
-
-
-@media screen and (max-width : 768px){
-    .table thead th:first-child{
-
+@media screen and (max-width: 768px) {
+    .table thead th:first-child {
         width: 25% !important;
     }
 
-    .dropdown-menu{
+    .dropdown-menu {
         width: auto !important;
     }
 
-    .btn-outline-primary:hover , .btn-outline-primary:active{
+    .btn-outline-primary:hover,
+    .btn-outline-primary:active {
         color: #fff !important;
         background-color: #0465cc !important;
     }
 }
 
-
-@media screen and (max-width : 460px){
-    .student-list{
+@media screen and (max-width: 460px) {
+    .student-list {
         width: 100% !important;
     }
 
-    .student-table{
+    .student-table {
         overflow: scroll;
     }
-
-
 
     .student-table::-webkit-scrollbar {
         display: none;
