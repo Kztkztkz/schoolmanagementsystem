@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Http\Requests\StoreClassitemRequest;
 use App\Http\Requests\UpdateClassitemRequest;
 use App\Models\Student;
+use App\Models\UserClassitem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -173,7 +174,9 @@ class ClassitemController extends Controller
      */
     public function update(UpdateClassitemRequest $request, Classitem $classitem)
     {
-        $this->authorize('update', $classitem);
+        
+
+        // $this->authorize('update', $classitem);
         $days = $request->days;
         $day_string = implode(', ', $days);
         $lecturerIds = $request->lecturer;
@@ -193,7 +196,33 @@ class ClassitemController extends Controller
             'code' => $request->shortcode,
         ]);
 
-        $classitemId->users()->attach($lecturerIds);
+        
+        $classitem->name = $request->name;
+        $classitem->start_date = $request->startdate;
+        $classitem->end_date = $request->enddate;
+        $classitem->course_id = $request->course;
+        $classitem->start_time = $request->starttime;
+        $classitem->end_time = $request->endtime;
+        $classitem->room_id = $request->room;
+        $classitem->day = $day_string;
+        $classitem->price = $request->price;
+        $classitem->max_student = $request->maxstudent;
+        $classitem->container_color = $request->color;
+        $classitem->code = $request->shortcode;
+        $classitem->update();
+
+     
+
+        $classUser = UserClassitem::find($classitem->id);
+        $classUser->classitem_id = $classitem->id;
+        $classUser->user_id = (int) $request->lecturer;
+        $classUser->update();
+       
+        // $classitemId->users()->attach($lecturerIds);
+        // $studentClass = new ClassitemStudent();
+        // $studentClass->student_id = $request->student_id;
+        // $studentClass->classitem_id = $request->classitem_id;
+        // $studentClass->save();
 
         return redirect()->route('classitem.index')->with('message', 'Data updated successfully');
     }

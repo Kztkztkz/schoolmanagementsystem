@@ -18,7 +18,7 @@
    </td>
 
     {{-- Laptop View --}}
-    <td class="d-none d-lg-table-cell align-middle">{{$payment->created_at->format('d-m-Y')}}</td>
+    <td class="d-none d-lg-table-cell align-middle">{{$payment->created_at->format('d.m.Y')}}</td>
     <td class="align-middle">{{Str::limit($payment->classitem->name, 20)}} </td>
     <td class="d-none d-lg-table-cell align-middle">
         {{Str::limit($payment->classitem->course->name, 15)}}</td>
@@ -29,11 +29,11 @@
     <td class=" align-middle">
 
         @if ($payment->payment_type=="paid")
-            <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
+            <div class="text-success fw-bold pay-status d-flex justify-content-center align-items-center rounded">
                 paid
             </div>
         @else
-            <div class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
+            <div class="text-danger fw-bold pay-status d-flex justify-content-center align-items-center rounded">
                 unpaid
             </div>
         @endif

@@ -9081,10 +9081,13 @@ html[dir="ltr"] body .p-l-0 {
 #main-wrapper {
     width: 100%;
     overflow: hidden;
+    height: 100%;
 }
 .page-wrapper {
     background: #f6f5f5;
     position: relative;
+    overflow: hidden;
+    flex-grow: 1;
 }
 .page-wrapper > .container-fluid,
 .page-wrapper > .container-lg,

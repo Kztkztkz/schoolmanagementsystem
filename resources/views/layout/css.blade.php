@@ -1,5 +1,8 @@
  <!-- Favicon icon -->
- <link rel="icon" type="image/png" sizes="16x16" href="{{asset('admin/assets/images/favicon.png')}}">
+
+ <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon.ico')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css" integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <!-- Custom CSS -->
     <link href="{{asset('admin/assets/libs/flot/css/float-chart.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('admin/dist/css/icons/font-awesome/css/fontawesome-all.min.css') }}">

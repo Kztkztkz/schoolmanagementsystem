@@ -21,6 +21,7 @@
         <form method="POST" action="{{route('classitem.update', $classitem->id)}}">
           @csrf
           @method('put')
+          <input type="text" value="{{ $classitem->id }}" name="classitem_id" hidden >
           <div class = "row">
             <div class="col-sm-4">
               <div class="form-group test">

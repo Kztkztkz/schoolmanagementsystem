@@ -114,17 +114,50 @@
         </div>
     </div> --}}
     <!-- end responsive -->
+    
+
+
     <div class="row  px-3 max-height">
-        <div class="col-12">
-            <div class="card rounded-3">
-                <div class="card-body table-responsive">
-                    <div class="d-flex justify-content-between">
+        <div class="col-12  table-container">
+            <div class="card rounded-3 ">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0 py-2">
                         <p class="mb-0 fw-bolder">Total - {{$userdata->total()}}</p>
                         <div class="">
                             <a href="{{ route('user.create') }}" class="btn plus-btn btn-outline-secondary">
                                 <i class="mdi mdi-plus h5"></i>
                             </a>
                         </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr style="border-bottom: 2px solid black">
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                    
+                                    <th scope="col" class="text-end">Control</th>
+                                </tr>
+                            </thead>
+                            <tbody class="original" id="data-wrapper">
+                               @include('user.data')
+                            </tbody>
+                            <tbody class="find" id="data-wrapper2">
+                            </tbody>
+                            @if(count($userdata)>=15)
+                              <tr>
+                                <td colspan="6" class="text-center">
+                                    <button class="btn btn-secondary load-more-data"><i class="fa fa-refresh"></i> Load More Data...</button>
+                                </td>
+                              </tr>
+                              @endif
+                              <tr>
+                                <td colspan="6" class="text-center">
+                                    <button class="btn btn-secondary load-more-data2" style="display: none;"><i class="fa fa-refresh"></i> Load More Data...</button>
+                                </td>
+                              </tr>
+                        </table>
                     </div>
                     {{-- @if(session()->has('message'))
                     <div class="alert alert-success success-alt mt-2">
@@ -143,48 +176,20 @@
                     </div>
                     @endif --}}
 
-                    <table class="table table-striped">
-                        <thead>
-                            <tr style="border-bottom: 2px solid black">
-                                <th scope="col">Name</th>
-                                <th scope="col">Email</th>
-
-                                <th scope="col" class="text-end">Control</th>
-                            </tr>
-                        </thead>
-                        <tbody class="original" id="data-wrapper">
-                           @include('user.data')
-                        </tbody>
-                        <tbody class="find" id="data-wrapper2">
-                        </tbody>
-                        @if(count($userdata)>=15)
-                          <tr>
-                            <td colspan="6" class="text-center">
-                                <button class="btn btn-secondary load-more-data"><i class="fa fa-refresh"></i> Load More Data...</button>
-                            </td>
-                          </tr>
-                          @endif
-                          <tr>
-                            <td colspan="6" class="text-center">
-                                <button class="btn btn-secondary load-more-data2" style="display: none;"><i class="fa fa-refresh"></i> Load More Data...</button>
-                            </td>
-                          </tr>
-                    </table>
+                   
                                      <!-- Data Loader -->
-    <div class="auto-load text-center" style="display: none;">
-        <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
-            <path fill="#000"
-                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
-                <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
-                    from="0 50 50" to="360 50 50" repeatCount="indefinite" />
-            </path>
-        </svg>
-    </div>
+        <div class="auto-load text-center" style="display: none;">
+            <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                <path fill="#000"
+                    d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                    <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                        from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                </path>
+            </svg>
+        </div>
                 </div>
-                <div class="d-flex justify-content-end me-3">
-                    {{-- {{$userdata->links()}} --}}
-                </div>
+              
             </div>
         </div>
 

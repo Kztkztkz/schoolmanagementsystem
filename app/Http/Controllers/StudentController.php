@@ -183,6 +183,7 @@ class StudentController extends Controller
         $student->address = $request->address;
         $student->phone = $student->phone;
         $student->update();
+        
 
         return redirect()->route('student.index');
     }

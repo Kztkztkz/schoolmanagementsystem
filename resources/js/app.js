@@ -493,10 +493,10 @@ $(document).ready(function () {
 });
 
 //card height
-$(".card").map(function () {
-    let cardHeight = $(this).innerHeight();
-    // console.log('card' + cardHeight);
-    let mainHeight = window.innerHeight - 120;
-    // console.log(mainHeight);
-    $(this).css("height", mainHeight);
-});
+// $(".card").map(function () {
+//     let cardHeight = $(this).innerHeight();
+//     // console.log('card' + cardHeight);
+//     let mainHeight = window.innerHeight - 120;
+//     // console.log(mainHeight);
+//     $(this).css("height", mainHeight);
+// });

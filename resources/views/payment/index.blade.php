@@ -62,7 +62,7 @@
         <div class=" col-sm-12 col-md-9 table-container">
             <div class="card rounded-3 ">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
+                    <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0 py-2">
                         <p class="mb-0 fw-bolder">Total - {{$latestPayments->total()}}</p>
                         <div class="d-flex justify-content-end  d-xs-block d-md-none ">
                             <button type="button" class="btn plus-btn btn-outline-secondary d-flex " data-bs-toggle="modal"
@@ -86,7 +86,7 @@
                                     <th scope="col" class="d-none d-lg-table-cell list-student-col">Student</th>
                                     <th scope="col" class=" list-fees-col">Fees</th>
                                     <th scope="col" class=" list-due-col">Due</th>
-                                    <th scope="col" class=" text-center list-type-col">Type</th>
+                                    <th scope="col" class=" text-center list-type-col">Status</th>
                                 </tr>
                             </thead>
                             <tbody class="original" id="data-wrapper">
@@ -137,7 +137,7 @@
                     <form action="">
                         <div class=" mb-3">
                             <label for="">Student</label>
-                            <select class="select2  form-select shadow-none js-example-basic-single"  name="paymentByStudent" style="width: 100%; height:36px;" id="studentId">
+                            <select class="ui search dropdown w-100 shadow-none "  name="paymentByStudent" style="width: 100%; height:36px;" id="studentId">
                                 <option value="">Select Student</option>
                                 @foreach ($students as $student)
                                     <option value="{{ $student->id }}">{{ $student->name }}</option>
@@ -146,7 +146,7 @@
                         </div>
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="paymentByCourse">
+                            <select id="courseId" class="ui dropdown w-100 shadow-none courseId" style="width: 100%; height:36px;" name="paymentByCourse">
                                 <option value = "">Select Course</option>
                                 {{-- @foreach($courses as $course)
                                     <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
@@ -157,7 +157,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="paymentByClass">
+                            <select id="classId" required class="ui dropdown w-100 shadow-none classId" style="width: 100%; height:36px;" name="paymentByClass">
                                 <option value = "">Select Class</option>
                                 {{-- @foreach($classitems as $class)
                                     <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
@@ -166,12 +166,12 @@
                                 @endforeach --}}
                             </select>
                         </div>
-                        <div class="d-flex justify-content-center">
+                        {{-- <div class="d-flex justify-content-center">
                             <div class="position-absolute filterbtn">
                                 <button class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</button>
                                 <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                             </div>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
             </div>
@@ -182,111 +182,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endsection
 @push('scripts')
-    <!-- Modal -->
-    {{-- <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="mymodal" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="mymodal">Payment For Web Foundation (Batch 01)</h1>
-
-   @foreach ($latestPayments as $payment)
-
-
-
-
-
-         <!-- Modal -->
-    <div class="modal fade" id="exampleModal{{$payment->id}}" tabindex="-1" aria-labelledby="exampleModal{{$payment->id}}Label" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModal{{$payment->id}}Label">{{$payment->classitem->name}}</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    <h6>Student Name - <span id="modalStudentName"></span></h6>
-
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr style="border-bottom: 2px solid black">
-                                <th scope="col">Transfer Date</th>
-                                <th scope="col">Fees</th>
-                                <th scope="col">Paid</th>
-                                <th scope="col">Type</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ({{$payment->student->name}} as $student)
-
-                            <tr>
-                                <td class="col-3">01-01-2023</td>
-                                <td class="col-3">Class A</td>
-                                <td class="col-3">Python</td>
-                                <td class="col-3">Cash</td>
-                            </tr>
-                            @endforeach
-                            <tr>
-
-                        <tbody class="payHistory">
-
-
-                            {{-- @endforeach --}}
-                            {{-- <tr>
-
-                                <td class="col-3">01-01-2023</td>
-                                <td class="col-3">Class A</td>
-                                <td class="col-3">Python</td>
-                                <td class="col-3">Debit Card</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="mt-3 mb-3">
-                                <label for="amount mb-0">
-                                    <p class="small-header mb-0">Amount</p>
-                                </label>
-                                <input type="text" class="form-control w-75" id="amount"
-                                    placeholder="Enter Amount">
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="mt-3 mb-3">
-                                <label for="">Type</label>
-                                <div class="input-group w-75">
-                                    <select class="form-select" id="inputGroupSelect04"
-                                        aria-label="Example select with button addon">
-                                        <option selected>Choose Type</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-3 mb-3 d-flex">
-                        <div class="" style="margin-right: 10px;">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                id="flexRadioDefault1" checked>
-                        </div>
-                        <div>
-                            <label class="form-check-label mb-0" for="flexRadioDefault1">
-                                <p class="small-header mb-0" style="padding-top: 3px;">Print out the slip</p>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="text-center mt-5">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Play</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div> --}}
+    
 
     <div class="modal fade hide" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -298,7 +194,9 @@
             <form action="{{route('payments.createModal')}}" method="POST">
             <div class="modal-body">
 
-                <h3 class="studentName"></h3>
+                <div class=" mb-2">
+                    <span class="">Student name - </span><p class="studentName fw-bold d-inline-block"></p>
+                </div>
 
                 <table class="table table-striped table-hover">
                     <thead>
@@ -391,7 +289,7 @@
 
                         <div class=" mb-3">
                             <label for="">Student</label>
-                            <select class="select2  form-select shadow-none js-example-basic-single" class="" name="paymentByStudent" style="width: 100%; height:36px;">
+                            <select class="ui dropdown w-100 shadow-none js-example-basic-single" class="" name="paymentByStudent" style="width: 100%; height:36px;">
                                 <option>Select Student</option>
                                 <option value = "-1">Select Student</option>
                                 @foreach ($students as $student)
@@ -402,7 +300,7 @@
                         </div>
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="paymentByCourse">
+                            <select id="courseId" class="ui dropdown w-100 shadow-none courseId" style="width: 100%; height:36px;" name="paymentByCourse">
                                 <option value = "-1">Select Course</option>
                                 {{-- @foreach($courses as $course)
                                     <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
@@ -452,10 +350,11 @@
                 $('#exampleModalLabel').text(className);
                 $('.studentName').text(studentName);
                 response.map(function(el){
-                    console.log(el);
+                    
+                    let text = el.created_at;
                     $('.payHistory').append(`
                         <tr>
-                            <td class="col-3">${el.created_at}</td>
+                            <td class="col-3">${ text.slice(0, 10) }</td>
                             <td class="col-3">${el.fees}</td>
                             <td class="col-3">${el.due_amount}</td>
                             <td class="col-3">${el.payment_method}</td>
@@ -689,7 +588,9 @@
             .fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('Server error occured');
             });
-    }
+    };
+
+    $('.ui.dropdown').dropdown();
 
     </script>
 @endpush

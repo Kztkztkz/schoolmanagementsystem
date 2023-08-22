@@ -16,6 +16,8 @@
     <!--This page JavaScript -->
     <!-- <script src="../../dist/js/pages/dashboards/dashboard1.js"></script> -->
     <!-- Charts js Files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js" integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script src="{{asset('admin/assets/libs/flot/excanvas.js')}}"></script>
     <script src="{{asset('admin/assets/libs/flot/jquery.flot.js')}}"></script>
     <script src="{{asset('admin/assets/libs/flot/jquery.flot.pie.js')}}"></script>
