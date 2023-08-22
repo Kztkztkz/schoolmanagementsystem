@@ -76,3 +76,9 @@ Route::get('/studentsearch',[StudentController::class,'studentsearch'])->name('s
 Route::get('/paymentsearch',[PaymentController::class,'paymentsearch'])->name('payment.search');
 Route::get('/classitemfilter',[ClassitemController::class, 'classitemfilter'])->name('classitem.filter');
 });
+
+
+// invoice
+Route::get('/invoice',function(){
+    return view('payment.invoice');
+});
