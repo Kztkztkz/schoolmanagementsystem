@@ -242,8 +242,9 @@ class ClassitemController extends Controller
         // $classUser->classitem_id = $classitem->id;
         // $classUser->user_id = (int) $request->input('lecturers', []);
         // $classUser->update();
-        $classitem->users()->attach($request->input('lecturers', []));
-       
+        
+        $classitem->users()->sync($request->input('lecturers', []));
+        
         // $classitemId->users()->attach($lecturerIds);
         // $studentClass = new ClassitemStudent();
         // $studentClass->student_id = $request->student_id;

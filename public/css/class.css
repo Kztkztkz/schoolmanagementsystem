@@ -117,6 +117,11 @@
     display: none;
 }
 
+.select2-selection__choice {
+    color: black !important;
+    background: #e5e8ff !important;
+}
+
 @media screen and (max-width: 768px) {
     .control-btns {
         display: none !important;
