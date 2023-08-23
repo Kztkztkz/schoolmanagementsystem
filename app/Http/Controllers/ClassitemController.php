@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Http\Requests\StoreClassitemRequest;
 use App\Http\Requests\UpdateClassitemRequest;
 use App\Models\Student;
+use App\Models\UserClassitem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -108,23 +109,47 @@ class ClassitemController extends Controller
     public function store(StoreClassitemRequest $request)
     {
         $days = $request->days;
-        $day_string = implode(', ', $days);
-        $lecturerIds = $request->lecturer;
+        $day_string = implode(', ', $days);       
+        $lecturerIds = $request->input('lecturers', []);
+        $roomday = Classitem::where('room_id',$request->room)
+        ->where('type', $request->daytype)
+        ->first();
+        $startendtime = Classitem::whereBetween('start_time',[$request->starttime, $request->endtime])
+        ->whereBetween('end_time',[$request->starttime, $request->endtime])
+        ->exists();
+        // $classitemId = Classitem::create([
+        //     'name' => $request->name,
+        //     'start_date' => $request->startdate,
+        //     'end_date' => $request->enddate,
+        //     'course_id' => $request->course,
+        //     'start_time' => $request->starttime,
+        //     'end_time' => $request->endtime,
+        //     'room_id' => $request->room,
+        //     'day' => $day_string,
+        //     'price' => $request->price,
+        //     'max_student' => $request->maxstudent,
+        //     'container_color' => $request->color,
+        //     'code' => $request->shortcode,
+        // ]);
 
-        $classitemId = Classitem::create([
-            'name' => $request->name,
-            'start_date' => $request->startdate,
-            'end_date' => $request->enddate,
-            'course_id' => $request->course,
-            'start_time' => $request->starttime,
-            'end_time' => $request->endtime,
-            'room_id' => $request->room,
-            'day' => $day_string,
-            'price' => $request->price,
-            'max_student' => $request->maxstudent,
-            'container_color' => $request->color,
-            'code' => $request->shortcode,
-        ]);
+        $classitemId = new Classitem();
+            $classitemId->name = $request->name;
+            $classitemId->start_date = $request->startdate;
+            $classitemId->end_date = $request->enddate;
+            $classitemId->course_id = $request->course;
+            if(!is_null($roomday) && !is_null($startendtime)){
+                return redirect()->route('classitem.create' )->with('message', 'Room is not Free in that time range. Please select different time');
+             }else{
+                $classitemId->start_time = $request->starttime;
+             }
+            $classitemId->end_time = $request->endtime;
+            $classitemId->room_id = $request->room;
+            $classitemId->day = $day_string;
+            $classitemId->price = $request->price;
+            $classitemId->max_student = $request->maxstudent;
+            $classitemId->container_color = $request->color;
+            $classitemId->code = $request->shortcode;
+        $classitemId->save();
         $classitemId->users()->attach($lecturerIds);
 
         // $noty = new Noty('success');
@@ -173,27 +198,57 @@ class ClassitemController extends Controller
      */
     public function update(UpdateClassitemRequest $request, Classitem $classitem)
     {
-        $this->authorize('update', $classitem);
+        
+
+        // $this->authorize('update', $classitem);
         $days = $request->days;
         $day_string = implode(', ', $days);
         $lecturerIds = $request->lecturer;
 
-        $classitemId = $classitem->update([
-            'name' => $request->name,
-            'start_date' => $request->startdate,
-            'end_date' => $request->enddate,
-            'course_id' => $request->course,
-            'start_time' => $request->starttime,
-            'end_time' => $request->endtime,
-            'room_id' => $request->room,
-            'day' => $day_string,
-            'price' => $request->price,
-            'max_student' => $request->maxstudent,
-            'container_color' => $request->color,
-            'code' => $request->shortcode,
-        ]);
+        // $classitemId = $classitem->update([
+        //     'name' => $request->name,
+        //     'start_date' => $request->startdate,
+        //     'end_date' => $request->enddate,
+        //     'course_id' => $request->course,
+        //     'start_time' => $request->starttime,
+        //     'end_time' => $request->endtime,
+        //     'room_id' => $request->room,
+        //     'day' => $day_string,
+        //     'price' => $request->price,
+        //     'max_student' => $request->maxstudent,
+        //     'container_color' => $request->color,
+        //     'code' => $request->shortcode,
+        // ]);
 
-        $classitemId->users()->attach($lecturerIds);
+        
+        $classitem->name = $request->name;
+        $classitem->start_date = $request->startdate;
+        $classitem->end_date = $request->enddate;
+        $classitem->course_id = $request->course;
+        $classitem->start_time = $request->starttime;
+        $classitem->end_time = $request->endtime;
+        $classitem->room_id = $request->room;
+        $classitem->day = $day_string;
+        $classitem->price = $request->price;
+        $classitem->max_student = $request->maxstudent;
+        $classitem->container_color = $request->color;
+        $classitem->code = $request->shortcode;
+        $classitem->update();
+
+        // $classId = $classitem->id;
+        
+        // $classUser = UserClassitem::where('classitem_id' , $classId)->get();
+        // return $classUser;
+        // $classUser->classitem_id = $classitem->id;
+        // $classUser->user_id = (int) $request->input('lecturers', []);
+        // $classUser->update();
+        $classitem->users()->attach($request->input('lecturers', []));
+       
+        // $classitemId->users()->attach($lecturerIds);
+        // $studentClass = new ClassitemStudent();
+        // $studentClass->student_id = $request->student_id;
+        // $studentClass->classitem_id = $request->classitem_id;
+        // $studentClass->save();
 
         return redirect()->route('classitem.index')->with('message', 'Data updated successfully');
     }

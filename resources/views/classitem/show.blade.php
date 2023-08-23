@@ -43,9 +43,10 @@
             text-align: left;
         }
 
-        .card-body {
-            height: 600px;
+        .vh-80{
+            height: 80vh !important;
         }
+
     </style>
 @endsection
 
@@ -66,8 +67,8 @@
         </div>
 
         {{-- Right side bar --}}
-        <div class="card">
-            <div class="card-body">
+        <div class="card vh-80 ">
+            <div class="card-body overflow-auto">
 
                 <div class="col-12 d-flex justify-content-end ">
                     <a href="{{ route('student.create') }}" type="button" class="btn btn-primary d-none d-md-block "
@@ -101,8 +102,6 @@
                                     <ul class="list-group list-unstyled">
                                         <li class="">{{ $classitem->day }}</li>
                                     </ul>
-                                    {{-- <div class="row">Tues,Wed,Fr</div>
-                                    <div class="row">(Wednesday)</div> --}}
                                 </div>
                             </div>
                             <div class="row">
@@ -145,7 +144,7 @@
                                 <label for="">Select Existing Student</label>
                                 <div class="input-group w-75">
                                     <select name="student_id"
-                                        class="form-select @error('due_amount') is-invalid @enderror js-example-basic-single"
+                                        class="ui dropdown form-select  @error('student_id') is-invalid @enderror"
                                         id="inputGroupSelect04" aria-label="Example select with button addon">
 
                                         <optgroup label="Existing students">
@@ -176,7 +175,8 @@
                             <div class=" mt-3 mb-3 w-75">
                                 <label for="class">Payment Method</label>
                                 <select name="payment_method"
-                                    class="form-select slectopt @error('due_amount') is-invalid @enderror" id="class">
+                                    class="form-select slectopt @error('payment_method') is-invalid @enderror" id="class">
+                                    
                                     <option value="cash">Cash</option>
                                     <option value="card">Card</option>
                                     <option value="bank transfer">Bank Transfer</option>
@@ -212,7 +212,7 @@
                                 </label>
                             </div>
 
-                            <div>
+                            <div class="mb-3">
                                 <a href="{{ route('classitem.index') }}" type="button"
                                     class="btn btn-secondary">Cancel</a>
                                 <button type="submit" class="btn btn-primary">Enroll</button>
@@ -289,4 +289,7 @@
         </div>
     </div> --}}
     {{-- model --}}
+    <script>
+        $(".ui.dropdown").dropdown();
+    </script>
 @endpush

@@ -62,6 +62,10 @@ body::-webkit-scrollbar {
     background-color: #2b2b41 !important;
 }
 
+.left-sidebar::-webkit-scrollbar {
+    display: none;
+}
+
 #main-wrapper .topbar .top-navbar .navbar-header[data-logobg="skin5"] {
     background-color: #2b2b41 !important;
     background-color: #2b2b41 !important;
@@ -104,10 +108,21 @@ body::-webkit-scrollbar {
 .card {
     border-radius: 6px !important;
     border: 1px solid #e6e6e6;
+    /* border: 1px solid #020202; */
+    height: 100% !important;
+}
+
+.card-body {
+    height: 100% !important;
 }
 
 .rounded-6 {
     border-radius: 6px !important;
+}
+
+.table-responsive {
+    height: 100% !important;
+    overflow: auto !important;
 }
 
 .rounded-3 {
@@ -117,6 +132,8 @@ body::-webkit-scrollbar {
 .table-container {
     padding: 0 !important;
     position: relative;
+    height: 100% !important;
+    overflow: hidden;
 }
 
 .user-account-name {
@@ -226,6 +243,10 @@ p {
 
 .left-sidebar {
     width: 220px;
+    height: auto;
+    bottom: 0;
+    overflow: scroll;
+    padding: 0 !important;
 }
 
 .paginate {
@@ -243,7 +264,7 @@ p {
     position: fixed;
 } */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767.99px) {
     #main-wrapper[data-layout="vertical"][data-sidebartype="full"]
         .topbar
         .top-navbar

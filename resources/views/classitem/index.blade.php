@@ -57,8 +57,8 @@
     <div class="row  px-3 max-height  d-sm-flex">
         <div class="col-12 col-md-9 table-container">
             <div class="card rounded-3">
-                <div class="card-body table-responsive">
-                    <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
+                <div class="card-body ">
+                    <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0 my-2">
                         <p class="mb-0 fw-bolder">Total - {{$classitem->total()}}</p>
                         <div class="d-flex justify-content-center align-items-center">
                             <a href="{{ route('classitem.create') }}" class="btn d-flex me-2 justify-content-center align-items-center plus-btn btn-outline-secondary ">
@@ -73,43 +73,45 @@
                         </div>
                     </div>
 
-                    <table class="table table-striped highscro">
-                        <thead>
-                            <tr style="border-bottom: 2px solid black">
-                                <th scope="col" class="list-lecturer-col" >
-                                    <p class="d-none d-md-block">Name</p>
-                                    <p class="d-block d-md-none">Class & Lecturer</p>
-                                </th>
-                                <th scope="col" class="list-course-col">Course</th>
-                                <th class="d-none d-md-table-cell list-lecturer-col" scope="col">Lecturer</th>
-                                @can('viewAny', \App\Models\Classitem::class)
-                                <th scope="col" class="list-status-col">Status</th>
-                                <th class="d-none d-md-table-cell list-payment-col text-center" scope="col" >Payment</th>
-                                @endcan
-                                <th scope="col" class="text-center list-control-col" class="">
-                                    <p class=" d-none d-md-block">Control</p>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="original" id="data-wrapper">
-                            @include('classitem.data')
-                            </div>
-                          </tbody>
-                          <tbody class="find" id="data-wrapper2">
-                        </tbody>
-                        @if(count($classitem)>=15)
-                          <tr>
-                            <td colspan="6" class="text-center">
-                                <button class="btn btn-secondary load-more-data"><i class="fa fa-refresh"></i> Load More Data...</button>
-                            </td>
-                          </tr>
-                          @endif
-                          <tr>
-                            <td colspan="6" class="text-center">
-                                <button class="btn btn-secondary load-more-data2" style="display: none;"><i class="fa fa-refresh"></i> Load More Data...</button>
-                            </td>
-                          </tr>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-striped highscro">
+                            <thead>
+                                <tr style="border-bottom: 2px solid black">
+                                    <th scope="col" class="list-lecturer-col" >
+                                        <p class="d-none d-md-block">Name</p>
+                                        <p class="d-block d-md-none">Class & Lecturer</p>
+                                    </th>
+                                    <th scope="col" class="list-course-col">Course</th>
+                                    <th class="d-none d-md-table-cell list-lecturer-col" scope="col">Lecturer</th>
+                                    @can('viewAny', \App\Models\Classitem::class)
+                                    <th scope="col" class="list-status-col">Status</th>
+                                    <th class="d-none d-md-table-cell list-payment-col text-center" scope="col" >Payment</th>
+                                    @endcan
+                                    <th scope="col" class="text-center list-control-col" class="">
+                                        <p class=" d-none d-md-block">Control</p>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="original" id="data-wrapper">
+                                @include('classitem.data')
+                                </div>
+                              </tbody>
+                              <tbody class="find" id="data-wrapper2">
+                            </tbody>
+                            @if(count($classitem)>=15)
+                              <tr>
+                                <td colspan="6" class="text-center">
+                                    <button class="btn btn-secondary load-more-data"><i class="fa fa-refresh"></i> Load More Data...</button>
+                                </td>
+                              </tr>
+                              @endif
+                              <tr>
+                                <td colspan="6" class="text-center">
+                                    <button class="btn btn-secondary load-more-data2" style="display: none;"><i class="fa fa-refresh"></i> Load More Data...</button>
+                                </td>
+                              </tr>
+                        </table>
+                    </div>
                      <!-- Data Loader -->
     <div class="auto-load text-center" style="display: none;">
         <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -138,7 +140,7 @@
                     <form action="{{route('classitem.index')}}" method="get">
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select id="coursesearchclassitem" class="select2 form-select shadow-none" style="width: 100%; height:36px;" name="coursesearchclassitem">
+                            <select id="coursesearchclassitem" class="ui dropdown w-100 shadow-none" style="width: 100%; height:36px;" name="coursesearchclassitem">
                                 <option value = "">Select Course</option>
                                 @foreach($courseoption as $courses)
                                     <option value="{{$courses->id}}" {{ $courses->id == request('coursesearchclassitem') ? 'selected' : '' }}>{{$courses->name}}</option>
@@ -147,19 +149,19 @@
                         </div>
                         <div class=" mb-3">
                             <label for="">Student</label>
-                            <select id="studentsearchclassitem" class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentsearchclassitem" id="studentsearchclassitem">
+                            <select id="studentsearchclassitem" class="ui dropdown w-100 shadow-none" style="width: 100%; height:36px;" name="studentsearchclassitem" id="studentsearchclassitem">
                                 <option value = "">Select Student</option>
                                 @foreach($studentoption as $students)
                                     <option value="{{$students->id}}" {{ $students->id == request('studentsearchclassitem') ? 'selected' : '' }}>{{$students->name}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="d-flex justify-content-center">
+                        {{-- <div class="d-flex justify-content-center">
                             <div class="position-absolute filterbtn">
                                 <a class="btn btn-secondary cnl-btn me-2" href="{{route('classitem.index')}}">Cancel</a>
                                 <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                             </div>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
             </div>
@@ -183,7 +185,7 @@
                     <form action="{{route('classitem.index')}}" method="get">
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="coursesearchclassitem">
+                            <select class="ui dropdown w-100 shadow-none" style="width: 100%; height:36px;" name="coursesearchclassitem">
                                 <option>Select Course</option>
                                 @foreach($courseoption as $courses)
                                     <option value="{{$courses->name}}">{{$courses->name}}</option>
@@ -192,7 +194,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="">Student</label>
-                            <select class="select2  form-select shadow-none" name="studentsearchclassitem">
+                            <select class="ui dropdown w-100 shadow-none" name="studentsearchclassitem">
                                 <option>Select Class</option>
                             @foreach($studentoption as $students)
                                 <option value="{{$students->id}}">{{$students->name}}</option>
@@ -333,7 +335,7 @@
 
     @endif
 
-
+    $('.ui.dropdown').dropdown();
 
     </script>
 

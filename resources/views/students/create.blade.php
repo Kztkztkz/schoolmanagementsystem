@@ -115,7 +115,7 @@
                             </div>
                         </div>
 
-                        <div class=" text-center form-create-btn create-filterbtn  ">
+                        <div class=" text-center form-create-btn   ">
                             <a href="{{ route('student.index') }}" class="btn btn-secondary me-2">Cancel</a>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>

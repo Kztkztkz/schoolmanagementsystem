@@ -333,7 +333,7 @@ class PaymentController extends Controller
         $payment->classitem_id = $request->classitem_id;
         $payment->student_id = $request->student_id;
         if(request('due_amount') > $due_amount || request('due_amount') > $classitemPrice){
-           return redirect()->route('payment.index' )->with('message', 'This amount is exceeded');
+           dd('aa');
         }else{
             $payment->due_amount = $due_amount;
         }
@@ -519,11 +519,11 @@ class PaymentController extends Controller
     <td class="align-middle">';
 
         if ($payment->payment_type=="paid"){
-            $output.='<div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
+            $output.='<div class="text-success fw-bold pay-status d-flex justify-content-center align-items-center rounded">
                 paid
             </div>';
         } else {
-            $output.='<div class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
+            $output.='<div class="text-success fw-bold pay-status d-flex justify-content-center align-items-center rounded">
                 unpaid
             </div>';
         }

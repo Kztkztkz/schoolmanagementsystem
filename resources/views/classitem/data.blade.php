@@ -18,20 +18,20 @@
     @endif
     @endforeach
     @if($isUnpaid)
-    <td class=" align-middle">
+    <td class="">
         <div
-            class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
+            class="text-danger fw-bold pay-status d-flex justify-content-start align-items-center rounded">
             unpaid
         </div>
     </td>
     @else
-    <td class=" align-middle">
-        <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
+    <td class="">
+        <div class="text-success fw-bold pay-status d-flex justify-content-start align-items-center rounded">
             paid
         </div>
     </td>
     @endif
-    <td class="d-none d-md-table-cell align-middle text-center">
+    <td class="d-none d-md-table-cell align-middle text-center pe-1">
         <a href="{{ route('classitem.classPayment' , $classdata->id ) }}" class="btn table-btn-sm btn-primary">
             <i class="mdi mdi-credit-card-multiple h5"></i>
         </a>

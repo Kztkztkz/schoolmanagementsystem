@@ -64,10 +64,7 @@
         <div class="col-12 col-md-9 table-container">
             <div class="card rounded-3 ">
                 <div class="card-body">
-                    {{-- @if(session('message'))
-                        <span class=" alert alert-success ">{{ session('message') }}</span>
-                    @endif --}}
-                    <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
+                    <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0 py-2">
                         <p class="mb-0 fw-bolder">Total - {{ $students->total() }}</p>
                         <div class="d-flex justify-content-center align-items-center gap-2">
                             <a href="{{ route('student.create') }}"
@@ -148,7 +145,7 @@
                         @endif
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="studentByCourse">
+                            <select id="courseId" class=" ui dropdown w-100 shadow-none courseId" style="width: 100%; height:36px;" name="studentByCourse">
                                 <option value="" >Select Course</option>
 
                             </select>
@@ -156,18 +153,18 @@
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="studentByClass" >                                
+                            <select id="classId" required class="ui dropdown w-100 shadow-none classId" style="width: 100%; height:36px;" name="studentByClass" >                                
                                 <option value="" >Select Class</option>
 
                             </select>
                         </div>
 
-                        <div class="d-flex justify-content-center align-items-center ">
+                        {{-- <div class="d-flex justify-content-center align-items-center ">
                             <div class="filterbtn">
                                 <a href="{{route('student.index')}}" class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</a>
                                 <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                             </div>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
             </div>
@@ -192,7 +189,7 @@
                         @endif
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select id="courseId" class="select2  form-select shadow-none courseId" style="width: 100%; height:36px;" name="studentByCourse">
+                            <select id="courseId" class="ui dropdown w-100 shadow-none courseId" style="width: 100%; height:36px;" name="studentByCourse">
                                 <option value = "-1">Select Course</option>
                                 {{-- @foreach($courses as $course)
                                     <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
@@ -203,7 +200,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="studentByClass">
+                            <select id="classId" required class="ui dropdown w-100 shadow-none classId" style="width: 100%; height:36px;" name="studentByClass">
                                 <option value = "-1">Select Class</option>
                                 {{-- @foreach($classitems as $class)
                                     <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
@@ -213,12 +210,12 @@
                             </select>
                         </div>
 
-                        <div class="d-flex justify-content-center align-items-center ">
+                        {{-- <div class="d-flex justify-content-center align-items-center ">
                             <div class="">
                                 <a href="{{route('student.index')}}" class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</a>
                                 <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                             </div>
-                        </div>
+                        </div> --}}
                     </form>
                 </div>
             </div>
@@ -411,7 +408,7 @@
     }
 
 
-
+    $('.ui.dropdown').dropdown();
 
 
 

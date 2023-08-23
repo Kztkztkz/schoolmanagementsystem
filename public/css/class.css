@@ -110,7 +110,7 @@
 }
 
 .table-responsive {
-    max-height: 34rem;
+    /* max-height: 34rem; */
 }
 
 .table-responsive::-webkit-scrollbar {

@@ -2076,6 +2076,10 @@ $(document).ready(function (e) {
     placeholder: "Select days",
     allowClear: true
   });
+  $(".lecturermulti").select2({
+    placeholder: "Select Lecturers",
+    allowClear: true
+  });
 
   //colorpicker
   $("#color").on("input", function () {
@@ -2123,10 +2127,10 @@ $(document).ready(function (e) {
   $("#studentId").change(function (e) {
     paymentSearch();
   });
-  $("#courseId").change(function (e) {
+  $("#courseIdPay").change(function (e) {
     paymentSearch();
   });
-  $("#classId").change(function (e) {
+  $("#classIdPay").change(function (e) {
     paymentSearch();
   });
   function classItemSearch() {
@@ -2349,8 +2353,8 @@ $(document).ready(function (e) {
   function paymentSearch() {
     var paymentId = $("#paymentId").val();
     var studentId = $("#studentId").val();
-    var courseId = $("#courseId").val();
-    var classId = $("#classId").val();
+    var courseId = $("#courseIdPay").val();
+    var classId = $("#classIdPay").val();
     var query = "?search=".concat(paymentId, "&paymentByStudent=").concat(studentId, "&paymentByCourse=").concat(courseId, "&paymentByClass=").concat(classId);
 
     // console.log(window.location.href + query);
@@ -2383,8 +2387,8 @@ $(document).ready(function (e) {
         paymentByClass: classId
       },
       success: function success(data) {
+        console.log(data);
         $(".find").html(data);
-        deletealert();
       }
     });
 
@@ -2490,13 +2494,17 @@ $(document).ready(function () {
 });
 
 //card height
-$(".card").map(function () {
-  var cardHeight = $(this).innerHeight();
-  // console.log('card' + cardHeight);
-  var mainHeight = window.innerHeight - 120;
-  // console.log(mainHeight);
-  $(this).css("height", mainHeight);
-});
+// $(".card").map(function () {
+//     let cardHeight = $(this).innerHeight();
+//     // console.log('card' + cardHeight);
+//     let mainHeight = window.innerHeight - 120;
+//     // console.log(mainHeight);
+//     $(this).css("height", mainHeight);
+// });
+
+// $(".ui.dropdown").map(function () {
+//     $(this).dropdown();
+// });
 
 /***/ }),
 
