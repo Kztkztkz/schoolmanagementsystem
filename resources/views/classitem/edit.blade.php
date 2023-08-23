@@ -71,7 +71,7 @@
                 <span class="text-danger">@error('endtime') {{$message}} @enderror</span>
               </div>
             </div>
-            <div class="col-sm-4 mt-3">
+            {{-- <div class="col-sm-4 mt-3">
               <div class="form-group test">
               <label for="lecturer">Lecturer</label>
                 <select class="form-select slectopt" id="lecturer" name="lecturer">
@@ -81,6 +81,19 @@
                   @endforeach
                 </select>
                 <span class="text-danger">@error('lecturer') {{$message}} @enderror</span>
+              </div>
+            </div> --}}
+            <div class="col-sm-4 mt-3">
+              <div class="form-group test">
+                <label for="lecturer">Lecturer</label>
+                {{-- <div class = "multisel-day"> --}}
+                <select class="js-example-basic-multiple form-select" name="lecturers[]" multiple="multiple" id="lecturer">
+                  @foreach($lectureroption as $lecturer)
+                  <option value="{{$lecturer->id}}" {{in_array($lecturer->id, $classitem->users->pluck('id')->toArray()) ? 'selected' : ''  }}>{{$lecturer->name}}</option>
+                  @endforeach
+                </select>
+                <span class="text-danger">@error('days') {{$message}} @enderror</span>
+                {{-- </div> --}}
               </div>
             </div>
             <div class="col-sm-4 mt-3">

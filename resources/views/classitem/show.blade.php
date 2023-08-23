@@ -145,7 +145,7 @@
                                 <label for="">Select Existing Student</label>
                                 <div class="input-group w-75">
                                     <select name="student_id"
-                                        class="form-select @error('due_amount') is-invalid @enderror js-example-basic-single"
+                                        class="ui dropdown form-select  @error('student_id') is-invalid @enderror"
                                         id="inputGroupSelect04" aria-label="Example select with button addon">
 
                                         <optgroup label="Existing students">
@@ -176,7 +176,8 @@
                             <div class=" mt-3 mb-3 w-75">
                                 <label for="class">Payment Method</label>
                                 <select name="payment_method"
-                                    class="form-select slectopt @error('due_amount') is-invalid @enderror" id="class">
+                                    class="form-select slectopt @error('payment_method') is-invalid @enderror" id="class">
+                                    
                                     <option value="cash">Cash</option>
                                     <option value="card">Card</option>
                                     <option value="bank transfer">Bank Transfer</option>
@@ -289,4 +290,7 @@
         </div>
     </div> --}}
     {{-- model --}}
+    <script>
+        $(".ui.dropdown").dropdown();
+    </script>
 @endpush

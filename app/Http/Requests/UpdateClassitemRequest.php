@@ -30,7 +30,7 @@ class UpdateClassitemRequest extends FormRequest
             'course' => 'required',
             'starttime' => 'required',
             'endtime' => 'required',
-            'lecturer'=>'required',
+            'lecturers'=>'required',
             'room' => 'required',
             'days' => 'required',
             'price' => 'required',

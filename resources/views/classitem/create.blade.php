@@ -81,6 +81,11 @@
                 <!-- <input type="time" class="form-control" id="starttime" value="19:00"> -->
                 <input type="text" placeholder="--:--" onfocus="(this.type='time')" class="form-control" id="starttime" name="starttime">
                 <span class="text-danger">@error('starttime') {{$message}} @enderror</span>
+                @if (session('message'))
+                <span class=" fs-6 text-danger ">
+                    {{ session('message') }} 
+                </span>
+            @endif
               </div>
             </div>
             <div class="col-sm-4 mt-3">
@@ -92,14 +97,15 @@
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-              <label for="lecturer">Lecturer</label>
-                <select class="form-select slectopt" id="lecturer" name="lecturer">
-                  <option value="">Select Lecturer name</option>
+                <label for="lecturer" class="d-block">Lecturer</label>
+                {{-- <div class = "multisel-day"> --}}
+                <select class="js-example-basic-multiple form-select lecturermulti" name="lecturers[]" multiple="multiple"  id="lecturer" >
                   @foreach($lectureroption as $lecturer)
                   <option value="{{$lecturer->id}}">{{$lecturer->name}}</option>
                   @endforeach
                 </select>
                 <span class="text-danger">@error('lecturer') {{$message}} @enderror</span>
+                {{-- </div> --}}
               </div>
             </div>
             <div class="col-sm-4 mt-3">

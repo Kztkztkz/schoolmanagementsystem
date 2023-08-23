@@ -146,7 +146,7 @@
                         </div>
                         <div class=" mb-3">
                             <label for="">Course</label>
-                            <select id="courseId" class="ui dropdown w-100 shadow-none courseId" style="width: 100%; height:36px;" name="paymentByCourse">
+                            <select id="courseIdPay" class="ui dropdown w-100 shadow-none courseId" style="width: 100%; height:36px;" name="paymentByCourse">
                                 <option value = "">Select Course</option>
                                 {{-- @foreach($courses as $course)
                                     <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
@@ -157,7 +157,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
-                            <select id="classId" required class="ui dropdown w-100 shadow-none classId" style="width: 100%; height:36px;" name="paymentByClass">
+                            <select id="classIdPay" required class="ui dropdown w-100 shadow-none classId" style="width: 100%; height:36px;" name="paymentByClass">
                                 <option value = "">Select Class</option>
                                 {{-- @foreach($classitems as $class)
                                     <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
