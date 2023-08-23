@@ -10,11 +10,11 @@
         <p>{{$payment->created_at}}</p>
         <p> {{$payment->student->name}}</p>
     </td>
-    <td class="relatedStudent d-none">
-         {{$payment->student->id}}
+    <td class="fees d-none">
+         {{ $payment->fees }}
     </td>
-    <td class="relatedClass d-none">
-        {{$payment->classitem->id}}
+    <td class="paid d-none">
+        {{$payment->due_amount}}
    </td>
 
     {{-- Laptop View --}}
@@ -24,8 +24,8 @@
         {{Str::limit($payment->classitem->course->name, 15)}}</td>
     <td class="d-none d-lg-table-cell align-middle">
         {{Str::limit($payment->student->name, 15)}}</td>
-    <td class=" align-middle">{{number_format(floatval($payment->fees))}}</td>
-    <td class=" align-middle">{{number_format(floatval($payment->due_amount))}}</td>
+    <td class=" align-middle ">{{number_format(floatval($payment->fees))}}</td>
+    <td class=" align-middle ">{{number_format(floatval($payment->due_amount))}}</td>
     <td class=" align-middle">
 
         @if ($payment->payment_type=="paid")

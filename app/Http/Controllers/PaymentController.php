@@ -332,8 +332,8 @@ class PaymentController extends Controller
 
         $payment->classitem_id = $request->classitem_id;
         $payment->student_id = $request->student_id;
-        if(request('due_amount') > $due_amount || request('due_amount') > $classitemPrice){
-           dd('aa');
+        if(request('due_amount') > $due_amount && request('due_amount') > $classitemPrice){
+           return redirect()->route('payment.index')->with('message' , 'The amount is exceeded');
         }else{
             $payment->due_amount = $due_amount;
         }
@@ -356,8 +356,11 @@ class PaymentController extends Controller
     public function allPaymentHistory(HttpRequest $request){
 
 
+        
         $paymentHistory = Student::find($request->student_id)->payments;
-        $paymentHistory =  $paymentHistory->where('classitem_id' , 1);
+       
+        $paymentHistory =  $paymentHistory->where('classitem_id' , $request->classitem_id);
+    
         return view('students.pay-history-student' , compact('paymentHistory'));
     }
 
@@ -519,11 +522,11 @@ class PaymentController extends Controller
     <td class="align-middle">';
 
         if ($payment->payment_type=="paid"){
-            $output.='<div class="text-success fw-bold pay-status d-flex justify-content-center align-items-center rounded">
+            $output.='<div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
                 paid
             </div>';
         } else {
-            $output.='<div class="text-success fw-bold pay-status d-flex justify-content-center align-items-center rounded">
+            $output.='<div class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
                 unpaid
             </div>';
         }

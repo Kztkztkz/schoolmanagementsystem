@@ -191,16 +191,15 @@
               <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{route('payments.createModal')}}" method="POST">
-                <div class="modal-body">
+            <form action="{{route('payments.createModal')}}" onsubmit = "return(validate());" method="POST" name = "myForm">
+            <div class="modal-body">
 
-<<<<<<< HEAD
-                    <h3 class="studentName"></h3>
-=======
+
+
                 <div class=" mb-2">
                     <span class="">Student name - </span><p class="studentName fw-bold d-inline-block"></p>
                 </div>
->>>>>>> 7a264b5b259df60999e99af9db02657cfb51b3e6
+
 
                     <table class="table table-striped table-hover">
                         <thead>
@@ -224,18 +223,22 @@
                         </tbody>
                     </table>
 
-                    @csrf
-                    <input type="text" class="d-none" name="student_id" hidden id="curStudentId" value="">
-                    <input type="text" class="d-none" name="classitem_id" hidden id="curClassId" value="">
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="mt-3 mb-3">
-                                <label for="amount mb-0">
-                                    <p class="small-header mb-0">Amount</p>
-                                </label>
-                                <input type="text" class="form-control w-75" name="due_amount"
-                                    placeholder="Enter Amount">
-                            </div>
+
+                @csrf
+                <input type="text" class="d-none" name="student_id" hidden id="curStudentId" value="">
+                <input type="text" class="d-none" name="classitem_id" hidden id="curClassId" value="">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mt-3 mb-3">
+                            <label for="amount mb-0">
+                                <p class="small-header mb-0">Amount</p>
+                                
+                            </label>
+                            <input type="text" class="form-control w-75 amount" name="due_amount"
+                                placeholder="Enter Amount">
+                                <span class=" fs-6 text-danger amount-error"></span>
+                                                    
+
                         </div>
                         <div class="col-6">
                             <div class="mt-3 mb-3">
@@ -266,6 +269,10 @@
                         <button type="submit" class="btn btn-primary">Pay</button>
                     </div>
 
+                </div>
+                
+
+
 
                 </div>
             </form>
@@ -276,6 +283,9 @@
 
 
     </div>
+
+   
+   
    
 
 
@@ -338,13 +348,21 @@
 
     <script>
 
+        
+          
+       
+
         let className;
         let studentName;
+        let fees;
+        let paid;
             $('.history').map(function(){
                     $(this).on('click', function(){
                     className = $(this).attr('data-className');
                     studentName = $(this).attr('data-studentName');
-                console.log(className , studentName);
+                    fees = Number($(this).children('.fees').text());
+                    paid = Number($(this).children('.paid').text());
+                    console.log(fees , paid);
                 });
             });
 
@@ -356,15 +374,17 @@
                 response.map(function(el){
                     
                     let text = el.created_at;
-                    $('.payHistory').append(`
+                    $('.payHistory').map(function(){
+                        $(this).append(`
                         <tr>
                             <td class="col-3">${ text.slice(0, 10) }</td>
-                            <td class="col-3">${el.fees}</td>
-                            <td class="col-3">${el.due_amount}</td>
+                            <td class="col-3 ">${el.fees}</td>
+                            <td class="col-3 ">${el.due_amount}</td>
                             <td class="col-3">${el.payment_method}</td>
                         </tr>
 
                     `);
+                    })
                 });
                 $('#exampleModal').modal('show');
             };
@@ -376,6 +396,11 @@
 
 
 
+        // function validate(){
+        //     let amount = $('.amount').val();
+        //     console.log(amount);
+        //     return false;
+        // }
 
 
 
@@ -411,6 +436,19 @@
 
 
 
+        function validate(){
+                        
+            
+            let amount = Number(document.myForm.due_amount.value);
+            paid = Number(paid);
+            fees = Number(fees);
+            if(amount > fees || amount > paid){
+                // console.log(amount , paid);                             
+                $('.amount-error').text('This amount is exceeded');
+                return false;
+            }
+            
+        };
 
         let payments =  {!! json_encode($payments->toArray())  !!} ;
 
@@ -595,6 +633,8 @@
     };
 
     $('.ui.dropdown').dropdown();
+
+    
 
     </script>
 @endpush
