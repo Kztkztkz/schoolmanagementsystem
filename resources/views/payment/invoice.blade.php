@@ -56,17 +56,17 @@
       <div class="row p-2">
         <div class="col-3">Name</div>
         <div class="col-1">-</div>
-        <div class="col-8">Michael Michael</div>
+        <div class="col-8">{{$student->name}}</div>
       </div>
       <div class="row p-2">
         <div class="col-3">Ph No</div>
         <div class="col-1">-</div>
-        <div class="col-8">09987456123</div>
+        <div class="col-8">{{$student->phone}}</div>
       </div>
       <div class="row p-2">
         <div class="col-3">Address</div>
         <div class="col-1">-</div>
-        <div class="col-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate officia et voluptates illo? .</div>
+        <div class="col-8">{{$student->address}}.</div>
       </div>
     </div>
     <div class="col-6 d-flex flex-column ">
@@ -78,12 +78,17 @@
       <div class="row p-2 ">
         <div class="col-8 text-end">Invoice Date</div>
         <div class="col-1 text-end">-</div>
-        <div class="col-3 text-end">22.8.2023</div>
+        <div class="col-3 text-end">{{$payment->updated_at}}</div>
       </div>
       <div class="row p-2 ">
         <div class="col-8 text-end">Class Name</div>
         <div class="col-1 text-end">-</div>
-        <div class="col-3 text-end">PHP</div>
+        <div class="col-3 text-end">{{$classitem->name}}</div>
+      </div>
+      <div class="row p-2 ">
+        <div class="col-8 text-end">Class Price</div>
+        <div class="col-1 text-end">-</div>
+        <div class="col-3 text-end">{{$classitem->price}}</div>
       </div>
     </div>
   </div>
@@ -97,10 +102,11 @@
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col"></th>
         <th scope="col">Date</th>
-        <th scope="col">Fee</th>
-        <th scope="col">Paid</th>
+        <th scope="col">Current Paid</th>
+        <th scope="col">Total Paid</th>
+        <th scope="col">Total Paid</th>
         <th scope="col">Due Amount</th>
         <th scope="col">Type</th>
       </tr>
@@ -108,11 +114,12 @@
     <tbody>
       <tr>
         <th scope="row"></th>
-        <td>22.8.2023</td>
-        <td>500,000</td>
-        <td>400,000</td>
-        <td>100,000</td>
-        <td>Paid</td>
+        <td>{{$payment->updated_at->format('d.m.Y')}}</td>
+        <td>{{$payment->fees}}</td>
+        <td>{{$current_paid}}</td>
+        <td>{{$payment->fees-$payment->due_amount}}</td>
+        <td>{{$payment->due_amount}}</td>
+        <td>{{$payment->payment_method}}</td>
       </tr>
     </tbody>
   </table>
@@ -122,9 +129,9 @@
 {{-- Fourth --}}
 <div class="d-flex footer">
   <div class="w-100 bg-primary p-5">
-    <h5 class="text-white">Note</h5>
+    <h5 class="text-white"></h5>
   </div>
-\
+
     
   </div>
 </div>

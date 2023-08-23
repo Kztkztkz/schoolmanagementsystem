@@ -311,6 +311,9 @@ class PaymentController extends Controller
 
     public function paymentFromModal (Request $request){
         $classitem = Classitem::find(request('classitem_id'));
+        $student= Student::find(request('student_id'));
+        $current_paid = $request->due_amount;
+
         $classitemPrice = $classitem->price;
         $currentStudentPayment = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first();
 
@@ -338,6 +341,12 @@ class PaymentController extends Controller
         $payment->payment_type = $payment_type;
         $payment->payment_method = $request->payment_method;
         $payment->save();
+
+        // return to invoice
+        if($request->slip == 'on' & $request->due_amount > 0 ) {
+            return view('payment.invoice', compact('classitem','student','payment','current_paid'));
+        }
+        // return to invoice
 
         return redirect()->route('payment.index');
     }
