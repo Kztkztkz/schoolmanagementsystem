@@ -118,6 +118,9 @@ class ClassitemController extends Controller
         $startendtime = Classitem::whereBetween('start_time',[$request->starttime, $request->endtime])
         ->whereBetween('end_time',[$request->starttime, $request->endtime])
         ->exists();
+        $startendday=Classitem::whereBetween('start_date',[$request->startdate, $request->enddate])
+        ->whereBetween('end_date',[$request->startdate, $request->enddate])
+        ->exists();
         // $classitemId = Classitem::create([
         //     'name' => $request->name,
         //     'start_date' => $request->startdate,
@@ -138,7 +141,7 @@ class ClassitemController extends Controller
             $classitemId->start_date = $request->startdate;
             $classitemId->end_date = $request->enddate;
             $classitemId->course_id = $request->course;
-            if(!is_null($roomday) && !is_null($startendtime)){
+            if(!is_null($roomday) && !is_null($startendtime) && !is_null($startendday)){
                 return redirect()->route('classitem.create' )->with('message', 'Room is not Free in that time range. Please select different time');
              }else{
                 $classitemId->start_time = $request->starttime;

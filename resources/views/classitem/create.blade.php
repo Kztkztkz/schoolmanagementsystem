@@ -24,6 +24,8 @@
       <div class="card-body">
         <form method="post" action="{{route('classitem.store')}}">
           @csrf
+          <input type="hidden" placeholder="#958D8D" class="form-control" id="hex">
+          
           {{-- @if(session()->has('message'))
           <div class="alert alert-success success-alt">
             {{session()->get('message')}}
@@ -41,12 +43,16 @@
             });
         </script>
           @endif --}}
-          <div class = "row">
+          <div class = "row testcalendar">
             <div class="col-sm-4">
               <div class="form-group test">
                 <label for="name">Name</label>
+                <div class="d-flex">
                 <input type="text" class="form-control" id="name" placeholder="Class name" name="name">
+                <input type="color"  id="color" class = "class-colorpicker" name="color" value="{{ old('color') }}">
+              </div>
                 <span class="text-danger">@error ('name') {{$message}} @enderror</span>
+                <span class="text-danger">@error('color') {{$message}} @enderror</span>
               </div>
             </div>
             <div class="col-sm-4">
@@ -133,9 +139,10 @@
                   <option value="Saturday">Saturday</option>
                   <option value="Sunday">Sunday</option>
                 </select>
-                <span class="text-danger">@error('days') {{$message}} @enderror</span>
+                
                 {{-- </div> --}}
               </div>
+              <span class="text-danger">@error('days') {{$message}} @enderror</span>
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
@@ -162,7 +169,7 @@
                 <span class="text-danger">@error('daytype') {{$message}} @enderror</span>
               </div>
             </div>
-            <div class="col-sm-4 mt-3">
+            {{-- <div class="col-sm-4 mt-3">
               <div class="form-group test">
                 <label for="hex">Set Color</label>
                 <div class="d-flex">
@@ -172,7 +179,7 @@
                 <span class="text-danger">@error('color') {{$message}} @enderror</span>
               </div>
 
-            </div>
+            </div> --}}
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
                 <label for="shortcode">Short Code</label>

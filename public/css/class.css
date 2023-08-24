@@ -1,9 +1,3 @@
-.class-colorpicker {
-    height: 34px;
-    width: 46px;
-    border: none;
-}
-
 .select2-container--default .select2-selection--multiple {
     height: auto !important;
 }
@@ -120,6 +114,23 @@
 .select2-selection__choice {
     color: black !important;
     background: #e5e8ff !important;
+    width: 60px;
+    font-size: 10px;
+}
+
+.testcalendar input,
+.testcalendar select {
+    width: 70%;
+}
+
+.select2-container {
+    width: 70% !important;
+}
+
+.class-colorpicker {
+    height: 34px;
+    width: 40px !important;
+    border: none;
 }
 
 @media screen and (max-width: 768px) {
