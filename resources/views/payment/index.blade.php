@@ -9,7 +9,7 @@
             }
 
             .max-height {
-                padding-bottom: 75px !important;
+                padding-bottom: 100px !important;
             }
         }
     </style>
@@ -35,17 +35,19 @@
             <div class="col-lg-3 col-md-3 col-sm-12 ">
                 <!-- Button trigger modal -->
                 <div class="mx-auto">
-                    <div class="input-group">
-                        <input class="form-control border-end-0 border" placeholder="search payment" type="search"
-                            value="" id="paymentId" name="search">
-                        <span class="input-group-append">
-                            <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
-                                type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
+                    <div class="ui search">
+                        <div class="ui icon input w-100">
+                            <input class=" form-control " placeholder="search payment" type="search"
+                                value="" id="paymentId" name="search">
+                                
+                                <i class="search icon"></i>
+                            
+                        </div>
+                       
                     </div>
+                    
                 </div>
+                
             </div>
         </div>
     </div>
@@ -97,13 +99,13 @@
                             @if(count($latestPayments)>=15)
                               <tr>
                                 <td colspan="7" class="text-center">
-                                    <button class="btn btn-secondary load-more-data"><i class="fa fa-refresh"></i> Load More Data...</button>
+                                    <button class="btn btn-secondary load-more-data"><i class="fa fa-refresh"></i> More Data...</button>
                                 </td>
                               </tr>
                               @endif
                               <tr>
                                 <td colspan="7" class="text-center">
-                                    <button class="btn btn-secondary load-more-data2" style="display: none;"><i class="fa fa-refresh"></i> Load More Data...</button>
+                                    <button class="btn btn-secondary load-more-data2" style="display: none;"><i class="fa fa-refresh"></i> More Data...</button>
                                 </td>
                               </tr>
                         </table>
@@ -186,96 +188,84 @@
 
     <div class="modal fade hide" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
+          <div class="modal-content rounded-6">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{route('payments.createModal')}}" onsubmit = "return(validate());" method="POST" name = "myForm">
-            <div class="modal-body">
+                <div class="modal-body">
+                    <div class=" mb-2">
+                        <span class="">Student name - </span><p class="studentName fw-bold d-inline-block"></p>
+                    </div>
+
+                    <div class="payment-list-container">
+
+                        <div>
+
+                        <div class="payment-list">
+                        <div class="payment-list-header">
+                            <p>Transfer Date</p>
+                            <p>Fees</p>
+                            <p>Due Amount</p>
+                            <p class="text-nowrap">Payment method</p>
+                        </div>
+                        <div id="paymentList" class="payHistory">
+
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
 
 
-
-                <div class=" mb-2">
-                    <span class="">Student name - </span><p class="studentName fw-bold d-inline-block"></p>
-                </div>
-
-
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr style="border-bottom: 2px solid black">
-                                <th scope="col">Transfer Date</th>
-                                <th scope="col">Fees</th>
-                                <th scope="col">Paid</th>
-                                <th scope="col">Type</th>
-                            </tr>
-                        </thead>
-                        <tbody class="payHistory">
-
-
-                            {{-- @endforeach --}}
-                            {{-- <tr>
-                                <td class="col-3">01-01-2023</td>
-                                <td class="col-3">Class A</td>
-                                <td class="col-3">Python</td>
-                                <td class="col-3">Debit Card</td>
-                            </tr> --}}
-                        </tbody>
-                    </table>
-
-
-                @csrf
+                    @csrf
                 <input type="text" class="d-none" name="student_id" hidden id="curStudentId" value="">
                 <input type="text" class="d-none" name="classitem_id" hidden id="curClassId" value="">
-                <div class="row">
+                <div class="row p-3">
                     <div class="col-6">
                         <div class="mt-3 mb-3">
                             <label for="amount mb-0">
                                 <p class="small-header mb-0">Amount</p>
                                 
                             </label>
-                            <input type="text" class="form-control w-75 amount" name="due_amount"
+                            <input type="text" class="form-control  amount" name="due_amount"
                                 placeholder="Enter Amount">
-                                <span class=" fs-6 text-danger amount-error"></span>
-                                                    
-
+                                <span class=" fs-6 text-danger amount-error"></span>               
                         </div>
-                        <div class="col-6">
-                            <div class="mt-3 mb-3">
-                                <label for="">Payment Method</label>
-                                <div class="input-group w-75">
-                                    <select name="payment_method"
-                                        class="form-select slectopt" id="class">
-                                        <option value="cash">Cash</option>
-                                        <option value="card">Card</option>
-                                        <option value="bank transfer">Bank Transfer</option>
-                                    </select>
+                    </div>
+                    <div class="col-6">
+                        <div class="mt-3 mb-3">
+                            <label for="">Payment Method</label>
+                            <div class="input-group ">
+                                <select name="payment_method"
+                                    class="form-select slectopt" id="class">
+                                    <option value="cash">Cash</option>
+                                    <option value="card">Card</option>
+                                    <option value="bank transfer">Bank Transfer</option>
+                                </select>
 
-                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="mt-3 mb-3 d-flex">
-                        <div class="form-group margin-right mt-5">
-                            <input name="slip" class=" form-check-input" type="checkbox" name="flexRadioDefault"
-                                id="flexRadioDefault1">
-                            <label class="form-check-label mb-0" for="flexRadioDefault1">
-                                <p class="small-header mb-0">Print out the slip</p>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="text-center mt-5">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Pay</button>
-                    </div>
-
                 </div>
-                
-
-
+                <div class=" mb-3 d-flex px-3">
+                    <div class="form-group margin-right ">
+                        <input name="slip" class=" form-check-input" type="checkbox" name="flexRadioDefault"
+                            id="flexRadioDefault1">
+                        <label class="form-check-label mb-0" for="flexRadioDefault1">
+                            <p class="small-header mb-0">Print out the slip</p>
+                        </label>
+                    </div>
+                </div>
+                <div class="text-center p-3">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
 
                 </div>
             </form>
+            
           </div>
         </div>
       </div>
@@ -366,6 +356,20 @@
                 });
             });
 
+            function validate(){
+                        
+            
+                        let amount = Number(document.myForm.due_amount.value);
+                        paid = Number(paid);
+                        fees = Number(fees);
+                        if(amount > fees || amount > paid){
+                            // console.log(amount , paid);                             
+                            $('.amount-error').text('This amount is exceeded');
+                            return false;
+                        }
+                        
+                    };
+
 
             // Function to show the Bootstrap modal
             function showModal(response){
@@ -376,12 +380,12 @@
                     let text = el.created_at;
                     $('.payHistory').map(function(){
                         $(this).append(`
-                        <tr>
-                            <td class="col-3">${ text.slice(0, 10) }</td>
-                            <td class="col-3 ">${el.fees}</td>
-                            <td class="col-3 ">${el.due_amount}</td>
-                            <td class="col-3">${el.payment_method}</td>
-                        </tr>
+                        <div class="payment-list-body">
+                            <p class="payment-lists">${ text.slice(0, 10) }</p>
+                            <p class="payment-lists">${el.fees}</p>
+                            <p class="payment-lists">${el.due_amount}</p>
+                            <p class="payment-lists">${el.payment_method}</p>
+                        </div>
 
                     `);
                     })
@@ -436,49 +440,37 @@
 
 
 
-        function validate(){
-                        
-            
-            let amount = Number(document.myForm.due_amount.value);
-            paid = Number(paid);
-            fees = Number(fees);
-            if(amount > fees || amount > paid){
-                // console.log(amount , paid);                             
-                $('.amount-error').text('This amount is exceeded');
-                return false;
-            }
-            
-        };
+       
 
         let payments =  {!! json_encode($payments->toArray())  !!} ;
 
 
 
-        $('.pay-row').map(function(){
-            $(this).on('click' , function(){
-            let studentId = $(this).children('.relatedStudent').text();
-            let classitemId = $(this).children('.relatedClass').text();
+        // $('.pay-row').map(function(){
+        //     $(this).on('click' , function(){
+        //     let studentId = $(this).children('.relatedStudent').text();
+        //     let classitemId = $(this).children('.relatedClass').text();
 
-            let studentPay = payments.filter( el => el.student_id == studentId );
-            console.log(studentPay);
+        //     let studentPay = payments.filter( el => el.student_id == studentId );
+        //     console.log(studentPay);
 
-            studentPay.forEach(el => {
-                $('.payHistory').map(function(){
-                    $(this).append(`
-                        <tr>
-                            <td class="col-3">${el.created_at}</td>
-                            <td class="col-3">${el.fees}</td>
-                            <td class="col-3">${el.due_amount}</td>
-                            <td class="col-3">${el.payment_method}</td>
-                        </tr>
+        //     studentPay.forEach(el => {
+        //         $('.payHistory').map(function(){
+        //             $(this).append(`
+        //                 <tr>
+        //                     <td class="col-3">${el.created_at}</td>
+        //                     <td class="col-3">${el.fees}</td>
+        //                     <td class="col-3">${el.due_amount}</td>
+        //                     <td class="col-3">${el.payment_method}</td>
+        //                 </tr>
 
-                    `);
-                });
-            });
+        //             `);
+        //         });
+        //     });
 
-            console.log(studentId , classitemId);
-            });
-        });
+        //     console.log(studentId , classitemId);
+        //     });
+        // });
 
 
 
@@ -633,6 +625,8 @@
     };
 
     $('.ui.dropdown').dropdown();
+
+    $('.ui.search').search();
 
     
 

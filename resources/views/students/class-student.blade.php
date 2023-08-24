@@ -22,12 +22,12 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item asdf"><a href="{{route('student.index')}}">Students</a></li>
-                            <li class="breadcrumb-item active " aria-current="page">Class related by Student</li>
+                            <li class="breadcrumb-item active" aria-current="page">Class related by <span class="fw-bold">{{ $selectedStudent->name }}</span></li>
                         </ol>
                     </nav>
                 </div>
             </div>
-            <div class="col-md-3">
+            {{-- <div class="col-md-3">
                 <div class="mx-auto">
                     <div class="input-group">
                         <input class="form-control border-end-0 border" placeholder="search class" type="search"
@@ -40,17 +40,22 @@
                         </span>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 
 
     <div class="row  px-3 max-height  d-sm-flex">
-        <div class="col-12 col-md-9 class-table">
+        <div class="col-12  class-table">
             <div class="card rounded-3">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
-                        <p class="mb-0 fw-bolder">Total - 10</p>
+                        <div class="d-flex gap-2 justify-content-center align-items-center">
+                            <a href="{{ url()->previous() }}" class="text-black">
+                                <i class="mdi mdi-chevron-left h4"></i>
+                            </a>
+                            <p class="mb-0 fw-bolder">Total - {{ count($classitems) }}</p>
+                        </div>
                         <div class="d-flex justify-content-center align-items-center">
                             <a href="{{ route('classitem.create') }}" class="btn d-flex me-2 justify-content-center align-items-center plus-btn btn-outline-secondary ">
                                 <i class="mdi mdi-plus h5 mb-0"></i>
@@ -89,8 +94,7 @@
                                 <th scope="col" class="list-course-col">Course</th>
                                 <th class="d-none d-md-table-cell list-lecturer-col" scope="col">Lecturer</th>
                                 <th scope="col" class="list-status-col">Status</th>
-                                <th class="d-none d-md-table-cell list-payment-col text-center" scope="col" >Payment</th>
-                                <th scope="col" class="text-center list-control-col" class="">
+                                <th scope="col" class="text-end list-control-col" class="">
                                     <p class=" d-none d-md-block">Control</p>
                                 </th>
                             </tr>
@@ -99,7 +103,7 @@
                             @forelse($classitems as $classdata)
                             <tr>
                                 <td class="align-middle">
-                                    <p class="d-none d-md-block text-cut">{{Str::limit($classdata->name,20)}}</p>
+                                    <p class="d-none d-md-block text-cut">{{Str::limit($classdata->name,30)}}</p>
                                     <div class="d-block d-md-none">
                                         <p>{{$classdata->name}} </p>
                                         <p class=" text-black-50 text-cut">{{Str::limit($classdata->users->pluck('name')->implode(', '),20)}} </p>
@@ -116,18 +120,18 @@
                                 @if($isUnpaid)
                                 <td class=" align-middle">
                                     <div
-                                        class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
+                                        class="text-danger fw-bold pay-status  ">
                                         unpaid
                                     </div>
                                 </td>
                                 @else
-                                <td class=" align-middle">
-                                    <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
+                                <td class="">
+                                    <div class="text-success fw-bold pay-status  ">
                                         paid
                                     </div>
                                 </td>
                                 @endif
-                                <td class="d-none d-md-table-cell align-middle text-center">
+                                {{-- <td class="d-none d-md-table-cell align-middle text-center">
                                     <form action="{{ route( 'payment.allhistory' ) }}" method="POST">
                                         <button " class="btn table-btn-sm btn-primary">
                                             @csrf
@@ -138,12 +142,12 @@
 
                                         </button>
                                     </form>
-                                </td>
+                                </td> --}}
                                 <td class="text-end align-middle text-nowrap">
                                     <div class="d-none d-md-block control-btns">
-                                        <a href="{{ route('classitem.edit', $classdata) }}" class="btn table-btn-sm btn-primary">
+                                        {{-- <a href="{{ route('classitem.edit', $classdata) }}" class="btn table-btn-sm btn-primary">
                                             <i class="mdi mdi-pencil h5"></i>
-                                        </a>
+                                        </a> --}}
 
                                         <a href="{{ route('classitem.show',  [ $classdata->id , 'ss' => $selectedStudent->id] ) }}"
                                             class="btn table-btn-sm btn-primary">
@@ -172,11 +176,11 @@
 
                                         <ul class="dropdown-menu mb-1">
                                             <div class="d-flex justify-content-around">
-                                                <li>
+                                                {{-- <li>
                                                     <a href="{{ route('classitem.edit', 1) }}" class="btn table-btn-sm btn-outline-primary border border-0">
                                                         <i class="mdi mdi-pencil h5"></i>
                                                     </a>
-                                                </li>
+                                                </li> --}}
                                                 <li>
                                                     <a href="" class="btn table-btn-sm btn-outline-danger border border-0">
                                                         <i class="mdi mdi-delete h5 "></i>
@@ -204,7 +208,7 @@
             </div>
 
         </div>
-        <div class="col-3 d-none d-md-block class-filter-container">
+        {{-- <div class="col-3 d-none d-md-block class-filter-container">
             <div class="card">
                 <div class="card-body position-relative filter-card">
                     <div class="d-flex align-items-center justify-content-center mb-2">
@@ -242,7 +246,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
 

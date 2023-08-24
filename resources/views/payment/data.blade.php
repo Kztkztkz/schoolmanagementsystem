@@ -7,7 +7,7 @@
     {{-- Mobile View --}}
     <td class="d-table-cell d-lg-none text-nowrap align-middle">
         {{-- <p>01-01-2023</p> --}}
-        <p>{{$payment->created_at}}</p>
+        <p>{{$payment->created_at->format('Y-m-d')}}</p>
         <p> {{$payment->student->name}}</p>
     </td>
     <td class="fees d-none">
@@ -18,7 +18,7 @@
    </td>
 
     {{-- Laptop View --}}
-    <td class="d-none d-lg-table-cell align-middle">{{$payment->created_at->format('d.m.Y')}}</td>
+    <td class="d-none d-lg-table-cell align-middle">{{$payment->created_at->format('Y-m-d')}}</td>
     <td class="align-middle">{{Str::limit($payment->classitem->name, 20)}} </td>
     <td class="d-none d-lg-table-cell align-middle">
         {{Str::limit($payment->classitem->course->name, 15)}}</td>

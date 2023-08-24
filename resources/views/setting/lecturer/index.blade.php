@@ -7,7 +7,7 @@
             }
 
             .max-height {
-                padding-bottom: 75px !important;
+                padding-bottom: 100px !important;
             }
         }
     </style>
@@ -30,15 +30,12 @@
             </div>
             <form class="col-md-3" method="get" action="{{route('user.index')}}">
                 <div class="mx-auto">
-                    <div class="input-group">
-                        <input class="form-control border-end-0 border" placeholder="search user" type="search"
-                            value="{{request('usersearch')}}" id="lecturersearch" name="lecturersearch">
-                        <span class="input-group-append">
-                            <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
-                                type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
+                    <div class="ui search">
+                        <div class="ui icon input w-100">
+                            <input class="form-control border-end-0 border" placeholder="search user" type="search"
+                                value="{{request('usersearch')}}" id="lecturersearch" name="lecturersearch">
+                                <i class="search icon"></i>
+                        </div>
                     </div>
                 </div>
             </form>

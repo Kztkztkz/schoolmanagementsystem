@@ -21,13 +21,13 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item "><a href="#">Student</a></li>
-                            <li class="breadcrumb-item active " aria-current="page">Payments by Student</li>
+                            <li class="breadcrumb-item active" aria-current="page">Payments by <span class="fw-bold">{{ $selectedStudent->name }}</span></li>
                         </ol>
                     </nav>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-3 col-sm-12 ">
+            {{-- <div class="col-lg-3 col-md-3 col-sm-12 ">
                 <!-- Button trigger modal -->
                 <div class="mx-auto">
                     <div class="input-group">
@@ -41,7 +41,7 @@
                         </span>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 
@@ -54,11 +54,17 @@
     <div class="row  px-3 max-height">
 
         {{-- <div class="col-9 col-sm-12"> --}}
-        <div class=" col-sm-12 col-md-9 table-container">
+        <div class=" col-sm-12  table-container">
             <div class="card rounded-3 ">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
-                        <p class="mb-0 fw-bolder">Total - 10</p>
+                        <div class="d-flex gap-2 justify-content-center align-items-center">
+                            <a href="{{ url()->previous() }}" class="text-black">
+                                <i class="mdi mdi-chevron-left h4"></i>
+                            </a>
+                            <p class="mb-0 fw-bolder">Total - {{ count($payments) }}</p>
+                        </div>
+                        {{-- <p class="mb-0 fw-bolder">Total - 10</p> --}}
                         <div class="d-flex justify-content-end  d-xs-block d-md-none ">
                             <button type="button" class="btn plus-btn btn-outline-secondary d-flex " data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
@@ -77,8 +83,7 @@
 
                                     <th scope="col" class="d-lg-table-cell list-date-col">Date</th>
                                     <th scope="col" class=" list-class-col">Class</th>
-                                    <th scope="col" class="d-none d-lg-table-cell list-course-col">Course</th>
-                                    <th scope="col" class="d-none d-lg-table-cell list-student-col">Student</th>
+                                    <th scope="col" class="d-none d-lg-table-cell list-course-col">Course</th>                                   
                                     <th scope="col" class=" list-fees-col">Fees</th>
                                     <th scope="col" class=" list-due-col">Due</th>
                                     <th scope="col" class=" text-center list-type-col">Type</th>
@@ -86,7 +91,7 @@
                             </thead>
                             <tbody>
                                 @forelse ($payments as $payment)
-                                <tr data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <tr onclick="showPayments({{ $payment->classitem_id }}, {{ $payment->student_id }})" class="history" data-className="{{$payment->classitem->name}}" data-studentName="{{$payment->student->name}}" data-bs-toggle="modal" data-bs-target="#exampleModelOne">
 
                                     {{-- Mobile View --}}
                                     <td class="d-table-cell d-lg-none text-nowrap align-middle">
@@ -94,21 +99,26 @@
                                         <p>{{ date('Y-m-d' , strtotime($payment->created_at)) }}</p>
                                         <p>{{$payment->student->name}}</p>
                                     </td>
+                                    <td class="fees d-none">
+                                        {{ $payment->fees }}
+                                   </td>
+                                   <td class="paid d-none">
+                                       {{$payment->due_amount}}
+                                  </td>
                                     {{-- Laptop View --}}
                                     <td class="d-none d-lg-table-cell align-middle">{{ date('Y-m-d' , strtotime($payment->created_at)) }}</td>
                                     <td class="align-middle">{{$payment->classitem->name}}</td>
                                     <td class="d-none d-lg-table-cell align-middle">{{$payment->classitem->course->name}}</td>
-                                    <td class="d-none d-lg-table-cell align-middle">{{$payment->student->name}}</td>
                                     <td class=" align-middle">{{number_format(floatval($payment->fees))}}</td>
                                     <td class=" align-middle">{{number_format(floatval($payment->due_amount))}}</td>
                                     <td class=" align-middle">
 
                                         @if ($payment->payment_type=="paid")
-                                            <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
+                                            <div class="text-success fw-bold pay-status d-flex justify-content-center align-items-center rounded">
                                                 paid
                                             </div>
                                         @else
-                                            <div class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
+                                            <div class="text-danger fw-bold pay-status d-flex justify-content-center align-items-center rounded">
                                                 unpaid
                                             </div>
                                         @endif
@@ -128,7 +138,7 @@
             </div>
         </div>
 
-        <div class="col-3 d-none d-md-block" id="exampleModal2">
+        {{-- <div class="col-3 d-none d-md-block" id="exampleModal2">
             <div class="card" style="height: 100%">
                 <div class="card-body position-relative filter-card">
                     <div class="d-flex align-items-center justify-content-center mb-2">
@@ -175,89 +185,97 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
 
 @push('scripts')
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade hide" id="exampleModelOne" tabindex="-1" aria-labelledby="exampleModelOneLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Payment For Web Foundation (Batch 01)</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <h6>Student Name - Kyaw Kyaw</h6>
-
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr style="border-bottom: 2px solid black">
-                                <th scope="col">Transfer Date</th>
-                                <th scope="col">Fees</th>
-                                <th scope="col">Paid</th>
-                                <th scope="col">Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="col-3">01-01-2023</td>
-                                <td class="col-3">Class A</td>
-                                <td class="col-3">Python</td>
-                                <td class="col-3">Cash</td>
-                            </tr>
-                            <tr>
-                                <td class="col-3">01-01-2023</td>
-                                <td class="col-3">Class A</td>
-                                <td class="col-3">Python</td>
-                                <td class="col-3">Debit Card</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="mt-3 mb-3">
-                                <label for="amount mb-0">
-                                    <p class="small-header mb-0">Amount</p>
-                                </label>
-                                <input type="text" class="form-control w-75" id="amount"
-                                    placeholder="Enter Amount">
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="mt-3 mb-3">
-                                <label for="">Type</label>
-                                <div class="input-group w-75">
-                                    <select class="form-select" id="inputGroupSelect04"
-                                        aria-label="Example select with button addon">
-                                        <option selected>Choose Type</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-3 mb-3 d-flex">
-                        <div class="" style="margin-right: 10px;">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                id="flexRadioDefault1" checked>
-                        </div>
-                        <div>
-                            <label class="form-check-label mb-0" for="flexRadioDefault1">
-                                <p class="small-header mb-0" style="padding-top: 3px;">Print out the slip</p>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="text-center mt-5">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Play</button>
-                    </div>
-                </div>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModelOneLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <form action="{{route('payments.createModal')}}" onsubmit = "return(validate());" method="POST" name = "myForm">
+                <div class="modal-body">
+                    <div class=" mb-2">
+                        <span class="">Student name - </span><p class="studentName fw-bold d-inline-block"></p>
+                    </div>
+
+                    <div class="payment-list-container">
+
+                        <div>
+
+                        <div class="payment-list">
+                        <div class="payment-list-header">
+                            <p>Transfer Date</p>
+                            <p>Fees</p>
+                            <p>Due Amount</p>
+                            <p class="text-nowrap">Payment method</p>
+                        </div>
+                        <div id="paymentList" class="payHistory">
+
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+                    @csrf
+                <input type="text" class="d-none" name="student_id" hidden id="curStudentId" value="">
+                <input type="text" class="d-none" name="classitem_id" hidden id="curClassId" value="">
+                <div class="row p-3">
+                    <div class="col-6">
+                        <div class="mt-3 mb-3">
+                            <label for="amount mb-0">
+                                <p class="small-header mb-0">Amount</p>
+                                
+                            </label>
+                            <input type="text" class="form-control  amount" name="due_amount"
+                                placeholder="Enter Amount">
+                                <span class=" fs-6 text-danger amount-error"></span>               
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mt-3 mb-3">
+                            <label for="">Payment Method</label>
+                            <div class="input-group ">
+                                <select name="payment_method"
+                                    class="form-select slectopt" id="class">
+                                    <option value="cash">Cash</option>
+                                    <option value="card">Card</option>
+                                    <option value="bank transfer">Bank Transfer</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" mb-3 d-flex px-3">
+                    <div class="form-group margin-right ">
+                        <input name="slip" class=" form-check-input" type="checkbox" name="flexRadioDefault"
+                            id="flexRadioDefault1">
+                        <label class="form-check-label mb-0" for="flexRadioDefault1">
+                            <p class="small-header mb-0">Print out the slip</p>
+                        </label>
+                    </div>
+                </div>
+                <div class="text-center p-3">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+                </div>
+            </form>
+          </div>
         </div>
+      </div>
+
+
+
     </div>
 
     {{-- Modal for right side bar --}}
@@ -270,33 +288,40 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  position-relative">
-                    <form action="{{route('student.index')}}" method="get">
+                    <form action="">
                         <div class=" mb-3">
-                            <label for="">Course</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
-                                <option value = "">Select Course</option>
-                                @foreach($courses as $course)
-                                    <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
-                                        {{$course->name}}
+                            <label for="">Student</label>
+                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;">
+                                <option>Select Student</option>
+                                @foreach($studentoption as $students)
+                                    <option value="{{$students->id}}" {{ $students->id == $selectedStudent->id ? 'selected' : '' }}>
+                                        {{$students->name}}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="">Class</label>
-                            <select required class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
-                                <option value = "">Select Class</option>
-                                @foreach($classitems as $class)
-                                    <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
-                                        {{$class->name}}
-                                    </option>
+                            <label for="">Course</label>
+                            <select class="select2  form-select shadow-none">
+                                <option>Select Course</option>
+                                @foreach($courseoption as $courses)
+                                    <option value="{{$courses->id}}">{{$courses->name}}</option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <div class="d-flex justify-content-center align-items-center ">
+                        <div class="mb-3">
+                            <label for="">Class</label>
+                            <select class="select2  form-select shadow-none">
+                                <option>Select Class</option>
+                                @foreach($classitems as $classitem)
+                                    <option value="{{$classitem->id}}">{{$classitem->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="d-flex justify-content-center">
                             <div class="">
-                                <a href="{{route('student.index')}}" class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</a>
+                                <button class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</button>
                                 <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                             </div>
                         </div>
@@ -304,4 +329,93 @@
             </div>
         </div>
     </div> --}}
+
+
+    <script>
+               let className;
+        let studentName;
+        let fees;
+        let paid;
+            $('.history').map(function(){
+                    $(this).on('click', function(){
+                    className = $(this).attr('data-className');
+                    studentName = $(this).attr('data-studentName');
+                    fees = Number($(this).children('.fees').text());
+                    paid = Number($(this).children('.paid').text());
+                    console.log(fees , paid);
+                });
+            });
+
+
+            // Function to show the Bootstrap modal
+            function showModal(response){
+                $('#exampleModelOneLabel').text(className);
+                $('.studentName').text(studentName);
+                response.map(function(el){
+                    
+                    let text = el.created_at;
+                    $('.payHistory').map(function(){
+                        $(this).append(`
+                        <div class="payment-list-body">
+                            <p class="payment-lists">${ text.slice(0, 10) }</p>
+                            <p class="payment-lists">${el.fees}</p>
+                            <p class="payment-lists">${el.due_amount}</p>
+                            <p class="payment-lists">${el.payment_method}</p>
+                        </div>
+
+                    `);
+                    })
+                });
+                $('#exampleModelOne').modal('show');
+            };
+
+
+        var ENDPOINT = "{{ route('classitem.index') }}";
+
+        
+        function showPayments(classitemId, studentId ) {
+
+
+$('#studentId').val(studentId);
+$('#classId').val(classitemId);
+
+console.log(classitemId, studentId);
+$.ajax({
+    url: "{{ route('payments.get') }}?classitemId="+classitemId+"&studentId="+studentId,
+    type: "get",
+})
+.done(function (response) {
+    showModal(response);
+
+
+
+})
+.fail(function (jqXHR, ajaxOptions, thrownError) {
+    console.log('Server error occured');
+});
+
+$('.payHistory').empty();
+className = '';
+studentName = '';
+
+
+// console.log(allHistory);
+}
+
+
+
+function validate(){
+            
+
+let amount = Number(document.myForm.due_amount.value);
+paid = Number(paid);
+fees = Number(fees);
+if(amount > fees || amount > paid){
+    // console.log(amount , paid);                             
+    $('.amount-error').text('This amount is exceeded');
+    return false;
+}
+
+};
+    </script>
 @endpush

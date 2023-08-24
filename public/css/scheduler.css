@@ -40,8 +40,20 @@
 
 .room-row-ph{
     background-color: #fff !important;
-    border-radius: 2px;
+    border-radius: 6px;
     margin-bottom: 0.5rem;
+    border: 1px solid #e6e6e6;
+}
+
+.all-room-ph{
+    background-color: #fff !important;
+    border-radius: 6px !important;
+    border: 1px solid #e6e6e6 !important;
+}
+
+.scheduler{
+    height: 100%;
+    padding-bottom: 7.5rem !important;
 }
 
 .page-wrapper > .scheduler ~ .scheduler {

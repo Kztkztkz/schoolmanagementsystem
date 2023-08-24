@@ -9,7 +9,7 @@
             }
 
             .max-height {
-                padding-bottom: 10px !important;
+                padding-bottom: 100px !important;
             }
         }
     </style>
@@ -39,19 +39,16 @@
             <div class="col-12 col-md-3">
                 <div class="mx-auto">
                     <form action="{{ route('student.index') }}" >
-                        <div class="input-group">
-                            <input class="form-control border-end-0 border" placeholder="search student" type="search"
-                            name="keyword" value="{{ request('keyword') }}" id="keyword">
-                            @if (request('studentByCourse') || request('studentByClass'))
-                            <input hidden name="studentByCourse" value="{{ request('studentByCourse') }}">
-                            <input hidden name="studentByClass" value="{{ request('studentByClass') }}">
-                            @endif
-                            <span class="input-group-append">
-                                <button class="btn btn-outline-secondary bg-white hover-none border-start-0 border-bottom-0 border ms-n5"
-                                    type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </span>
+                        <div class="ui search">
+                            <div class="ui icon input w-100">
+                                <input class="form-control border-end-0 border" placeholder="search student" type="search"
+                                name="keyword" value="{{ request('keyword') }}" id="keyword">
+                                @if (request('studentByCourse') || request('studentByClass'))
+                                <input hidden name="studentByCourse" value="{{ request('studentByCourse') }}">
+                                <input hidden name="studentByClass" value="{{ request('studentByClass') }}">
+                                @endif
+                                <i class="search icon"></i>
+                            </div>
                         </div>
                     </form>
                 </div>

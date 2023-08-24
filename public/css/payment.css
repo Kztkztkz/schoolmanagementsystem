@@ -28,11 +28,41 @@
 
 }
 
-/* .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
+.payment-list-container {
+    width: 100%;
+    border-radius: 5px;
+    padding: 1rem;
+    background-color: #ebebeb;
+    font-weight: 400;
+}
+
+
+
+  .payment-list-container h2{
+    border-bottom: 2px solid black;
+  }
+
+  .payment-list-header , .payment-list-body{
+    display: grid;
+    grid-template-columns: 80px 1fr 1fr 1fr;
+    gap: 2rem;
+    padding: 0.8rem;
+    border-bottom:1px solid #8f8f8f !important;
+    text-align: center;
+  }
+
+  .payment-list-header{
+    font-weight: 800;
+  }
+
+  #paymentList{
+    height: 190px;
+    overflow: scroll;
+  }
+
+  #paymentList::-webkit-scrollbar {
+    display: none;
+  }
 
 .list-date-col {
     width: 15%;

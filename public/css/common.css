@@ -255,6 +255,19 @@ p {
     right: 1rem;
 }
 
+.load-more-data{
+    width: 100% !important;
+    background-color: #e6e6e6;
+    color: #2b2b41;
+    border: none !important;
+}
+
+.load-more-data:hover , .load-more-data:focus{
+    background-color: #e6e6e6;
+    color: #2b2b41;
+    box-shadow: none;
+}
+
 /*
 .left-sidebar {
     position: fixed;

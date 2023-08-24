@@ -314,6 +314,7 @@ class PaymentController extends Controller
         $student= Student::find(request('student_id'));
         $current_paid = $request->due_amount;
 
+        
         $classitemPrice = $classitem->price;
         $currentStudentPayment = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first();
 
@@ -522,11 +523,11 @@ class PaymentController extends Controller
     <td class="align-middle">';
 
         if ($payment->payment_type=="paid"){
-            $output.='<div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
+            $output.='<div class="text-success fw-bold pay-status ">
                 paid
             </div>';
         } else {
-            $output.='<div class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
+            $output.='<div class=" text-danger fw-bold pay-status ">
                 unpaid
             </div>';
         }

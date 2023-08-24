@@ -80,6 +80,8 @@ class SchedulerController extends Controller
             })->get();
         }else{
             $rooms = Room::all();
+          
+        
         }
 
 

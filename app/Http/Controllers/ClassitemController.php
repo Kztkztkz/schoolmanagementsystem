@@ -11,6 +11,7 @@ use App\Http\Requests\UpdateClassitemRequest;
 use App\Models\Student;
 use App\Models\UserClassitem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class ClassitemController extends Controller
@@ -268,14 +269,21 @@ class ClassitemController extends Controller
     }
 
     public function classPayment(Classitem $classitem)
+
     {
-        $payments = $classitem->payments()->get();
+        $selectedClass = $classitem;
+        // $payments = $classitem->payments()->get();
+        $payments = $classitem->payments()->whereIn('id', function ($query) {
+            $query->select(DB::raw('MAX(id)'))
+                  ->from('payments')
+                  ->groupBy('classitem_id', 'student_id');
+        })->paginate(10);
         $studentoption = Student::all();
         $courseoption = Course::all();
         $classitems = Classitem::all();
-        $selectedStudent = $classitem;
+        
 
-        return view('classitem.classpayment' , compact(['classitems' , 'studentoption' , 'courseoption' ,'selectedStudent' , 'payments']));
+        return view('classitem.classpayment' , compact(['classitems' , 'studentoption' , 'courseoption' ,'selectedClass' , 'payments']));
     }
 
     public function classitemsearch(Request $request)
@@ -346,7 +354,7 @@ if(count($searchdata)>0){
       $output .= '
       <td class=" align-middle">
         <div
-          class="bg-danger pay-status d-flex justify-content-center align-items-center rounded">
+          class="text-danger fw-bold pay-status d-flex  ">
           unpaid
         </div>
       </td>
@@ -354,7 +362,7 @@ if(count($searchdata)>0){
       } else {
       $output .= '
       <td class=" align-middle">
-        <div class="bg-success pay-status d-flex justify-content-center align-items-center rounded">
+        <div class="text-success fw-bold pay-status d-flex  ">
           paid
         </div>
       </td>
@@ -367,7 +375,7 @@ if(count($searchdata)>0){
     </td>';
     $output .= '<td class="text-end align-middle text-nowrap">
         <div class="d-none d-md-block control-btns">';
-        $output .= '<a href="' . route('classitem.edit', $classdata) . '" class="btn table-btn-sm btn-primary">
+        $output .= '<a href="' . route('classitem.edit', $classdata) . '" class="me-1 btn table-btn-sm btn-primary ">
         <i class="mdi mdi-pencil h5"></i>
     </a>';
     $output .= '<a href="' . route('classitem.show', $classdata) . '" class="btn table-btn-sm btn-primary">
