@@ -1598,18 +1598,18 @@ progress {
     border-color: #484e53;
 }
 .table-responsive {
-    overflow-x: auto;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
 @media (max-width: 575.98px) {
     .table-responsive-sm {
-        overflow-x: auto;
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
     }
 }
 @media (max-width: 767px) {
     .table-responsive-md {
-        overflow-x: auto;
+        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
     }
 }

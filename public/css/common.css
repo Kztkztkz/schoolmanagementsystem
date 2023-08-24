@@ -122,7 +122,7 @@ body::-webkit-scrollbar {
 
 .table-responsive {
     height: 100% !important;
-    overflow: auto !important;
+    overflow-y: auto !important;
 }
 
 .rounded-3 {

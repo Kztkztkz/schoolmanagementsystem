@@ -309,6 +309,7 @@ $(document).ready(function (e) {
             },
             success: function success(data) {
                 $(".find").html(data);
+                
                 deletealert();
             },
         });
@@ -368,7 +369,7 @@ $(document).ready(function (e) {
             },
             success: function success(data) {
                 console.log(data);
-                $(".find").html(data);
+                $(".find").html(data);        
             },
         });
 

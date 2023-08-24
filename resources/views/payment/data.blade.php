@@ -1,6 +1,6 @@
 @forelse ($latestPayments as $payment)
 
-<tr onclick="showPayments({{ $payment->classitem_id }}, {{ $payment->student_id }})" class="history" data-className="{{$payment->classitem->name}}" data-studentName="{{$payment->student->name}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<tr onclick="showPayments(event, {{ $payment->classitem_id }}, {{ $payment->student_id }})" class="history" data-className="{{$payment->classitem->name}}" data-studentName="{{$payment->student->name}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
 
 
 
