@@ -203,10 +203,11 @@
                                 @enderror
 
                             </div>
+                            
 
                             <div class="mt-3 mb-3">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                    id="flexRadioDefault1" checked>
+                                <input class="form-check-input" type="checkbox" name="slip"
+                                    id="slip" checked>
                                 <label class="form-check-label mb-0" for="flexRadioDefault1">
                                     <p class="small-header mb-0">Print out the slip</p>
                                 </label>

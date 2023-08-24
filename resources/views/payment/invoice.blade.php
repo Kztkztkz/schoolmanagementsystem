@@ -52,52 +52,65 @@
 
 {{-- Second --}}
   <div class=" d-flex p-5">
-    <div class="col-6">
+    {{-- left --}}
+    <div class="col-7">
+
       <div class="row p-2">
-        <div class="col-3">Name</div>
+        <div class="col-4">Student ID</div>
         <div class="col-1">-</div>
-        <div class="col-8">{{$student->name}}</div>
+        <div class="col-7">SID-{{$student->id}}</div>
+        {{-- <div class="col-7">SID - 0007</div> --}}
       </div>
       <div class="row p-2">
-        <div class="col-3">Ph No</div>
+        <div class="col-4">Name</div>
         <div class="col-1">-</div>
-        <div class="col-8">{{$student->phone}}</div>
+        <div class="col-7">{{$student->name}}</div>
+        {{-- <div class="col-7">Toot Pi</div> --}}
       </div>
       <div class="row p-2">
-        <div class="col-3">Address</div>
+        <div class="col-4">Class Name</div>
         <div class="col-1">-</div>
-        <div class="col-8">{{$student->address}}.</div>
-      </div>
+        <div class="col-7"><b>{{$classitem->name}}</b></div>
+        {{-- <div class="col-7"><b>Laravel</b></div> --}}
+      </div>     
     </div>
-    <div class="col-6 d-flex flex-column ">
+    {{-- left --}}
+
+    {{-- right --}}
+    <div class="col-5 d-flex flex-column ">
       <div class="row p-2 ">
         <div class="col-8 text-end">Invoice No</div>
         <div class="col-1 text-end">-</div>
-        <div class="col-3 text-end">#007007</div>
+        <div class="col-3 text-end">InvID_{{$payment->id}}</div>
+        {{-- <div class="col-3 text-end">InvID_123</div> --}}
+
       </div>
       <div class="row p-2 ">
         <div class="col-8 text-end">Invoice Date</div>
         <div class="col-1 text-end">-</div>
-        <div class="col-3 text-end">{{$payment->updated_at}}</div>
+        <div class="col-3 text-end">{{$payment->updated_at->format('d/m/Y')}}</div>
+        {{-- <div class="col-3 text-end">23.2.2700</div> --}}
       </div>
-      <div class="row p-2 ">
-        <div class="col-8 text-end">Class Name</div>
-        <div class="col-1 text-end">-</div>
-        <div class="col-3 text-end">{{$classitem->name}}</div>
-      </div>
+     
       <div class="row p-2 ">
         <div class="col-8 text-end">Class Price</div>
         <div class="col-1 text-end">-</div>
-        <div class="col-3 text-end">{{$classitem->price}}</div>
+        <div class="col-3 text-end"><b>{{$classitem->price}}</b></div>
+        {{-- <div class="col-3 text-end"><b>20000</b></div> --}}
       </div>
     </div>
+    {{-- right --}}
   </div>
-  {{-- border-bottom --}}
-  <div class="custom-border-bottom"></div>
-  {{-- border-bottom --}}
 {{-- Second --}}
 
 {{-- Third --}}
+<div class="d-flex custom-border-bottom">
+  
+
+</div>
+{{-- Third --}}
+
+{{-- Fourth --}}
 <div class="p-4">
   <table class="table">
     <thead>
@@ -106,7 +119,6 @@
         <th scope="col">Date</th>
         <th scope="col">Current Paid</th>
         <th scope="col">Total Paid</th>
-        <th scope="col">Total Paid</th>
         <th scope="col">Due Amount</th>
         <th scope="col">Type</th>
       </tr>
@@ -114,19 +126,28 @@
     <tbody>
       <tr>
         <th scope="row"></th>
-        <td>{{$payment->updated_at->format('d.m.Y')}}</td>
-        <td>{{$payment->fees}}</td>
+        <td>{{$payment->created_at->format('d/m/Y')}}</td>
+        {{-- <td>22.22.22</td> --}}
         <td>{{$current_paid}}</td>
+        {{-- <td>100000</td> --}}
         <td>{{$payment->fees-$payment->due_amount}}</td>
+        {{-- <td>400000</td> --}}
         <td>{{$payment->due_amount}}</td>
+        {{-- <td>500000</td> --}}
         <td>{{$payment->payment_method}}</td>
+        {{-- <td>Bank Transfer</td> --}}
+
       </tr>
     </tbody>
   </table>
 </div>
-{{-- Third --}}
+{{-- Fouth --}}
+
+
 
 {{-- Fourth --}}
+
+{{-- Five --}}
 <div class="d-flex footer">
   <div class="w-100 bg-primary p-5">
     <h5 class="text-white"></h5>
@@ -135,7 +156,7 @@
     
   </div>
 </div>
-{{-- Fourth --}}
+{{-- Five --}}
 
 </body>
 </html>

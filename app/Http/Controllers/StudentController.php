@@ -100,18 +100,18 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-
-
+        
         $student = new Student();
         $student->name = $request->name;
         $student->email = $request->email;
         $student->address = $request->address;
         $student->phone = $request->phone;
         $student->save();
+       
 
 
         if($request->classitem_id > -1 ){
-
+        $current_paid = $request->due_amount;
         $currentStudentPayment = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first();
 
 
@@ -141,6 +141,12 @@ class StudentController extends Controller
             $payment->save();
             $student->classitems()->attach($request->classitem_id);
 
+            // return to invoice
+            if($request->slip == 'on' & $request->due_amount > 0 ) {
+                return view('payment.invoice', compact('classitem','student','payment','current_paid'));
+                // return view('payment.invoice');
+            }
+            // return to invoice
         }
 
         return redirect()->route('student.index')->with('message' , 'Student created successfully');

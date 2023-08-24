@@ -209,16 +209,17 @@ class PaymentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StorePaymentRequest $request)
-    {
-
-
-        // $currentStudentId = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first()->student_id;
+    {   
+        $student = Student::find($request->student_id);
+        $current_paid = $request->due_amount;
 
         $currentStudentPayment = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first();
-
-
+   
+        
         $classitem = Classitem::find(request('classitem_id'));
         $classitemPrice = $classitem->price;
+    
+       
 
         if($currentStudentPayment !== null){
             $currentStudentLastPayment = $currentStudentPayment->due_amount;
@@ -252,6 +253,14 @@ class PaymentController extends Controller
             $studentClass->classitem_id = $request->classitem_id;
             $studentClass->save();
         }
+        
+         // return to invoice
+         if($request->slip == 'on' & $request->due_amount > 0 ) {
+            return view('payment.invoice', compact('classitem','student','payment','current_paid'));
+            // return view('payment.invoice');
+        }
+        // dd($payment);
+        // return to invoice
 
         return redirect()->route('payment.index');
 
@@ -310,9 +319,12 @@ class PaymentController extends Controller
 
 
     public function paymentFromModal (Request $request){
-        $classitem = Classitem::find(request('classitem_id'));
-        $student= Student::find(request('student_id'));
-        $current_paid = $request->due_amount;
+    
+
+    $classitem = Classitem::find(request('classitem_id'));
+    $student= Student::find(request('student_id'));
+    $current_paid = $request->due_amount;
+
 
         
         $classitemPrice = $classitem->price;
@@ -330,7 +342,7 @@ class PaymentController extends Controller
 
         $payment = new Payment();
         $payment->fees = $classitemPrice;
-
+        
         $payment->classitem_id = $request->classitem_id;
         $payment->student_id = $request->student_id;
         if(request('due_amount') > $due_amount && request('due_amount') > $classitemPrice){
@@ -346,9 +358,10 @@ class PaymentController extends Controller
         // return to invoice
         if($request->slip == 'on' & $request->due_amount > 0 ) {
             return view('payment.invoice', compact('classitem','student','payment','current_paid'));
+            // return view('payment.invoice');
         }
+        // dd($payment);
         // return to invoice
-
         return redirect()->route('payment.index');
     }
 
