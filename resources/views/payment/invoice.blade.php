@@ -70,7 +70,7 @@
       <div class="row p-2">
         <div class="col-4">Class Name</div>
         <div class="col-1">-</div>
-        <div class="col-7"><b>{{$classitem->name}}</b></div>
+        <div class="col-7"><b>{{$classitem->course->name}}({{$classitem->name}})</b></div>
         {{-- <div class="col-7"><b>Laravel</b></div> --}}
       </div>     
     </div>
@@ -95,7 +95,7 @@
       <div class="row p-2 ">
         <div class="col-8 text-end">Class Price</div>
         <div class="col-1 text-end">-</div>
-        <div class="col-3 text-end"><b>{{$classitem->price}}</b></div>
+        <div class="col-3 text-end"><b>{{number_format(floatval($classitem->price))}}</b></div>
         {{-- <div class="col-3 text-end"><b>20000</b></div> --}}
       </div>
     </div>
@@ -128,14 +128,15 @@
         <th scope="row"></th>
         <td>{{$payment->created_at->format('d/m/Y')}}</td>
         {{-- <td>22.22.22</td> --}}
-        <td>{{$current_paid}}</td>
+        <td>{{number_format(floatval($current_paid))}}</td>
         {{-- <td>100000</td> --}}
-        <td>{{$payment->fees-$payment->due_amount}}</td>
+        <td>{{number_format(floatval($payment->fees - $payment->due_amount))}}</td>
         {{-- <td>400000</td> --}}
-        <td>{{$payment->due_amount}}</td>
+        <td>{{number_format(floatval($payment->due_amount))}}</td>
         {{-- <td>500000</td> --}}
-        <td>{{$payment->payment_method}}</td>
+        <td>{{($payment->payment_method)}}</td>
         {{-- <td>Bank Transfer</td> --}}
+ 
 
       </tr>
     </tbody>
