@@ -217,18 +217,33 @@ class StudentController extends Controller
         return view('students.class-student' , compact('classitems' , 'studentoption' , 'courseoption' , 'selectedStudent'));
     }
 
-    public function relatedPayment(Student $student){
-
+    public function relatedPayment(Student $student, Request $request){
 
         $payments = $student->payments()->whereIn('id', function ($query) {
             $query->select(DB::raw('MAX(id)'))
                   ->from('payments')
                   ->groupBy('classitem_id', 'student_id');
         })->paginate(10);
+
+        $paymentModal = $student->payments()
+        ->select('payments.*', 'classitems.name as classitem_name', 'courses.name as course_name','students.name as student_name')
+        ->join('classitems', 'classitems.id', '=', 'payments.classitem_id')
+        ->join('courses', 'courses.id', '=', 'classitems.course_id')
+        ->join('students','students.id','=', 'payments.classitem_id')
+        ->whereIn('payments.id', function ($query) {
+            $query->select(DB::raw('MAX(id)'))
+                ->from('payments')
+                ->groupBy('classitem_id', 'student_id');
+        })
+        ->get();
         $studentoption = Student::all();
         $courseoption = Course::all();
         $classitems = Classitem::all();
         $selectedStudent = $student;
+
+        if ($request->ajax()){
+            return response()->json($paymentModal);
+        }
 
         return view('students.payment-student' , compact(['classitems' , 'studentoption' , 'courseoption' ,'selectedStudent' , 'payments']));
     }

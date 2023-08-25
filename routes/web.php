@@ -56,9 +56,6 @@ Route::get('payments/get' , [ PaymentController::class , 'getPayments' ])->name(
 Route::post('payments/get' , [ PaymentController::class , 'paymentFromModal' ])->name("payments.createModal");
 
 
-
-
-
 Route::post('paymenthistory' , [ PaymentController::class , 'allPaymentHistory' ])->name('payment.allhistory');
 
 Route::resource('lecturer' , LecturerController::class);
@@ -73,12 +70,16 @@ Route::get('student/{student}/class' , [ StudentController::class , 'relatedClas
 
 Route::get('classpayment/{classitem}' , [ ClassitemController::class , 'classPayment' ])->name("classitem.classPayment");
 
+//allsearch
 Route::get('/classitemsearch',[ClassitemController::class, 'classitemsearch'])->name('classitem.search');
 Route::get('/adminmsearch',[UserController::class,'adminsearch'])->name('admin.search');
 Route::get('/lecturersearch',[LecturerController::class,'lecturersearch'])->name('lecturer.search');
 Route::get('/studentsearch',[StudentController::class,'studentsearch'])->name('student.search');
 Route::get('/paymentsearch',[PaymentController::class,'paymentsearch'])->name('payment.search');
 Route::get('/classitemfilter',[ClassitemController::class, 'classitemfilter'])->name('classitem.filter');
+
+// Route::get('studentmodal/{studentmodal}' , [StudentController::class, 'studentPaymentModal'])->name('student.studentPaymentModal');
+
 });
 
 

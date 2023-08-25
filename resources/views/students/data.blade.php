@@ -10,13 +10,15 @@
                                         <p> {{ Str::limit($student->address, 50 , '...') }} </p>
                                     </td>
                                     <td class=" align-middle text-center">
-                                        <a href="{{ route('student.relatedPayment' , $student->id ) }}" class="btn table-btn-sm btn-primary">
+                                        {{-- <a href="{{ route('student.relatedPayment' , $student->id ) }}" class="btn table-btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> --}}
+                                             
+                                        <a href="#" class="btn table-btn-sm btn-primary showpaydata" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" data-url="{{ route('student.relatedPayment', $student->id)}}">
                                             <i class="mdi mdi-credit-card-multiple h5"></i>
                                         </a>
                                     </td>
                                     
                                     <td class=" align-middle text-center">
-                                        <a href="{{ route('student.relatedClass' , $student->id ) }}" class="btn table-btn-sm btn-primary">
+                                        <a href="{{ route('student.relatedClass' , $student->id ) }}" class="btn table-btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalCenter">                                            
                                             <i class="mdi mdi-book-open-page-variant h5"></i>
                                         </a>
                                     </td>

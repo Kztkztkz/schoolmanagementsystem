@@ -188,35 +188,147 @@
                             <label for="">Course</label>
                             <select id="courseId" class="ui dropdown w-100 shadow-none courseId" style="width: 100%; height:36px;" name="studentByCourse">
                                 <option value = "-1">Select Course</option>
-                                {{-- @foreach($courses as $course)
-                                    <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
-                                        {{$course->name}}
-                                    </option>
-                                @endforeach --}}
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="">Class</label>
                             <select id="classId" required class="ui dropdown w-100 shadow-none classId" style="width: 100%; height:36px;" name="studentByClass">
                                 <option value = "-1">Select Class</option>
-                                {{-- @foreach($classitems as $class)
-                                    <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
-                                        {{$class->name}}
-                                    </option>
-                                @endforeach --}}
+
                             </select>
                         </div>
-
-                        {{-- <div class="d-flex justify-content-center align-items-center ">
-                            <div class="">
-                                <a href="{{route('student.index')}}" class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</a>
-                                <button class="btn btn-primary sub-btn " type="submit">Submit</button>
-                            </div>
-                        </div> --}}
                     </form>
                 </div>
             </div>
         </div>
+    </div>
+
+    {{-- paymentmodal --}}
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 700px;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-titlefirst" id="exampleModalLongTitle">Modal title</h5>
+              {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> --}}
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-list-containerfirst">
+                    <table class="table addline">
+                        <thead>
+                          <tr>
+                            <th scope="col" class="headingtext">Date</th>
+                            <th scope="col" class="headingtext">Class</th>
+                            <th scope="col" class="headingtext">Course</th>
+                            <th scope="col" class="headingtext">Fees</th>
+                            <th scope="col" class="headingtext">Due</th>
+                            <th scope="col" class="headingtext">Type</th>
+                          </tr>
+                        </thead>
+                        
+                        <tbody class="payHistory">
+                        </tbody>
+                    
+                      </table>
+                    </div>
+            </div>
+            {{-- <div class="text-center p-3">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div> --}}
+          </div>
+        </div>
+      </div>
+
+  
+      {{-- amypaymentmodel --}}
+      <div class="modal fade hide" id="exampleModalRelate" tabindex="-1" aria-labelledby="exampleModalLabelrelate" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content rounded-6">
+            <div class="modal-header">
+              <h5 class="modal-title className" id="exampleModalLabelrelate">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{route('payments.createModal')}}" onsubmit = "return(validate());" method="POST" name = "myForm">
+                <div class="modal-body">
+                    <div class=" mb-2">
+                        <span class="">Student name - </span><p class="studentName fw-bold d-inline-block"></p>
+                    </div>
+
+                    <div class="payment-list-container">
+
+                        <div>
+
+                        <div class="payment-list">
+                        <div class="payment-list-header">
+                            <p>Transfer Date</p>
+                            <p>Fees</p>
+                            <p>Due Amount</p>
+                            <p class="text-nowrap">Payment method</p>
+                        </div>
+                        <div id="paymentList"  class="payHistory">
+
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+                    @csrf
+                <input type="text" class="d-none" name="student_id" hidden id="curStudentIdChg" value="">
+                <input type="text" class="d-none" name="classitem_id" hidden id="curClassIdChg" value="">
+                <div class="row p-3">
+                    <div class="col-6">
+                        <div class="mt-3 mb-3">
+                            <label for="amount mb-0">
+                                <p class="small-header mb-0">Amount</p>
+                                
+                            </label>
+                            <input type="text" class="form-control  amount" name="due_amount"
+                                placeholder="Enter Amount">
+                                <span class=" fs-6 text-danger amount-error"></span>               
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mt-3 mb-3">
+                            <label for="">Payment Method</label>
+                            <div class="input-group ">
+                                <select name="payment_method"
+                                    class="form-select slectopt" id="class">
+                                    <option value="cash">Cash</option>
+                                    <option value="card">Card</option>
+                                    <option value="bank transfer">Bank Transfer</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" mb-3 d-flex px-3">
+                    <div class="form-group margin-right ">
+                        <input name="slip" class=" form-check-input" type="checkbox" name="flexRadioDefault"
+                            id="flexRadioDefault1">
+                        <label class="form-check-label mb-0" for="flexRadioDefault1">
+                            <p class="small-header mb-0">Print out the slip</p>
+                        </label>
+                    </div>
+                </div>
+                <div class="text-center p-3">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+                </div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+
+
+
     </div>
 
     <script>
@@ -406,6 +518,97 @@
 
 
     $('.ui.dropdown').dropdown();
+
+
+    //showpaymentdata
+    $('body').on('click', '.showpaydata', function () {
+          var userURL = $(this).data('url');
+          $.get(userURL, function (data) {
+            $('#exampleModalCenter').modal('show');
+            data.map(function(el){              
+                
+                $('.payHistory').map(function(){
+                        $(this).append(`
+                          <tr onclick="showPayments(event, ${el.classitem_id}, ${el.student_id})" class="history" data-className="${el.classitem_name}" data-studentName="${el.student_name}" data-bs-toggle="modal" data-bs-target="#exampleModalRelate" data-bs-dismiss="modal">
+                            <td>${el.created_at}</td>
+                            <td>${el.classitem_name}</td>
+                            <td>${el.course_name}</td>
+                            <td>${el.fees}</td>
+                            <td>${el.due_amount}</td>
+                            <td>${el.payment_type}</td>
+                          </tr>
+
+                    `);
+                    })
+                    $('.modal-titlefirst').text(el.classitem_name);
+            })
+          })
+          $('.payHistory').empty();
+       });
+
+       //amy payment model box
+       let className;
+        let studentName;
+        let fees;
+        let paid;
+        
+        function showModal(response){
+                response.map(function(elrelated){
+                    
+                    let text = elrelated.created_at;
+                    $('.payHistory').map(function(){
+                        $(this).append(`
+                        <div class="payment-list-body">
+                            <p class="payment-lists">${ text.slice(0, 10) }</p>
+                            <p class="payment-lists ">${elrelated.fees}</p>
+                            <p class="payment-lists ">${elrelated.due_amount}</p>
+                            <p class="payment-lists">${elrelated.payment_method}</p>
+                        </div>
+
+                    `);
+                    })
+                });
+                $('#exampleModalRelate').modal('show');
+            };
+            
+
+            function showPayments(event, classitemId, studentId) {
+
+
+$('#curStudentIdChg').val(studentId);
+$('#curClassIdChg').val(classitemId);
+
+
+className = event.currentTarget.getAttribute('data-className');
+studentName = event.currentTarget.getAttribute('data-studentName');
+$('#exampleModalLabelrelate').text(className);
+$('.studentName').text(studentName);
+console.log(className, studentName);
+
+
+
+console.log(classitemId, studentId);
+$.ajax({
+    url: "{{ route('payments.get') }}?classitemId=" + classitemId + "&studentId=" + studentId,
+    type: "get",
+  })
+  .done(function(response) {
+    showModal(response);
+
+
+
+  })
+  .fail(function(jqXHR, ajaxOptions, thrownError) {
+    console.log('Server error occured');
+  });
+
+$('.payHistory').empty();
+className = '';
+studentName = '';
+
+
+// console.log(allHistory);
+}
 
 
 
