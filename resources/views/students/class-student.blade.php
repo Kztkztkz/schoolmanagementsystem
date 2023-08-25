@@ -51,7 +51,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0">
                         <div class="d-flex gap-2 justify-content-center align-items-center">
-                            <a href="{{ url()->previous() }}" class="text-black">
+                            <a href="{{ URL::route('student.index') }}" class="text-black">
                                 <i class="mdi mdi-chevron-left h4"></i>
                             </a>
                             <p class="mb-0 fw-bolder">Total - {{ count($classitems) }}</p>

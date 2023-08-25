@@ -514,18 +514,18 @@ class PaymentController extends Controller
             foreach($latestPayments as $payment)
             {
         $output .= '
-<tr onclick="showPayments(' . $payment->classitem_id . ', ' . $payment->student_id . ')" class="history" data-className="' . $payment->classitem->name . '" data-studentName="' . $payment->student->name . '" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<tr onclick="showPayments(event, ' . $payment->classitem_id . ', ' . $payment->student_id . ')" class="history" data-className="' . $payment->classitem->name . '" data-studentName="' . $payment->student->name . '" data-bs-toggle="modal" data-bs-target="#exampleModal">
 
     <td class="d-table-cell d-lg-none text-nowrap align-middle">
         <p>' . $payment->created_at . '</p>
         <p>' . $payment->student->name . '</p>
     </td>
-    <td class="relatedStudent d-none">
-         ' . $payment->student->id . '
-    </td>
-    <td class="relatedClass d-none">
-        ' . $payment->classitem->id . '
-   </td>
+    <td class="fees d-none">'
+        . $payment->fees  .
+    '</td>
+    <td class="paid d-none">'
+       . $payment->due_amount .
+   '</td>
 
     <td class="d-none d-lg-table-cell align-middle">' . $payment->created_at->format('d-m-Y') . '</td>
     <td class="align-middle">' . Str::limit($payment->classitem->name, 20) . '</td>

@@ -75,11 +75,9 @@
                     </div>
                     <div class=" table-responsive">
                         <table class="table table-striped table-hover">
-                            <thead>
+                            {{-- <thead>
                                 <tr style="border-bottom: 2px solid black">
-                                    {{-- Mobile View --}}
-                                    {{-- <th scope="col" class="d-table-cell d-lg-none">Date</th> --}}
-                                    {{-- Mobile View --}}
+                                  
 
 
                                     <th scope="col" class="d-lg-table-cell list-date-col">Date</th>
@@ -89,6 +87,17 @@
                                     <th scope="col" class=" list-fees-col">Fees</th>
                                     <th scope="col" class=" list-due-col">Due</th>
                                     <th scope="col" class=" text-center list-type-col">Status</th>
+                                </tr>
+                            </thead> --}}
+                            <thead>
+                                <tr style="border-bottom: 2px solid black">
+                                    <th class="w-15" scope="col">Date</th>
+                                    <th class=" w-25" scope="col">Class</th>
+                                    <th class=" w-30 d-none d-lg-table-cell" scope="col">Course</th>
+                                    <th scope="col" class="text-center d-none d-lg-table-cell w-auto">Student</th>
+                                    <th scope="col" class="text-center w-auto">Fees</th>
+                                    <th scope="col" class="text-center w-auto">Due</th>
+                                    <th scope="col" class=" text-center w-auto">Status</th>
                                 </tr>
                             </thead>
                             <tbody class="original" id="data-wrapper">
@@ -190,7 +199,7 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content rounded-6">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title className" id="exampleModalLabel">Modal title</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{route('payments.createModal')}}" onsubmit = "return(validate());" method="POST" name = "myForm">
@@ -210,7 +219,7 @@
                             <p>Due Amount</p>
                             <p class="text-nowrap">Payment method</p>
                         </div>
-                        <div id="paymentList" class="payHistory">
+                        <div id="paymentList"  class="payHistory">
 
                         </div>
                         </div>
@@ -346,15 +355,16 @@
         let studentName;
         let fees;
         let paid;
-            $('.history').map(function(){
-                    $(this).on('click', function(){
-                    className = $(this).attr('data-className');
-                    studentName = $(this).attr('data-studentName');
-                    fees = Number($(this).children('.fees').text());
-                    paid = Number($(this).children('.paid').text());
-                    console.log(fees , paid);
-                });
-            });
+
+        // $('.history').map(function(){
+        //         $(this).on('click', function(){
+        //         className = $(this).attr('data-className');
+        //         studentName = $(this).attr('data-studentName');
+        //         fees = Number($(this).children('.fees').text());
+        //         paid = Number($(this).children('.paid').text());
+        //         console.log(className , studentName);
+        //     });
+        // });
 
             function validate(){
                         
@@ -373,8 +383,12 @@
 
             // Function to show the Bootstrap modal
             function showModal(response){
-                $('#exampleModalLabel').text(className);
-                $('.studentName').text(studentName);
+                // $('#exampleModalLabel').text(className);
+                // $('.studentName').text(studentName);
+               
+                
+                
+                // console.log(aa);
                 response.map(function(el){
                     
                     let text = el.created_at;
@@ -382,8 +396,8 @@
                         $(this).append(`
                         <div class="payment-list-body">
                             <p class="payment-lists">${ text.slice(0, 10) }</p>
-                            <p class="payment-lists">${el.fees}</p>
-                            <p class="payment-lists">${el.due_amount}</p>
+                            <p class="payment-lists ">${el.fees}</p>
+                            <p class="payment-lists ">${el.due_amount}</p>
                             <p class="payment-lists">${el.payment_method}</p>
                         </div>
 
@@ -409,11 +423,20 @@
 
 
 
-        function showPayments(classitemId, studentId ) {
+        function showPayments(event, classitemId, studentId ) {
 
 
             $('#curStudentId').val(studentId);
             $('#curClassId').val(classitemId);
+
+            
+            className = event.currentTarget.getAttribute('data-className');
+            studentName = event.currentTarget.getAttribute('data-studentName');
+            $('#exampleModalLabel').text(className);
+            $('.studentName').text(studentName);
+            console.log(className , studentName);
+            
+            
 
             console.log(classitemId, studentId);
             $.ajax({
@@ -446,31 +469,7 @@
 
 
 
-        // $('.pay-row').map(function(){
-        //     $(this).on('click' , function(){
-        //     let studentId = $(this).children('.relatedStudent').text();
-        //     let classitemId = $(this).children('.relatedClass').text();
-
-        //     let studentPay = payments.filter( el => el.student_id == studentId );
-        //     console.log(studentPay);
-
-        //     studentPay.forEach(el => {
-        //         $('.payHistory').map(function(){
-        //             $(this).append(`
-        //                 <tr>
-        //                     <td class="col-3">${el.created_at}</td>
-        //                     <td class="col-3">${el.fees}</td>
-        //                     <td class="col-3">${el.due_amount}</td>
-        //                     <td class="col-3">${el.payment_method}</td>
-        //                 </tr>
-
-        //             `);
-        //         });
-        //     });
-
-        //     console.log(studentId , classitemId);
-        //     });
-        // });
+       
 
 
 
@@ -566,6 +565,7 @@
                     return;
                 }
                 $('.auto-load').hide();
+                console.log(response.html);
                     $("#data-wrapper").append(response.html);
 
 
