@@ -212,6 +212,8 @@ class StudentController extends Controller
         $classitems = $student->classitems;
         $selectedStudent = $student;
 
+        // return view('students.class-student' , compact('classitems' , 'studentoption' , 'courseoption' , 'selectedStudent'));
+        
         return view('students.class-student' , compact('classitems' , 'studentoption' , 'courseoption' , 'selectedStudent'));
     }
 
@@ -251,7 +253,8 @@ class StudentController extends Controller
                 $query->where('course_id' , request('studentByCourse'));
             })->when( request("keyword") , function ($query){
                 $keyword = request('keyword');
-                $query->where("name" , "like",  "%$keyword%")->where("name" , "like" , "%$keyword%")
+                $query->where("name" , "like",  "%$keyword%")
+                ->orWhere("address" , "like" , "%$keyword%")
                 ->orWhere( "email" , "like" , "%$keyword%");
             })
             ->paginate(15);
@@ -264,7 +267,8 @@ class StudentController extends Controller
 
             $students = $students->when( request("keyword") , function ($query){
                 $keyword = request('keyword');
-                $query->where("name" , "like",  "%$keyword%")->where("name" , "like" , "%$keyword%")
+                $query->where("name" , "like",  "%$keyword%")
+                ->orWhere("address" , "like" , "%$keyword%")
                 ->orWhere( "email" , "like" , "%$keyword%");
             })->whereHas('classitems' , function($query){
 

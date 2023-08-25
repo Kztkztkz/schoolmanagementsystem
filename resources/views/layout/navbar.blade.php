@@ -1,4 +1,4 @@
-<a class="navbar-brand d-none d-md-flex" href="index.html">
+<a class="navbar-brand d-none d-md-flex" href="{{route('schdeuler.index')}}">
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
