@@ -377,7 +377,7 @@ if(count($searchdata)>0){
 }
 } else {
     $output .= '<tr>
-    <td colspan="6" class="text-center text-danger">Data is Empty</td>
+    <td colspan="6" class="text-center text-danger">Data not found</td>
 </tr>';
 }
 
@@ -503,7 +503,7 @@ public function classPaymentSearch(Request $request)
 }
 } else {
     $output .= '<tr>
-    <td colspan="6" class="text-center text-danger">Data is Empty</td>
+    <td colspan="6" class="text-center text-danger">Data not found</td>
 </tr>';
 }
 

@@ -57,11 +57,15 @@ class PaymentController extends Controller
             $latestPayments = $latestPayments->where(function($q) {
                 $q->whereHas('classitem' , function($query){
                     $keyword = request('search');
-                    $query->where("name" ,'like' , "%$keyword%");
+                    $query->where("name" ,'like' , "%$keyword%")->orWhereHas('course' , function($query){
+
+                        $keyword = request('search');
+                        $query->where('name' , 'like' , "%$keyword%");
+                    });
                 })
                 ->orWhereHas('student' , function($query){
                     $keyword = request('search');
-                    $query->where("name" ,'like' , "%$keyword%")->limit(1);
+                    $query->where("name" ,'like' , "%$keyword%");
                 });
             });
 
@@ -400,7 +404,11 @@ class PaymentController extends Controller
             $latestPayments = $latestPayments->where(function($q) {
                 $q->whereHas('classitem' , function($query){
                     $keyword = request('search');
-                    $query->where("name" ,'like' , "%$keyword%");
+                    $query->where("name" ,'like' , "%$keyword%")->orWhereHas('course' , function($query){
+
+                        $keyword = request('search');
+                        $query->where('name' , 'like' , "%$keyword%");
+                    });
                 })
                 ->orWhereHas('student' , function($query){
                     $keyword = request('search');
@@ -549,7 +557,7 @@ class PaymentController extends Controller
 }
 } else {
     $output .= '<tr>
-    <td colspan="6" class="text-center text-danger">Data is Empty</td>
+    <td colspan="7" class="text-center text-danger">Data not found</td>
 </tr>';
 }
 

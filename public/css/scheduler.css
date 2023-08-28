@@ -35,7 +35,7 @@
 }
 
 .page-wrapper > .scheduler {
-    margin-top: 6.4rem;
+    margin-top: 5.4rem;
 }
 
 .room-row-ph{
@@ -54,7 +54,7 @@
 .scheduler{
     height: 100%;
     overflow: hidden;
-    padding-bottom: 0;
+    padding-bottom: 85px;
 }
 
 .page-wrapper > .scheduler ~ .scheduler {
@@ -81,6 +81,12 @@
     height: 100%;
     display: block;
     position: relative;
+    overflow: auto !important;
+
+}
+
+.scheduler-container::-webkit-scrollbar{
+    display: none;
 }
 
 .week-line {

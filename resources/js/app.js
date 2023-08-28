@@ -552,6 +552,13 @@ $(document).ready(function () {
     });
 });
 
+//tooltip
+$('#asdf').on('mouseenter', function(){
+    setTimeout(() => {
+        $('#asdf').tooltip('show');
+    }, 5000);
+})
+
 //card height
 // $(".card").map(function () {
 //     let cardHeight = $(this).innerHeight();

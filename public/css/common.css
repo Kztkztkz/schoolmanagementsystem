@@ -136,6 +136,11 @@ body::-webkit-scrollbar {
     overflow: hidden;
 }
 
+.card-over-container{
+    height: 100% !important;
+    overflow: hidden !important;
+}
+
 .user-account-name {
     display: flex;
     align-items: center;
@@ -239,7 +244,7 @@ p {
 
 #main-wrapper[data-sidebartype="full"] .page-wrapper {
     margin-left: 220px;
-    overflow: hidden;
+    overflow: hidden !important;
 }
 
 .left-sidebar {
@@ -285,6 +290,10 @@ p {
         .navbar-header {
         width: 250px;
     }
+
+    .page-wrapper > .scheduler {
+        margin-top: 6.4rem !important;
+    } 
 
     #main-wrapper[data-sidebartype="full"] .page-wrapper {
         margin-left: 250px;
@@ -351,7 +360,7 @@ p {
     }
 
     .page-breadcrumb {
-        padding: 13px 6px !important;
+        padding: 0.5rem 1rem !important;
     }
 
     .filter-btn {

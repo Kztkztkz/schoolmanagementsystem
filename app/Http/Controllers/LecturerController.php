@@ -172,7 +172,7 @@ class LecturerController extends Controller
         else 
         {
             $output .= '<tr>
-            <td colspan="3" class="text-center text-danger">Data is Empty</td>
+            <td colspan="3" class="text-center text-danger">Data not found</td>
         </tr>';
         }
         

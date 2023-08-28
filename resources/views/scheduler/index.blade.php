@@ -6,7 +6,7 @@
       
         .page-wrapper{
                
-                padding-top: 55px !important;
+                padding-top: 55px;
         }
 
         .dropdown-item:focus, .dropdown-item:hover {
@@ -24,7 +24,7 @@
         
         @media screen and (min-width:768px) {
             .page-wrapper{
-                overflow: scroll !important;
+               
                 padding-top: 73px !important;
             }
 
@@ -197,7 +197,7 @@
 
    @foreach ($rooms->take(1) as $room)
    <div class="row px-3 scheduler " style="">
-    <div class="col-12 d-block d-md-none p-0">
+    <div class="col-12 d-block d-md-none ">
         <div class="room-row-ph">
             <p class=" fs-4 fw-bolder h4  text-center p-2"> {{ $room->name }} </p>
         </div>
@@ -304,7 +304,7 @@
     </div>
 
 
-    <div class="col-12 col-lg-10 p-auto">
+    <div class="col-12 col-lg-10 p-auto card-over-container">
         <div class="card rounded-3 ">
             <div class="card-body">
 
@@ -363,9 +363,10 @@
                                                             $month->between(Carbon\Carbon::parse($classitem->start_date)->format('Y-m'),
                                                                 Carbon\Carbon::parse($classitem->end_date)->format('Y-m')) && $hourstring === date('H', strtotime($classitem->start_time)))
                                 
-                                                            <div class="active-classitem"
+                                                            <a href="{{ route('classitem.show' , $classitem->id) }}" class="active-classitem"
                                                                 style=" background-color: {{ $classitem->container_color }}; border: 1px solid {{ $classitem->container_color }}; border-right: 1px solid {{ $classitem->container_color }}; border-bottom: 1px solid {{ $classitem->container_color }};"
-                                                                data-bs-placement="bottom"
+                                                                
+                                                                data-toggle="tooltip" data-placement="bottom"
                                                                 title="{{ $classitem->name }}"
                                                                 >
 
@@ -380,7 +381,7 @@
                                                                 @endif
 
 
-                                                            </div>
+                                                            </a>
 
                                                         @endif
                                                         {{-- @endfor --}}
@@ -447,9 +448,9 @@
                                                         @if (
                                                             $month->between(Carbon\Carbon::parse($classitem->start_date)->format('Y-m'),
                                                                 Carbon\Carbon::parse($classitem->end_date)->format('Y-m')) && $hourstring === date('H', strtotime($classitem->start_time)))
-                                                            <div id="asdf" class="active-classitem"
+                                                            <a href="{{route('classitem.show' , $classitem->id )}}" id="asdf" class="active-classitem"
                                                                 style=" background-color: {{ $classitem->container_color }}; border: 1px solid {{ $classitem->container_color }}; border-right: 1px solid {{ $classitem->container_color }}; border-bottom: 1px solid {{ $classitem->container_color }};"
-                                                                data-bs-placement="bottom"
+                                                                data-toggle="tooltip" data-placement="bottom"  
                                                                         title="{{ $classitem->name }}">
 
                                                                 @if ($k == round(($timedif-1)/2) && $month->format('m') == date('m', strtotime($classitem->start_date)))
@@ -465,7 +466,7 @@
                                                                 @endif
 
 
-                                                            </div>
+                                                            </a>
                                                         @endif
                                                         {{-- @endfor --}}
                                                     @endfor
