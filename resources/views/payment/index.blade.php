@@ -202,7 +202,7 @@
               <h5 class="modal-title className" id="exampleModalLabel">Modal title</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{route('payments.createModal')}}" onsubmit = "return(validate());" method="POST" name = "myForm">
+            <form target="_blank" action="{{route('payments.createModal')}}" onsubmit = "return(validate());" method="POST" name = "myForm">
                 <div class="modal-body">
                     <div class=" mb-2">
                         <span class="">Student name - </span><p class="studentName fw-bold d-inline-block"></p>

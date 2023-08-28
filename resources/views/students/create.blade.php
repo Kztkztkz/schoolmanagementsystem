@@ -25,7 +25,7 @@
         <div class="col-md-12 table-container">
             <div class="card rounded-3 " style="height: 600px">
                 <div class="card-body">
-                    <form action="{{ route('student.store') }}" method="post">
+                    <form target="_blank" action="{{ route('student.store') }}" method="post">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">

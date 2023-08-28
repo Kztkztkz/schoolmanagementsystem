@@ -179,7 +179,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body  position-relative">
-                    <form action="{{route('classitem.index')}}" method="get">
+                    <form target="_blank" action="{{route('classitem.index')}}" method="get">
                         <div class=" mb-3">
                             <label for="">Course</label>
                             <select class="ui dropdown w-100 shadow-none" style="width: 100%; height:36px;" name="coursesearchclassitem">

@@ -16,7 +16,7 @@
                                             <i class="mdi mdi-credit-card-multiple h5"></i>
                                         </a>
                                     </td>
-                                    
+                                    {{-- Pyin --}}
                                     <td class=" align-middle text-center">
                                         {{-- <a href="{{ route('student.relatedClass' , $student->id ) }}" class="btn table-btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalCenter">                                            
                                             <i class="mdi mdi-book-open-page-variant h5"></i>

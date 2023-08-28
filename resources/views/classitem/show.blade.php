@@ -136,7 +136,7 @@
                         <h5 class="sub-header mb-5">Enroll existing student</h5>
 
 
-                        <form action="{{ route('payment.store') }}" method="post">
+                        <form target="_blank" action="{{ route('payment.store') }}" method="post">
                             @csrf
                             <input type="text" hidden name="classitem_id" value="{{ $classitem->id }}">
                             <input type="text" hidden name="fees" value="{{ $classitem->price }}">

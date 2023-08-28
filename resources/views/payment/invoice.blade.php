@@ -25,6 +25,10 @@
     </style>
 </head>
 <body>
+  <script>
+    window.print();
+  </script>
+
 {{-- First --}}
   <div class="p-5 bg-primary">
     <div class="row d-flex justify-content-center align-items-center">

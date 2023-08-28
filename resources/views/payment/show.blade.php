@@ -1,5 +1,6 @@
 @extends('layout.template')
 @section('content')
+
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 d-flex ">
