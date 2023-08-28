@@ -12,15 +12,22 @@
 
 .headingtext {
     font-weight: 800 !important;
+    border-bottom:1px solid #8f8f8f !important;
+    line-height: 1.9rem;
 }
+
 .addline {
     border-bottom: 1px solid #8f8f8f;
-    height: 20px;
+}
+
+.EmptyData{
+    line-height: 1.9rem;
 }
 
 .modal-body {
     padding: 1rem;
 }
+
 .payment-list-containerfirst {
     width: 100%;
     border-radius: 5px;
@@ -64,6 +71,10 @@
     display: none;
 }
 
+.fontsetting {
+    font-weight: 700;
+    font-size: 0.9rem;
+}
 /* .student-table td:last-child{
     text-align: end !important;
 } */

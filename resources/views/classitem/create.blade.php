@@ -46,7 +46,7 @@
           <div class = "row testcalendar">
             <div class="col-sm-4">
               <div class="form-group test">
-                <label for="name">Name</label>
+                <label for="name" class="required">Name</label>
                 <div class="d-flex">
                 <input type="text" class="form-control" id="name" placeholder="Class name" name="name">
                 <input type="color"  id="color" class = "class-colorpicker" name="color" value="{{ old('color') }}">
@@ -57,21 +57,21 @@
             </div>
             <div class="col-sm-4">
               <div class="form-group test">
-                <label for="startdate">Start Date</label>
+                <label for="startdate" class="required">Start Date</label>
                 <input type="date" class="form-control" id="enddate" placeholder="Start date" name = "startdate">
                 <span class="text-danger">@error ('startdate') {{$message}} @enderror</span>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group test">
-                <label for="enddate">End Date</label>
+                <label for="enddate" class="required">End Date</label>
                 <input type="date" class="form-control" id="enddate" placeholder="End date" name="enddate">
                 <span class="text-danger">@error ('enddate') {{$message}} @enderror</span>
               </div>
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-              <label for="course">Course Name</label>
+              <label for="course" class="required">Course Name</label>
                 <select class="form-select slectopt" id="course" name="course">
                   <option value="">Select course name</option>
                   @foreach($courseoption as $course)
@@ -83,7 +83,7 @@
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-                <label for="starttime">Start Time</label>
+                <label for="starttime" class="required">Start Time</label>
                 <!-- <input type="time" class="form-control" id="starttime" value="19:00"> -->
                 <input type="text" placeholder="--:--" onfocus="(this.type='time')" class="form-control" id="starttime" name="starttime">
                 <span class="text-danger">@error('starttime') {{$message}} @enderror</span>
@@ -96,14 +96,14 @@
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-                <label for="endtime">End Time</label>
+                <label for="endtime" class="required">End Time</label>
                 <input type="text" placeholder="--:--" onfocus="(this.type='time')" class="form-control" id="endtime" class="starttime" name="endtime">
                 <span class="text-danger">@error('endtime') {{$message}} @enderror</span>
               </div>
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-                <label for="lecturer" class="d-block">Lecturer</label>
+                <label for="lecturer" class="d-block required">Lecturer</label>
                 {{-- <div class = "multisel-day"> --}}
                 <select class="js-example-basic-multiple form-select lecturermulti" name="lecturers[]" multiple="multiple"  id="lecturer" >
                   @foreach($lectureroption as $lecturer)
@@ -116,7 +116,7 @@
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-              <label for="room">Room</label>
+              <label for="room" class="required">Room</label>
                 <select class="form-select slectopt" id="room" name="room">
                   <option value="">Select Room name</option>
                   @foreach($roomoption as $room)
@@ -128,7 +128,7 @@
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-                <label for="day" class="d-block">Day</label>
+                <label for="day" class="d-block required">Day</label>
                 {{-- <div class = "multisel-day"> --}}
                 <select class="js-example-basic-multiple form-select" name="days[]" multiple="multiple" id="day">
                   <option value="Monday">Monday</option>
@@ -146,21 +146,21 @@
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-                <label for="price">Price</label>
+                <label for="price" class="required">Price</label>
                 <input type="text" class="form-control" id="price" placeholder="Price" name="price">
                 <span class="text-danger">@error('price') {{$message}} @enderror</span>
               </div>
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-                <label for="maxstudent">Maximun Student</label>
+                <label for="maxstudent" class="required">Maximun Student</label>
                 <input type="number" class="form-control" id="maxstudent" placeholder="Student limit" name="maxstudent">
                 <span class="text-danger">@error('maxstudent') {{$message}} @enderror</span>
               </div>
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-              <label for="type">Type</label>
+              <label for="type" class="required">Type</label>
                 <select class="form-select slectopt" id="type" name="daytype">
                   <option value="">Select type</option>
                   <option value="weekdays">Weekdays</option>
@@ -182,7 +182,7 @@
             </div> --}}
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-                <label for="shortcode">Short Code</label>
+                <label for="shortcode" class="required">Short Code</label>
                 <input type="text" class="form-control" id="shortcode" placeholder="Short Code" name="shortcode">
                 <span class="text-danger">@error('shortcode') {{$message}} @enderror</span>
               </div>

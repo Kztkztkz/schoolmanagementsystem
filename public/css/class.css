@@ -133,6 +133,10 @@
     border: none;
 }
 
+.required:after{
+    content:" *";
+    color: red;
+}
 @media screen and (max-width: 768px) {
     .control-btns {
         display: none !important;

@@ -214,6 +214,10 @@
               </button>
             </div>
             <div class="modal-body">
+                {{-- amyStudentTitle --}}
+                <div class=" mb-2">
+                    <span class="">Student name - </span><p class="StudentNameFirst fw-bold d-inline-block"></p>
+                </div>
                 <div class="payment-list-containerfirst">
                     <table class="table addline">
                         <thead>
@@ -227,7 +231,7 @@
                           </tr>
                         </thead>
                         
-                        <tbody class="payHistory">
+                        <tbody class="payHistory EmptyData">
                         </tbody>
                     
                       </table>
@@ -315,9 +319,8 @@
                         </label>
                     </div>
                 </div>
-                <div class="text-center p-3">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="text-center p-3 backbtn">                    
+                    
                 </div>
 
                 </div>
@@ -657,25 +660,39 @@
           var userURL = $(this).data('url');
           $.get(userURL, function (data) {
             $('#exampleModalCenter').modal('show');
-            data.map(function(el){              
-                
+            data.map(function(el){           
                 $('.payHistory').map(function(){
                         $(this).append(`
                           <tr onclick="showPayments(event, ${el.classitem_id}, ${el.student_id})" class="history" data-className="${el.classitem_name}" data-studentName="${el.student_name}" data-bs-toggle="modal" data-bs-target="#exampleModalRelate" data-bs-dismiss="modal">
-                            <td>${el.created_at}</td>
+                            <td>${el.created_at.slice(0,10)}</td>
                             <td>${el.classitem_name}</td>
                             <td>${el.course_name}</td>
-                            <td>${el.fees}</td>
-                            <td>${el.due_amount}</td>
-                            <td>${el.payment_type}</td>
+                            <td>${Number(el.fees).toLocaleString('en-Us')}</td>
+                            <td>${Number(el.due_amount).toLocaleString('en-Us')}</td>
+                            <td class="${el.payment_type=="unpaid" ? 'text-danger' : 'text-success'} fw-bold">${el.payment_type}</td>                         
+                            
                           </tr>
 
                     `);
+                                     
+
                     })
                     $('.modal-titlefirst').text(el.classitem_name);
+                    $('.StudentNameFirst').text(el.student_name); 
+
             })
+            if(document.querySelector('.addline').rows.length==1){
+            $('.payHistory').append(`
+                <tr>
+                    <td colspan="6" class="text-center text-danger fontsetting">Not Paid yet</td>
+                </tr>
+            `);
+        }  
           })
+
           $('.payHistory').empty();
+          $('.backbtn').empty();
+          
        });
 
        //amy payment model box
@@ -686,7 +703,6 @@
         
         function showModal(response){
                 response.map(function(elrelated){
-                    
                     let text = elrelated.created_at;
                     $('.payHistory').map(function(){
                         $(this).append(`
@@ -709,6 +725,11 @@
 
 $('#curStudentIdChg').val(studentId);
 $('#curClassIdChg').val(classitemId);
+
+$('.backbtn').append(`
+<a href="#" class="btn btn-secondary showpaydata" data-bs-target="#exampleModalCenter" data-bs-toggle="modal" data-url="{{URL::to('student/${studentId}')}}" data-bs-dismiss="modal">Cadncel</a>
+<button type="submit" class="btn btn-primary">Submit</button>
+`);
 
 
 className = event.currentTarget.getAttribute('data-className');
@@ -745,6 +766,7 @@ studentName = '';
 // console.log(allHistory);
 }
 
+
 function validate(){
                          
                          let amount = Number(document.myForm.due_amount.value);
@@ -762,7 +784,6 @@ function validate(){
                          };
                          
                      };
-
 
 
     </script>
