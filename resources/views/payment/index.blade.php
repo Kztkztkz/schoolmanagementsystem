@@ -94,9 +94,9 @@
                                     <th class="w-15" scope="col">Date</th>
                                     <th class=" w-25" scope="col">Class</th>
                                     <th class=" w-30 d-none d-lg-table-cell" scope="col">Course</th>
-                                    <th scope="col" class="text-center d-none d-lg-table-cell w-auto">Student</th>
-                                    <th scope="col" class="text-center w-auto">Fees</th>
-                                    <th scope="col" class="text-center w-auto">Due</th>
+                                    <th scope="col" class=" d-none d-lg-table-cell w-auto">Student</th>
+                                    <th scope="col" class=" w-auto">Fees</th>
+                                    <th scope="col" class=" w-auto">Due</th>
                                     <th scope="col" class=" text-center w-auto">Status</th>
                                 </tr>
                             </thead>
@@ -366,19 +366,23 @@
         //     });
         // });
 
-            function validate(){
-                        
-            
-                        let amount = Number(document.myForm.due_amount.value);
-                        paid = Number(paid);
-                        fees = Number(fees);
-                        if(amount > fees || amount > paid){
-                            // console.log(amount , paid);                             
-                            $('.amount-error').text('This amount is exceeded');
-                            return false;
-                        }
-                        
-                    };
+        function validate(){
+                         
+                         let amount = Number(document.myForm.due_amount.value);
+                         paid = Number(paid);
+                         fees = Number(fees);
+                         if(amount > fees || amount > paid ){
+                             // console.log(amount , paid);                             
+                             $('.amount-error').text('This amount is exceeded');
+                             return false;
+                         };
+ 
+                         if(amount == ''){
+                             $('.amount-error').text('Amount is required');
+                             return false;
+                         };
+                         
+                     };
 
 
             // Function to show the Bootstrap modal
@@ -414,14 +418,7 @@
 
 
 
-        // function validate(){
-        //     let amount = $('.amount').val();
-        //     console.log(amount);
-        //     return false;
-        // }
-
-
-
+      
 
         function showPayments(event, classitemId, studentId ) {
 
@@ -432,13 +429,15 @@
             
             className = event.currentTarget.getAttribute('data-className');
             studentName = event.currentTarget.getAttribute('data-studentName');
+            fees = $(event.currentTarget).find('.fees').text().trim();
+            paid = $(event.currentTarget).find('.paid').text().trim();
+
             $('#exampleModalLabel').text(className);
             $('.studentName').text(studentName);
-            console.log(className , studentName);
-            
-            
+            // console.log(className , studentName);
+            // console.log(classitemId, studentId);
 
-            console.log(classitemId, studentId);
+
             $.ajax({
                 url: "{{ route('payments.get') }}?classitemId="+classitemId+"&studentId="+studentId,
                 type: "get",
@@ -456,9 +455,7 @@
             $('.payHistory').empty();
             className = '';
             studentName = '';
-
-
-            // console.log(allHistory);
+           
         }
 
 

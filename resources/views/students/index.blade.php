@@ -206,7 +206,7 @@
     {{-- paymentmodal --}}
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 700px;">
-          <div class="modal-content">
+          <div class="modal-content rounded-6">
             <div class="modal-header">
               <h5 class="modal-titlefirst" id="exampleModalLongTitle">Modal title</h5>
               {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> --}}
@@ -237,6 +237,131 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div> --}}
+          </div>
+        </div>
+      </div>
+
+  
+      {{-- amypaymentmodel --}}
+      <div class="modal fade hide" id="exampleModalRelate" tabindex="-1" aria-labelledby="exampleModalLabelrelate" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content rounded-6">
+            <div class="modal-header">
+              <h5 class="modal-title className" id="exampleModalLabelrelate">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{route('payments.createModal')}}" onsubmit = "return(validate());" method="POST" name = "myForm">
+                <div class="modal-body">
+                    <div class=" mb-2">
+                        <span class="">Student name - </span><p class="studentName fw-bold d-inline-block"></p>
+                    </div>
+
+                    <div class="payment-list-container">
+
+                        <div>
+
+                        <div class="payment-list">
+                        <div class="payment-list-header">
+                            <p>Transfer Date</p>
+                            <p>Fees</p>
+                            <p>Due Amount</p>
+                            <p class="text-nowrap">Payment method</p>
+                        </div>
+                        <div id="paymentList"  class="payHistory">
+
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+                    @csrf
+                <input type="text" class="d-none" name="student_id" hidden id="curStudentIdChg" value="">
+                <input type="text" class="d-none" name="classitem_id" hidden id="curClassIdChg" value="">
+                <div class="row p-3">
+                    <div class="col-6">
+                        <div class="mt-3 mb-3">
+                            <label for="amount mb-0">
+                                <p class="small-header mb-0">Amount</p>
+                                
+                            </label>
+                            <input type="text" class="form-control  amount" name="due_amount"
+                                placeholder="Enter Amount">
+                                <span class=" fs-6 text-danger amount-error"></span>               
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mt-3 mb-3">
+                            <label for="">Payment Method</label>
+                            <div class="input-group ">
+                                <select name="payment_method"
+                                    class="form-select slectopt" id="class">
+                                    <option value="cash">Cash</option>
+                                    <option value="card">Card</option>
+                                    <option value="bank transfer">Bank Transfer</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" mb-3 d-flex px-3">
+                    <div class="form-group margin-right ">
+                        <input name="slip" class=" form-check-input" type="checkbox" name="flexRadioDefault"
+                            id="flexRadioDefault1">
+                        <label class="form-check-label mb-0" for="flexRadioDefault1">
+                            <p class="small-header mb-0">Print out the slip</p>
+                        </label>
+                    </div>
+                </div>
+                <div class="text-center p-3">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+                </div>
+            </form>
+            
+          </div>
+        </div>
+      </div>
+
+
+
+    </div>
+
+    {{-- Classitemmodal --}}
+    <div class="modal fade " id="classitemModal" tabindex="-1" role="dialog" aria-labelledby="classitemModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " role="document" >
+          <div class="modal-content rounded-6">
+            <div class="modal-header">
+              <h5 class="modal-titlefirst mb-0" id="classitemModal">Related Classes by 
+                <Span class="classStudentName"></Span>
+              </h5>
+              {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> --}}
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="payment-list-containerfirst">
+                    <table class="table addline">
+                        <thead>
+                            <tr style="border-bottom: 2px solid black">
+                                <th scope="col" class="" >Class Name</th>
+                                <th scope="col" class="">Course name</th>
+                                <th class="d-none d-md-table-cell  w-30" scope="col">Lecturers</th>
+                                <th scope="col" class="">Fees</th>                                                     
+                            </tr>
+                        </thead>
+                        
+                        <tbody class="relatedClass">
+                        </tbody>
+                    
+                      </table>
+                    </div>
+            </div>
+           
           </div>
         </div>
       </div>
@@ -522,6 +647,13 @@
 
     //showpaymentdata
     $('body').on('click', '.showpaydata', function () {
+            className = event.currentTarget.getAttribute('data-className');
+            studentName = event.currentTarget.getAttribute('data-studentName');
+            fees = $(event.currentTarget).find('.fees').text().trim();
+            paid = $(event.currentTarget).find('.paid').text().trim();
+
+            $('#exampleModalLabel').text(className);
+            $('.studentName').text(studentName);
           var userURL = $(this).data('url');
           $.get(userURL, function (data) {
             $('#exampleModalCenter').modal('show');
@@ -580,10 +712,13 @@ $('#curClassIdChg').val(classitemId);
 
 
 className = event.currentTarget.getAttribute('data-className');
-studentName = event.currentTarget.getAttribute('data-studentName');
-$('#exampleModalLabelrelate').text(className);
-$('.studentName').text(studentName);
-console.log(className, studentName);
+            studentName = event.currentTarget.getAttribute('data-studentName');
+            fees = $(event.currentTarget).find('.fees').text().trim();
+            paid = $(event.currentTarget).find('.paid').text().trim();
+
+            $('#exampleModalLabel').text(className);
+            $('.studentName').text(studentName);
+            console.log(className , studentName);
 
 
 
@@ -609,6 +744,24 @@ studentName = '';
 
 // console.log(allHistory);
 }
+
+function validate(){
+                         
+                         let amount = Number(document.myForm.due_amount.value);
+                         paid = Number(paid);
+                         fees = Number(fees);
+                         if(amount > fees || amount > paid ){
+                             // console.log(amount , paid);                             
+                             $('.amount-error').text('This amount is exceeded');
+                             return false;
+                         };
+ 
+                         if(amount == ''){
+                             $('.amount-error').text('Amount is required');
+                             return false;
+                         };
+                         
+                     };
 
 
 

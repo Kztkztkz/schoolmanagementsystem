@@ -31,16 +31,17 @@
             <div class="col-lg-3 col-md-3 col-sm-12 ">
                 <!-- Button trigger modal -->
                 <div class="mx-auto">
-                    <div class="input-group">
-                        <input class="form-control border-end-0 border" placeholder="search payment" type="search"
-                            value="" id="example-search-input ">
-                        <span class="input-group-append">
-                            <button class="btn btn-outline-secondary bg-white border-start-0 border-bottom-0 border ms-n5"
-                                type="button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
+                    <div class="ui search">
+                        <div class="ui icon input w-100">
+                            <input class=" form-control " placeholder="search payment" type="search" value=""
+                                id="classPayment" name="search">
+    
+                            <i class="search icon"></i>
+                            <input type="text" hidden class="d-none" id="selectedClass" value="{{ $selectedClass->id }}">
+                        </div>
+    
                     </div>
+    
                 </div>
             </div>
         </div>
@@ -85,9 +86,9 @@
                                     <th scope="col" class=" text-center list-type-col">Type</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="original" id="data-wrapper">
                                 @forelse ($payments as $payment)
-                                <tr onclick="showPayments({{ $payment->classitem_id }}, {{ $payment->student_id }})" class="history" data-className="{{$payment->classitem->name}}" data-studentName="{{$payment->student->name}}" data-bs-toggle="modal" data-bs-target="#exampleModalTwo">
+                                <tr onclick="showPayments(event ,{{ $payment->classitem_id }}, {{ $payment->student_id }})" class="history" data-className="{{$payment->classitem->name}}" data-studentName="{{$payment->student->name}}" data-bs-toggle="modal" data-bs-target="#exampleModalTwo">
 
                                     {{-- Mobile View --}}
                                     <td class="fees d-none">
@@ -147,6 +148,9 @@
                                 {{-- </tr> --}}
 
                             </tbody>
+
+                            <tbody class="find" id="data-wrapper2">
+                            </tbody>
                         </table>
                     </div>
 
@@ -204,41 +208,42 @@
 @endsection
 
 @push('scripts')
-    <!-- Modal -->
-    <div class="modal fade hide " id="exampleModalTwo" tabindex="-1" aria-labelledby="exampleModalTwoLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content rounded-6">
+<!-- Modal -->
+<div class="modal fade hide " id="exampleModalTwo" tabindex="-1" aria-labelledby="exampleModalTwoLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-6">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModelTwoLabel">Modal title</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <h5 class="modal-title" id="exampleModalTwoLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{route('payments.createModal')}}" onsubmit = "return(validate());" method="POST" name = "myForm">
+            <form action="{{route('payments.createModal')}}" onsubmit="return(validate());" method="POST" name="myForm">
                 <div class="modal-body">
                     <div class=" mb-2">
-                        <span class="">Student name - </span><p class="studentName fw-bold d-inline-block"></p>
+                        <span class="">Student name - </span>
+                        <p class="studentName fw-bold d-inline-block"></p>
                     </div>
 
                     <div class="payment-list-container">
 
                         <div>
 
-                        <div class="payment-list">
-                        <div class="payment-list-header">
-                            <p>Transfer Date</p>
-                            <p>Fees</p>
-                            <p>Due Amount</p>
-                            <p class="text-nowrap">Payment method</p>
-                        </div>
-                        <div id="paymentList" class="payHistory">
+                            <div class="payment-list">
+                                <div class="payment-list-header">
+                                    <p>Transfer Date</p>
+                                    <p>Fees</p>
+                                    <p>Due Amount</p>
+                                    <p class="text-nowrap">Payment method</p>
+                                </div>
+                                <div id="paymentList" class="payHistory">
 
-                        </div>
-                        </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    </div>
+                </div>
 
-
-                    @csrf
+                @csrf
                 <input type="text" class="d-none" name="student_id" hidden id="curStudentId" value="">
                 <input type="text" class="d-none" name="classitem_id" hidden id="curClassId" value="">
                 <div class="row p-3">
@@ -246,19 +251,18 @@
                         <div class="mt-3 mb-3">
                             <label for="amount mb-0">
                                 <p class="small-header mb-0">Amount</p>
-                                
+
                             </label>
                             <input type="text" class="form-control  amount" name="due_amount"
                                 placeholder="Enter Amount">
-                                <span class=" fs-6 text-danger amount-error"></span>               
+                            <span class=" fs-6 text-danger amount-error"></span>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="mt-3 mb-3">
                             <label for="">Payment Method</label>
                             <div class="input-group ">
-                                <select name="payment_method"
-                                    class="form-select slectopt" id="class">
+                                <select name="payment_method" class="form-select slectopt" id="class">
                                     <option value="cash">Cash</option>
                                     <option value="card">Card</option>
                                     <option value="bank transfer">Bank Transfer</option>
@@ -282,86 +286,84 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
 
-                </div>
-            </form>
-          </div>
         </div>
-      </div>
-
-
-
+        </form>
     </div>
+</div>
+</div>
 
-    {{-- Modal for right side bar --}}
-    <div class="modal fade " id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content rounded-6">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Payment Filter</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body  position-relative">
-                    <form action="{{route('student.index')}}" method="get">
-                        <div class=" mb-3">
-                            <label for="">Course</label>
-                            <select class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByCourse">
-                                <option value = "">Select Course</option>
-                                {{-- @foreach($courses as $course)
-                                    <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
-                                        {{$course->name}}
-                                    </option>
-                                @endforeach --}}
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="">Class</label>
-                            <select required class="select2  form-select shadow-none" style="width: 100%; height:36px;" name="studentByClass">
-                                <option value = "">Select Class</option>
-                                @foreach($classitems as $class)
-                                    <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
-                                        {{$class->name}}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+</div>
 
-                        <div class="d-flex justify-content-center align-items-center ">
-                            <div class="">
-                                <a href="{{route('student.index')}}" class="btn btn-secondary cnl-btn me-2" type="submit">Cancel</a>
-                                <button class="btn btn-primary sub-btn " type="submit">Submit</button>
-                            </div>
+{{-- Modal for right side bar --}}
+<div class="modal fade " id="staticBackdrop" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-6">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Payment Filter</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body  position-relative">
+                <form action="{{route('student.index')}}" method="get">
+                    <div class=" mb-3">
+                        <label for="">Course</label>
+                        <select class="select2  form-select shadow-none" style="width: 100%; height:36px;"
+                            name="studentByCourse">
+                            <option value="">Select Course</option>
+                            {{-- @foreach($courses as $course)
+                                    <option value="{{$course->id}}"
+                            {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
+                            {{$course->name}}
+                            </option>
+                            @endforeach --}}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Class</label>
+                        <select required class="select2  form-select shadow-none" style="width: 100%; height:36px;"
+                            name="studentByClass">
+                            <option value="">Select Class</option>
+                            @foreach($classitems as $class)
+                            <option value="{{$class->id}}"
+                                {{ $class->id == request('studentByClass') ? 'selected' : '' }}>
+                                {{$class->name}}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="d-flex justify-content-center align-items-center ">
+                        <div class="">
+                            <a href="{{route('student.index')}}" class="btn btn-secondary cnl-btn me-2"
+                                type="submit">Cancel</a>
+                            <button class="btn btn-primary sub-btn " type="submit">Submit</button>
                         </div>
-                    </form>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
     <script>
         let className;
- let studentName;
- let fees;
- let paid;
-     $('.history').map(function(){
-             $(this).on('click', function(){
-             className = $(this).attr('data-className');
-             studentName = $(this).attr('data-studentName');
-             fees = Number($(this).children('.fees').text());
-             paid = Number($(this).children('.paid').text());
-             console.log(fees , paid);
-         });
-     });
-
-
-     // Function to show the Bootstrap modal
-     function showModal(response){
-         $('#exampleModelTwoLabel').text(className);
-         $('.studentName').text(studentName);
-         response.map(function(el){
-             
-             let text = el.created_at;
-             $('.payHistory').map(function(){
-                 $(this).append(`
+        let studentName;
+        let fees;
+        let paid;
+        //  $('.history').map(function(){
+        //          $(this).on('click', function(){
+        //          className = $(this).attr('data-className');
+        //          studentName = $(this).attr('data-studentName');
+        //          fees = Number($(this).children('.fees').text());
+        //          paid = Number($(this).children('.paid').text());
+        //          console.log(fees , paid);
+        //      });
+        //  });
+        // Function to show the Bootstrap modal
+        function showModal(response) {
+            response.map(function(el) {
+                let text = el.created_at;
+                $('.payHistory').map(function() {
+                    $(this).append(`
                  <div class="payment-list-body">
                             <p class="payment-lists">${ text.slice(0, 10) }</p>
                             <p class="payment-lists">${el.fees}</p>
@@ -370,58 +372,57 @@
                 </div>
 
              `);
-             })
-         });
-         $('#exampleModelTwo').modal('show');
-     };
+                })
+            });
+            $('#exampleModelTwo').modal('show');
+        };
+        var ENDPOINT = "{{ route('classitem.index') }}";
 
+        function showPayments(event, classitemId, studentId) {
+            $('#curStudentId').val(studentId);
+            $('#curClassId').val(classitemId);
+            
+            className = event.currentTarget.getAttribute('data-className');
+            studentName = event.currentTarget.getAttribute('data-studentName');
+            fees = $(event.currentTarget).find('.fees').text().trim();
+            paid = $(event.currentTarget).find('.paid').text().trim();
+           
+            $('#exampleModalTwoLabel').text(className);
+            $('.studentName').text(studentName);
+           
+            
+            $.ajax({
+                    url: "{{ route('payments.get') }}?classitemId=" + classitemId + "&studentId=" + studentId,
+                    type: "get",
+                })
+                .done(function(response) {
+                    showModal(response);
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    console.log('Server error occured');
+                });
+            $('.payHistory').empty();
+            className = '';
+            studentName = '';
+          
+        }
 
- var ENDPOINT = "{{ route('classitem.index') }}";
-
+        function validate(){
+                         
+                         let amount = Number(document.myForm.due_amount.value);
+                         paid = Number(paid);
+                         fees = Number(fees);
+                         if(amount > fees || amount > paid ){
+                             // console.log(amount , paid);                             
+                             $('.amount-error').text('This amount is exceeded');
+                             return false;
+                         };
  
- function showPayments(classitemId, studentId ) {
-
-
-$('#curStudentId').val(studentId);
-$('#curClassId').val(classitemId);
-
-// console.log(classitemId, studentId);
-$.ajax({
-url: "{{ route('payments.get') }}?classitemId="+classitemId+"&studentId="+studentId,
-type: "get",
-})
-.done(function (response) {
-showModal(response);
-
-
-
-})
-.fail(function (jqXHR, ajaxOptions, thrownError) {
-console.log('Server error occured');
-});
-
-$('.payHistory').empty();
-className = '';
-studentName = '';
-
-
-// console.log(allHistory);
-}
-
-
-
-function validate(){
-     
-
-let amount = Number(document.myForm.due_amount.value);
-paid = Number(paid);
-fees = Number(fees);
-if(amount > fees || amount > paid){
-console.log(amount , paid);                             
-$('.amount-error').text('This amount is exceeded');
-return false;
-}
-
-};
-</script>
-@endpush
+                         if(amount == ''){
+                             $('.amount-error').text('Amount is required');
+                             return false;
+                         };
+                         
+                     };
+    </script>
+    @endpush

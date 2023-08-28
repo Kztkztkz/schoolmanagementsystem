@@ -194,6 +194,26 @@ class StudentController extends Controller
         return redirect()->route('student.index');
     }
 
+    public function getClassitems(Request $request){
+        // $paymentModal = $student->payments()
+        // ->select('payments.*', 'classitems.name as classitem_name', 'courses.name as course_name','students.name as student_name')
+        // ->join('classitems', 'classitems.id', '=', 'payments.classitem_id')
+        // ->join('courses', 'courses.id', '=', 'classitems.course_id')
+        // ->join('students','students.id','=', 'payments.classitem_id');
+
+        $classitems = Student::find($request->studentId)
+        ->classitems()
+        ->select('courses.name as course_name','classitems.*' )
+        ->join('courses','courses.id','=','classitems.course_id')
+        ->with(['users' => function($query) {
+            $query->select('name');
+        }])   
+        ->get()        
+        ;
+       
+        return response()->json($classitems);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -374,3 +394,5 @@ return response()->json($output);
     }
 
 }
+
+

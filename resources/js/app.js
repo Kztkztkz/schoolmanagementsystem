@@ -79,6 +79,15 @@ $(document).ready(function (e) {
             paymentSearch();
         }, 600)
     );
+
+    $("#classPayment").on(
+        "keyup",
+        _.debounce(function (e) {
+            // console.log('aa');
+            classPaymentSearch();
+        }, 600)
+    );
+
     $("#studentId").change(function (e) {
         paymentSearch();
     });
@@ -385,6 +394,52 @@ $(document).ready(function (e) {
         //         },
         //     });
         // }
+    }
+
+    function classPaymentSearch() {
+        
+        var paymentId = $("#classPayment").val();
+        var selectedClassId = $("#selectedClass").val();
+        console.log(paymentId);
+
+       
+
+        // console.log(window.location.href + query);
+
+        // window.location.href = window.location.href + query;
+       
+
+        if (paymentId || selectedClassId) {
+            $(".original").hide();
+            $(".find").show();
+            $(".load-more-data").hide();
+            $(".load-more-data2").show();
+        } else {
+            $(".original").show();
+            $(".find").hide();
+            $(".load-more-data").show();
+            $(".load-more-data2").hide();
+        }
+
+        if ($(".find tr").length < 15) {
+            $(".load-more-data2").hide();
+        }
+
+        // if (!window.location.href.includes("search")) {
+        $.ajax({
+            url: "/classpaymentsearch",
+            method: "GET",
+            data: {
+                search: paymentId,
+                classId: selectedClassId
+            },
+            success: function success(data) {
+                console.log(data);
+                $(".find").html(data);        
+            },
+        });
+
+       
     }
 
     //sweetalert2

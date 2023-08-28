@@ -22,7 +22,7 @@
 
         
         
-        @media screen and (max-width:767.99px) {
+        @media screen and (min-width:768px) {
             .page-wrapper{
                 overflow: scroll !important;
                 padding-top: 73px !important;

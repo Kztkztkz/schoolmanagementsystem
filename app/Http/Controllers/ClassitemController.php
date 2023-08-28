@@ -27,17 +27,7 @@ class ClassitemController extends Controller
         $studentoption = Student::all();
         $courseoption = Course::all();
 
-        // if($request->has('coursesearchclassitem') || $request->has('studentsearchclassitem')){
-            // $classitemIdsQuery = Classitem::where('course_id', $request->coursesearchclassitem)
-            // ->orWhereHas('students', function ($query) use ($request) {
-            //     $query->where('students.id', $request->studentsearchclassitem);
-            // })
-            // ->paginate(7)->withQueryString();
-
-            // $classids = $classitemIdsQuery->pluck('id')->toArray();
-            // $classitem = Classitem::where('name', 'like', '%' . $request->classitemsearch . '%')
-            // ->whereIn('id',$classids)
-            // ->paginate(7)->withQueryString();
+       
 
         $classItemQuery = Classitem::query();
         $coursesearchclassitem = $request->coursesearchclassitem;
@@ -121,20 +111,7 @@ class ClassitemController extends Controller
         $startendday=Classitem::whereBetween('start_date',[$request->startdate, $request->enddate])
         ->whereBetween('end_date',[$request->startdate, $request->enddate])
         ->exists();
-        // $classitemId = Classitem::create([
-        //     'name' => $request->name,
-        //     'start_date' => $request->startdate,
-        //     'end_date' => $request->enddate,
-        //     'course_id' => $request->course,
-        //     'start_time' => $request->starttime,
-        //     'end_time' => $request->endtime,
-        //     'room_id' => $request->room,
-        //     'day' => $day_string,
-        //     'price' => $request->price,
-        //     'max_student' => $request->maxstudent,
-        //     'container_color' => $request->color,
-        //     'code' => $request->shortcode,
-        // ]);
+       
 
         $classitemId = new Classitem();
             $classitemId->name = $request->name;
@@ -156,10 +133,7 @@ class ClassitemController extends Controller
         $classitemId->save();
         $classitemId->users()->attach($lecturerIds);
 
-        // $noty = new Noty('success');
-        // $noty->setTitle('Success');
-        // $noty->setMessage('Your file has been uploaded successfully.');
-        // $noty->show();
+       
 
        return redirect()->route('classitem.index')->with('message','Data Inserted Successfully');
     }
@@ -204,25 +178,12 @@ class ClassitemController extends Controller
     {
         
 
-        // $this->authorize('update', $classitem);
+        
         $days = $request->days;
         $day_string = implode(', ', $days);
         $lecturerIds = $request->lecturer;
 
-        // $classitemId = $classitem->update([
-        //     'name' => $request->name,
-        //     'start_date' => $request->startdate,
-        //     'end_date' => $request->enddate,
-        //     'course_id' => $request->course,
-        //     'start_time' => $request->starttime,
-        //     'end_time' => $request->endtime,
-        //     'room_id' => $request->room,
-        //     'day' => $day_string,
-        //     'price' => $request->price,
-        //     'max_student' => $request->maxstudent,
-        //     'container_color' => $request->color,
-        //     'code' => $request->shortcode,
-        // ]);
+        
 
         
         $classitem->name = $request->name;
@@ -239,21 +200,10 @@ class ClassitemController extends Controller
         $classitem->code = $request->shortcode;
         $classitem->update();
 
-        // $classId = $classitem->id;
-        
-        // $classUser = UserClassitem::where('classitem_id' , $classId)->get();
-        // return $classUser;
-        // $classUser->classitem_id = $classitem->id;
-        // $classUser->user_id = (int) $request->input('lecturers', []);
-        // $classUser->update();
-        
+             
         $classitem->users()->sync($request->input('lecturers', []));
         
-        // $classitemId->users()->attach($lecturerIds);
-        // $studentClass = new ClassitemStudent();
-        // $studentClass->student_id = $request->student_id;
-        // $studentClass->classitem_id = $request->classitem_id;
-        // $studentClass->save();
+       
 
         return redirect()->route('classitem.index')->with('message', 'Data updated successfully');
     }
@@ -441,11 +391,124 @@ if(count($searchdata)>0){
 // }
 
 return response()->json($output);
-    }
 
-    public function classitemfilter(Request $request)
-    {
-
-
-    }
 }
+
+   
+
+
+
+public function classPaymentSearch(Request $request)
+    {
+        $output="";
+       
+
+        $classitem = Classitem::find(request('classId'));
+        // $latestPayments = Payment::whereIn('id', function ($query) {
+        //     $query->select(DB::raw('MAX(id)'))
+        //           ->from('payments')
+        //           ->groupBy('classitem_id', 'student_id');
+        // });
+        $latestPayments = $classitem->payments()->whereIn('id', function ($query) {
+            $query->select(DB::raw('MAX(id)'))
+                  ->from('payments')
+                  ->groupBy('classitem_id', 'student_id');
+        });
+
+        $paymentByStudent = $request->paymentByStudent;
+        $paymentByClass = $request->paymentByClass;
+        $paymentByCourse = $request->paymentByCourse;
+
+        if (request('search')){
+            $latestPayments = $latestPayments->where(function($q) {
+                $q->whereHas('classitem' , function($query){
+                    $keyword = request('search');
+                    $query->where("name" ,'like' , "%$keyword%");
+                })
+                ->orWhereHas('student' , function($query){
+                    $keyword = request('search');
+                    $query->where("name" ,'like' , "%$keyword%")->limit(1);
+                });
+            });
+
+        }
+
+      
+
+
+        $latestPayments = $latestPayments->orderBy('id' , 'desc')->paginate(15)->withQueryString();
+
+
+
+        // $searchData = $latestPayments->paginate(10);
+        $totalPayment =  $classitem->payments()->whereIn('id', function ($query) {
+            $query->select(DB::raw('MAX(id)'))
+                  ->from('payments')
+                  ->groupBy('classitem_id', 'student_id');
+        })->get();
+
+        $total = count($totalPayment);
+
+        // return $latestPayments;
+
+        // foreach ($latestPayments as $payment) {
+        //     $classId = $payment->class_id;
+        //     $studentId = $payment->student_id;
+
+        //     echo "<pre>";
+        //     echo $payment ;
+        //     echo "</pre>";
+        // }
+
+
+        // return count($payments);
+
+        if(count($latestPayments)>0){
+            foreach($latestPayments as $payment)
+            {
+        $output .= '
+<tr onclick="showPayments(event, ' . $payment->classitem_id . ', ' . $payment->student_id . ')" class="history" data-className="' . $payment->classitem->name . '" data-studentName="' . $payment->student->name . '" data-bs-toggle="modal" data-bs-target="#exampleModalTwo">
+
+    <td class="d-table-cell d-lg-none text-nowrap align-middle">
+        <p>' . $payment->created_at . '</p>
+        <p>' . $payment->student->name . '</p>
+    </td>
+    <td class="fees d-none">'
+        . $payment->fees  .
+    '</td>
+    <td class="paid d-none">'
+       . $payment->due_amount .
+   '</td>
+
+    <td class="d-none d-lg-table-cell align-middle">' . $payment->created_at->format('d-m-Y') . '</td>
+   
+    
+    <td class="d-none d-lg-table-cell align-middle">' . Str::limit($payment->student->name, 15) . '</td>
+    <td class="align-middle">' . number_format(floatval($payment->fees)) . '</td>
+    <td class="align-middle">' . number_format(floatval($payment->due_amount)) . '</td>
+    <td class="text-center">';
+
+        if ($payment->payment_type=="paid"){
+            $output.='<div class="text-success fw-bold pay-status ">
+                paid
+            </div>';
+        } else {
+            $output.='<div class=" text-danger fw-bold pay-status ">
+                unpaid
+            </div>';
+        }
+    $output.= '</td>
+</tr>';
+}
+} else {
+    $output .= '<tr>
+    <td colspan="6" class="text-center text-danger">Data is Empty</td>
+</tr>';
+}
+
+return response()->json($output);
+
+
+
+
+}}

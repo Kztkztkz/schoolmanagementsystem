@@ -1,4 +1,6 @@
-<a class="navbar-brand d-none d-md-flex" href="{{route('schdeuler.index')}}">
+
+<a class="navbar-brand d-none d-md-flex" href="index.html">
+
                         <!-- Logo icon -->
                         <b class="logo-icon">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -42,7 +44,7 @@
                     <!-- ============================================================== -->
 
                     <ul class="navbar-nav float-start me-auto">
-                        <li class="d-none d-lg-block">
+                        <li class="d-none d-md-block">
                             <a
                                 class="nav-link sidebartoggler " href="javascript:void(0)"
                                 data-sidebartype="mini-sidebar"><i class="mdi mdi-menu h2 mb-0"></i>

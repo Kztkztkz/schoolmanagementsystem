@@ -53,6 +53,7 @@ Route::resource('user', UserController::class);
 Route::resource('payment' , PaymentController::class);
 
 Route::get('payments/get' , [ PaymentController::class , 'getPayments' ])->name("payments.get");
+Route::get('classitems/get' , [ StudentController::class , 'getClassitems' ])->name("classitems.get");
 Route::post('payments/get' , [ PaymentController::class , 'paymentFromModal' ])->name("payments.createModal");
 
 
@@ -72,6 +73,7 @@ Route::get('classpayment/{classitem}' , [ ClassitemController::class , 'classPay
 
 //allsearch
 Route::get('/classitemsearch',[ClassitemController::class, 'classitemsearch'])->name('classitem.search');
+Route::get('/classpaymentsearch',[ClassitemController::class, 'classPaymentSearch'])->name('classitemPayment.search');
 Route::get('/adminmsearch',[UserController::class,'adminsearch'])->name('admin.search');
 Route::get('/lecturersearch',[LecturerController::class,'lecturersearch'])->name('lecturer.search');
 Route::get('/studentsearch',[StudentController::class,'studentsearch'])->name('student.search');

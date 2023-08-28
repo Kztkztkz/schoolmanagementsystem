@@ -97,9 +97,9 @@ body::-webkit-scrollbar {
     background-color: #3e3e56 !important;
 }
 
-.mini-sidebar .sidebar-nav ul .sidebar-item .sidebar-link {
+/* .mini-sidebar .sidebar-nav ul .sidebar-item .sidebar-link {
     justify-content: center;
-}
+} */
 
 .topbar .top-navbar .navbar-header {
     background-color: #2b2b41;
@@ -239,6 +239,7 @@ p {
 
 #main-wrapper[data-sidebartype="full"] .page-wrapper {
     margin-left: 220px;
+    overflow: hidden;
 }
 
 .left-sidebar {

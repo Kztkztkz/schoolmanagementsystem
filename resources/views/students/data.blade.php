@@ -18,17 +18,14 @@
                                     </td>
                                     
                                     <td class=" align-middle text-center">
-                                        <a href="{{ route('student.relatedClass' , $student->id ) }}" class="btn table-btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalCenter">                                            
+                                        {{-- <a href="{{ route('student.relatedClass' , $student->id ) }}" class="btn table-btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalCenter">                                            
+                                            <i class="mdi mdi-book-open-page-variant h5"></i>
+                                        </a> --}}
+                                        <a href="#" class="btn table-btn-sm btn-primary " onclick="showclassdata(event , {{ $student->id }})" data-student-name="{{ $student->name }}"  data-bs-toggle="modal" data-bs-target="#classitemModal" data-url="{{ route('student.relatedPayment', $student->id)}}">
                                             <i class="mdi mdi-book-open-page-variant h5"></i>
                                         </a>
                                     </td>
-                                    {{-- Class Modal --}}
-                                    {{-- <td class=" align-middle text-center">
-                                        <a href="{{ route('student.relatedClass' , $student->id ) }}" class="btn table-btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                            <i class="mdi mdi-book-open-page-variant h5"></i>
-                                        </a>
-                                    </td> --}}
-                                    {{-- Class Modal --}}
+                                  
                                     <td class="text-end align-middle text-nowrap">
                                         <div class="d-none d-md-block control-btns">
                                             <a href="{{ route('student.edit', $student->id ) }}" class="btn table-btn-sm btn-primary">
@@ -83,24 +80,60 @@
                                 @endforelse
 
                                 @push('scripts') 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                      <div class="modal-content">
-                                        <div class="modal-header">
-                                          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                          ...
-                                        </div>
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                          <button type="button" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                {{-- Modal --}}
+                                
+                                <script>
+
+                                function classModal(response){
+                                              
+                                                response.map(function(el){
+                                                    let lecturers = [];
+                                                    el.users.map(function(el){
+                                                        lecturers += el.name + ',';
+                                                    });
+
+                                                    let price = el.price;
+
+
+                                                    
+                                                    $('.relatedClass').map(function(){
+                                                        $(this).append(`
+                                                        <tr>
+                                                            <td>${el.name}</td>
+                                                            <td>${el.course_name}</td>
+                                                            <td>${lecturers}</td> 
+                                                            <td>${price.toLocaleString()}</td>                                                                                                                                                                          
+                                                        </tr>
+
+                                                    `);
+                                                    });
+                                                });
+                                                $('#exampleModal').modal('show');
+
+                                            };
+
+
+                                    let classStudentName;
+                                    function showclassdata(event , studentId) {
+                                        
+                                        classStudentName = event.currentTarget.getAttribute('data-student-name');
+                                        $('.classStudentName').text(studentName);
+                                      
+                                        $.ajax({
+                                                url: "{{ route('classitems.get') }}?studentId=" + studentId,
+                                                type: "get",
+                                            })
+                                            .done(function(response) {
+                                            //    console.log(response);
+                                            classModal(response);
+                                            })
+                                            .fail(function(jqXHR, ajaxOptions, thrownError) {
+                                                console.log('Server error occured');
+                                            });
+                                       
+                                            $('.relatedClass').empty();
+                                            
+                                            studentName = '';
+                                    };
+                                </script>
                                 @endpush
 

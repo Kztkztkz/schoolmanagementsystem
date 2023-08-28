@@ -943,7 +943,7 @@ progress {
         --bs-gutter-y: 3rem;
     }
 }
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     .col-md {
         flex: 1 0 0%;
     }
@@ -7263,7 +7263,7 @@ fieldset:disabled .btn {
         text-align: center !important;
     }
 }
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     .float-md-start {
         float: left !important;
     }
@@ -9106,7 +9106,7 @@ html[dir="ltr"] body .p-l-0 {
 #main-wrapper[data-sidebartype="full"] .page-wrapper {
     margin-left: 250px;
 }
-@media (min-width: 768px) {
+@media (min-width: 769px) {
     #main-wrapper[data-layout="vertical"] {
     }
     #main-wrapper[data-layout="vertical"][data-sidebartype="full"]
@@ -9197,7 +9197,7 @@ html[dir="ltr"] body .p-l-0 {
         top: 64px;
     }
 }
-@media (min-width: 768px) and (max-width: 991.98px) {
+@media (min-width: 769px) and (max-width: 991.98px) {
     #main-wrapper[data-sidebartype="mini-sidebar"]
         .sidebar-nav
         ul
