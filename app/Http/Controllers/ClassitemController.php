@@ -247,23 +247,102 @@ class ClassitemController extends Controller
         $coursesearchclassitem = $request->coursesearchclassitem;
         $studentsearchclassitem = $request->studentsearchclassitem;
 
-        if($coursesearchclassitem && $studentsearchclassitem) {
-            $classItemQuery = $classItemQuery->where('course_id', $coursesearchclassitem)
-                                ->whereHas('students', function ($query) use ($studentsearchclassitem) {
-                                    $query->where('students.id', $studentsearchclassitem);
-                                });
+        
+        // if($coursesearchclassitem || $studentsearchclassitem){
+        //     if($coursesearchclassitem == -1 && $studentsearchclassitem == -1){
+               
+        //         $searchdata = $classItemQuery->orderBy('id', 'desc')->paginate(15)->withQueryString();
+        //     }elseif($studentsearchclassitem){
+                
+        //             $classItemQuery = $classItemQuery->whereHas('students', function ($query) use ($studentsearchclassitem) {
+        //                 $query->where('students.id', $studentsearchclassitem);
+        //             });
+                   
+                               
+        //     }elseif($coursesearchclassitem) {
+        //         $classItemQuery = $classItemQuery->where('course_id', $coursesearchclassitem);
+        //     }
+        // };
+
+        if ($coursesearchclassitem == -1 && $studentsearchclassitem == -1) {
+            // Retrieve all data when both criteria are -1
+            $searchdata = $classItemQuery->orderBy('id', 'desc')->paginate(15)->withQueryString();
         } else {
-
-            if($coursesearchclassitem) {
-                $classItemQuery = $classItemQuery->where('course_id', $coursesearchclassitem);
-            }
-
-            if($studentsearchclassitem) {
-                $classItemQuery = $classItemQuery->orWhereHas('students', function ($query) use ($studentsearchclassitem) {
-                    $query->where('students.id', $studentsearchclassitem);
-                });
+            // Apply filters based on search criteria
+            if ($coursesearchclassitem && $studentsearchclassitem) {
+                // Both course and student criteria provided
+                $classItemQuery->where('course_id', $coursesearchclassitem)
+                    ->whereHas('students', function ($query) use ($studentsearchclassitem) {
+                        $query->where('students.id', $studentsearchclassitem);
+                    });
+            } else {
+                // Only one criteria provided
+                if ($coursesearchclassitem) {
+                    // Filter based on course criteria
+                    $classItemQuery->where('course_id', $coursesearchclassitem);
+                }
+        
+                if ($studentsearchclassitem) {
+                    // Filter based on student criteria
+                    $classItemQuery->whereHas('students', function ($query) use ($studentsearchclassitem) {
+                        $query->where('students.id', $studentsearchclassitem);
+                    });
+                }
             }
         }
+        
+
+        
+
+        // if($coursesearchclassitem || $studentsearchclassitem){
+        //     if($coursesearchclassitem == -1 && $studentsearchclassitem == -1){
+        //         $searchdata = $classItemQuery->orderBy('id', 'desc')->paginate(15)->withQueryString();
+        //     }
+        // };
+
+        
+      
+        // elseif($coursesearchclassitem && $studentsearchclassitem){
+        //     $classItemQuery = $classItemQuery->where('course_id', $coursesearchclassitem)
+        //                             ->whereHas('students', function ($query) use ($studentsearchclassitem) {
+        //                                 $query->where('students.id', $studentsearchclassitem);
+        //                             });
+        // }
+
+        // if($coursesearchclassitem && $studentsearchclassitem) {
+            
+        //     $classItemQuery = $classItemQuery->where('course_id', $coursesearchclassitem)
+        //                         ->whereHas('students', function ($query) use ($studentsearchclassitem) {
+        //                             $query->where('students.id', $studentsearchclassitem);
+        //                         });
+
+        // } 
+
+        
+
+        
+
+    //     if($coursesearchclassitem && $studentsearchclassitem) {                   
+    //         $classItemQuery = $classItemQuery->where('course_id', $coursesearchclassitem)
+    //                             ->whereHas('students', function ($query) use ($studentsearchclassitem) {
+    //                                 $query->where('students.id', $studentsearchclassitem);
+    //                             });
+
+    // }else{
+    //         if($coursesearchclassitem) {
+    //         $classItemQuery = $classItemQuery->where('course_id', $coursesearchclassitem);
+    //     }
+
+    //     if($studentsearchclassitem) {
+    //         $classItemQuery = $classItemQuery->whereHas('students', function ($query) use ($studentsearchclassitem) {
+    //             $query->where('students.id', $studentsearchclassitem);
+    //         });
+    //     }
+    
+    // }
+        
+
+        
 
         if($request->classitemsearch) {
             $classItemQuery = $classItemQuery->where('name', 'like', '%' . $request->classitemsearch . '%')
@@ -273,7 +352,7 @@ class ClassitemController extends Controller
             ->orWhereHas('users', function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->classitemsearch . '%');
             });
-        }
+        };
 
         $searchdata = $classItemQuery->orderBy('id', 'desc')->paginate(15)->withQueryString();
 

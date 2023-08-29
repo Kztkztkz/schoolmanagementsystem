@@ -335,7 +335,7 @@ class PaymentController extends Controller
         $currentStudentPayment = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first();
 
 
-        if($currentStudentPayment !== null){
+        if(! is_null($currentStudentPayment)){
             $currentStudentLastPayment = $currentStudentPayment->due_amount;
             $due_amount = (int) $currentStudentLastPayment - (int) request('due_amount');
         }else{
@@ -418,7 +418,11 @@ class PaymentController extends Controller
 
         }
 
-        // if($paymentByClass && $paymentByCourse && $paymentByStudent){
+
+
+
+        if($paymentByClass && $paymentByCourse && $paymentByStudent){
+
 
 
 
@@ -485,6 +489,8 @@ class PaymentController extends Controller
             }
 
         // }
+
+        
 
 
         $latestPayments = $latestPayments->orderBy('id' , 'desc')->paginate(15)->withQueryString();

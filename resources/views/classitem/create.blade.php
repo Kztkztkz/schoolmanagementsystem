@@ -200,7 +200,7 @@
             </div> -->
       </div>
 
-      <div class="text-center mt-5 form-create-btn">
+      <div class="text-center mt-5 form-create-btn ">
       <a href="{{route('classitem.index')}}" class="btn btn-secondary me-2">Cancel</a>
       <button type="submit" class="btn btn-primary">Submit</button>
       </div>

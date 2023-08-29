@@ -4957,7 +4957,7 @@ fieldset:disabled .btn {
     flex-shrink: 0;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 1rem;
+    padding: 0.7rem 1rem;
     border-bottom: 1px solid #e9ecef;
     border-top-left-radius: 1px;
     border-top-right-radius: 1px;

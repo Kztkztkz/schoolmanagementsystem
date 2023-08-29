@@ -184,10 +184,11 @@ class StudentController extends Controller
      */
     public function update(UpdateStudentRequest $request, Student $student)
     {
+       
         $student->name = $request->name;
         $student->email = $request->email;
         $student->address = $request->address;
-        $student->phone = $student->phone;
+        $student->phone = $request->phone;
         $student->update();
         
 
@@ -249,7 +250,7 @@ class StudentController extends Controller
         ->select('payments.*', 'classitems.name as classitem_name', 'courses.name as course_name','students.name as student_name')
         ->join('classitems', 'classitems.id', '=', 'payments.classitem_id')
         ->join('courses', 'courses.id', '=', 'classitems.course_id')
-        ->join('students','students.id','=', 'payments.classitem_id')
+        ->join('students','students.id','=', 'payments.student_id')
         ->whereIn('payments.id', function ($query) {
             $query->select(DB::raw('MAX(id)'))
                 ->from('payments')
@@ -281,21 +282,36 @@ class StudentController extends Controller
         $studentByCourse = $request->studentByCourse;
 
 
-        if(request()->has('studentByCourse') || request()->has('studentByClass')){
-            $students = $students->whereHas('classitems' , function($query){
-                $query->where("classitems.id" , request('studentByClass'));
-            })->whereHas('classitems' , function($query){
-                $query->where('course_id' , request('studentByCourse'));
-            })->when( request("keyword") , function ($query){
-                $keyword = request('keyword');
-                $query->where("name" , "like",  "%$keyword%")
-                ->orWhere("address" , "like" , "%$keyword%")
-                ->orWhere( "email" , "like" , "%$keyword%");
-            })
-            ->paginate(15);
+        // $students = $students->when(request('studentByCourse' , '!==' , 'all') , function($query){
+        //     $query->whereHas('classitems' , function($query){
+        //         $query->where("classitems.id" , request('studentByClass'));
+        //     })->whereHas('classitems' , function($query){
+        //         $query->where('course_id' , request('studentByCourse'));
+        //     });
+        // });
 
+        if(request()->has('studentByCourse') || request()->has('studentByClass')){
+                if(request('studentByCourse') == -1 && request('studentByClass')  == -1 ){
+                    $students = Student::latest()->paginate(15);                  
+                }else{
+                    $students = $students->whereHas('classitems' , function($query){
+                        $query->where("classitems.id" , request('studentByClass'));
+                    })->orWhereHas('classitems' , function($query){
+                        $query->where('course_id' , request('studentByCourse'));
+                    })->when( request("keyword") , function ($query){
+                        $keyword = request('keyword');
+                        $query->where("name" , "like",  "%$keyword%")
+                        ->orWhere("address" , "like" , "%$keyword%")
+                        ->orWhere( "email" , "like" , "%$keyword%");
+                    })
+                    ->paginate(15);
+                }
 
         }
+
+        
+       
+
 
         else if (request('keyword')){
 
@@ -318,6 +334,9 @@ class StudentController extends Controller
             $students = Student::latest()->paginate(15);
         }
 
+
+
+        
         if(count($students)>0){
             foreach($students as $student)
             {

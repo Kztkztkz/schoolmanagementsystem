@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Phone</label>
-                                    <input type="number" name="phone" value="{{old('phone' , $student->phone)}}" class="form-control @error('phone') is-invalid @enderror" id="name" placeholder="Phone number">
+                                    <input type="text" name="phone" value="{{old('phone' , $student->phone)}}" class="form-control @error('phone') is-invalid @enderror" id="name" placeholder="Phone number">
                                     @error('phone')
                                             <div class=" invalid-feedback">{{ $message }}</div>
                                     @enderror

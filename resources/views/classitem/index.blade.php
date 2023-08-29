@@ -73,7 +73,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped highscro">
                             <thead>
-                                <tr style="border-bottom: 2px solid black">
+                                <tr class="table-header" style="border-bottom: 2px solid black">
                                     <th scope="col" class="list-lecturer-col" >
                                         <p class="d-none d-md-block">Name</p>
                                         <p class="d-block d-md-none">Class & Lecturer</p>
@@ -85,7 +85,8 @@
                                     <th class="d-none d-md-table-cell list-payment-col text-center" scope="col" >Payment</th>
                                     @endcan
                                     <th scope="col" class="text-center list-control-col" class="">
-                                        <p class=" d-none d-md-block">Control</p>
+                                        <p class=" d-none d-md-bl
+                                        ock">Control</p>
                                     </th>
                                 </tr>
                             </thead>
@@ -138,7 +139,7 @@
                         <div class=" mb-3">
                             <label for="">Course</label>
                             <select id="coursesearchclassitem" class="ui dropdown w-100 shadow-none" style="width: 100%; height:36px;" name="coursesearchclassitem">
-                                <option value = "">Select Course</option>
+                                <option value = "-1">Select Course</option>
                                 @foreach($courseoption as $courses)
                                     <option value="{{$courses->id}}" {{ $courses->id == request('coursesearchclassitem') ? 'selected' : '' }}>{{$courses->name}}</option>
                                 @endforeach
@@ -147,7 +148,7 @@
                         <div class=" mb-3">
                             <label for="">Student</label>
                             <select id="studentsearchclassitem" class="ui dropdown w-100 shadow-none" style="width: 100%; height:36px;" name="studentsearchclassitem" id="studentsearchclassitem">
-                                <option value = "">Select Student</option>
+                                <option value = "-1">Select Student</option>
                                 @foreach($studentoption as $students)
                                     <option value="{{$students->id}}" {{ $students->id == request('studentsearchclassitem') ? 'selected' : '' }}>{{$students->name}}</option>
                                 @endforeach

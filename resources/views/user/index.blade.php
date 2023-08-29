@@ -129,8 +129,8 @@
 
                     <div class="table-responsive">
                         <table class="table table-striped">
-                            <thead>
-                                <tr style="border-bottom: 2px solid black">
+                            <thead >
+                                <tr class="table-header" style="border-bottom: 2px solid black">
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
                     

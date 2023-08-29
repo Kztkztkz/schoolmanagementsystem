@@ -90,7 +90,7 @@
                                 </tr>
                             </thead> --}}
                             <thead>
-                                <tr style="border-bottom: 2px solid black">
+                                <tr class="table-header" style="border-bottom: 2px solid black">
                                     <th class="w-15" scope="col">Date</th>
                                     <th class=" w-25" scope="col">Class</th>
                                     <th class=" w-30 d-none d-lg-table-cell" scope="col">Course</th>
