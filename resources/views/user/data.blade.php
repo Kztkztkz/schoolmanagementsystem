@@ -15,7 +15,7 @@
 
     <td class="text-end">
         <div class="d-none d-md-block">
-            <a href="{{ route('user.edit', 1) }}" class="btn table-btn-sm btn-primary">
+            <a href="{{ route('user.edit', $user->id) }}" class="btn table-btn-sm btn-primary">
                 <i class="mdi mdi-pencil h5"></i>
             </a>
             {{-- <a href="" class="btn table-btn-sm btn-danger">

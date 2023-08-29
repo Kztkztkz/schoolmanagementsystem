@@ -319,9 +319,12 @@
                 <p class="my-2 fw-bold">Class Lists</p>
                 <ul class=" list-group ">
                     @forelse ($room->classitems->take(5) as $classitem)
-                        <a href="{{ route('classitem.show', $classitem->id) }}"
+                        {{-- <a href="{{ route('classitem.show', $classitem->id) }}"
                             class=" list-group-item list-group-item-action">
-                            {{ Str::limit($classitem->name, 20, '...') }}</a>
+                            {{ Str::limit($classitem->name, 20, '...') }}</a> --}}
+                            <a href="{{ URL::to('/preMonth/'.date('Y-m', strtotime('+5 months', strtotime($classitem->start_date)))).'-01?keyword='.$classitem->room->name }}"
+                                class=" list-group-item list-group-item-action">
+                                {{ Str::limit($classitem->name, 20, '...') }}</a>
                     @empty
                         <li class=" list-group-item list-group-item-action text-black-50">No Class</li>
                     @endforelse
