@@ -35,7 +35,7 @@
 }
 
 .page-wrapper > .scheduler {
-    margin-top: 5.4rem;
+    margin-top: 3.4rem;
 }
 
 .room-row-ph{
@@ -179,6 +179,13 @@
 
 .left-sidebar {
     position: fixed;
+}
+
+.roomclassgrid{
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 5px;
 }
 
 @media screen and (max-width: 460px){

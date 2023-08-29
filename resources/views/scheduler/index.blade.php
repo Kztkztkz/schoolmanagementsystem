@@ -89,7 +89,7 @@
         </div>
 
 
-        <div class="row  px-3">
+        {{-- <div class="row  px-3">
             <div class="col-6 col-md-2 mb-2 position-relative all-room  ">
                 <div style="width: auto">
                     <a class="btn all-room-ph w-100 dropdown-toggle " href="#" role="button" id="dropdownMenuButton1"
@@ -101,11 +101,13 @@
                         </div>
                     </a>
                     <ul class="dropdown-menu room-dropdown w-100"  aria-labelledby="dropdownMenuButton1">
-                        {{-- <li class="w-100">
+                        commentbyamy
+                        <li class="w-100">
                             <a href="{{ route('schdeuler.index') }}" class="link btn btn-light w-100">
                                 <p>All room</p>
                             </a>
-                        </li> --}}
+                        </li>
+                        commentbyamy
                         @foreach ($roomsForSelect as $room)
                             <li class="">
                                 <form class="d-flex">
@@ -129,7 +131,7 @@
             </button>
 
 
-        </div>
+        </div> --}}
     </div>
 
     <!-- Create Room Modal -->
@@ -204,8 +206,40 @@
     </div>
 
     <div class="col-2 d-none d-lg-block ">
+        <div class="roomclassgrid">
+        <div class="position-relative all-room" style="z-index:2;">
+            <div style="width: auto">
+                <a class="btn all-room-ph w-100 dropdown-toggle " href="#" role="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p>Total Rooms - {{ count($roomsForSelect) }}</p>
+                        <i class="mdi mdi-chevron-down "></i>
+                    </div>
+                </a>
+                <ul class="dropdown-menu room-dropdown w-100"  aria-labelledby="dropdownMenuButton1">
+                    {{-- commentbyamy
+                    <li class="w-100">
+                        <a href="{{ route('schdeuler.index') }}" class="link btn btn-light w-100">
+                            <p>All room</p>
+                        </a>
+                    </li>
+                    commentbyamy --}}
+                    @foreach ($roomsForSelect as $r)
+                        <li class="">
+                            <form class="d-flex">
+                                <input hidden type="search" name="keyword" value="{{ $r->name }}">
+                                <button class="dropdown-item"> {{ $r->name }}
+                                </button>
+                            </form>
 
-        <div class="card ">
+                        </li>
+                    @endforeach
+
+                </ul>
+            </div>
+        </div>
+        <div class="card">            
             <div class="card-body position-relative">
                 <div class="d-flex justify-content-between align-items-center">
                     <p class="  fs-4 fw-bolder h4  text-center">{{ $room->name }}</p>
@@ -294,16 +328,24 @@
                 </ul>
                 <div class="d-flex justify-content-center align-items-center  ">
                     <div class="filterbtn">
-                        <a href="{{ route('classitem.create') }}" class="btn btn-primary sub-btn "
+                        <a href="{{ route('classitem.create') }}" class="btn btn-outline-primary sub-btn "
                             type="submit">Add Class</a>
                     </div>
                 </div>
 
             </div>
+            
         </div>
+        <div>
+        <button type="button "
+        class=" col-12 btn  btn-primary d-flex justify-content-center align-items-center gap-1 createroombtn"
+        data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <i class="mdi mdi-plus-circle  mb-0"></i>
+        <p class="">Create Room</p>
+    </button>
+</div>
+</div>
     </div>
-
-
     <div class="col-12 col-lg-10 p-auto card-over-container">
         <div class="card rounded-3 ">
             <div class="card-body">
