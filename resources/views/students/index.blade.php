@@ -283,7 +283,7 @@
                                         <p>Due Amount</p>
                                         <p class="text-nowrap">Payment method</p>
                                     </div>
-                                    <div id="paymentList" class="payHistory">
+                                    <div id="paymentList" class="allPayHistory">
 
                                     </div>
                                 </div>
@@ -720,12 +720,12 @@
         function showModal(response) {
             response.map(function(elrelated) {
                 let text = elrelated.created_at;
-                $('.payHistory').map(function() {
+                $('.allPayHistory').map(function() {
                     $(this).append(`
                         <div class="payment-list-body">
                             <p class="payment-lists">${ text.slice(0, 10) }</p>
-                            <p class="payment-lists ">${elrelated.fees}</p>
-                            <p class="payment-lists ">${elrelated.due_amount}</p>
+                            <p class="payment-lists ">${Number(elrelated.fees).toLocaleString('en-Us')}</p>
+                            <p class="payment-lists ">${Number(elrelated.due_amount).toLocaleString('en-Us')}</p>
                             <p class="payment-lists">${elrelated.payment_method}</p>
                         </div>
 

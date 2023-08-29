@@ -421,74 +421,20 @@ class PaymentController extends Controller
 
 
 
-        if($paymentByClass && $paymentByCourse && $paymentByStudent){
-
-
-
-
-
-        //     $latestPayments = $latestPayments->where('student_id' , $paymentByStudent)
-        //                         ->whereHas('classitem' , function($query){
-        //         $query->where("id" , request('paymentByClass'));
-        //     })->whereHas('classitem' , function($query){
-        //         $query->where('course_id' , request('paymentByCourse'));
-        //     })
-        //     ->paginate(10);
-
-
-        //     //->when( request("keyword") , function ($query){
-        //     //     $keyword = request('keyword');
-        //     //     $query->where("name" , "like",  "%$keyword%")->where("name" , "like" , "%$keyword%")
-        //     //     ->orWhere( "email" , "like" , "%$keyword%");
-        //     // })->get();
-
-
-
-
-        // }
-        // elseif($paymentByStudent && $paymentByCourse){
-        //     $latestPayments = $latestPayments->where('student_id' , $paymentByStudent)
-        //                         ->orWhereHas('classitem' , function($query){
-        //         $query->where("id" , request('paymentByClass'));
-        //     })->whereHas('classitem' , function($query){
-        //         $query->where('course_id' , request('paymentByCourse'));
-        //     })
-        //     ;
-        // }
-        // elseif($paymentByCourse && $paymentByClass){
-        //     $latestPayments = $latestPayments->orWhere('student_id' , $paymentByStudent)
-        //                         ->whereHas('classitem' , function($query){
-        //         $query->where("id" , request('paymentByClass'));
-        //     })->whereHas('classitem' , function($query){
-        //         $query->where('course_id' , request('paymentByCourse'));
-        //     })
-        //     ;
-        // }
-        // elseif($paymentByClass && $paymentByStudent){
-        //     $latestPayments = $latestPayments->where('student_id' , $paymentByStudent)
-        //                         ->whereHas('classitem' , function($query){
-        //         $query->where("id" , request('paymentByClass'));
-        //     })->orWhereHas('classitem' , function($query){
-        //         $query->where('course_id' , request('paymentByCourse'));
-        //     })
-        //     ;
-        // }else{
-            if($paymentByStudent){
-                $latestPayments = $latestPayments->where('student_id' , $paymentByStudent);
-                // return $latestPayments;
-            }
-            if($paymentByClass ){
-                $latestPayments = $latestPayments->whereHas('classitem' , function($query){
-                    $query->where("id" , request('paymentByClass'));
-                });
-            }
-            if($paymentByCourse){
-                $latestPayments = $latestPayments->whereHas('classitem' , function($query){
-                    $query->where('course_id' , request('paymentByCourse'));
-                });
-            }
-
-        // }
+        if($paymentByStudent){
+            $latestPayments = $latestPayments->where('student_id' , $paymentByStudent);
+            // return $latestPayments;
+        }
+        if($paymentByClass ){
+            $latestPayments = $latestPayments->whereHas('classitem' , function($query){
+                $query->where("id" , request('paymentByClass'));
+            });
+        }
+        if($paymentByCourse){
+            $latestPayments = $latestPayments->whereHas('classitem' , function($query){
+                $query->where('course_id' , request('paymentByCourse'));
+            });
+        }
 
         
 
@@ -573,3 +519,5 @@ return response()->json($output);
 
 
 }}
+
+

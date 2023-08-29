@@ -101,7 +101,7 @@
                                                             <td>${el.name}</td>
                                                             <td>${el.course_name}</td>
                                                             <td>${lecturers}</td> 
-                                                            <td>${price.toLocaleString()}</td>                                                                                                                                                                          
+                                                            <td>${Number(price).toLocaleString('en-Us')}</td>                                                                                                                                                                          
                                                         </tr>
 
                                                     `);
