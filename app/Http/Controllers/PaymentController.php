@@ -419,6 +419,8 @@ class PaymentController extends Controller
         $paymentByClass = $request->paymentByClass;
         $paymentByCourse = $request->paymentByCourse;
 
+ 
+
         if (request('search')){
             $latestPayments = $latestPayments->where(function($q) {
                 $q->whereHas('classitem' , function($query){
@@ -454,6 +456,7 @@ class PaymentController extends Controller
                 $query->where('course_id' , request('paymentByCourse'));
             });
         }
+
 
         
 

@@ -97,6 +97,7 @@ $(document).ready(function (e) {
     $("#classIdPay").change(function (e) {
         paymentSearch();
     });
+
     function classItemSearch() {
         var classitemsearch = $("#classitemsearch").val();
         var coursesearchclassitem = $("#coursesearchclassitem").val();
@@ -336,10 +337,10 @@ $(document).ready(function (e) {
         //     });
         // }
     }
-
+    
     function paymentSearch() {
         var paymentId = $("#paymentId").val();
-        var studentId = $("#studentId").val();
+        var studentId = $("#studentId").val();       
         var courseId = $("#courseIdPay").val();
         var classId = $("#classIdPay").val();
 
@@ -349,7 +350,7 @@ $(document).ready(function (e) {
 
         // window.location.href = window.location.href + query;
         window.history.pushState({}, "", "payment" + query);
-
+        
         if (paymentId || studentId || courseId || classId) {
             $(".original").hide();
             $(".find").show();
@@ -362,9 +363,7 @@ $(document).ready(function (e) {
             $(".load-more-data2").hide();
         }
 
-        if ($(".find tr").length < 15) {
-            $(".load-more-data2").hide();
-        }
+
 
         // if (!window.location.href.includes("search")) {
         $.ajax({
@@ -377,8 +376,14 @@ $(document).ready(function (e) {
                 paymentByClass: classId,
             },
             success: function success(data) {
-                console.log(data);
-                $(".find").html(data);        
+                // console.log(data);
+                $(".find").html(data); 
+                if ($(".find tr").length < 15) {
+                    $(".load-more-data2").hide();
+                }
+        
+                
+                console.log($(".find tr").length);       
             },
         });
 
@@ -425,6 +430,7 @@ $(document).ready(function (e) {
             $(".load-more-data2").hide();
         }
 
+
         // if (!window.location.href.includes("search")) {
         $.ajax({
             url: "/classpaymentsearch",
@@ -434,7 +440,7 @@ $(document).ready(function (e) {
                 classId: selectedClassId
             },
             success: function success(data) {
-                console.log(data);
+                // console.log(data);
                 $(".find").html(data);        
             },
         });

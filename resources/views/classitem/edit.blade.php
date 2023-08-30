@@ -15,14 +15,17 @@
             </div>
         </div>
     </div>
+  </div>
 
-    <div class="card my-2">
+    <div class="row  px-3 max-height">
+      <div class="col-md-12 table-container">
+      <div class="card rounded-3 ">
       <div class="card-body">
         <form method="POST" action="{{route('classitem.update', $classitem->id)}}">
           @csrf
           @method('put')
           <input type="text" value="{{ $classitem->id }}" name="classitem_id" hidden >
-          <div class = "row">
+          <div class = "row testcalendar">
             <div class="col-sm-4">
               <div class="form-group test">
                 <label for="name">Name</label>
@@ -85,7 +88,7 @@
             </div> --}}
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-                <label for="lecturer">Lecturer</label>
+                <label for="lecturer" class="d-block">Lecturer</label>
                 {{-- <div class = "multisel-day"> --}}
                 <select class="js-example-basic-multiple form-select" name="lecturers[]" multiple="multiple" id="lecturer">
                   @foreach($lectureroption as $lecturer)
@@ -110,7 +113,7 @@
             </div>
             <div class="col-sm-4 mt-3">
               <div class="form-group test">
-                <label for="day">Day</label>
+                <label for="day" class="d-block">Day</label>
                 {{-- <div class = "multisel-day"> --}}
                 <select class="js-example-basic-multiple form-select" name="days[]" multiple="multiple" id="day">
                   <option value="Monday" {{in_array('Monday', explode(', ',$classitem->day)) ? 'selected' : '' }}>Monday</option>
@@ -180,12 +183,16 @@
             </div> --}}
       </div>
 
-      <div class="text-center mt-5">
+      <div class="create-edit-btn-bottom">
+        <div class=" text-center form-create-btn">
       <button type="submit" class="btn btn-secondary">Cancel</button>
       <button type="submit" class="btn btn-primary">Submit</button>
       </div>
+    </div>
   </div>
 </div>
+      </div>
+    </div>
 </div>
 
 

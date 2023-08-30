@@ -27,9 +27,9 @@
     </div>
   </div>
 </div>
-<div class="row  px-3">
-<div class="col-md-12">
-  <div class="card rounded-3 " style="height: 600px">
+<div class="row  px-3 max-height">
+<div class="col-md-12 table-container">
+  <div class="card rounded-3 ">
     <div class="card-body">
       {{-- @if(session()->has('message'))
                     <div class="alert alert-success success-alt mt-2">

@@ -19,8 +19,11 @@
             </div>
         </div>
     </div>
+  </div>
 
-    <div class="card my-2">
+    <div class="row  px-3 max-height">
+      <div class="col-md-12 table-container">
+      <div class="card rounded-3 ">
       <div class="card-body">
         <form method="post" action="{{route('classitem.store')}}">
           @csrf
@@ -200,12 +203,16 @@
             </div> -->
       </div>
 
-      <div class="text-center mt-5 form-create-btn ">
-      <a href="{{route('classitem.index')}}" class="btn btn-secondary me-2">Cancel</a>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="create-edit-btn-bottom">
+        <div class="text-center mt-5 form-create-btn ">
+          <a href="{{route('classitem.index')}}" class="btn btn-secondary me-2">Cancel</a>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
       </div>
+    </form>
   </div>
-</div>
+      </div>
+    </div>
 </div>
 
 

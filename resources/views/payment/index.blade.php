@@ -66,6 +66,12 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-2 mb-lg-0 py-2">
                         <p class="mb-0 fw-bolder">Total - {{$latestPayments->total()}}</p>
+                        <div class="d-flex justify-content-center align-items-center gap-2">
+                            <a href="#"
+                                class="btn d-flex justify-content-center align-items-center setorigin" style="font-size: 1.3rem;">
+                                <i class="mdi mdi-reload"></i>
+                            </a>
+                        </div>
                         <div class="d-flex justify-content-end  d-xs-block d-md-none ">
                             <button type="button" class="btn plus-btn btn-outline-secondary d-flex " data-bs-toggle="modal"
                                 data-bs-target="#staticBackdrop">
@@ -147,9 +153,10 @@
                     </div>
                     <form action="">
                         <div class=" mb-3">
+                            
                             <label for="">Student</label>
                             <select class="ui search dropdown w-100 shadow-none "  name="paymentByStudent" style="width: 100%; height:36px;" id="studentId">
-                                <option value="">Select Student</option>
+                                <option value=" ">Select Student</option>
                                 @foreach ($students as $student)
                                     <option value="{{ $student->id }}">{{ $student->name }}</option>
                                 @endforeach
@@ -158,7 +165,7 @@
                         <div class=" mb-3">
                             <label for="">Course</label>
                             <select id="courseIdPay" class="ui dropdown w-100 shadow-none courseId" style="width: 100%; height:36px;" name="paymentByCourse">
-                                <option value = "">Select Course</option>
+                                <option value = " ">Select Course</option>
                                 {{-- @foreach($courses as $course)
                                     <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
                                         {{$course->name}}
@@ -169,7 +176,7 @@
                         <div class="mb-3">
                             <label for="">Class</label>
                             <select id="classIdPay" required class="ui dropdown w-100 shadow-none classId" style="width: 100%; height:36px;" name="paymentByClass">
-                                <option value = "">Select Class</option>
+                                <option value = " ">Select Class</option>
                                 {{-- @foreach($classitems as $class)
                                     <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
                                         {{$class->name}}
@@ -304,7 +311,7 @@
                             <label for="">Student</label>
                             <select class="ui dropdown w-100 shadow-none js-example-basic-single" class="" name="paymentByStudent" style="width: 100%; height:36px;">
                                 <option>Select Student</option>
-                                <option value = "-1">Select Student</option>
+                                <option value = " ">Select Student</option>
                                 @foreach ($students as $student)
                                     <option value="{{ $student->id }}">{{ $student->name }}</option>
                                 @endforeach
@@ -314,7 +321,7 @@
                         <div class=" mb-3">
                             <label for="">Course</label>
                             <select id="courseId" class="ui dropdown w-100 shadow-none courseId" style="width: 100%; height:36px;" name="paymentByCourse">
-                                <option value = "-1">Select Course</option>
+                                <option value = " ">Select Course</option>
                                 {{-- @foreach($courses as $course)
                                     <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
                                         {{$course->name}}
@@ -325,7 +332,7 @@
                         <div class="mb-3">
                             <label for="">Class</label>
                             <select id="classId" required class="select2  form-select shadow-none classId" style="width: 100%; height:36px;" name="PaymentByCourse">
-                                <option value = "-1">Select Class</option>
+                                <option value = " ">Select Class</option>
                                 {{-- @foreach($classitems as $class)
                                     <option value="{{$class->id}}" {{ $class->id == request('studentByClass') ? 'selected' : '' }} >
                                         {{$class->name}}

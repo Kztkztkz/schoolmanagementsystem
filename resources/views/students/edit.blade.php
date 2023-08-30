@@ -22,8 +22,8 @@
     </div>
 
     <div class="row  px-3 max-height">
-        <div class="col-md-12 ">
-            <div class="card rounded-3 " style="height: 600px">
+        <div class="col-md-12 table-container">
+            <div class="card rounded-3 ">
                 <div class="card-body">
                     <form action="{{ route('student.update' , $student->id ) }}" method="POST">
                         @csrf

@@ -285,6 +285,17 @@ p {
     box-shadow: none;
 }
 
+.create-edit-btn-bottom{
+    display: flex;
+    justify-content: center;
+}
+
+
+.form-create-btn{
+    position: absolute;
+    bottom: 1rem;
+   }
+
 /*
 .left-sidebar {
     position: fixed;
