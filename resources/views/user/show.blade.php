@@ -74,7 +74,7 @@
         {{-- pyin --}}
         <div class="list-group px-5">
 
-        <a href="{{route('cusername' , $user->id)}}" type="button" class="list-group-item list-group-item-action py-3 d-flex justify-content-between border-top border-bottom" name ="name" >
+          <a href="{{route('cusername' , auth()->user()->id )}}"  class="list-group-item list-group-item-action py-3 d-flex justify-content-between border-top border-bottom" name ="name" >
             <div class="d-flex w-40 justify-content-between align-items-center">
               <div>Name</div>
               <div class="custom-font w-50 text-align-left"><b>{{$user->name}}</b></div>
@@ -86,7 +86,7 @@
             </div>
           </a>
 
-          <a href="" type="button" class="list-group-item list-group-item-action py-3 d-flex justify-content-between border-bottom" name ="email" >
+          <a href="{{route('cuseremail' , auth()->user()->id )}}" type="button" class="list-group-item list-group-item-action py-3 d-flex justify-content-between border-bottom" name ="email" >
             <div class="d-flex w-40 justify-content-between align-items-center">
               <div>Email</div>
               <div class="custom-font w-50 text-align-left"><b>{{$user->email}}</b></div>
@@ -98,19 +98,7 @@
             </div>
           </a>
 
-          <a type="button" class="list-group-item list-group-item-action py-3  d-flex justify-content-between border-bottom" name ="role" >
-            <div class="d-flex w-40 justify-content-between align-items-center">
-              <div>Role</div>
-              <div class="custom-font w-50 text-align-left"><b>{{$user->role->name}}</b></div>
-            </div>    
-            <div class="d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-              </svg>
-            </div>
-          </a>
-
-          <a type="button" class="list-group-item list-group-item-action py-3  d-flex justify-content-between border-bottom" name ="password" >
+          <a href="{{route('cuserpassword', auth()->user()->id)}}" type="button" class="list-group-item list-group-item-action py-3  d-flex justify-content-between border-bottom" name ="password" >
             <div class="d-flex w-40 justify-content-between align-items-center">
               <div>Password</div>
               <div class="custom-font w-50 text-align-left"><b>********</b></div>

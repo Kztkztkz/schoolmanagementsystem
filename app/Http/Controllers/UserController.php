@@ -10,8 +10,10 @@ use App\Http\Requests\PwdResetRequest;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
-use Hash;
+use Illuminate\Support\Facades\Validator;
+
 use Session;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -84,9 +86,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show()
     {
-        //
+        $user = Auth::user();
+       
+        return view('user.show' , compact('user'));
     }
 
     /**
@@ -100,6 +104,70 @@ class UserController extends Controller
         $roleoptions = Role::all();
         return view('user.edit', compact(['user', 'roleoptions']));
     }
+// pyin
+    public function changeUsername(User $user){
+        if(Auth::user()->id == $user->id){
+            return view('changeauth.usernamechange',compact('user'));
+        }else{
+            return abort(404);
+        }   
+    }
+    public function updateUserName(Request $request , User $user){
+        // return $user;
+        $request->validate([
+            'name'=>'required'
+        ]);
+
+        $user->name = $request->name;
+        $user->update();
+        return redirect()->route('user.show' , $user->id )->with('message','Data updated Successfully');
+        
+    }
+
+    public function changeUserEmail(User $user){
+
+        if(Auth::user()->id == $user->id){
+            return view('changeauth.useremailchange',compact('user'));
+        }else{
+            return abort(404);
+        }   
+    }
+    public function updateUserEmail(Request $request , User $user){
+        $request->validate([
+            'email'=>'required'
+        ]);
+
+
+        $user->email = $request->email;
+        $user->update();
+        return redirect()->route('user.show' , $user->id )->with('message','Data updated Successfully');
+        
+    }
+    public function changeUserPassword(Request $request, User $user){
+       
+        if(Auth::user()->id == $user->id){
+            return view('changeauth.userpasswordchange',compact('user'));
+        }else{
+            return abort(404);
+        }   
+    }
+    public function updateUserPassword(Request $request, User $user){
+
+        $request->validate([
+            'current_password'=>'required',
+            'new_password'=>'required|confirmed'
+        ]) ;
+        
+        if(!Hash::check($request->current_password,$user->password)){
+            return back()->with("error","Old password doesn't match");
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->update();
+        return back()->with("status","Password change successfully");
+        
+    }
+// 
 
     /**
      * Update the specified resource in storage.
@@ -298,4 +366,6 @@ class UserController extends Controller
         return response()->json($output);
 
     }
+
+    
 }

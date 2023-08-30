@@ -56,20 +56,20 @@
                 <ul class="dropdown-menu mb-1">
                     <div class="d-flex ">
                         <li>
-                            <a href="{{ route('student.edit', $student->id) }}"
+                            <a href="{{ route('student.edit' , $student->id ) }}"
+                                
                                 class="btn table-btn-sm btn-outline-primary border border-0">
                                 <i class="mdi mdi-pencil h5"></i>
                             </a>
                         </li>
                         <li>
-                            <form action="{{ route('student.destroy', $student->id) }}" method="post">
+                            <form action="{{ route('student.destroy' , $student->id ) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn table-btn-sm btn-outline-danger border border-0">
                                     <i class="mdi mdi-delete h5 "></i>
                                 </button>
                             </form>
-
                         </li>
 
                     </div>

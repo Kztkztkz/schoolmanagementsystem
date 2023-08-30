@@ -85,7 +85,19 @@ Route::get('/classitemfilter',[ClassitemController::class, 'classitemfilter'])->
 });
 
 
-// invoice
-Route::get('/invoice',function(){
-    return view('payment.invoice');
-});
+// views/changeauth
+// Route::get('/changeusername',function(){
+//     return view('changeauth.usernamechange');
+// })->name('cusername');
+Route::get('/userInfo' , [UserController::class , 'showInfo'])->name('userInfo');
+Route::get('changeusername/{user}',[UserController::class,'changeUsername'])->name('cusername');
+Route::put('updateusername/{user}',[UserController::class,'updateUsername'])->name('uusername');
+Route::get('changeuseremail/{user}',[UserController::class,'changeUserEmail'])->name('cuseremail');
+Route::put('updateuseremail/{user}',[UserController::class,'updateUseremail'])->name('uuseremail');
+Route::get('changeuserpassword/{user}',[UserController::class,'changeUserPassword'])->name('cuserpassword');
+Route::put('updateuserpassword/{user}',[UserController::class,'updateUserPassword'])->name('uuserpassword');
+
+
+
+
+
