@@ -272,7 +272,7 @@ p {
     right: 1rem;
 }
 
-.load-more-data{
+.load-more-data , .load-more-data2{
     width: 100% !important;
     background-color: #e6e6e6;
     color: #2b2b41;

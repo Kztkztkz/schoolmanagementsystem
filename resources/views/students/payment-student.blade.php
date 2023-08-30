@@ -360,7 +360,6 @@
                             <p class="payment-lists">${el.due_amount}</p>
                             <p class="payment-lists">${el.payment_method}</p>
                         </div>
-
                     `);
                 })
             });

@@ -217,7 +217,8 @@ class PaymentController extends Controller
         $student = Student::find($request->student_id);
         $current_paid = $request->due_amount;
 
-        $currentStudentPayment = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first();
+        $currentStudentPayment = Payment::where('student_id' , $request->student_id)
+        ->where('classitem_id' , $request->classitem_id)->orderBy('id', 'DESC')->first();
    
         
         $classitem = Classitem::find(request('classitem_id'));
@@ -226,12 +227,15 @@ class PaymentController extends Controller
        
 
         if($currentStudentPayment !== null){
+            
             $currentStudentLastPayment = $currentStudentPayment->due_amount;
             $due_amount = (int) $currentStudentLastPayment - (int) request('due_amount');
+            
         }else{
+            
             $due_amount = (int) $classitemPrice - (int) request('due_amount');
+            
         }
-
 
 
         $payment = new Payment();
@@ -250,18 +254,22 @@ class PaymentController extends Controller
         $payment->save();
 
 
-        $stuCla = ClassitemStudent::where('student_id' , $request->student_id)->where('classitem_id' , $request->classitem_id )->get();
-        if($stuCla == ''){
+        $stuCla = ClassitemStudent::where('student_id' , $request->student_id)->where('classitem_id' , $request->classitem_id )->count();
+       
+        
+        if($stuCla == 0){
+            
             $studentClass = new ClassitemStudent();
             $studentClass->student_id = $request->student_id;
             $studentClass->classitem_id = $request->classitem_id;
             $studentClass->save();
+            
         }
         
          // return to invoice
          if($request->slip == 'on' & $request->due_amount > 0 ) {
             return view('payment.invoice', compact('classitem','student','payment','current_paid'));
-            // return view('payment.invoice');
+            
         }
         // dd($payment);
         // return to invoice
@@ -332,14 +340,25 @@ class PaymentController extends Controller
 
         
         $classitemPrice = $classitem->price;
-        $currentStudentPayment = Payment::where('student_id' , $request->student_id)->orderBy('id', 'DESC')->first();
+        $currentStudentPayment = Payment::where('student_id' , $request->student_id)
+        ->where('classitem_id' , $request->classitem_id)->orderBy('id', 'DESC')->first();
+        // $latestPayments = Payment::where('student_id' ,  $request->student_id)->whereIn('id', function ($query) {
+        //     $query->select(DB::raw('MAX(id)'))
+        //           ->from('payments')
+        //           ->groupBy('classitem_id', 'student_id');
+        // });
+        
 
 
-        if(! is_null($currentStudentPayment)){
+        if($currentStudentPayment !== null){
+            
             $currentStudentLastPayment = $currentStudentPayment->due_amount;
             $due_amount = (int) $currentStudentLastPayment - (int) request('due_amount');
         }else{
+            
             $due_amount = (int) $classitemPrice - (int) request('due_amount');
+            $classitemPrice;
+            
         }
 
         // return $due_amount;
@@ -509,7 +528,7 @@ class PaymentController extends Controller
 }
 } else {
     $output .= '<tr>
-    <td colspan="7" class="text-center text-danger">Data not found</td>
+    <td colspan="7" class="text-center text-black">Data is empty</td>
 </tr>';
 }
 

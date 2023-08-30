@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Student::factory()->count(20)->create();
         \App\Models\Classitem::factory()->count(6)->create();
         \App\Models\ClassitemStudent::factory()->count(20)->create();
-        \App\Models\UserClassitem::factory()->count(10)->create();
-        \App\Models\Payment::factory()->count(20)->create();
+        \App\Models\UserClassitem::factory()->count(20)->create();
+        $this->call(PaymentSeeder::class);
     }
 }
