@@ -15,7 +15,7 @@ class ClassitemFactory extends Factory
      */
     public function definition()
     {
-        $classitemNames = $this->faker->randomElement(['Object Oriented PHP & MVC','Java Tutorial for Complete Beginners','The Complete Python Bootcamp From Zero to Hero in Python','Microsoft Excel – Excel from Beginner to Advanced','Automate the Boring Stuff with Python Programming','Machine Learning A-Z™: Python & R in Data','Complete 2023 Web']);
+        $classitemNames = $this->faker->randomElement(['Object Oriented PHP & MVC','Java Tutorial for Complete Beginners','The Complete Python Bootcamp From Zero to Hero in Python','Microsoft Excel - Excel from Beginner to Advanced','Automate the Boring Stuff with Python Programming','Machine Learning : Python & R in Data','Complete 2023 Web']);
         $stTimes = ['7:00','8:00','9:00','10:00','11:00','12:00'];
         $edTimes= ['13:00','14:00','15:00','16:00','17:00','18:00','19:00'];
         $start = $this->faker->dateTimeBetween('-6 months', 'now');
@@ -36,7 +36,7 @@ class ClassitemFactory extends Factory
             'container_color'=>$this->faker->hexcolor(),
             'max_student'=>$this->faker->numberBetween(20, 30),
             'type'=>$type,
-            'price'=>$this->faker->numberBetween(200000, 4000000),
+            'price'=>$this->faker->numberBetween(2000000, 4000000),
             'code'=>$shortCode,
             'room_id' => $this->faker->randomElement($roomIds),
             'course_id'=> $this->faker->randomElement($courseIds),

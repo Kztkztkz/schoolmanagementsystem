@@ -83,12 +83,12 @@
                             <div class="row">
                                 <div class="col-4">Time</div>
                                 <div class="col-2">-</div>
-                                <div class="col-4">{{ $classitem->start_time }} - {{ $classitem->end_time }}</div>
+                                <div class="col-4">{{ \Carbon\Carbon::createFromFormat('H:i:s', $classitem->start_time)->format('G:i') }} - {{ \Carbon\Carbon::createFromFormat('H:i:s', $classitem->end_time)->format('G:i') }}</div>
                             </div>
                             <div class="row">
                                 <div class="col-4">fee</div>
                                 <div class="col-2">-</div>
-                                <div class="col-4">{{ $classitem->price }} mmk</div>
+                                <div class="col-4">{{number_format(floatval($classitem->price))}} mmk</div>
                             </div>
                             <div class="row">
                                 <div class="col-4">Course name</div>
@@ -114,6 +114,16 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-4">Maximun Students</div>
+                                <div class="col-2">-</div>
+                                <div class="col-4">{{ $classitem->max_student }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">Students Avaliable</div>
+                                <div class="col-2">-</div>
+                                <div class="col-4">{{ $classitem->students()->count() <= $classitem->max_student ?'Available':'Unavailable' }}</div>
+                            </div>
+                            {{-- <div class="row">
                                 <div class="col-4">Color</div>
                                 <div class="col-2">-</div>
                                 <div class="col-4" style="display:flex">
@@ -122,21 +132,26 @@
                                     </div>
                                     <div>{{ $classitem->container_color }} </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
 
 
 
+                    
+
+                    @if ($classitem->students()->count() <= $classitem->max_student)
+
                     <div class="col-12 d-flex justify-content-start d-block d-md-none mb-3">
                         <a href="{{ route('student.create') }}" type="button" class="btn btn-primary d-block d-md-none"
                             style="font-size: 14px; border:none;">Enroll New Student</a>
                     </div>
+
                     <div class="col-xs-12 col-md-6">
                         <h5 class="sub-header mb-5">Enroll existing student</h5>
 
 
-                        <form target="_blank" action="{{ route('payment.store') }}" method="post">
+                        <form  action="{{ route('payment.store') }}" method="post">
                             @csrf
                             <input type="text" hidden name="classitem_id" value="{{ $classitem->id }}">
                             <input type="text" hidden name="fees" value="{{ $classitem->price }}">
@@ -207,7 +222,7 @@
 
                             <div class="mt-3 mb-3">
                                 <input class="form-check-input" type="checkbox" name="slip"
-                                    id="slip" checked>
+                                    id="slip" >
                                 <label class="form-check-label mb-0" for="flexRadioDefault1">
                                     <p class="small-header mb-0">Print out the slip</p>
                                 </label>
@@ -220,6 +235,10 @@
                             </div>
                         </form>
                     </div>
+                    @else
+                        <h4 class="text-center">Full Student</h4>
+                    @endif
+                    
                 </div>
 
             </div>

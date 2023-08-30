@@ -660,17 +660,14 @@
         $('.ui.dropdown').dropdown();
 
 
+        let student;
         //showpaymentdata
-        $('body').on('click', '.showpaydata', function() {
-            className = event.currentTarget.getAttribute('data-className');
-            studentName = event.currentTarget.getAttribute('data-studentName');
-            fees = $(event.currentTarget).find('.fees').text().trim();
-            paid = $(event.currentTarget).find('.paid').text().trim();
-
-            // $('#exampleModalLabelrelate').text(className);
-            // $('.stuName').text(studentName);
-            var userURL = $(this).data('url');
-            $.get(userURL, function(data) {
+        function showpaydata(event , studentId){
+            student = event.currentTarget.getAttribute('data-student');
+            $('.StudentNameFirst').text(student);
+           
+            let showpaydataURL = event.currentTarget.getAttribute('data-url-payment');           
+            $.get(showpaydataURL, function(data) {
                 $('#exampleModalCenter').modal('show');
                 data.map(function(el) {
                     $('.payHistory').map(function() {
@@ -693,7 +690,7 @@
 
                     })
                     // $('.modal-titlefirst').text(el.classitem_name);
-                    $('.StudentNameFirst').text(el.student_name);
+                  
 
                 })
                 if (document.querySelector('.addline').rows.length == 1) {
@@ -707,9 +704,7 @@
 
             $('.payHistory').empty();
             $('.backbtn').empty();
-           
-
-        });
+        }
 
         //amy payment model box
         let className;
@@ -740,20 +735,21 @@
 
           
 
+            className = event.currentTarget.getAttribute('data-className');
+            studentName = event.currentTarget.getAttribute('data-studentName');
+            fees = $(event.currentTarget).find('.fees').text().trim();
+            paid = $(event.currentTarget).find('.paid').text().trim();
 
             $('#curStudentIdChg').val(studentId);
             $('#curClassIdChg').val(classitemId);
 
             $('.backbtn').append(`
-<a href="#" class="btn btn-secondary showpaydata" data-bs-target="#exampleModalCenter" data-bs-toggle="modal" data-url="{{ URL::to('student/${studentId}') }}" data-bs-dismiss="modal">Cadncel</a>
+<a href="#" class="btn btn-secondary showpaydata" data-bs-target="#exampleModalCenter"  data-student="${studentName}"  onclick="showpaydata(event , ${studentId})"  data-bs-toggle="modal" data-url-payment="{{ URL::to('student/${studentId}') }}" data-bs-dismiss="modal">Cancel</a>
 <button type="submit" class="btn btn-primary">Submit</button>
 `);
 
 
-            className = event.currentTarget.getAttribute('data-className');
-            studentName = event.currentTarget.getAttribute('data-studentName');
-            fees = $(event.currentTarget).find('.fees').text().trim();
-            paid = $(event.currentTarget).find('.paid').text().trim();
+            
 
             $('#exampleModalLabelrelate').text(className);
             $('.studentName').text(studentName);
@@ -776,7 +772,7 @@
                     console.log('Server error occured');
                 });
 
-            $('.payHistory').empty();
+            $('.allPayHistory').empty();
             // className = '';
             // studentName = '';
 
