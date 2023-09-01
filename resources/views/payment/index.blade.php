@@ -202,7 +202,7 @@
               <h5 class="modal-title className" id="exampleModalLabel">Modal title</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form target="_blank" action="{{route('payments.createModal')}}" onsubmit = "return(validate());" method="POST" name = "myForm">
+            <form  action="{{route('payments.createModal')}}" onsubmit = "return(validate());" method="POST" name = "myForm">
                 <div class="modal-body">
                     <div class=" mb-2">
                         <span class="">Student name - </span><p class="studentName fw-bold d-inline-block"></p>
@@ -218,6 +218,7 @@
                             <p>Fees</p>
                             <p>Due Amount</p>
                             <p class="text-nowrap">Payment method</p>
+                            <p>adsfadsf</p>
                         </div>
                         <div id="paymentList"  class="payHistory">
 
@@ -394,7 +395,7 @@
                 
                 // console.log(aa);
                 response.map(function(el){
-                    
+                    console.log(el);
                     let text = el.created_at;
                     $('.payHistory').map(function(){
                         $(this).append(`
@@ -403,6 +404,7 @@
                             <p class="payment-lists ">${el.fees}</p>
                             <p class="payment-lists ">${el.due_amount}</p>
                             <p class="payment-lists">${el.payment_method}</p>
+                            <p class="payment-lists">asdsdf </p>
                         </div>
 
                     `);
