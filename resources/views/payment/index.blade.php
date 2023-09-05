@@ -165,7 +165,7 @@
                         <div class=" mb-3">
                             <label for="">Course</label>
                             <select id="courseIdPay" class="ui dropdown w-100 shadow-none courseId" style="width: 100%; height:36px;" name="paymentByCourse">
-                                <option value = " ">Select Course</option>
+                                <option value = "">Select Course</option>
                                 {{-- @foreach($courses as $course)
                                     <option value="{{$course->id}}" {{ $course->id == request('studentByCourse') ? 'selected' : '' }}>
                                         {{$course->name}}
@@ -569,13 +569,13 @@
                     return;
                 }
                 $('.auto-load').hide();
-                console.log(response.html);
+                // console.log(response.html);
                     $("#data-wrapper").append(response.html);
 
 
                 if (response.html.includes('Data is Empty')) {
-            $('.load-more-data').hide();
-          }
+                    $('.load-more-data').hide();
+                }
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('Server error occured');
@@ -619,9 +619,10 @@
                     $("#data-wrapper2").append(response);
 
 
-                if (response.includes('Data is Empty')) {
-            $('.load-more-data2').hide();
-          }
+                if (response.includes('Data is empty')) {
+                    console.log('hi');
+                    $('.load-more-data2').hide();
+                }
             })
             .fail(function (jqXHR, ajaxOptions, thrownError) {
                 console.log('Server error occured');
