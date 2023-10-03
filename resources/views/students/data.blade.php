@@ -13,7 +13,7 @@
             {{-- <a href="{{ route('student.relatedPayment' , $student->id ) }}" class="btn table-btn-sm btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> --}}
 
             <a href="#" class="btn table-btn-sm btn-primary showpaydata" data-bs-toggle="modal"
-                data-bs-target="#exampleModalCenter" data-url="{{ route('student.relatedPayment', $student->id) }}">
+                data-bs-target="#exampleModalCenter" data-student="{{ $student->name }}" data-url-payment="{{ route('student.relatedPayment', $student->id) }}" onclick="showpaydata(event,{{$student->id}})">
                 <i class="mdi mdi-credit-card-multiple h5"></i>
             </a>
         </td>

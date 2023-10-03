@@ -406,7 +406,7 @@ class StudentController extends Controller
 }
 } else {
     $output .= '<tr>
-    <td colspan="6" class="text-center text-danger">Data not found</td>
+    <td colspan="6" class="text-center text-black">Data is empty</td>
 </tr>';
 }
 return response()->json($output);

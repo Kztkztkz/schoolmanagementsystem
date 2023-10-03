@@ -85,8 +85,7 @@
                                     <th class="d-none d-md-table-cell list-payment-col text-center" scope="col" >Payment</th>
                                     @endcan
                                     <th scope="col" class="text-center list-control-col" class="">
-                                        <p class=" d-none d-md-bl
-                                        ock">Control</p>
+                                        <p class="d-none d-lg-block">Control</p>
                                     </th>
                                 </tr>
                             </thead>
@@ -99,13 +98,13 @@
                             @if(count($classitem)>=15)
                               <tr>
                                 <td colspan="6" class="text-center">
-                                    <button class="btn btn-secondary load-more-data"><i class="fa fa-refresh"></i> Load More Data...</button>
+                                    <button class="btn btn-secondary load-more-data"><i class="fa fa-refresh"></i> More Data...</button>
                                 </td>
                               </tr>
                               @endif
                               <tr>
                                 <td colspan="6" class="text-center">
-                                    <button class="btn btn-secondary load-more-data2" style="display: none;"><i class="fa fa-refresh"></i> Load More Data...</button>
+                                    <button class="btn btn-secondary load-more-data2" style="display: none;"><i class="fa fa-refresh"></i>More Data...</button>
                                 </td>
                               </tr>
                         </table>

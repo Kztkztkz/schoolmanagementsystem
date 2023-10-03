@@ -79,6 +79,7 @@
     text-align: end !important;
 } */
 
+
 @media screen and (max-width: 768px) {
     .table thead th:first-child {
         width: 25% !important;

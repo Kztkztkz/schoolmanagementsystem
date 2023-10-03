@@ -63,6 +63,7 @@ class ClassitemController extends Controller
         $classitem =  $classItemQuery->orderBy('id', 'desc')->paginate(15)->withQueryString();
 
 
+       
             // $classitem = $this->classitemfilter($classitem);
         // } else {
         //     $classitem =  Classitem::orderBy('id', 'desc')->paginate(7);
